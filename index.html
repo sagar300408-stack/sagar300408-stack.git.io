@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sagar M| Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    /* Animated gradient background */
+    .bg-animated {
+      background: linear-gradient(-45deg, #0f172a, #020617, #1e293b, #020617);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glow effect */
+    .glow {
+      box-shadow: 0 0 20px rgba(59,130,246,0.5);
+    }
+
+    /* Floating animation */
+    .float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Typing effect */
+    .typing {
+      overflow: hidden;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      animation: typing 4s steps(40,end), blink 1s infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+  <!-- HERO -->
+  <section class="h-screen flex flex-col justify-center items-center text-center px-4 bg-animated">
+    <h1 class="text-6xl md:text-8xl font-extrabold mb-6">Sagar M ⚡</h1>
+
+    <p class="text-xl md:text-2xl text-gray-300 mb-6 typing">
+      Building AI Systems • Shipping Fast • Full Stack Dev
+    </p>
+
+    <div class="flex gap-4">
+      <a href="#projects" class="bg-blue-600 px-8 py-3 rounded-2xl glow hover:scale-110 transition">Explore Work</a>
+      <a href="https://github.com/sagar300408-stack" target="_blank" class="border border-gray-500 px-8 py-3 rounded-2xl hover:bg-gray-800 transition">GitHub</a>
+    </div>
+
+    <div class="mt-16 float text-gray-500">
+      ↓ Scroll
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="py-24 px-6 max-w-5xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-6">About</h2>
+    <p class="text-gray-400 text-lg leading-relaxed">
+      I build systems, not just apps. From AI-driven tools to scalable platforms,
+      I treat every idea like code — iterate, optimize, and deploy.
+    </p>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-24 px-6 bg-gray-950">
+    <h2 class="text-4xl font-bold mb-16 text-center">Projects</h2>
+
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+
+      <div class="bg-black p-6 rounded-3xl border border-gray-800 hover:scale-105 hover:border-blue-500 transition">
+        <h3 class="text-xl font-bold mb-3">Mission JEE App</h3>
+        <p class="text-gray-400 mb-4">Coaching sync, CSV import, performance tracking.</p>
+        <a href="https://github.com/sagar300408-stack" target="_blank" class="text-blue-400">View →</a>
+      </div>
+
+      <div class="bg-black p-6 rounded-3xl border border-gray-800 hover:scale-105 hover:border-blue-500 transition">
+        <h3 class="text-xl font-bold mb-3">LifeOS AI</h3>
+        <p class="text-gray-400 mb-4">AI operating system for decisions & productivity.</p>
+        <a href="https://github.com/sagar300408-stack" target="_blank" class="text-blue-400">View →</a>
+      </div>
+
+      <div class="bg-black p-6 rounded-3xl border border-gray-800 hover:scale-105 hover:border-blue-500 transition">
+        <h3 class="text-xl font-bold mb-3">Kids AI App</h3>
+        <p class="text-gray-400 mb-4">Safe AI experience designed for kids.</p>
+        <a href="https://github.com/sagar300408-stack" target="_blank" class="text-blue-400">View →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="py-24 px-6 text-center">
+    <h2 class="text-4xl font-bold mb-6">Let’s Build</h2>
+    <p class="text-gray-400 mb-8">Ideas → Systems → Reality</p>
+    <a href="mailto:sagar@example.com" class="bg-blue-600 px-8 py-3 rounded-2xl glow hover:scale-110 transition">Contact Me</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-6 text-gray-600 text-sm">
+    © 2026 Sagar M • Engineered with ⚡
+  </footer>
+
+</body>
+</html>
