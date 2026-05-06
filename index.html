@@ -1,127 +1,599 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sagar M| Developer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
 
-    /* Animated gradient background */
-    .bg-animated {
-      background: linear-gradient(-45deg, #0f172a, #020617, #1e293b, #020617);
-      background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
-    }
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Glow effect */
-    .glow {
-      box-shadow: 0 0 20px rgba(59,130,246,0.5);
-    }
+  .pf-root {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(160deg, #020617 0%, #0f172a 45%, #020617 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
 
-    /* Floating animation */
-    .float {
-      animation: float 4s ease-in-out infinite;
-    }
+  /* NAV */
+  .pf-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(2,6,23,0.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 24px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pf-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pf-logo-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: white;
+  }
+  .pf-logo-text { font-size: 13px; font-weight: 600; color: white; letter-spacing: -0.3px; }
+  .pf-logo-text span { color: #38bdf8; }
+  .pf-nav-links { display: flex; align-items: center; gap: 24px; }
+  .pf-nav-links a {
+    font-size: 13px; color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .pf-nav-links a:hover { color: white; }
+  .pf-nav-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    background: #0ea5e9;
+    color: white;
+    font-size: 13px; font-weight: 500;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .pf-nav-btn:hover { background: #38bdf8; box-shadow: 0 0 20px rgba(14,165,233,0.35); }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+  /* HERO */
+  .pf-hero {
+    padding: 64px 24px 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pf-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -120px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .pf-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    border-radius: 99px;
+    border: 1px solid rgba(56,189,248,0.3);
+    background: rgba(56,189,248,0.08);
+    color: #38bdf8;
+    font-size: 11px; font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+  }
+  .pf-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .pf-h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+    color: white;
+    margin-bottom: 18px;
+  }
+  .pf-h1 .grad {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .pf-sub {
+    font-size: 15px;
+    color: #94a3b8;
+    line-height: 1.65;
+    margin-bottom: 32px;
+    max-width: 420px;
+  }
+  .pf-sub strong { color: #cbd5e1; font-weight: 500; }
+  .pf-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .pf-cta-primary {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 11px 22px;
+    border-radius: 10px;
+    background: #0ea5e9;
+    color: white;
+    font-size: 13px; font-weight: 600;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .pf-cta-primary:hover { background: #38bdf8; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(14,165,233,0.3); }
+  .pf-cta-secondary {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 11px 22px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: #cbd5e1;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .pf-cta-secondary:hover { color: white; border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
 
-    /* Typing effect */
-    .typing {
-      overflow: hidden;
-      border-right: 2px solid white;
-      white-space: nowrap;
-      animation: typing 4s steps(40,end), blink 1s infinite;
-    }
+  /* Hero image placeholder */
+  .pf-hero-img-wrap {
+    display: flex; justify-content: flex-end;
+    position: relative;
+  }
+  .pf-hero-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 28px;
+    background: radial-gradient(ellipse, rgba(14,165,233,0.25) 0%, rgba(124,58,237,0.15) 50%, transparent 80%);
+    filter: blur(20px);
+    z-index: 0;
+  }
+  .pf-hero-card {
+    position: relative; z-index: 1;
+    width: 260px; height: 300px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.95));
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    box-shadow: 0 0 60px rgba(14,165,233,0.12), inset 0 1px 0 rgba(255,255,255,0.07);
+    transition: transform 0.3s;
+  }
+  .pf-hero-card:hover { transform: scale(1.02) rotate(0.5deg); }
+  .pf-hero-avatar {
+    width: 80px; height: 80px;
+    border-radius: 18px;
+    background: rgba(14,165,233,0.12);
+    border: 1px solid rgba(14,165,233,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; color: rgba(56,189,248,0.7);
+  }
+  .pf-hero-hint { font-size: 12px; color: #475569; text-align: center; }
+  .pf-hero-dot {
+    position: absolute; top: 14px; right: 14px;
+    width: 8px; height: 8px;
+    border-radius: 50%; background: #38bdf8;
+    animation: pulse 2s infinite;
+  }
+  .pf-hero-line {
+    position: absolute; bottom: 0; left: 16px; right: 16px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(56,189,248,0.5), transparent);
+  }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
+  /* GLASS CARD */
+  .glass {
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.35);
+  }
 
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-  </style>
-</head>
-<body class="bg-black text-white">
+  /* SECTION WRAPPER */
+  .pf-section { padding: 56px 24px; max-width: 960px; margin: 0 auto; }
+  .pf-section-label {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .pf-section-line { height: 1px; width: 28px; }
+  .pf-section-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .pf-section-title { font-size: 30px; font-weight: 700; color: white; letter-spacing: -0.5px; margin-bottom: 36px; }
+  .pf-section-title span { color: #64748b; font-weight: 600; }
+
+  /* PROJECT */
+  .pf-dashboard-placeholder {
+    width: 100%;
+    height: 240px;
+    background: rgba(15,23,42,0.7);
+    position: relative;
+    overflow: hidden;
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .pf-db-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .pf-db-pill {
+    height: 10px; border-radius: 5px; background: rgba(255,255,255,0.07);
+  }
+  .pf-db-trafficlights { display: flex; gap: 5px; }
+  .pf-db-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .pf-db-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+  .pf-db-metric {
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 10px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    height: 64px;
+  }
+  .pf-db-metric-label { height: 6px; border-radius: 3px; width: 50%; background: rgba(255,255,255,0.08); }
+  .pf-db-metric-value { font-size: 18px; font-weight: 700; }
+  .pf-db-row { display: grid; grid-template-columns: 3fr 2fr; gap: 8px; }
+  .pf-db-chart {
+    border-radius: 10px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    height: 56px;
+    padding: 8px;
+    display: flex; align-items: flex-end; gap: 3px;
+  }
+  .pf-bar { flex: 1; border-radius: 3px 3px 0 0; background: rgba(56,189,248,0.4); }
+  .pf-db-list {
+    border-radius: 10px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 8px;
+    display: flex; flex-direction: column; justify-content: center; gap: 7px;
+    height: 56px;
+  }
+  .pf-db-list-row { display: flex; align-items: center; gap: 6px; }
+  .pf-db-list-dot { width: 5px; height: 5px; border-radius: 50%; background: #818cf8; }
+  .pf-db-list-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.07); flex: 1; }
+  .pf-placeholder-label {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #475569;
+    background: rgba(2,6,23,0.5);
+  }
+  .pf-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 20px 24px;
+    gap: 16px;
+  }
+  .pf-stat { display: flex; align-items: flex-start; gap: 10px; }
+  .pf-stat-check { color: #38bdf8; margin-top: 1px; font-size: 15px; }
+  .pf-stat-text { font-size: 13px; color: #94a3b8; }
+  .pf-stat-text strong { color: white; font-weight: 600; }
+
+  /* SERVICES */
+  .pf-services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .pf-service-card {
+    padding: 24px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column; gap: 14px;
+    cursor: default;
+    transition: transform 0.25s;
+  }
+  .pf-service-card:hover { transform: translateY(-5px); }
+  .pf-service-topline {
+    position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
+  }
+  .pf-service-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .pf-service-title { font-size: 15px; font-weight: 600; color: white; margin-bottom: 4px; }
+  .pf-service-desc { font-size: 13px; color: #64748b; line-height: 1.6; flex: 1; }
+  .pf-service-link { font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 4px; margin-top: 12px; }
+
+  /* STACK */
+  .pf-stack-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .pf-stack-item {
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px;
+    cursor: default;
+    transition: transform 0.2s;
+  }
+  .pf-stack-item:hover { transform: translateY(-4px) scale(1.02); }
+  .pf-stack-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .pf-stack-label { font-size: 13px; font-weight: 500; color: #cbd5e1; }
+
+  /* FOOTER */
+  .pf-footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 960px; margin: 0 auto;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .pf-footer-links { display: flex; align-items: center; gap: 20px; }
+  .pf-footer-link {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .pf-footer-link:hover { color: #e2e8f0; }
+  .pf-footer-copy { font-size: 11px; color: #334155; }
+
+  @media (max-width: 640px) {
+    .pf-hero { grid-template-columns: 1fr; gap: 32px; }
+    .pf-hero-img-wrap { justify-content: center; }
+    .pf-services-grid { grid-template-columns: 1fr; }
+    .pf-stack-grid { grid-template-columns: repeat(2,1fr); }
+    .pf-stats { grid-template-columns: 1fr; }
+    .pf-h1 { font-size: 28px; }
+    .pf-section-title { font-size: 24px; }
+    .pf-nav-links { gap: 14px; }
+  }
+</style>
+
+<div class="pf-root">
+
+  <!-- NAV -->
+  <nav class="pf-nav">
+    <div class="pf-logo">
+      <div class="pf-logo-icon">⚡</div>
+      <div class="pf-logo-text">agentic<span>.dev</span></div>
+    </div>
+    <div class="pf-nav-links">
+      <a href="#">Services</a>
+      <a href="#">Projects</a>
+      <a href="#">Stack</a>
+      <button class="pf-nav-btn">Contact</button>
+    </div>
+  </nav>
 
   <!-- HERO -->
-  <section class="h-screen flex flex-col justify-center items-center text-center px-4 bg-animated">
-    <h1 class="text-6xl md:text-8xl font-extrabold mb-6">Sagar M ⚡</h1>
-
-    <p class="text-xl md:text-2xl text-gray-300 mb-6 typing">
-      Building AI Systems • Shipping Fast • Full Stack Dev
-    </p>
-
-    <div class="flex gap-4">
-      <a href="#projects" class="bg-blue-600 px-8 py-3 rounded-2xl glow hover:scale-110 transition">Explore Work</a>
-      <a href="https://github.com/sagar300408-stack" target="_blank" class="border border-gray-500 px-8 py-3 rounded-2xl hover:bg-gray-800 transition">GitHub</a>
-    </div>
-
-    <div class="mt-16 float text-gray-500">
-      ↓ Scroll
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="py-24 px-6 max-w-5xl mx-auto text-center">
-    <h2 class="text-4xl font-bold mb-6">About</h2>
-    <p class="text-gray-400 text-lg leading-relaxed">
-      I build systems, not just apps. From AI-driven tools to scalable platforms,
-      I treat every idea like code — iterate, optimize, and deploy.
-    </p>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="py-24 px-6 bg-gray-950">
-    <h2 class="text-4xl font-bold mb-16 text-center">Projects</h2>
-
-    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-
-      <div class="bg-black p-6 rounded-3xl border border-gray-800 hover:scale-105 hover:border-blue-500 transition">
-        <h3 class="text-xl font-bold mb-3">Mission JEE App</h3>
-        <p class="text-gray-400 mb-4">Coaching sync, CSV import, performance tracking.</p>
-        <a href="https://github.com/sagar300408-stack" target="_blank" class="text-blue-400">View →</a>
+  <div class="pf-hero">
+    <div>
+      <div class="pf-badge">
+        <div class="pf-badge-dot"></div>
+        Available for new projects
       </div>
-
-      <div class="bg-black p-6 rounded-3xl border border-gray-800 hover:scale-105 hover:border-blue-500 transition">
-        <h3 class="text-xl font-bold mb-3">LifeOS AI</h3>
-        <p class="text-gray-400 mb-4">AI operating system for decisions & productivity.</p>
-        <a href="https://github.com/sagar300408-stack" target="_blank" class="text-blue-400">View →</a>
+      <h1 class="pf-h1">
+        Architecting <span class="grad">Agentic AI Systems</span> for High-Growth Startups.
+      </h1>
+      <p class="pf-sub">
+        Specialising in <strong>FastAPI backends</strong> and <strong>Mission-Control Dashboards</strong> that turn complex logic into actionable intelligence.
+      </p>
+      <div class="pf-ctas">
+        <a class="pf-cta-primary" href="#">View My Services →</a>
+        <a class="pf-cta-secondary" href="#">See Projects ›</a>
       </div>
-
-      <div class="bg-black p-6 rounded-3xl border border-gray-800 hover:scale-105 hover:border-blue-500 transition">
-        <h3 class="text-xl font-bold mb-3">Kids AI App</h3>
-        <p class="text-gray-400 mb-4">Safe AI experience designed for kids.</p>
-        <a href="https://github.com/sagar300408-stack" target="_blank" class="text-blue-400">View →</a>
-      </div>
-
     </div>
-  </section>
+    <div class="pf-hero-img-wrap">
+      <div class="pf-hero-glow"></div>
+      <div class="pf-hero-card">
+        <div class="pf-hero-dot"></div>
+        <div class="pf-hero-avatar">
+          <i class="ti ti-robot" aria-hidden="true"></i>
+        </div>
+        <div class="pf-hero-hint">Add your photo here<br><span style="font-size:11px;color:#334155">800 × 1000px recommended</span></div>
+        <div class="pf-hero-line"></div>
+      </div>
+    </div>
+  </div>
 
-  <!-- CONTACT -->
-  <section class="py-24 px-6 text-center">
-    <h2 class="text-4xl font-bold mb-6">Let’s Build</h2>
-    <p class="text-gray-400 mb-8">Ideas → Systems → Reality</p>
-    <a href="mailto:sagar@example.com" class="bg-blue-600 px-8 py-3 rounded-2xl glow hover:scale-110 transition">Contact Me</a>
-  </section>
+  <!-- FEATURED PROJECT -->
+  <div class="pf-section">
+    <div class="pf-section-label">
+      <div class="pf-section-line" style="background:#38bdf8"></div>
+      <span class="pf-section-tag" style="color:#38bdf8">Featured Work</span>
+    </div>
+    <h2 class="pf-section-title">SwiftRoute AI: <span>Logistics Command Center</span></h2>
+
+    <div class="glass" style="overflow:hidden">
+      <div class="pf-dashboard-placeholder">
+        <div class="pf-db-bar">
+          <div style="display:flex;gap:6px">
+            <div class="pf-db-pill" style="width:64px"></div>
+            <div class="pf-db-pill" style="width:44px"></div>
+          </div>
+          <div class="pf-db-trafficlights">
+            <div class="pf-db-dot" style="background:rgba(239,68,68,0.5)"></div>
+            <div class="pf-db-dot" style="background:rgba(234,179,8,0.5)"></div>
+            <div class="pf-db-dot" style="background:rgba(34,197,94,0.5)"></div>
+          </div>
+        </div>
+        <div class="pf-db-grid">
+          <div class="pf-db-metric">
+            <div class="pf-db-metric-label"></div>
+            <div class="pf-db-metric-value" style="color:#38bdf8">98%</div>
+          </div>
+          <div class="pf-db-metric">
+            <div class="pf-db-metric-label"></div>
+            <div class="pf-db-metric-value" style="color:#a78bfa">&lt;4s</div>
+          </div>
+          <div class="pf-db-metric">
+            <div class="pf-db-metric-label"></div>
+            <div class="pf-db-metric-value" style="color:#34d399">12k</div>
+          </div>
+        </div>
+        <div class="pf-db-row">
+          <div class="pf-db-chart">
+            <div class="pf-bar" style="height:40%"></div>
+            <div class="pf-bar" style="height:65%"></div>
+            <div class="pf-bar" style="height:45%"></div>
+            <div class="pf-bar" style="height:80%"></div>
+            <div class="pf-bar" style="height:55%"></div>
+            <div class="pf-bar" style="height:90%"></div>
+            <div class="pf-bar" style="height:70%"></div>
+          </div>
+          <div class="pf-db-list">
+            <div class="pf-db-list-row"><div class="pf-db-list-dot"></div><div class="pf-db-list-line"></div></div>
+            <div class="pf-db-list-row"><div class="pf-db-list-dot"></div><div class="pf-db-list-line" style="width:60%"></div></div>
+            <div class="pf-db-list-row"><div class="pf-db-list-dot"></div><div class="pf-db-list-line" style="width:80%"></div></div>
+          </div>
+        </div>
+        <div class="pf-placeholder-label">Add your dashboard screenshot here</div>
+      </div>
+      <div class="pf-stats">
+        <div class="pf-stat">
+          <span class="pf-stat-check"><i class="ti ti-circle-check" aria-hidden="true"></i></span>
+          <span class="pf-stat-text"><strong>98%</strong> Data Extraction Accuracy</span>
+        </div>
+        <div class="pf-stat">
+          <span class="pf-stat-check"><i class="ti ti-circle-check" aria-hidden="true"></i></span>
+          <span class="pf-stat-text"><strong>FastAPI & Next.js</strong> Architecture</span>
+        </div>
+        <div class="pf-stat">
+          <span class="pf-stat-check"><i class="ti ti-circle-check" aria-hidden="true"></i></span>
+          <span class="pf-stat-text"><strong>&lt; 4s</strong> End-to-End Latency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="pf-section">
+    <div class="pf-section-label">
+      <div class="pf-section-line" style="background:#a78bfa"></div>
+      <span class="pf-section-tag" style="color:#a78bfa">What I Do</span>
+    </div>
+    <h2 class="pf-section-title">Services</h2>
+
+    <div class="pf-services-grid">
+      <!-- Card 1 -->
+      <div class="glass pf-service-card">
+        <div class="pf-service-topline" style="background:linear-gradient(90deg,transparent,#38bdf8,transparent)"></div>
+        <div class="pf-service-icon" style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#38bdf8">
+          <i class="ti ti-shield-check" aria-hidden="true"></i>
+        </div>
+        <div>
+          <div class="pf-service-title">AI Operational Audits</div>
+          <div class="pf-service-desc">Deep-dive analysis of your existing AI pipelines. Identify bottlenecks, hallucination risks, and latency culprits — delivered as a prioritised remediation roadmap.</div>
+        </div>
+        <div class="pf-service-link" style="color:#38bdf8">Learn more <i class="ti ti-chevron-right" style="font-size:13px" aria-hidden="true"></i></div>
+      </div>
+      <!-- Card 2 -->
+      <div class="glass pf-service-card">
+        <div class="pf-service-topline" style="background:linear-gradient(90deg,transparent,#a78bfa,transparent)"></div>
+        <div class="pf-service-icon" style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);color:#a78bfa">
+          <i class="ti ti-bolt" aria-hidden="true"></i>
+        </div>
+        <div>
+          <div class="pf-service-title">High-Velocity Dashboard Sprints</div>
+          <div class="pf-service-desc">Mission-control interfaces shipped in weeks, not quarters. From raw API data to polished, real-time dashboards that operators actually love using.</div>
+        </div>
+        <div class="pf-service-link" style="color:#a78bfa">Learn more <i class="ti ti-chevron-right" style="font-size:13px" aria-hidden="true"></i></div>
+      </div>
+      <!-- Card 3 -->
+      <div class="glass pf-service-card">
+        <div class="pf-service-topline" style="background:linear-gradient(90deg,transparent,#34d399,transparent)"></div>
+        <div class="pf-service-icon" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);color:#34d399">
+          <i class="ti ti-network" aria-hidden="true"></i>
+        </div>
+        <div>
+          <div class="pf-service-title">Custom Agentic Ecosystems</div>
+          <div class="pf-service-desc">End-to-end autonomous agent architectures: tool use, memory layers, orchestration loops — purpose-built for your domain's constraints and compliance needs.</div>
+        </div>
+        <div class="pf-service-link" style="color:#34d399">Learn more <i class="ti ti-chevron-right" style="font-size:13px" aria-hidden="true"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <div class="pf-section">
+    <div class="pf-section-label">
+      <div class="pf-section-line" style="background:#34d399"></div>
+      <span class="pf-section-tag" style="color:#34d399">Technical Stack</span>
+    </div>
+    <h2 class="pf-section-title">Built With</h2>
+    <div class="pf-stack-grid">
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(247,196,72,0.12);border:1px solid rgba(247,196,72,0.2);color:#f7c948">
+          <i class="ti ti-brand-python" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">Python</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(0,150,136,0.12);border:1px solid rgba(0,150,136,0.2);color:#4db6ac">
+          <i class="ti ti-bolt" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">FastAPI</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(226,232,240,0.08);border:1px solid rgba(226,232,240,0.15);color:#e2e8f0">
+          <i class="ti ti-brand-nextjs" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">Next.js</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(116,170,156,0.12);border:1px solid rgba(116,170,156,0.2);color:#74aa9c">
+          <i class="ti ti-brain" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">OpenAI</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(51,103,145,0.2);border:1px solid rgba(51,103,145,0.3);color:#5b9bd5">
+          <i class="ti ti-database" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">PostgreSQL</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(36,150,237,0.12);border:1px solid rgba(36,150,237,0.2);color:#2496ed">
+          <i class="ti ti-brand-docker" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">Docker</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.2);color:#38bdf8">
+          <i class="ti ti-link" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">LangChain</span>
+      </div>
+      <div class="glass pf-stack-item">
+        <div class="pf-stack-icon" style="background:rgba(220,56,45,0.12);border:1px solid rgba(220,56,45,0.2);color:#dc382d">
+          <i class="ti ti-server-bolt" aria-hidden="true"></i>
+        </div>
+        <span class="pf-stack-label">Redis</span>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
-  <footer class="text-center py-6 text-gray-600 text-sm">
-    © 2026 Sagar M • Engineered with ⚡
-  </footer>
+  <div style="max-width:960px;margin:0 auto">
+    <footer class="pf-footer">
+      <div class="pf-logo">
+        <div class="pf-logo-icon" style="width:26px;height:26px;border-radius:6px;font-size:12px">⚡</div>
+        <div class="pf-logo-text">agentic<span>.dev</span></div>
+      </div>
+      <div class="pf-footer-links">
+        <a class="pf-footer-link" href="#"><i class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Contra</a>
+        <a class="pf-footer-link" href="#"><i class="ti ti-brand-linkedin" style="font-size:13px" aria-hidden="true"></i> LinkedIn</a>
+        <a class="pf-footer-link" href="#"><i class="ti ti-brand-github" style="font-size:13px" aria-hidden="true"></i> GitHub</a>
+      </div>
+      <span class="pf-footer-copy">© 2026 — All rights reserved</span>
+    </footer>
+  </div>
 
-</body>
-</html>
+</div>
