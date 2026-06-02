@@ -1,0 +1,12 @@
+{
+  "name": "sagar-ai-consulting-platform",
+  "version": "1.0.0",
+  "description": "Premium AI Developer & Founder Consulting Platform",
+  "main": "api/send.js",
+  "dependencies": {
+    "resend": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

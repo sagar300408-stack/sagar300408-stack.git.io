@@ -284,4 +284,141 @@ document.addEventListener('DOMContentLoaded', () => {
     statsObserver.observe(statsSection);
   }
 
+  /* ---------- MODALS SYSTEM HANDLING ---------- */
+  const modalWrapper = document.getElementById('modal-wrapper');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalContainers = document.querySelectorAll('.modal-container');
+  const modalCloseBtns = document.querySelectorAll('.modal-close');
+
+  function openModal(modalId, projectName = null) {
+    // Hide all modal containers first
+    modalContainers.forEach(c => {
+      c.classList.remove('active');
+      c.style.display = 'none';
+    });
+
+    const targetModal = document.getElementById(modalId);
+    if (!targetModal) return;
+
+    // Reset standard form and success states inside this modal
+    const form = targetModal.querySelector('form');
+    const successState = targetModal.querySelector('.modal-success-state');
+    if (form) {
+      form.classList.remove('hidden');
+      form.style.display = 'flex';
+      form.reset();
+    }
+    if (successState) {
+      successState.classList.add('hidden');
+      successState.style.display = 'none';
+    }
+
+    // Auto-fill project interest fields if provided
+    if (modalId === 'project-interest-modal' && projectName) {
+      const displayStrong = document.getElementById('interest-project-display');
+      const inputHidden = document.getElementById('interest-project-name');
+      if (displayStrong) displayStrong.textContent = projectName;
+      if (inputHidden) inputHidden.value = projectName;
+    }
+
+    // Open wrapper and display container
+    modalWrapper.classList.add('active');
+    modalWrapper.setAttribute('aria-hidden', 'false');
+    targetModal.classList.add('active');
+    targetModal.style.display = 'block';
+    document.body.classList.add('loading'); // Reuse lock-scroll class
+  }
+
+  function closeModal() {
+    modalWrapper.classList.remove('active');
+    modalWrapper.setAttribute('aria-hidden', 'true');
+    modalContainers.forEach(c => {
+      c.classList.remove('active');
+      setTimeout(() => { c.style.display = 'none'; }, 300);
+    });
+    document.body.classList.remove('loading');
+  }
+
+  // Bind trigger buttons (using delegation or direct queries)
+  document.body.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-modal-target]');
+    if (trigger) {
+      e.preventDefault();
+      const modalId = trigger.getAttribute('data-modal-target');
+      const projectName = trigger.getAttribute('data-project-name');
+      openModal(modalId, projectName);
+    }
+  });
+
+  // Bind close triggers
+  modalCloseBtns.forEach(btn => btn.addEventListener('click', closeModal));
+  modalBackdrop.addEventListener('click', closeModal);
+  document.querySelectorAll('.modal-success-close').forEach(btn => btn.addEventListener('click', closeModal));
+
+  // Press ESC to close
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalWrapper.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  /* ---------- FORM DISPATCH (SECURE RESEND FLOW) ---------- */
+  const modalForms = document.querySelectorAll('.modal-form');
+  modalForms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('.form-submit-btn');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnSpinner = submitBtn.querySelector('.btn-spinner');
+      const targetModal = form.closest('.modal-container');
+      const successState = targetModal.querySelector('.modal-success-state');
+
+      // Enter loading state
+      submitBtn.disabled = true;
+      if (btnText) btnText.style.opacity = '0.5';
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+
+      // Retrieve form values
+      const formData = new FormData(form);
+      const payload = {};
+      formData.forEach((value, key) => {
+        payload[key] = value;
+      });
+
+      try {
+        const response = await fetch('/api/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          // Success workflow
+          form.classList.add('hidden');
+          form.style.display = 'none';
+          if (successState) {
+            successState.classList.remove('hidden');
+            successState.style.display = 'flex';
+          }
+        } else {
+          // Failure workflow
+          alert(result.error || 'Failed to submit request. Please try again or email Sagar directly.');
+        }
+      } catch (err) {
+        console.error('Error submitting form payload:', err);
+        alert('A network error occurred. Please verify your connection and try again.');
+      } finally {
+        // Exit loading state
+        submitBtn.disabled = false;
+        if (btnText) btnText.style.opacity = '1';
+        if (btnSpinner) btnSpinner.classList.add('hidden');
+      }
+    });
+  });
+
 });

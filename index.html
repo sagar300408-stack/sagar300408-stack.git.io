@@ -72,9 +72,10 @@
       <div class="nav-links" id="nav-links">
         <a href="#home" class="active">Home</a>
         <a href="#projects">Projects</a>
+        <a href="#process">Process</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#contact" class="nav-cta">Let's Talk</a>
+        <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
@@ -104,14 +105,19 @@
           <p class="hero-description" id="hero-subtext" style="visibility:hidden;">I design and build AI agents, autonomous workflows, enterprise AI systems, and intelligent SaaS products that help businesses scale without increasing operational complexity.</p>
 
           <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary" id="hero-cta-projects">
+            <button class="btn btn-primary" data-modal-target="start-project-modal" id="hero-cta-start">
               <span class="btn-icon">⚡</span>
-              View Projects
-            </a>
-            <a href="#contact" class="btn btn-secondary" id="hero-cta-contact">
+              Start a Project
+            </button>
+            <button class="btn btn-secondary" data-modal-target="project-consultation-modal" id="hero-cta-discuss">
               <span class="btn-icon">💬</span>
-              Book a Discussion
-            </a>
+              Discuss Your AI Project
+            </button>
+          </div>
+
+          <div class="hero-trust">
+            <p class="trust-title">Trusted by founders building AI-first businesses</p>
+            <p class="trust-subtitle">Building AI systems, autonomous workflows, and SaaS products for the next generation of businesses.</p>
           </div>
 
           <div class="hero-stats">
@@ -266,10 +272,13 @@
             <span class="project-status active">
               <span class="pulse"></span> Active Development
             </span>
-            <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-              GitHub
-            </a>
+            <div class="project-actions">
+              <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View HunterOS source code on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub
+              </a>
+              <button class="btn-project-cta" data-project-name="HunterOS" data-modal-target="project-interest-modal">Try For My Business</button>
+            </div>
           </div>
         </div>
 
@@ -286,6 +295,7 @@
             <span class="project-status active">
               <span class="pulse"></span> Active Development
             </span>
+            <button class="btn-project-cta" data-project-name="LifeOS" data-modal-target="project-interest-modal">Try For My Business</button>
           </div>
         </div>
 
@@ -302,6 +312,7 @@
             <span class="project-status construction">
               🚧 Under Construction
             </span>
+            <button class="btn-project-cta" data-project-name="Enterprise RAG with RBAC & Cost Monitoring" data-modal-target="project-interest-modal">Try For My Business</button>
           </div>
         </div>
 
@@ -318,10 +329,13 @@
             <span class="project-status concept">
               💡 Production Concept
             </span>
-            <a href="https://github.com/sagar300408-stack/logistics-dashboard-ai" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-              GitHub
-            </a>
+            <div class="project-actions">
+              <a href="https://github.com/sagar300408-stack/logistics-dashboard-ai" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View SwiftRoute source code on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub
+              </a>
+              <button class="btn-project-cta" data-project-name="SwiftRoute AI" data-modal-target="project-interest-modal">Try For My Business</button>
+            </div>
           </div>
         </div>
 
@@ -338,10 +352,13 @@
             <span class="project-status hackathon">
               🏆 Hackathon Project
             </span>
-            <a href="https://github.com/sagar300408-stack/ShadowOS" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-              GitHub
-            </a>
+            <div class="project-actions">
+              <a href="https://github.com/sagar300408-stack/ShadowOS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View ShadowOS source code on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub
+              </a>
+              <button class="btn-project-cta" data-project-name="ShadowOS" data-modal-target="project-interest-modal">Try For My Business</button>
+            </div>
           </div>
         </div>
 
@@ -358,10 +375,13 @@
             <span class="project-status completed">
               ✅ Completed
             </span>
-            <a href="https://github.com/sagar300408-stack/kids-ai" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-              GitHub
-            </a>
+            <div class="project-actions">
+              <a href="https://github.com/sagar300408-stack/kids-ai" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Sunny AI Companion source code on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub
+              </a>
+              <button class="btn-project-cta" data-project-name="Sunny AI Companion" data-modal-target="project-interest-modal">Try For My Business</button>
+            </div>
           </div>
         </div>
 
@@ -378,6 +398,7 @@
             <span class="project-status prototype">
               🧪 Prototype
             </span>
+            <button class="btn-project-cta" data-project-name="AI Receptionist for Coaching Centers" data-modal-target="project-interest-modal">Try For My Business</button>
           </div>
         </div>
 
@@ -394,9 +415,78 @@
             <span class="project-status construction">
               🚧 Under Construction
             </span>
+            <button class="btn-project-cta" data-project-name="Mission Control" data-modal-target="project-interest-modal">Try For My Business</button>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AUDIT SECTION ============ -->
+  <section class="section audit" id="audit">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="audit-card glass-card reveal">
+        <div class="audit-content">
+          <span class="section-label">Workflow Efficiency</span>
+          <h2 class="section-title">Got a process that <span class="gradient-text">wastes time?</span></h2>
+          <p class="section-subtitle">We identify repetitive workflows and replace them with intelligent AI systems.</p>
+          <button class="btn btn-primary" data-modal-target="automation-audit-modal" style="margin-top: 1.5rem;">
+            <span class="btn-icon">🔍</span> Get Free AI Automation Audit
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS SECTION ============ -->
+  <section class="section process" id="process">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label reveal">Our Blueprint</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        How <span class="gradient-text">We Work</span>
+      </h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        A structured, rapid framework to turn bottlenecks into autonomous automation systems.
+      </p>
+
+      <div class="process-timeline">
+        <!-- Step 1 -->
+        <div class="process-card glass-card reveal reveal-delay-1">
+          <div class="process-number">01</div>
+          <h3>Discovery Call</h3>
+          <p>We analyze your business operations, trace current workflows, and isolate manual friction points ripe for AI intervention.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-card glass-card reveal reveal-delay-2">
+          <div class="process-number">02</div>
+          <h3>Solution Architecture</h3>
+          <p>We design custom schemas mapping prompt sequences, vector stores, API connectors, and agent logic tailored to your goals.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-card glass-card reveal reveal-delay-3">
+          <div class="process-number">03</div>
+          <h3>Development Sprint</h3>
+          <p>We build your autonomous pipelines, integrate secure logic (LLMs, RAG, custom tools), and run comprehensive edge-case testing.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="process-card glass-card reveal reveal-delay-4">
+          <div class="process-number">04</div>
+          <h3>Deployment</h3>
+          <p>We release systems into your environment with strict compliance parameters, RBAC protections, and real-time operations dashboards.</p>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="process-card glass-card reveal reveal-delay-5">
+          <div class="process-number">05</div>
+          <h3>Optimization & Scale</h3>
+          <p>We monitor run costs, fine-tune accuracy rates based on live operational analytics, and expand automated triggers as needed.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -428,79 +518,65 @@
     </div>
   </section>
 
-  <!-- ============ CONTACT SECTION ============ -->
+  <!-- ============ CONTACT SECTION REDESIGN ============ -->
   <section class="contact section" id="contact">
     <div class="grid-bg" aria-hidden="true"></div>
     <div class="container">
-      <span class="section-label reveal">Contact</span>
+      <span class="section-label reveal">Get in Touch</span>
       <h2 class="section-title reveal reveal-delay-1">
-        Let's Build Something <span class="gradient-text">Intelligent</span>
+        Communication <span class="gradient-text">Channels</span>
       </h2>
+      <p class="section-subtitle reveal reveal-delay-2" style="margin-bottom: 3rem;">
+        Connect with me directly across my core developer operations dashboards.
+      </p>
 
-      <div class="contact-grid">
-        <!-- Left: Info + Links -->
-        <div class="contact-info reveal reveal-delay-2">
-          <p>
-            Looking to automate business operations, deploy AI agents, or build AI-powered products?<br><br>
-            <strong>Let's talk.</strong>
-          </p>
+      <div class="contact-channels-grid">
+        <!-- Card 1: Direct Email -->
+        <a href="mailto:contact.300408@gmail.com" class="channel-card glass-card reveal reveal-delay-1" id="channel-email">
+          <div class="channel-border-glow"></div>
+          <div class="channel-icon">📬</div>
+          <h3>Direct Email</h3>
+          <p class="channel-desc">Fastest response for project inquiries, custom integrations, and consulting contracts.</p>
+          <span class="channel-value">contact.300408@gmail.com</span>
+          <span class="channel-action">Open Email Client →</span>
+        </a>
 
-          <div class="contact-links">
-            <!-- Email -->
-            <a href="mailto:contact.300408@gmail.com" class="contact-link-card" id="contact-email">
-              <div class="contact-link-icon">📧</div>
-              <div class="contact-link-text">
-                <span class="contact-link-label">Email</span>
-                <span class="contact-link-value">contact.300408@gmail.com</span>
-              </div>
-            </a>
+        <!-- Card 2: LinkedIn -->
+        <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" class="channel-card glass-card reveal reveal-delay-2" id="channel-linkedin">
+          <div class="channel-border-glow"></div>
+          <div class="channel-icon">💼</div>
+          <h3>LinkedIn Network</h3>
+          <p class="channel-desc">Founder updates, agentic system articles, architectural blueprints, and professional networking.</p>
+          <span class="channel-value">linkedin.com/in/upscalewithsagar</span>
+          <span class="channel-action">Connect on LinkedIn →</span>
+        </a>
 
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" class="contact-link-card" id="contact-linkedin">
-              <div class="contact-link-icon">💼</div>
-              <div class="contact-link-text">
-                <span class="contact-link-label">LinkedIn</span>
-                <span class="contact-link-value">linkedin.com/in/upscalewithsagar</span>
-              </div>
-            </a>
+        <!-- Card 3: GitHub -->
+        <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" class="channel-card glass-card reveal reveal-delay-3" id="channel-github">
+          <div class="channel-border-glow"></div>
+          <div class="channel-icon">⚡</div>
+          <h3>GitHub Labs</h3>
+          <p class="channel-desc">Open-source agent frameworks, production tools, webhook decoders, and prototype codebases.</p>
+          <span class="channel-value">github.com/sagar300408-stack</span>
+          <span class="channel-action">Explore Repositories →</span>
+        </a>
+      </div>
 
-            <!-- GitHub -->
-            <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" class="contact-link-card" id="contact-github">
-              <div class="contact-link-icon">🐙</div>
-              <div class="contact-link-text">
-                <span class="contact-link-label">GitHub</span>
-                <span class="contact-link-value">github.com/sagar300408-stack</span>
-              </div>
-            </a>
+      <!-- Contra QR block -->
+      <div class="contra-section glass-card reveal reveal-delay-4" style="margin-top: 3rem;">
+        <div class="contra-container">
+          <div class="contra-info">
+            <h4>Hire Me on Contra</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 0;">
+              Prefer contracting via premium freelance marketplaces? Access secure escrow, milestone invoicing, and direct contracting channels.
+            </p>
           </div>
-
-          <!-- CTA Buttons -->
-          <div class="hero-buttons" style="margin-top: 2rem;">
-            <a href="mailto:contact.300408@gmail.com" class="btn btn-primary" id="contact-send-email">
-              <span class="btn-icon">✉️</span>
-              Send Email
-            </a>
-            <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="contact-view-linkedin">
-              <span class="btn-icon">💼</span>
-              View LinkedIn
-            </a>
-            <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="contact-view-github">
-              <span class="btn-icon">🐙</span>
-              View GitHub
-            </a>
+          <div class="contra-visual">
+            <div class="contra-qr">
+              <img src="contra.png" alt="Contra QR Code — Hire Sagar M" width="160" height="160" loading="lazy">
+            </div>
+            <span class="contra-cta">📱 Scan to connect on Contra</span>
           </div>
-        </div>
-
-        <!-- Right: Contra QR -->
-        <div class="contra-section reveal reveal-delay-3">
-          <h4>Hire Me on Contra</h4>
-          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.5rem;">
-            Scan the QR code to view my profile and hire me for freelance projects.
-          </p>
-          <div class="contra-qr">
-            <img src="contra.png" alt="Contra QR Code — Hire Sagar M" width="160" height="160" loading="lazy">
-          </div>
-          <span class="contra-cta">📱 Scan to connect on Contra</span>
         </div>
       </div>
     </div>
@@ -529,6 +605,264 @@
 
   <!-- ============ BACK TO TOP ============ -->
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- ============ MODALS SYSTEM ============ -->
+  <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    
+    <!-- Modal 1: Start a Project -->
+    <div class="modal-container glass-card" id="start-project-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Start a Project</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-start-project">
+        <input type="hidden" name="formType" value="start-project">
+        
+        <div class="form-group">
+          <label for="start-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
+          <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-company">Company Name</label>
+          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
+          <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Strategy Call Requested!</h3>
+        <p>Your request has been received. Sagar will reach out to you within 24 hours to schedule a deep-dive call.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 2: Discuss Your AI Project -->
+    <div class="modal-container glass-card" id="project-consultation-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Project Consultation</h3>
+        <p>Define your system outcomes, timeline, and ROI parameters.</p>
+      </div>
+      <form class="modal-form" id="form-project-consultation">
+        <input type="hidden" name="formType" value="project-consultation">
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="consult-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="consult-name" name="name" required placeholder="John Doe">
+          </div>
+          
+          <div class="form-group">
+            <label for="consult-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="consult-email" name="email" required placeholder="john@company.com">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="consult-phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="consult-phone" name="phone" required placeholder="+1 (555) 000-0000">
+          </div>
+          
+          <div class="form-group">
+            <label for="consult-company">Company</label>
+            <input type="text" id="consult-company" name="company" placeholder="Acme Corp">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="consult-type">Project Type <span class="required">*</span></label>
+            <select id="consult-type" name="projectType" required>
+              <option value="" disabled selected>Select option...</option>
+              <option value="AI Agent">AI Agent</option>
+              <option value="AI Automation">AI Automation</option>
+              <option value="SaaS Platform">SaaS Platform</option>
+              <option value="Internal Business Tool">Internal Business Tool</option>
+              <option value="Enterprise AI System">Enterprise AI System</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="consult-impact">Expected Monthly Revenue Impact <span class="required">*</span></label>
+            <select id="consult-impact" name="revenueImpact" required>
+              <option value="" disabled selected>Select impact range...</option>
+              <option value="<$1,000">&lt; $1,000</option>
+              <option value="$1,000-$10,000">$1,000 - $10,000</option>
+              <option value="$10,000-$50,000">$10,000 - $50,000</option>
+              <option value="$50,000+">$50,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="consult-desc">Project Description <span class="required">*</span></label>
+          <textarea id="consult-desc" name="description" required placeholder="What operational workflow should this system execute autonomously?"></textarea>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="consult-budget">Budget Range <span class="required">*</span></label>
+            <select id="consult-budget" name="budget" required>
+              <option value="" disabled selected>Select budget...</option>
+              <option value="Under $1,000">Under $1,000</option>
+              <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+              <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+              <option value="$10,000+">$10,000+</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="consult-timeline">Timeline <span class="required">*</span></label>
+            <input type="text" id="consult-timeline" name="timeline" required placeholder="e.g., 4 weeks, ASAP">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Schedule Discussion</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Intake Strategy Logged!</h3>
+        <p>Thank you for submitting your project parameters. Sagar will review your budget, timeline, and expected ROI targets and follow up via email.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 3: Try This For My Business -->
+    <div class="modal-container glass-card" id="project-interest-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Deploy Custom Solution</h3>
+        <p>Request a custom system based on the <strong id="interest-project-display">HunterOS</strong> architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-interest">
+        <input type="hidden" name="formType" value="project-interest">
+        <input type="hidden" id="interest-project-name" name="projectName" value="">
+
+        <div class="form-group">
+          <label for="interest-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="interest-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-company">Company Name</label>
+          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-business">Tell us about your business <span class="required">*</span></label>
+          <textarea id="interest-business" name="businessInfo" required placeholder="What industry are you in? What is your current workflow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-outcome">What outcome are you looking for? <span class="required">*</span></label>
+          <textarea id="interest-outcome" name="outcome" required placeholder="e.g. Save 15 hours/week, automate company outreach leads..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Request Similar Solution</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Solution Request Logged!</h3>
+        <p>Your interest in this specific system has been documented. Sagar will reach out shortly to discuss adapting this architecture for your custom business requirements.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 4: Get Free AI Automation Audit -->
+    <div class="modal-container glass-card" id="automation-audit-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Free Automation Audit</h3>
+        <p>Expose hidden inefficiencies and map manual processes to digital agent targets.</p>
+      </div>
+      <form class="modal-form" id="form-automation-audit">
+        <input type="hidden" name="formType" value="automation-audit">
+
+        <div class="form-group">
+          <label for="audit-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="audit-company">Company</label>
+            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+          </div>
+          
+          <div class="form-group">
+            <label for="audit-website">Website</label>
+            <input type="url" id="audit-website" name="website" placeholder="https://company.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
+          <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Get Free AI Automation Audit</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Audit Request Submitted!</h3>
+        <p>Thank you for submitting your process bottlenecks. Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ============ SCRIPTS ============ -->
   <script src="script.js"></script>
