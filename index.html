@@ -1,599 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+  <!-- SEO Meta Tags -->
+  <title>Sagar M — AI Full Stack Developer | Agentic Systems & Autonomous SaaS</title>
+  <meta name="description" content="I help businesses transform manual workflows into intelligent AI-powered autonomous systems. AI Full Stack Developer specializing in AI agents, enterprise AI, and workflow automation.">
+  <meta name="keywords" content="AI Developer, Full Stack Developer, AI Agents, Agentic Systems, SaaS, Autonomous AI, Enterprise AI, Workflow Automation, RAG, LLM">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sagar300408-stack.github.io/sagar300408-stack.git.io/">
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sagar M — AI Full Stack Developer | Agentic Systems & Autonomous SaaS">
+  <meta property="og:description" content="I help businesses transform manual workflows into intelligent AI-powered autonomous systems.">
+  <meta property="og:url" content="https://sagar300408-stack.github.io/sagar300408-stack.git.io/">
+  <meta property="og:image" content="https://sagar300408-stack.github.io/sagar300408-stack.git.io/profile.png">
+  <meta property="og:site_name" content="Sagar M Portfolio">
 
-  .pf-root {
-    font-family: 'DM Sans', sans-serif;
-    background: linear-gradient(160deg, #020617 0%, #0f172a 45%, #020617 100%);
-    color: #e2e8f0;
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-  }
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sagar M — AI Full Stack Developer">
+  <meta name="twitter:description" content="Building Agentic Systems & Autonomous SaaS for businesses.">
+  <meta name="twitter:image" content="https://sagar300408-stack.github.io/sagar300408-stack.git.io/profile.png">
 
-  /* NAV */
-  .pf-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(2,6,23,0.82);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 0 24px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .pf-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .pf-logo-icon {
-    width: 30px; height: 30px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #38bdf8, #818cf8);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; color: white;
-  }
-  .pf-logo-text { font-size: 13px; font-weight: 600; color: white; letter-spacing: -0.3px; }
-  .pf-logo-text span { color: #38bdf8; }
-  .pf-nav-links { display: flex; align-items: center; gap: 24px; }
-  .pf-nav-links a {
-    font-size: 13px; color: #94a3b8;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .pf-nav-links a:hover { color: white; }
-  .pf-nav-btn {
-    padding: 7px 16px;
-    border-radius: 8px;
-    background: #0ea5e9;
-    color: white;
-    font-size: 13px; font-weight: 500;
-    border: none; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: background 0.2s, box-shadow 0.2s;
-  }
-  .pf-nav-btn:hover { background: #38bdf8; box-shadow: 0 0 20px rgba(14,165,233,0.35); }
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
 
-  /* HERO */
-  .pf-hero {
-    padding: 64px 24px 72px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    max-width: 960px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .pf-hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -120px;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .pf-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 12px;
-    border-radius: 99px;
-    border: 1px solid rgba(56,189,248,0.3);
-    background: rgba(56,189,248,0.08);
-    color: #38bdf8;
-    font-size: 11px; font-weight: 500;
-    margin-bottom: 20px;
-    letter-spacing: 0.3px;
-  }
-  .pf-badge-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #38bdf8;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .pf-h1 {
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.8px;
-    color: white;
-    margin-bottom: 18px;
-  }
-  .pf-h1 .grad {
-    background: linear-gradient(135deg, #38bdf8, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .pf-sub {
-    font-size: 15px;
-    color: #94a3b8;
-    line-height: 1.65;
-    margin-bottom: 32px;
-    max-width: 420px;
-  }
-  .pf-sub strong { color: #cbd5e1; font-weight: 500; }
-  .pf-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-  .pf-cta-primary {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 11px 22px;
-    border-radius: 10px;
-    background: #0ea5e9;
-    color: white;
-    font-size: 13px; font-weight: 600;
-    border: none; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-  .pf-cta-primary:hover { background: #38bdf8; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(14,165,233,0.3); }
-  .pf-cta-secondary {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 11px 22px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.03);
-    color: #cbd5e1;
-    font-size: 13px; font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-  .pf-cta-secondary:hover { color: white; border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  /* Hero image placeholder */
-  .pf-hero-img-wrap {
-    display: flex; justify-content: flex-end;
-    position: relative;
-  }
-  .pf-hero-glow {
-    position: absolute;
-    inset: -20px;
-    border-radius: 28px;
-    background: radial-gradient(ellipse, rgba(14,165,233,0.25) 0%, rgba(124,58,237,0.15) 50%, transparent 80%);
-    filter: blur(20px);
-    z-index: 0;
-  }
-  .pf-hero-card {
-    position: relative; z-index: 1;
-    width: 260px; height: 300px;
-    border-radius: 24px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.95));
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-    box-shadow: 0 0 60px rgba(14,165,233,0.12), inset 0 1px 0 rgba(255,255,255,0.07);
-    transition: transform 0.3s;
-  }
-  .pf-hero-card:hover { transform: scale(1.02) rotate(0.5deg); }
-  .pf-hero-avatar {
-    width: 80px; height: 80px;
-    border-radius: 18px;
-    background: rgba(14,165,233,0.12);
-    border: 1px solid rgba(14,165,233,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 32px; color: rgba(56,189,248,0.7);
-  }
-  .pf-hero-hint { font-size: 12px; color: #475569; text-align: center; }
-  .pf-hero-dot {
-    position: absolute; top: 14px; right: 14px;
-    width: 8px; height: 8px;
-    border-radius: 50%; background: #38bdf8;
-    animation: pulse 2s infinite;
-  }
-  .pf-hero-line {
-    position: absolute; bottom: 0; left: 16px; right: 16px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(56,189,248,0.5), transparent);
-  }
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 
-  /* GLASS CARD */
-  .glass {
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.07);
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 40px rgba(0,0,0,0.35);
-  }
+  <!-- Prevent FOUC -->
+  <style>body { overflow: hidden; }</style>
+</head>
+<body>
 
-  /* SECTION WRAPPER */
-  .pf-section { padding: 56px 24px; max-width: 960px; margin: 0 auto; }
-  .pf-section-label {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 10px;
-  }
-  .pf-section-line { height: 1px; width: 28px; }
-  .pf-section-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
-  .pf-section-title { font-size: 30px; font-weight: 700; color: white; letter-spacing: -0.5px; margin-bottom: 36px; }
-  .pf-section-title span { color: #64748b; font-weight: 600; }
+  <!-- ============ PARTICLES ============ -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
 
-  /* PROJECT */
-  .pf-dashboard-placeholder {
-    width: 100%;
-    height: 240px;
-    background: rgba(15,23,42,0.7);
-    position: relative;
-    overflow: hidden;
-    padding: 16px;
-    display: flex; flex-direction: column; gap: 10px;
-  }
-  .pf-db-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 4px;
-  }
-  .pf-db-pill {
-    height: 10px; border-radius: 5px; background: rgba(255,255,255,0.07);
-  }
-  .pf-db-trafficlights { display: flex; gap: 5px; }
-  .pf-db-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .pf-db-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-  .pf-db-metric {
-    border-radius: 10px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 10px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    height: 64px;
-  }
-  .pf-db-metric-label { height: 6px; border-radius: 3px; width: 50%; background: rgba(255,255,255,0.08); }
-  .pf-db-metric-value { font-size: 18px; font-weight: 700; }
-  .pf-db-row { display: grid; grid-template-columns: 3fr 2fr; gap: 8px; }
-  .pf-db-chart {
-    border-radius: 10px; background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    height: 56px;
-    padding: 8px;
-    display: flex; align-items: flex-end; gap: 3px;
-  }
-  .pf-bar { flex: 1; border-radius: 3px 3px 0 0; background: rgba(56,189,248,0.4); }
-  .pf-db-list {
-    border-radius: 10px; background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 8px;
-    display: flex; flex-direction: column; justify-content: center; gap: 7px;
-    height: 56px;
-  }
-  .pf-db-list-row { display: flex; align-items: center; gap: 6px; }
-  .pf-db-list-dot { width: 5px; height: 5px; border-radius: 50%; background: #818cf8; }
-  .pf-db-list-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.07); flex: 1; }
-  .pf-placeholder-label {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; color: #475569;
-    background: rgba(2,6,23,0.5);
-  }
-  .pf-stats {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 20px 24px;
-    gap: 16px;
-  }
-  .pf-stat { display: flex; align-items: flex-start; gap: 10px; }
-  .pf-stat-check { color: #38bdf8; margin-top: 1px; font-size: 15px; }
-  .pf-stat-text { font-size: 13px; color: #94a3b8; }
-  .pf-stat-text strong { color: white; font-weight: 600; }
-
-  /* SERVICES */
-  .pf-services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-  .pf-service-card {
-    padding: 24px;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    display: flex; flex-direction: column; gap: 14px;
-    cursor: default;
-    transition: transform 0.25s;
-  }
-  .pf-service-card:hover { transform: translateY(-5px); }
-  .pf-service-topline {
-    position: absolute; top: 0; left: 16px; right: 16px; height: 1px;
-  }
-  .pf-service-icon {
-    width: 42px; height: 42px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .pf-service-title { font-size: 15px; font-weight: 600; color: white; margin-bottom: 4px; }
-  .pf-service-desc { font-size: 13px; color: #64748b; line-height: 1.6; flex: 1; }
-  .pf-service-link { font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 4px; margin-top: 12px; }
-
-  /* STACK */
-  .pf-stack-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
-  .pf-stack-item {
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 10px;
-    cursor: default;
-    transition: transform 0.2s;
-  }
-  .pf-stack-item:hover { transform: translateY(-4px) scale(1.02); }
-  .pf-stack-icon {
-    width: 34px; height: 34px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .pf-stack-label { font-size: 13px; font-weight: 500; color: #cbd5e1; }
-
-  /* FOOTER */
-  .pf-footer {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 28px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: 960px; margin: 0 auto;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .pf-footer-links { display: flex; align-items: center; gap: 20px; }
-  .pf-footer-link {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; color: #64748b;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .pf-footer-link:hover { color: #e2e8f0; }
-  .pf-footer-copy { font-size: 11px; color: #334155; }
-
-  @media (max-width: 640px) {
-    .pf-hero { grid-template-columns: 1fr; gap: 32px; }
-    .pf-hero-img-wrap { justify-content: center; }
-    .pf-services-grid { grid-template-columns: 1fr; }
-    .pf-stack-grid { grid-template-columns: repeat(2,1fr); }
-    .pf-stats { grid-template-columns: 1fr; }
-    .pf-h1 { font-size: 28px; }
-    .pf-section-title { font-size: 24px; }
-    .pf-nav-links { gap: 14px; }
-  }
-</style>
-
-<div class="pf-root">
-
-  <!-- NAV -->
-  <nav class="pf-nav">
-    <div class="pf-logo">
-      <div class="pf-logo-icon">⚡</div>
-      <div class="pf-logo-text">agentic<span>.dev</span></div>
+  <!-- ============ LOADING SCREEN ============ -->
+  <div class="loader-screen" id="loader" aria-label="Loading">
+    <div class="loader-logo gradient-text">Sagar M</div>
+    <div class="loader-bar-track">
+      <div class="loader-bar"></div>
     </div>
-    <div class="pf-nav-links">
-      <a href="#">Services</a>
-      <a href="#">Projects</a>
-      <a href="#">Stack</a>
-      <button class="pf-nav-btn">Contact</button>
+  </div>
+
+  <!-- ============ MOBILE NAV OVERLAY ============ -->
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="#home" class="nav-logo" id="nav-logo-link">
+        <span class="logo-icon">SM</span>
+        Sagar M
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Let's Talk</a>
+      </div>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <div class="pf-hero">
-    <div>
-      <div class="pf-badge">
-        <div class="pf-badge-dot"></div>
-        Available for new projects
+  <!-- ============ HERO SECTION ============ -->
+  <section class="hero section" id="home">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Content Column -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pulse"></span>
+            Available for projects
+          </div>
+
+          <h1 class="hero-title">
+            Building <span class="highlight">AI Systems</span> That Replace Manual Work
+          </h1>
+
+          <p class="hero-description" id="hero-subtext" style="visibility:hidden;">I design and build AI agents, autonomous workflows, enterprise AI systems, and intelligent SaaS products that help businesses scale without increasing operational complexity.</p>
+
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary" id="hero-cta-projects">
+              <span class="btn-icon">⚡</span>
+              View Projects
+            </a>
+            <a href="#contact" class="btn btn-secondary" id="hero-cta-contact">
+              <span class="btn-icon">💬</span>
+              Book a Discussion
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-number" data-count="7">0</div>
+              <div class="stat-label">AI Projects Built</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-count="Agentic">Agentic</div>
+              <div class="stat-label">Systems</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-count="Enterprise">Enterprise</div>
+              <div class="stat-label">AI</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-count="Automation">Automation</div>
+              <div class="stat-label">Focused</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Column -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <div class="hero-image-glow" aria-hidden="true"></div>
+            <img src="hero.png" alt="AI Systems Visualization" width="480" height="480" loading="eager">
+
+            <div class="hero-float-badge top-right">
+              🤖 Agentic AI
+            </div>
+            <div class="hero-float-badge bottom-left">
+              🚀 Autonomous SaaS
+            </div>
+          </div>
+        </div>
       </div>
-      <h1 class="pf-h1">
-        Architecting <span class="grad">Agentic AI Systems</span> for High-Growth Startups.
-      </h1>
-      <p class="pf-sub">
-        Specialising in <strong>FastAPI backends</strong> and <strong>Mission-Control Dashboards</strong> that turn complex logic into actionable intelligence.
+    </div>
+  </section>
+
+  <!-- ============ ABOUT SECTION ============ -->
+  <section class="about section" id="about">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="about-grid">
+        <!-- Image Column -->
+        <div class="about-image-col reveal">
+          <div class="about-profile-frame">
+            <img src="profile.png" alt="Sagar M — AI Full Stack Developer" width="300" height="300" loading="lazy">
+          </div>
+        </div>
+
+        <!-- Text Column -->
+        <div class="about-text">
+          <span class="section-label reveal">About</span>
+          <h2 class="section-title reveal reveal-delay-1">
+            Founder-Engineer Building the <span class="gradient-text">Future of Business Automation</span>
+          </h2>
+
+          <p class="reveal reveal-delay-2">
+            I specialize in building AI-powered systems that automate repetitive business operations, accelerate decision making, and unlock operational efficiency.
+          </p>
+
+          <p class="reveal reveal-delay-3">My work spans:</p>
+
+          <div class="about-skills-grid reveal reveal-delay-4">
+            <div class="about-skill-tag">AI Agents</div>
+            <div class="about-skill-tag">Enterprise AI</div>
+            <div class="about-skill-tag">RAG Systems</div>
+            <div class="about-skill-tag">Workflow Automation</div>
+            <div class="about-skill-tag">SaaS Platforms</div>
+            <div class="about-skill-tag">Full Stack Dev</div>
+            <div class="about-skill-tag">AI Infrastructure</div>
+          </div>
+
+          <div class="about-focus reveal reveal-delay-5">
+            I focus on outcomes, automation, and scalable business systems — rather than traditional software development.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES SECTION ============ -->
+  <section class="section" id="services">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label reveal">Services</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        How I Help <span class="gradient-text">Businesses</span>
+      </h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        End-to-end AI solutions — from strategy through deployment.
       </p>
-      <div class="pf-ctas">
-        <a class="pf-cta-primary" href="#">View My Services →</a>
-        <a class="pf-cta-secondary" href="#">See Projects ›</a>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="glass-card service-card reveal reveal-delay-1" id="service-automation">
+          <div class="service-icon">⚙️</div>
+          <h3>AI Workflow Automation</h3>
+          <p>Transform manual workflows into autonomous AI-driven systems that operate 24/7 with minimal human oversight.</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="glass-card service-card reveal reveal-delay-2" id="service-agents">
+          <div class="service-icon">🤖</div>
+          <h3>Custom AI Agents</h3>
+          <p>Build specialized AI agents for sales, operations, support, and internal processes that learn and adapt.</p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="glass-card service-card reveal reveal-delay-3" id="service-enterprise">
+          <div class="service-icon">🏢</div>
+          <h3>Enterprise AI Solutions</h3>
+          <p>Secure AI systems with compliance, RBAC, monitoring, and governance built for corporate environments.</p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="glass-card service-card reveal reveal-delay-4" id="service-saas">
+          <div class="service-icon">🚀</div>
+          <h3>AI SaaS Development</h3>
+          <p>End-to-end product development for AI-powered startups and businesses — from MVP to scale.</p>
+        </div>
       </div>
     </div>
-    <div class="pf-hero-img-wrap">
-      <div class="pf-hero-glow"></div>
-      <div class="pf-hero-card">
-        <div class="pf-hero-dot"></div>
-        <div class="pf-hero-avatar">
-          <i class="ti ti-robot" aria-hidden="true"></i>
-        </div>
-        <div class="pf-hero-hint">Add your photo here<br><span style="font-size:11px;color:#334155">800 × 1000px recommended</span></div>
-        <div class="pf-hero-line"></div>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <!-- FEATURED PROJECT -->
-  <div class="pf-section">
-    <div class="pf-section-label">
-      <div class="pf-section-line" style="background:#38bdf8"></div>
-      <span class="pf-section-tag" style="color:#38bdf8">Featured Work</span>
-    </div>
-    <h2 class="pf-section-title">SwiftRoute AI: <span>Logistics Command Center</span></h2>
+  <!-- ============ PROJECTS SECTION ============ -->
+  <section class="projects section" id="projects">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label reveal">Projects</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        Systems I've <span class="gradient-text">Built</span>
+      </h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        Real AI systems solving real business problems.
+      </p>
 
-    <div class="glass" style="overflow:hidden">
-      <div class="pf-dashboard-placeholder">
-        <div class="pf-db-bar">
-          <div style="display:flex;gap:6px">
-            <div class="pf-db-pill" style="width:64px"></div>
-            <div class="pf-db-pill" style="width:44px"></div>
+      <div class="projects-grid">
+
+        <!-- Project 1: HunterOS -->
+        <div class="glass-card project-card reveal reveal-delay-1" id="project-hunteros">
+          <div class="project-header">
+            <h3 class="project-title">HunterOS</h3>
+            <span class="project-lang">Python</span>
           </div>
-          <div class="pf-db-trafficlights">
-            <div class="pf-db-dot" style="background:rgba(239,68,68,0.5)"></div>
-            <div class="pf-db-dot" style="background:rgba(234,179,8,0.5)"></div>
-            <div class="pf-db-dot" style="background:rgba(34,197,94,0.5)"></div>
-          </div>
-        </div>
-        <div class="pf-db-grid">
-          <div class="pf-db-metric">
-            <div class="pf-db-metric-label"></div>
-            <div class="pf-db-metric-value" style="color:#38bdf8">98%</div>
-          </div>
-          <div class="pf-db-metric">
-            <div class="pf-db-metric-label"></div>
-            <div class="pf-db-metric-value" style="color:#a78bfa">&lt;4s</div>
-          </div>
-          <div class="pf-db-metric">
-            <div class="pf-db-metric-label"></div>
-            <div class="pf-db-metric-value" style="color:#34d399">12k</div>
-          </div>
-        </div>
-        <div class="pf-db-row">
-          <div class="pf-db-chart">
-            <div class="pf-bar" style="height:40%"></div>
-            <div class="pf-bar" style="height:65%"></div>
-            <div class="pf-bar" style="height:45%"></div>
-            <div class="pf-bar" style="height:80%"></div>
-            <div class="pf-bar" style="height:55%"></div>
-            <div class="pf-bar" style="height:90%"></div>
-            <div class="pf-bar" style="height:70%"></div>
-          </div>
-          <div class="pf-db-list">
-            <div class="pf-db-list-row"><div class="pf-db-list-dot"></div><div class="pf-db-list-line"></div></div>
-            <div class="pf-db-list-row"><div class="pf-db-list-dot"></div><div class="pf-db-list-line" style="width:60%"></div></div>
-            <div class="pf-db-list-row"><div class="pf-db-list-dot"></div><div class="pf-db-list-line" style="width:80%"></div></div>
+          <p class="project-description">
+            An autonomous AI SDR platform that finds niche leads, researches companies, detects pain points, and generates hyper-personalized outreach using AI agents.
+          </p>
+          <div class="project-footer">
+            <span class="project-status active">
+              <span class="pulse"></span> Active Development
+            </span>
+            <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
           </div>
         </div>
-        <div class="pf-placeholder-label">Add your dashboard screenshot here</div>
+
+        <!-- Project 2: LifeOS -->
+        <div class="glass-card project-card reveal reveal-delay-2" id="project-lifeos">
+          <div class="project-header">
+            <h3 class="project-title">LifeOS</h3>
+            <span class="project-lang">Python</span>
+          </div>
+          <p class="project-description">
+            An AI-driven ecosystem that shifts personal productivity from reactive task-tracking to proactive future simulation using a private Intelligence Hub and autonomous Agentic Scouts.
+          </p>
+          <div class="project-footer">
+            <span class="project-status active">
+              <span class="pulse"></span> Active Development
+            </span>
+          </div>
+        </div>
+
+        <!-- Project 3: Enterprise RAG -->
+        <div class="glass-card project-card reveal reveal-delay-3" id="project-rag">
+          <div class="project-header">
+            <h3 class="project-title">Enterprise RAG with RBAC & Cost Monitoring</h3>
+            <span class="project-lang">Python</span>
+          </div>
+          <p class="project-description">
+            Enterprise-grade Retrieval-Augmented Generation platform designed for corporate environments with compliance, RBAC, security controls, and AI cost monitoring.
+          </p>
+          <div class="project-footer">
+            <span class="project-status construction">
+              🚧 Under Construction
+            </span>
+          </div>
+        </div>
+
+        <!-- Project 4: SwiftRoute AI -->
+        <div class="glass-card project-card reveal reveal-delay-4" id="project-swiftroute">
+          <div class="project-header">
+            <h3 class="project-title">SwiftRoute AI</h3>
+            <span class="project-lang">TypeScript</span>
+          </div>
+          <p class="project-description">
+            High-velocity logistics platform that transforms unstructured driver communication into structured operational intelligence using LLMs.
+          </p>
+          <div class="project-footer">
+            <span class="project-status concept">
+              💡 Production Concept
+            </span>
+            <a href="https://github.com/sagar300408-stack/logistics-dashboard-ai" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 5: ShadowOS -->
+        <div class="glass-card project-card reveal reveal-delay-5" id="project-shadowos">
+          <div class="project-header">
+            <h3 class="project-title">ShadowOS</h3>
+            <span class="project-lang">TypeScript</span>
+          </div>
+          <p class="project-description">
+            AI operational intelligence system that identifies hidden workflow inefficiencies and generates intelligent automation opportunities.
+          </p>
+          <div class="project-footer">
+            <span class="project-status hackathon">
+              🏆 Hackathon Project
+            </span>
+            <a href="https://github.com/sagar300408-stack/ShadowOS" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 6: Sunny AI Companion -->
+        <div class="glass-card project-card reveal reveal-delay-6" id="project-sunny">
+          <div class="project-header">
+            <h3 class="project-title">Sunny AI Companion</h3>
+            <span class="project-lang">Python</span>
+          </div>
+          <p class="project-description">
+            Safe AI learning assistant for children with educational conversations, quizzes, storytelling, and content safety controls.
+          </p>
+          <div class="project-footer">
+            <span class="project-status completed">
+              ✅ Completed
+            </span>
+            <a href="https://github.com/sagar300408-stack/kids-ai" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 7: AI Receptionist -->
+        <div class="glass-card project-card reveal reveal-delay-7" id="project-receptionist">
+          <div class="project-header">
+            <h3 class="project-title">AI Receptionist for Coaching Centers</h3>
+            <span class="project-lang">Python</span>
+          </div>
+          <p class="project-description">
+            AI receptionist platform designed specifically for coaching institutes and educational organizations to handle inquiries autonomously.
+          </p>
+          <div class="project-footer">
+            <span class="project-status prototype">
+              🧪 Prototype
+            </span>
+          </div>
+        </div>
+
+        <!-- Project 8: Mission Control -->
+        <div class="glass-card project-card reveal reveal-delay-8" id="project-missioncontrol">
+          <div class="project-header">
+            <h3 class="project-title">Mission Control</h3>
+            <span class="project-lang">TypeScript</span>
+          </div>
+          <p class="project-description">
+            Real-time command center infrastructure featuring Postgres, Redis, webhook ingestion, WebSockets, and operational monitoring systems.
+          </p>
+          <div class="project-footer">
+            <span class="project-status construction">
+              🚧 Under Construction
+            </span>
+          </div>
+        </div>
+
       </div>
-      <div class="pf-stats">
-        <div class="pf-stat">
-          <span class="pf-stat-check"><i class="ti ti-circle-check" aria-hidden="true"></i></span>
-          <span class="pf-stat-text"><strong>98%</strong> Data Extraction Accuracy</span>
+    </div>
+  </section>
+
+  <!-- ============ TECH STACK SECTION ============ -->
+  <section class="section tech-stack" id="tech-stack">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label reveal">Tech Stack</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        Technologies I <span class="gradient-text">Work With</span>
+      </h2>
+
+      <div class="tech-badges reveal reveal-delay-2">
+        <span class="tech-badge"><span class="tech-icon">🐍</span> Python</span>
+        <span class="tech-badge"><span class="tech-icon">⚡</span> FastAPI</span>
+        <span class="tech-badge"><span class="tech-icon">📘</span> TypeScript</span>
+        <span class="tech-badge"><span class="tech-icon">⚛️</span> React</span>
+        <span class="tech-badge"><span class="tech-icon">🟨</span> JavaScript</span>
+        <span class="tech-badge"><span class="tech-icon">🐘</span> PostgreSQL</span>
+        <span class="tech-badge"><span class="tech-icon">🔴</span> Redis</span>
+        <span class="tech-badge"><span class="tech-icon">🧠</span> OpenAI</span>
+        <span class="tech-badge"><span class="tech-icon">💬</span> LLMs</span>
+        <span class="tech-badge"><span class="tech-icon">📄</span> RAG</span>
+        <span class="tech-badge"><span class="tech-icon">🔌</span> WebSockets</span>
+        <span class="tech-badge"><span class="tech-icon">🐙</span> GitHub</span>
+        <span class="tech-badge"><span class="tech-icon">🤖</span> AI Agents</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT SECTION ============ -->
+  <section class="contact section" id="contact">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="container">
+      <span class="section-label reveal">Contact</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        Let's Build Something <span class="gradient-text">Intelligent</span>
+      </h2>
+
+      <div class="contact-grid">
+        <!-- Left: Info + Links -->
+        <div class="contact-info reveal reveal-delay-2">
+          <p>
+            Looking to automate business operations, deploy AI agents, or build AI-powered products?<br><br>
+            <strong>Let's talk.</strong>
+          </p>
+
+          <div class="contact-links">
+            <!-- Email -->
+            <a href="mailto:contact.300408@gmail.com" class="contact-link-card" id="contact-email">
+              <div class="contact-link-icon">📧</div>
+              <div class="contact-link-text">
+                <span class="contact-link-label">Email</span>
+                <span class="contact-link-value">contact.300408@gmail.com</span>
+              </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" class="contact-link-card" id="contact-linkedin">
+              <div class="contact-link-icon">💼</div>
+              <div class="contact-link-text">
+                <span class="contact-link-label">LinkedIn</span>
+                <span class="contact-link-value">linkedin.com/in/upscalewithsagar</span>
+              </div>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" class="contact-link-card" id="contact-github">
+              <div class="contact-link-icon">🐙</div>
+              <div class="contact-link-text">
+                <span class="contact-link-label">GitHub</span>
+                <span class="contact-link-value">github.com/sagar300408-stack</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="hero-buttons" style="margin-top: 2rem;">
+            <a href="mailto:contact.300408@gmail.com" class="btn btn-primary" id="contact-send-email">
+              <span class="btn-icon">✉️</span>
+              Send Email
+            </a>
+            <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="contact-view-linkedin">
+              <span class="btn-icon">💼</span>
+              View LinkedIn
+            </a>
+            <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="contact-view-github">
+              <span class="btn-icon">🐙</span>
+              View GitHub
+            </a>
+          </div>
         </div>
-        <div class="pf-stat">
-          <span class="pf-stat-check"><i class="ti ti-circle-check" aria-hidden="true"></i></span>
-          <span class="pf-stat-text"><strong>FastAPI & Next.js</strong> Architecture</span>
-        </div>
-        <div class="pf-stat">
-          <span class="pf-stat-check"><i class="ti ti-circle-check" aria-hidden="true"></i></span>
-          <span class="pf-stat-text"><strong>&lt; 4s</strong> End-to-End Latency</span>
+
+        <!-- Right: Contra QR -->
+        <div class="contra-section reveal reveal-delay-3">
+          <h4>Hire Me on Contra</h4>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.5rem;">
+            Scan the QR code to view my profile and hire me for freelance projects.
+          </p>
+          <div class="contra-qr">
+            <img src="contra.png" alt="Contra QR Code — Hire Sagar M" width="160" height="160" loading="lazy">
+          </div>
+          <span class="contra-cta">📱 Scan to connect on Contra</span>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- SERVICES -->
-  <div class="pf-section">
-    <div class="pf-section-label">
-      <div class="pf-section-line" style="background:#a78bfa"></div>
-      <span class="pf-section-tag" style="color:#a78bfa">What I Do</span>
-    </div>
-    <h2 class="pf-section-title">Services</h2>
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-name">Sagar M</div>
+        <div class="footer-title">AI Full Stack Developer</div>
+        <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
 
-    <div class="pf-services-grid">
-      <!-- Card 1 -->
-      <div class="glass pf-service-card">
-        <div class="pf-service-topline" style="background:linear-gradient(90deg,transparent,#38bdf8,transparent)"></div>
-        <div class="pf-service-icon" style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#38bdf8">
-          <i class="ti ti-shield-check" aria-hidden="true"></i>
+        <div class="footer-links">
+          <a href="mailto:contact.300408@gmail.com" id="footer-email">📧 Email</a>
+          <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">💼 LinkedIn</a>
+          <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">🐙 GitHub</a>
         </div>
-        <div>
-          <div class="pf-service-title">AI Operational Audits</div>
-          <div class="pf-service-desc">Deep-dive analysis of your existing AI pipelines. Identify bottlenecks, hallucination risks, and latency culprits — delivered as a prioritised remediation roadmap.</div>
+
+        <div class="footer-copy">
+          &copy; 2025 Sagar M. All rights reserved. Built with precision.
         </div>
-        <div class="pf-service-link" style="color:#38bdf8">Learn more <i class="ti ti-chevron-right" style="font-size:13px" aria-hidden="true"></i></div>
-      </div>
-      <!-- Card 2 -->
-      <div class="glass pf-service-card">
-        <div class="pf-service-topline" style="background:linear-gradient(90deg,transparent,#a78bfa,transparent)"></div>
-        <div class="pf-service-icon" style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);color:#a78bfa">
-          <i class="ti ti-bolt" aria-hidden="true"></i>
-        </div>
-        <div>
-          <div class="pf-service-title">High-Velocity Dashboard Sprints</div>
-          <div class="pf-service-desc">Mission-control interfaces shipped in weeks, not quarters. From raw API data to polished, real-time dashboards that operators actually love using.</div>
-        </div>
-        <div class="pf-service-link" style="color:#a78bfa">Learn more <i class="ti ti-chevron-right" style="font-size:13px" aria-hidden="true"></i></div>
-      </div>
-      <!-- Card 3 -->
-      <div class="glass pf-service-card">
-        <div class="pf-service-topline" style="background:linear-gradient(90deg,transparent,#34d399,transparent)"></div>
-        <div class="pf-service-icon" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);color:#34d399">
-          <i class="ti ti-network" aria-hidden="true"></i>
-        </div>
-        <div>
-          <div class="pf-service-title">Custom Agentic Ecosystems</div>
-          <div class="pf-service-desc">End-to-end autonomous agent architectures: tool use, memory layers, orchestration loops — purpose-built for your domain's constraints and compliance needs.</div>
-        </div>
-        <div class="pf-service-link" style="color:#34d399">Learn more <i class="ti ti-chevron-right" style="font-size:13px" aria-hidden="true"></i></div>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <!-- STACK -->
-  <div class="pf-section">
-    <div class="pf-section-label">
-      <div class="pf-section-line" style="background:#34d399"></div>
-      <span class="pf-section-tag" style="color:#34d399">Technical Stack</span>
-    </div>
-    <h2 class="pf-section-title">Built With</h2>
-    <div class="pf-stack-grid">
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(247,196,72,0.12);border:1px solid rgba(247,196,72,0.2);color:#f7c948">
-          <i class="ti ti-brand-python" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">Python</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(0,150,136,0.12);border:1px solid rgba(0,150,136,0.2);color:#4db6ac">
-          <i class="ti ti-bolt" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">FastAPI</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(226,232,240,0.08);border:1px solid rgba(226,232,240,0.15);color:#e2e8f0">
-          <i class="ti ti-brand-nextjs" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">Next.js</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(116,170,156,0.12);border:1px solid rgba(116,170,156,0.2);color:#74aa9c">
-          <i class="ti ti-brain" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">OpenAI</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(51,103,145,0.2);border:1px solid rgba(51,103,145,0.3);color:#5b9bd5">
-          <i class="ti ti-database" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">PostgreSQL</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(36,150,237,0.12);border:1px solid rgba(36,150,237,0.2);color:#2496ed">
-          <i class="ti ti-brand-docker" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">Docker</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.2);color:#38bdf8">
-          <i class="ti ti-link" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">LangChain</span>
-      </div>
-      <div class="glass pf-stack-item">
-        <div class="pf-stack-icon" style="background:rgba(220,56,45,0.12);border:1px solid rgba(220,56,45,0.2);color:#dc382d">
-          <i class="ti ti-server-bolt" aria-hidden="true"></i>
-        </div>
-        <span class="pf-stack-label">Redis</span>
-      </div>
-    </div>
-  </div>
+  <!-- ============ BACK TO TOP ============ -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
-  <!-- FOOTER -->
-  <div style="max-width:960px;margin:0 auto">
-    <footer class="pf-footer">
-      <div class="pf-logo">
-        <div class="pf-logo-icon" style="width:26px;height:26px;border-radius:6px;font-size:12px">⚡</div>
-        <div class="pf-logo-text">agentic<span>.dev</span></div>
-      </div>
-      <div class="pf-footer-links">
-        <a class="pf-footer-link" href="#"><i class="ti ti-external-link" style="font-size:13px" aria-hidden="true"></i> Contra</a>
-        <a class="pf-footer-link" href="#"><i class="ti ti-brand-linkedin" style="font-size:13px" aria-hidden="true"></i> LinkedIn</a>
-        <a class="pf-footer-link" href="#"><i class="ti ti-brand-github" style="font-size:13px" aria-hidden="true"></i> GitHub</a>
-      </div>
-      <span class="pf-footer-copy">© 2026 — All rights reserved</span>
-    </footer>
-  </div>
+  <!-- ============ SCRIPTS ============ -->
+  <script src="script.js"></script>
 
-</div>
+</body>
+</html>
