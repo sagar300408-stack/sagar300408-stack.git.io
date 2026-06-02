@@ -6,21 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Loading Screen ---------- */
   const loader = document.getElementById('loader');
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      document.body.style.overflow = '';
-      initReveal();
-    }, 2000);
-  });
-  // Fallback — remove loader after 4s no matter what
-  setTimeout(() => {
+  
+  function hideLoader() {
     if (loader && !loader.classList.contains('hidden')) {
       loader.classList.add('hidden');
-      document.body.style.overflow = '';
+      document.body.classList.remove('loading');
       initReveal();
     }
-  }, 4000);
+  }
+
+  // Trigger when window fully loads
+  window.addEventListener('load', () => {
+    setTimeout(hideLoader, 1500); // Premium delay to show transition
+  });
+
+  // Fallback — dismiss loader after 3s max to prevent lockup
+  setTimeout(hideLoader, 3000);
 
   /* ---------- Navbar scroll effect ---------- */
   const navbar = document.getElementById('navbar');
