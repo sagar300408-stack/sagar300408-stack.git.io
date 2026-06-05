@@ -1865,3 +1865,18 @@ button {
   margin: 0 auto;
 }
 
+/* ============================
+   SVG ICON ACCENTS
+   ============================ */
+.service-svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent-light);
+}
+.channel-svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent-light);
+}
+
+
