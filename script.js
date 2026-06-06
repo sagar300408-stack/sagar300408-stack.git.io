@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(167, 139, 250, ${this.opacity})`;
+        ctx.fillStyle = `rgba(36, 66, 53, ${this.opacity * 0.4})`;
         ctx.fill();
       }
     }
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(124, 58, 237, ${0.06 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(36, 66, 53, ${0.05 * (1 - dist / 120)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
@@ -420,5 +420,70 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  /* ---------- HERO FEATURED WORK SLIDER ---------- */
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  const sliderContainer = document.querySelector('.hero-slider-container');
+  let currentSlide = 0;
+  let slideInterval;
+
+  function showSlide(index) {
+    if (slides.length === 0) return;
+    
+    // Bounds wrapping
+    if (index >= slides.length) currentSlide = 0;
+    else if (index < 0) currentSlide = slides.length - 1;
+    else currentSlide = index;
+
+    // Toggle active classes
+    slides.forEach((slide, i) => {
+      if (i === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === currentSlide) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    slideInterval = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoplay() {
+    if (slideInterval) {
+      clearInterval(slideInterval);
+    }
+  }
+
+  // Bind navigation dots
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      showSlide(i);
+      startAutoplay(); // Reset timer on click
+    });
+  });
+
+  // Autoplay control on hover
+  if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', stopAutoplay);
+    sliderContainer.addEventListener('mouseleave', startAutoplay);
+  }
+
+  // Initialize
+  startAutoplay();
 
 });

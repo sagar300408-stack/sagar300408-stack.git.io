@@ -33,6 +33,7 @@
   <!-- Preconnect for fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
@@ -138,17 +139,57 @@
           </div>
         </div>
 
-        <!-- Visual Column -->
+        <!-- Visual Column: Featured Work Slider -->
         <div class="hero-visual">
-          <div class="hero-image-wrapper">
-            <div class="hero-image-glow" aria-hidden="true"></div>
-            <img src="hero.png" alt="AI Systems Visualization" width="480" height="480" loading="eager">
+          <div class="hero-slider-container glass-card">
+            <div class="hero-slider-glow" aria-hidden="true"></div>
+            
+            <div class="hero-slider-track" id="hero-slider-track">
+              <!-- Slide 1: HunterOS -->
+              <div class="hero-slide active" data-slide-index="0">
+                <div class="slide-thumbnail">
+                  <img src="thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" loading="eager" width="480" height="270">
+                </div>
+                <div class="slide-content-panel">
+                  <span class="slide-tag">Featured Work</span>
+                  <h3>HunterOS</h3>
+                  <p>Autonomous AI SDR platform for niche lead prospecting and hyper-personalized outreach.</p>
+                  <a href="#projects" class="btn-slide-link">Learn More &rarr;</a>
+                </div>
+              </div>
 
-            <div class="hero-float-badge top-right">
-              Agentic AI
+              <!-- Slide 2: LifeOS -->
+              <div class="hero-slide" data-slide-index="1">
+                <div class="slide-thumbnail">
+                  <img src="thumbnails/lifeos.png" alt="LifeOS Interface Mockup" loading="lazy" width="480" height="270">
+                </div>
+                <div class="slide-content-panel">
+                  <span class="slide-tag">Featured Work</span>
+                  <h3>LifeOS</h3>
+                  <p>AI-driven productivity hub and agent scouts for proactive simulation and tracking.</p>
+                  <a href="#projects" class="btn-slide-link">Learn More &rarr;</a>
+                </div>
+              </div>
+
+              <!-- Slide 3: RAG -->
+              <div class="hero-slide" data-slide-index="2">
+                <div class="slide-thumbnail">
+                  <img src="thumbnails/rag.png" alt="Enterprise RAG Dashboard Mockup" loading="lazy" width="480" height="270">
+                </div>
+                <div class="slide-content-panel">
+                  <span class="slide-tag">Featured Work</span>
+                  <h3>Enterprise RAG</h3>
+                  <p>Retrieval-Augmented Generation platform with enterprise-grade RBAC and cost monitoring.</p>
+                  <a href="#projects" class="btn-slide-link">Learn More &rarr;</a>
+                </div>
+              </div>
             </div>
-            <div class="hero-float-badge bottom-left">
-              Autonomous SaaS
+
+            <!-- Slider Pagination Dots -->
+            <div class="hero-slider-dots">
+              <button class="slider-dot active" data-slide-to="0" aria-label="Go to slide 1"></button>
+              <button class="slider-dot" data-slide-to="1" aria-label="Go to slide 2"></button>
+              <button class="slider-dot" data-slide-to="2" aria-label="Go to slide 3"></button>
             </div>
           </div>
         </div>
@@ -264,167 +305,221 @@
       </p>
 
       <div class="projects-grid">
-
         <!-- Project 1: HunterOS -->
         <div class="glass-card project-card reveal reveal-delay-1" id="project-hunteros">
-          <div class="project-header">
-            <h3 class="project-title">HunterOS</h3>
-            <span class="project-lang">Python</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            An autonomous AI SDR platform that finds niche leads, researches companies, detects pain points, and generates hyper-personalized outreach using AI agents.
-          </p>
-          <div class="project-footer">
-            <span class="project-status active">
-              <span class="pulse"></span> Active Development
-            </span>
-            <div class="project-actions">
-              <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View HunterOS source code on GitHub">
-                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                GitHub
-              </a>
-              <button class="btn-project-cta" data-project-name="HunterOS" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">HunterOS</h3>
+              <span class="project-lang">Python</span>
+            </div>
+            <p class="project-description">
+              An autonomous AI SDR platform that finds niche leads, researches companies, detects pain points, and generates hyper-personalized outreach using AI agents.
+            </p>
+            <div class="project-footer">
+              <span class="project-status active">
+                <span class="pulse"></span> Active Development
+              </span>
+              <div class="project-actions">
+                <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View HunterOS source code on GitHub">
+                  <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                  GitHub
+                </a>
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="HunterOS" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Project 2: LifeOS -->
         <div class="glass-card project-card reveal reveal-delay-2" id="project-lifeos">
-          <div class="project-header">
-            <h3 class="project-title">LifeOS</h3>
-            <span class="project-lang">Python</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/lifeos.png" alt="LifeOS Interface Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            An AI-driven ecosystem that shifts personal productivity from reactive task-tracking to proactive future simulation using a private Intelligence Hub and autonomous Agentic Scouts.
-          </p>
-          <div class="project-footer">
-            <span class="project-status active">
-              <span class="pulse"></span> Active Development
-            </span>
-            <button class="btn-project-cta" data-project-name="LifeOS" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">LifeOS</h3>
+              <span class="project-lang">Python</span>
+            </div>
+            <p class="project-description">
+              An AI-driven ecosystem that shifts personal productivity from reactive task-tracking to proactive future simulation using a private Intelligence Hub and autonomous Agentic Scouts.
+            </p>
+            <div class="project-footer">
+              <span class="project-status active">
+                <span class="pulse"></span> Active Development
+              </span>
+              <div class="project-actions">
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="LifeOS" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Project 3: Enterprise RAG -->
         <div class="glass-card project-card reveal reveal-delay-3" id="project-rag">
-          <div class="project-header">
-            <h3 class="project-title">Enterprise RAG with RBAC & Cost Monitoring</h3>
-            <span class="project-lang">Python</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/rag.png" alt="Enterprise RAG Dashboard Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            Enterprise-grade Retrieval-Augmented Generation platform designed for corporate environments with compliance, RBAC, security controls, and AI cost monitoring.
-          </p>
-          <div class="project-footer">
-            <span class="project-status construction">
-              Under Construction
-            </span>
-            <button class="btn-project-cta" data-project-name="Enterprise RAG with RBAC & Cost Monitoring" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Enterprise RAG with RBAC & Cost Monitoring</h3>
+              <span class="project-lang">Python</span>
+            </div>
+            <p class="project-description">
+              Enterprise-grade Retrieval-Augmented Generation platform designed for corporate environments with compliance, RBAC, security controls, and AI cost monitoring.
+            </p>
+            <div class="project-footer">
+              <span class="project-status construction">
+                Under Construction
+              </span>
+              <div class="project-actions">
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="Enterprise RAG with RBAC & Cost Monitoring" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Project 4: SwiftRoute AI -->
         <div class="glass-card project-card reveal reveal-delay-4" id="project-swiftroute">
-          <div class="project-header">
-            <h3 class="project-title">SwiftRoute AI</h3>
-            <span class="project-lang">TypeScript</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            High-velocity logistics platform that transforms unstructured driver communication into structured operational intelligence using LLMs.
-          </p>
-          <div class="project-footer">
-            <span class="project-status concept">
-              Production Concept
-            </span>
-            <div class="project-actions">
-              <a href="https://github.com/sagar300408-stack/logistics-dashboard-ai" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View SwiftRoute source code on GitHub">
-                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                GitHub
-              </a>
-              <button class="btn-project-cta" data-project-name="SwiftRoute AI" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">SwiftRoute AI</h3>
+              <span class="project-lang">TypeScript</span>
+            </div>
+            <p class="project-description">
+              High-velocity logistics platform that transforms unstructured driver communication into structured operational intelligence using LLMs.
+            </p>
+            <div class="project-footer">
+              <span class="project-status concept">
+                Production Concept
+              </span>
+              <div class="project-actions">
+                <a href="https://github.com/sagar300408-stack/logistics-dashboard-ai" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View SwiftRoute source code on GitHub">
+                  <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                  GitHub
+                </a>
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="SwiftRoute AI" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Project 5: ShadowOS -->
         <div class="glass-card project-card reveal reveal-delay-5" id="project-shadowos">
-          <div class="project-header">
-            <h3 class="project-title">ShadowOS</h3>
-            <span class="project-lang">TypeScript</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/shadowos.png" alt="ShadowOS Dashboard Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            AI operational intelligence system that identifies hidden workflow inefficiencies and generates intelligent automation opportunities.
-          </p>
-          <div class="project-footer">
-            <span class="project-status hackathon">
-              Hackathon Project
-            </span>
-            <div class="project-actions">
-              <a href="https://github.com/sagar300408-stack/ShadowOS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View ShadowOS source code on GitHub">
-                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                GitHub
-              </a>
-              <button class="btn-project-cta" data-project-name="ShadowOS" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">ShadowOS</h3>
+              <span class="project-lang">TypeScript</span>
+            </div>
+            <p class="project-description">
+              AI operational intelligence system that identifies hidden workflow inefficiencies and generates intelligent automation opportunities.
+            </p>
+            <div class="project-footer">
+              <span class="project-status hackathon">
+                Hackathon Project
+              </span>
+              <div class="project-actions">
+                <a href="https://github.com/sagar300408-stack/ShadowOS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View ShadowOS source code on GitHub">
+                  <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                  GitHub
+                </a>
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="ShadowOS" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Project 6: Sunny AI Companion -->
         <div class="glass-card project-card reveal reveal-delay-6" id="project-sunny">
-          <div class="project-header">
-            <h3 class="project-title">Sunny AI Companion</h3>
-            <span class="project-lang">Python</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/sunny.png" alt="Sunny AI Companion Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            Safe AI learning assistant for children with educational conversations, quizzes, storytelling, and content safety controls.
-          </p>
-          <div class="project-footer">
-            <span class="project-status completed">
-              Completed
-            </span>
-            <div class="project-actions">
-              <a href="https://github.com/sagar300408-stack/kids-ai" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Sunny AI Companion source code on GitHub">
-                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                GitHub
-              </a>
-              <button class="btn-project-cta" data-project-name="Sunny AI Companion" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Sunny AI Companion</h3>
+              <span class="project-lang">Python</span>
+            </div>
+            <p class="project-description">
+              Safe AI learning assistant for children with educational conversations, quizzes, storytelling, and content safety controls.
+            </p>
+            <div class="project-footer">
+              <span class="project-status completed">
+                Completed
+              </span>
+              <div class="project-actions">
+                <a href="https://github.com/sagar300408-stack/kids-ai" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Sunny AI Companion source code on GitHub">
+                  <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                  GitHub
+                </a>
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="Sunny AI Companion" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Project 7: AI Receptionist -->
         <div class="glass-card project-card reveal reveal-delay-7" id="project-receptionist">
-          <div class="project-header">
-            <h3 class="project-title">AI Receptionist for Coaching Centers</h3>
-            <span class="project-lang">Python</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/receptionist.png" alt="AI Receptionist Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            AI receptionist platform designed specifically for coaching institutes and educational organizations to handle inquiries autonomously.
-          </p>
-          <div class="project-footer">
-            <span class="project-status prototype">
-              Prototype
-            </span>
-            <button class="btn-project-cta" data-project-name="AI Receptionist for Coaching Centers" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">AI Receptionist for Coaching Centers</h3>
+              <span class="project-lang">Python</span>
+            </div>
+            <p class="project-description">
+              AI receptionist platform designed specifically for coaching institutes and educational organizations to handle inquiries autonomously.
+            </p>
+            <div class="project-footer">
+              <span class="project-status prototype">
+                Prototype
+              </span>
+              <div class="project-actions">
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="AI Receptionist for Coaching Centers" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Project 8: Mission Control -->
         <div class="glass-card project-card reveal reveal-delay-8" id="project-missioncontrol">
-          <div class="project-header">
-            <h3 class="project-title">Mission Control</h3>
-            <span class="project-lang">TypeScript</span>
+          <div class="project-image-wrapper">
+            <img src="thumbnails/missioncontrol.png" alt="Mission Control Dashboard Mockup" class="project-card-image" loading="lazy">
           </div>
-          <p class="project-description">
-            Real-time command center infrastructure featuring Postgres, Redis, webhook ingestion, WebSockets, and operational monitoring systems.
-          </p>
-          <div class="project-footer">
-            <span class="project-status construction">
-              Under Construction
-            </span>
-            <button class="btn-project-cta" data-project-name="Mission Control" data-modal-target="project-interest-modal">Try For My Business</button>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Mission Control</h3>
+              <span class="project-lang">TypeScript</span>
+            </div>
+            <p class="project-description">
+              Real-time command center infrastructure featuring Postgres, Redis, webhook ingestion, WebSockets, and operational monitoring systems.
+            </p>
+            <div class="project-footer">
+              <span class="project-status construction">
+                Under Construction
+              </span>
+              <div class="project-actions">
+                <a href="#" class="btn-project-secondary">Learn More</a>
+                <button class="btn-project-cta" data-project-name="Mission Control" data-modal-target="project-interest-modal">Try For My Business</button>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
