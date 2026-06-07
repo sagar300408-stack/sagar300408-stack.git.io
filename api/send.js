@@ -111,7 +111,7 @@ Wasted Workflow:  ${processTime || 'N/A'}
 
     const { data, error } = await resend.emails.send({
       from: 'Acquisition Platform <onboarding@resend.dev>',
-      to: ['contact.300408@gmail.com'],
+      to: ['contact.sagar3004@gmail.com'],
       subject: subject,
       text: emailText,
       replyTo: email,
