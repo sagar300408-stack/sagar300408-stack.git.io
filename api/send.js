@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
-
+console.log("RESEND:", process.env.RESEND_API_KEY);
+console.log("ALL ENV KEYS:", Object.keys(process.env).filter(k => k.includes("RESEND")));
 export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
