@@ -30,85 +30,221 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body;
-    const { formType, name, email, phone } = body;
+    const { formType, name, email, phone, company } = body;
 
     if (!name || !email || !phone) {
       return res.status(400).json({ error: 'Name, Email, and Phone are required fields.' });
     }
 
-    let subject = '';
+    // --- LEAD SCORING SYSTEM ---
+    let leadScore = 0;
+
+    // 1. Company exists (+2)
+    const companyExists = company && company.trim().length > 0 && !/^(n\/a|none|no)$/i.test(company.trim());
+    if (companyExists) {
+      leadScore += 2;
+    }
+
+    // 2. Business email (+3)
+    const personalDomains = [
+      'gmail.com',
+      'yahoo.com',
+      'hotmail.com',
+      'outlook.com',
+      'aol.com',
+      'icloud.com',
+      'mail.com',
+      'protonmail.com',
+      'zoho.com',
+      'yandex.com',
+    ];
+    if (email && email.includes('@')) {
+      const domain = email.split('@')[1].toLowerCase().trim();
+      if (!personalDomains.includes(domain)) {
+        leadScore += 3;
+      }
+    }
+
+    // Fields specific to consultation
+    const { projectType, budget, timeline, description } = body;
+    
+    // 3. Budget specified (+2)
+    const budgetSpecified = budget && budget.trim().length > 0;
+    if (budgetSpecified) {
+      leadScore += 2;
+    }
+
+    // 4. Premium budget (+3)
+    const premiumBudget = budget === '$5,000 - $10,000' || budget === '$10,000+';
+    if (premiumBudget) {
+      leadScore += 3;
+    }
+
+    // 5. Timeline specified (+1)
+    const timelineSpecified = timeline && timeline.trim().length > 0;
+    if (timelineSpecified) {
+      leadScore += 1;
+    }
+
+    // 6. Description > 100 chars (+2)
+    const { discussion, businessInfo, outcome, processTime } = body;
+    const descText = description || discussion || businessInfo || outcome || processTime || '';
+    if (descText.trim().length > 100) {
+      leadScore += 2;
+    }
+
+    // Determine max possible score for this form type
+    let maxPossibleScore = 7;
+    if (formType === 'project-consultation') {
+      maxPossibleScore = 13;
+    }
+
+    // Dynamic priority classification
+    const priority = leadScore >= 8 ? '🔥 HOT LEAD' : (leadScore >= 5 ? '🟡 QUALIFIED LEAD' : '🚀 NEW INQUIRY');
+
+    // Category naming for subject line
+    const categoryName = formType === 'project-consultation' ? 'AI Project Consultation' :
+                         formType === 'start-project' ? 'Strategy Call' :
+                         formType === 'project-interest' ? 'Project Interest' :
+                         formType === 'automation-audit' ? 'AI Automation Audit' : 'Form Submission';
+
+    const subject = `${priority} | ${categoryName}`;
+    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' (IST)';
+
+    // Future-proofed lead data object
+    const leadData = {
+      leadScore,
+      maxPossibleScore,
+      priority,
+      formType,
+      submittedAt: timestamp,
+      name,
+      email,
+      phone,
+      company: company || 'N/A',
+      details: body
+    };
+    console.log('Lead processed:', leadData);
+
+    // Build the Lead Summary Block
+    const leadSummaryBlock = `LEAD SUMMARY
+━━━━━━━━━━━━━━━━━━
+
+Priority: ${priority}
+Lead Score: ${leadScore}/${maxPossibleScore}
+Form Type: ${categoryName}
+Submitted: ${timestamp}
+`;
+
     let emailText = '';
 
-    if (formType === 'start-project') {
-      const { company, discussion } = body;
-      if (!discussion) {
-        return res.status(400).json({ error: 'Discussion topic is required.' });
-      }
-      subject = 'New Strategy Call Request';
-      emailText = `
-Strategy Call Request Details:
-------------------------------------------
-Name:       ${name}
-Email:      ${email}
-Phone:      ${phone}
-Company:    ${company || 'N/A'}
-Discussion: ${discussion}
-------------------------------------------
-      `;
-    } else if (formType === 'project-consultation') {
-      const { company, projectType, description, budget, timeline, revenueImpact } = body;
-      subject = 'New AI Project Consultation';
-      emailText = `
-Project Consultation Details:
-------------------------------------------
-Name:                    ${name}
-Email:                   ${email}
-Phone:                   ${phone}
-Company:                 ${company || 'N/A'}
-Project Type:            ${projectType || 'N/A'}
-Expected Revenue Impact: ${revenueImpact || 'N/A'}
-Budget Range:            ${budget || 'N/A'}
-Timeline:                ${timeline || 'N/A'}
+    if (formType === 'project-consultation') {
+      const { revenueImpact } = body;
+      emailText = `${leadSummaryBlock}
+NEW PROJECT INQUIRY
+
+Client Information
+━━━━━━━━━━━━━━━━━━
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Company: ${company || 'N/A'}
+
+Project Details
+━━━━━━━━━━━━━━━━━━
+
+Project Type: ${projectType || 'N/A'}
+Budget: ${budget || 'N/A'}
+Timeline: ${timeline || 'N/A'}
+
+Expected Business Impact:
+${revenueImpact || 'N/A'}
 
 Project Description:
+━━━━━━━━━━━━━━━━━━
+
 ${description || 'No description provided.'}
-------------------------------------------
-      `;
+
+━━━━━━━━━━━━━━━━━━
+Generated by Tvira Lead Acquisition Platform
+`;
+    } else if (formType === 'start-project') {
+      emailText = `${leadSummaryBlock}
+AI STRATEGY DISCUSSION REQUEST
+
+Contact Information
+━━━━━━━━━━━━━━━━━━
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Company: ${company || 'N/A'}
+
+Discussion Topic
+━━━━━━━━━━━━━━━━━━
+
+${discussion || 'No discussion topic provided.'}
+
+━━━━━━━━━━━━━━━━━━
+Priority: Review within 24 hours
+`;
     } else if (formType === 'project-interest') {
-      const { company, projectName, businessInfo, outcome } = body;
-      if (!projectName) {
-        return res.status(400).json({ error: 'Project name is required.' });
-      }
-      subject = `${projectName} Interest Lead`;
-      emailText = `
-Project Lead Details (${projectName}):
-------------------------------------------
-Name:                  ${name}
-Email:                 ${email}
-Phone:                 ${phone}
-Company:               ${company || 'N/A'}
-Business Details:      ${businessInfo || 'N/A'}
-Desired Outcomes:      ${outcome || 'N/A'}
-------------------------------------------
-      `;
+      const { projectName } = body;
+      emailText = `${leadSummaryBlock}
+PROJECT INTEREST LEAD
+
+Contact Information
+━━━━━━━━━━━━━━━━━━
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Company: ${company || 'N/A'}
+
+Project Interest
+━━━━━━━━━━━━━━━━━━
+
+Project Name: ${projectName || 'N/A'}
+
+Business Details:
+${businessInfo || 'N/A'}
+
+Desired Outcomes:
+${outcome || 'N/A'}
+
+━━━━━━━━━━━━━━━━━━
+Generated by Tvira Lead Acquisition Platform
+`;
     } else if (formType === 'automation-audit') {
-      const { company, website, processTime } = body;
-      subject = 'Free AI Automation Audit Request';
-      emailText = `
-Automation Audit Request Details:
-------------------------------------------
-Name:             ${name}
-Email:            ${email}
-Phone:            ${phone}
-Company:          ${company || 'N/A'}
-Website:          ${website || 'N/A'}
-Wasted Workflow:  ${processTime || 'N/A'}
-------------------------------------------
-      `;
+      const { website } = body;
+      emailText = `${leadSummaryBlock}
+AUTOMATION AUDIT REQUEST
+
+Contact Information
+━━━━━━━━━━━━━━━━━━
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Company: ${company || 'N/A'}
+
+Audit Details
+━━━━━━━━━━━━━━━━━━
+
+Website: ${website || 'N/A'}
+
+Wasted Workflow/Process Bottleneck:
+${processTime || 'N/A'}
+
+━━━━━━━━━━━━━━━━━━
+Generated by Tvira Lead Acquisition Platform
+`;
     } else {
       return res.status(400).json({ error: 'Invalid form type provided.' });
     }
 
+    // Send primary notification email to Sagar
     const { data, error } = await resend.emails.send({
       from: 'Acquisition Platform <onboarding@resend.dev>',
       to: ['contact.sagar3004@gmail.com'],
@@ -121,6 +257,43 @@ Wasted Workflow:  ${processTime || 'N/A'}
       console.error('Resend API Error:', error);
       return res.status(400).json({ error: error.message });
     }
+
+    // --- CLIENT AUTO-REPLY (DISABLED UNTIL PERSONAL DOMAIN PROVIDED) ---
+    /*
+    const autoReplyText = `Hi ${name},
+
+Thank you for reaching out.
+
+Your request has been received successfully and is currently under review.
+
+What happens next?
+
+✓ Requirement review
+✓ Opportunity assessment
+✓ Technical feasibility evaluation
+✓ Follow-up discussion if aligned
+
+Expected response time:
+Within 24 hours
+
+Regards,
+
+Sagar
+Founder, Tvira
+AI Systems & Automation Consulting`;
+
+    try {
+      await resend.emails.send({
+        from: 'Sagar M <sagar@yourdomain.com>', // Replace with verified custom domain email once available
+        to: [email],
+        subject: "We've received your request",
+        text: autoReplyText,
+        replyTo: 'contact.sagar3004@gmail.com',
+      });
+    } catch (autoReplyError) {
+      console.warn('Auto reply skipped:', autoReplyError);
+    }
+    */
 
     return res.status(200).json({ success: true, message: 'Email sent successfully!', data });
   } catch (err) {

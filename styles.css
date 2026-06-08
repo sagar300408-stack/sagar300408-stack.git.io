@@ -859,6 +859,12 @@ button {
   border-color: var(--border-hover);
 }
 
+.project-image-link {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
 .project-image-wrapper {
   width: 100%;
   height: 220px;
