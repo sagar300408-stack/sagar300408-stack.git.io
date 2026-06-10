@@ -1161,6 +1161,12 @@ button {
   font-weight: 600;
 }
 
+.contra-hire-btn {
+  margin-top: var(--space-sm);
+  font-size: 0.9rem;
+  padding: 0.65rem 1.5rem;
+}
+
 /* ============================
    FOOTER
    ============================ */
