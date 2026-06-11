@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Control — Sagar M Portfolio</title>
+  <meta name="description" content="Mission Control is a centralized AI-driven command platform for monitoring, managing, and optimizing business operations from a single intelligent workspace.">
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    .project-header-section {
+      padding-top: calc(var(--nav-height) + var(--space-xl));
+      padding-bottom: var(--space-2xl);
+      position: relative;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      margin-bottom: var(--space-lg);
+      transition: all 0.3s var(--ease-out);
+    }
+    .back-btn:hover { color: var(--accent); transform: translateX(-3px); }
+    .project-hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+    @media (max-width: 992px) { .project-hero-grid { grid-template-columns: 1fr; gap: var(--space-2xl); } }
+    .project-meta-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    .meta-tag {
+      padding: var(--space-xs) var(--space-md);
+      background: rgba(36, 66, 53, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .meta-tag strong { color: var(--accent); }
+    .project-main-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-3xl);
+      margin-top: var(--space-3xl);
+    }
+    @media (max-width: 992px) { .project-main-grid { grid-template-columns: 1fr; gap: var(--space-2xl); } }
+    .project-body h2 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: var(--space-2xl);
+      margin-bottom: var(--space-md);
+    }
+    .project-body p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: var(--space-lg);
+    }
+    /* Problem list */
+    .problem-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+      margin: var(--space-md) 0 var(--space-xl);
+    }
+    @media (max-width: 576px) { .problem-list { grid-template-columns: 1fr; } }
+    .problem-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: rgba(163, 42, 63, 0.03);
+      border: 1px solid rgba(163, 42, 63, 0.1);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .problem-item::before { content: '✗'; color: var(--rose); font-weight: 700; flex-shrink: 0; }
+    /* Capabilities grid */
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+      margin: var(--space-xl) 0 var(--space-3xl);
+    }
+    @media (max-width: 768px) { .capabilities-grid { grid-template-columns: 1fr; } }
+    .cap-card { padding: var(--space-xl); height: 100%; }
+    .cap-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(36, 66, 53, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: var(--space-md);
+    }
+    .cap-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--space-xs); color: var(--text-primary); }
+    .cap-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-sm); }
+    .cap-tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-sm); }
+    .cap-tag {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      background: rgba(36, 66, 53, 0.05);
+      border: 1px solid rgba(36, 66, 53, 0.12);
+      color: var(--accent);
+    }
+    /* Architecture flow */
+    .arch-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      margin: var(--space-lg) 0 var(--space-2xl);
+      padding: var(--space-xl);
+      background: rgba(36, 66, 53, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      font-family: var(--font-mono);
+    }
+    .flow-item { display: flex; align-items: center; gap: var(--space-sm); font-size: 0.9rem; color: var(--text-secondary); padding: 0.25rem 0; }
+    .flow-item.hl { color: var(--accent); font-weight: 600; }
+    .flow-arrow { color: var(--accent-light); font-size: 0.8rem; padding-left: 0.5rem; }
+    /* Benefits grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin: var(--space-md) 0 var(--space-2xl);
+    }
+    @media (max-width: 576px) { .benefits-grid { grid-template-columns: 1fr; } }
+    .benefit-card { padding: var(--space-lg); border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); transition: all 0.3s ease; }
+    .benefit-card:hover { border-color: var(--accent-light); transform: translateY(-2px); }
+    .benefit-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs); }
+    .benefit-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0; }
+    /* Use cases */
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+      margin: var(--space-md) 0 var(--space-2xl);
+    }
+    @media (max-width: 576px) { .use-cases-grid { grid-template-columns: 1fr; } }
+    .use-case-tag {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+    .use-case-tag:hover { border-color: var(--accent-light); transform: translateY(-1px); }
+    .use-case-tag::before { content: '→'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+    /* Sidebar */
+    .tech-stack-panel {
+      padding: var(--space-xl);
+      background: rgba(36, 66, 53, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      position: sticky;
+      top: 100px;
+    }
+    .tech-stack-panel h3 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; color: var(--accent); margin-bottom: var(--space-md); }
+    .tech-badges-grid { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+    .tech-stack-badge {
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+    .tech-stack-badge:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.02); }
+    /* Quote box */
+    .quote-box {
+      text-align: center;
+      padding: var(--space-3xl) var(--space-2xl);
+      background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      margin: var(--space-4xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-box::after { content: '🎯'; position: absolute; right: -2%; bottom: -5%; font-size: 8rem; opacity: 0.04; pointer-events: none; }
+    .quote-box blockquote { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400; line-height: 1.4; color: var(--accent); margin-bottom: var(--space-md); font-style: italic; }
+    .quote-box cite { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-style: normal; }
+    .ambient-glow-mc { position: absolute; top: 10%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(36, 66, 53, 0.05) 0%, transparent 70%); filter: blur(80px); pointer-events: none; z-index: 0; }
+  </style>
+</head>
+<body>
+
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+        <span class="logo-icon">SM</span>
+        Sagar M
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="../../index.html#home">Home</a>
+        <a href="../../index.html#projects" class="active">Projects</a>
+        <a href="../../index.html#process">Process</a>
+        <a href="../../index.html#services">Services</a>
+        <a href="../../index.html#about">About</a>
+        <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container" style="position: relative; z-index: 1;">
+    <div class="ambient-glow-mc" aria-hidden="true"></div>
+
+    <section class="project-header-section">
+      <a href="../../index.html#projects" class="back-btn">&larr; Back To Projects</a>
+
+      <div class="project-hero-grid">
+        <div class="hero-content">
+          <span class="section-label">Under Construction</span>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+            Mission <span class="highlight" style="color: var(--accent);">Control</span>
+          </h1>
+          <p class="hero-description" style="font-size: 1.2rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+            AI-Powered Operational Command Center 🎯⚡📊
+          </p>
+          <p class="hero-description" style="margin-bottom: var(--space-lg);">
+            Mission Control is a centralized AI-driven command platform designed to help organizations monitor, manage, and optimize business operations from a single intelligent workspace — where information flows together and decisions are made faster and more confidently.
+          </p>
+
+          <div class="project-meta-box">
+            <div class="meta-tag">Status: <strong>Under Construction</strong></div>
+            <div class="meta-tag">Tech: <strong>TypeScript / PostgreSQL / WebSockets</strong></div>
+            <div class="meta-tag">Domain: <strong>Operational Intelligence</strong></div>
+          </div>
+
+          <div class="hero-buttons">
+            <button class="btn btn-primary" data-modal-target="automation-audit-modal" id="btn-trigger-audit">
+              Get This Project Audit
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-wrapper" style="max-width: 420px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08);">
+            <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(36, 66, 53, 0.1) 0%, transparent 70%);"></div>
+            <img src="../../thumbnails/missioncontrol.png" alt="Mission Control Dashboard Mockup" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-main-grid">
+      <div class="project-body">
+
+        <!-- Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl);">
+          <h2 style="margin-top: 0; color: var(--rose);">Problem Statement</h2>
+          <p>Modern organizations operate across numerous disconnected systems — CRM, project tools, communication channels, BI dashboards, support systems, and operational databases. As businesses grow, information becomes fragmented and leaders spend more time gathering data than acting on it.</p>
+          <div class="problem-list">
+            <div class="problem-item">Lack of operational visibility</div>
+            <div class="problem-item">Delayed decision making</div>
+            <div class="problem-item">Data silos across departments</div>
+            <div class="problem-item">Missed growth opportunities</div>
+            <div class="problem-item">Inefficient manual workflows</div>
+            <div class="problem-item">Manual reporting processes</div>
+          </div>
+        </div>
+
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl);">
+          <h2 style="margin-top: 0; color: var(--green);">Solution</h2>
+          <p>Mission Control provides a unified operational command center powered by AI. The platform continuously collects and analyzes information from multiple business systems, transforming raw data into actionable intelligence.</p>
+          <p style="margin-bottom: 0;">Instead of merely displaying metrics, Mission Control identifies patterns, highlights risks, surfaces opportunities, and helps teams prioritize actions that drive business outcomes.</p>
+        </div>
+
+        <!-- Core Capabilities -->
+        <h2>Core Capabilities</h2>
+        <div class="capabilities-grid">
+
+          <div class="glass-card cap-card">
+            <div class="cap-icon">🖥️</div>
+            <h3>Unified Business Dashboard</h3>
+            <p>A centralized workspace providing visibility across operations, sales, marketing, customer engagement, projects, team performance, and business KPIs.</p>
+            <div class="cap-tags">
+              <span class="cap-tag">Single Workspace</span>
+              <span class="cap-tag">Cross-Department</span>
+              <span class="cap-tag">KPI Tracking</span>
+            </div>
+          </div>
+
+          <div class="glass-card cap-card">
+            <div class="cap-icon">🧠</div>
+            <h3>AI Operational Intelligence</h3>
+            <p>Analyzes organizational data to identify bottlenecks, performance issues, emerging risks, growth opportunities, and operational inefficiencies.</p>
+            <div class="cap-tags">
+              <span class="cap-tag">Bottleneck Detection</span>
+              <span class="cap-tag">Risk Identification</span>
+              <span class="cap-tag">Growth Signals</span>
+            </div>
+          </div>
+
+          <div class="glass-card cap-card">
+            <div class="cap-icon">📡</div>
+            <h3>Real-Time Monitoring</h3>
+            <p>Tracks revenue fluctuations, lead generation trends, customer engagement changes, workflow delays, and team performance metrics as they happen.</p>
+            <div class="cap-tags">
+              <span class="cap-tag">Live Updates</span>
+              <span class="cap-tag">Revenue Tracking</span>
+              <span class="cap-tag">WebSockets</span>
+            </div>
+          </div>
+
+          <div class="glass-card cap-card">
+            <div class="cap-icon">🔔</div>
+            <h3>Intelligent Alerts</h3>
+            <p>Automatically notifies teams when important situations require attention — sales pipeline stagnation, high-priority customer issues, project deadline risks, or operational anomalies.</p>
+            <div class="cap-tags">
+              <span class="cap-tag">Auto Notifications</span>
+              <span class="cap-tag">Priority Triage</span>
+              <span class="cap-tag">Anomaly Detection</span>
+            </div>
+          </div>
+
+          <div class="glass-card cap-card">
+            <div class="cap-icon">🤖</div>
+            <h3>Decision Support Engine</h3>
+            <p>Provides AI-generated recommendations for resource allocation, process improvements, growth opportunities, and risk mitigation strategies.</p>
+            <div class="cap-tags">
+              <span class="cap-tag">AI Recommendations</span>
+              <span class="cap-tag">Resource Planning</span>
+              <span class="cap-tag">Risk Mitigation</span>
+            </div>
+          </div>
+
+          <div class="glass-card cap-card">
+            <div class="cap-icon">📋</div>
+            <h3>Executive Insights</h3>
+            <p>Transforms complex operational data into executive-level summaries that founders, managers, and decision-makers can understand and act on quickly.</p>
+            <div class="cap-tags">
+              <span class="cap-tag">Executive Reports</span>
+              <span class="cap-tag">Data Summaries</span>
+              <span class="cap-tag">Founder-Ready</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- System Architecture -->
+        <h2>System Architecture</h2>
+        <div class="arch-flow">
+          <div class="flow-item hl">🏢 Business Systems (CRM, ERP, Projects, Support, Marketing)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item">Data Integration Layer</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item hl">⚙️ Operational Intelligence Hub</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item">AI Analysis &amp; Reasoning</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item">Recommendations &amp; Insights</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item hl">🎯 Mission Control Dashboard</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-item hl">👥 Teams &amp; Leadership</div>
+        </div>
+
+        <!-- Benefits -->
+        <h2>Key Benefits</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <h4>Complete Organizational Visibility</h4>
+            <p>Gain a holistic view of business operations from a single platform — no more context switching.</p>
+          </div>
+          <div class="benefit-card">
+            <h4>Faster Decision Making</h4>
+            <p>Reduce time spent gathering information and increase time spent executing on what matters.</p>
+          </div>
+          <div class="benefit-card">
+            <h4>Improved Operational Efficiency</h4>
+            <p>Identify inefficiencies before they become major issues through continuous AI monitoring.</p>
+          </div>
+          <div class="benefit-card">
+            <h4>Proactive Management</h4>
+            <p>Detect risks and opportunities early through continuous real-time signal monitoring.</p>
+          </div>
+          <div class="benefit-card">
+            <h4>AI-Augmented Leadership</h4>
+            <p>Support managers and founders with data-driven recommendations rather than gut decisions.</p>
+          </div>
+          <div class="benefit-card">
+            <h4>Scalable Operations</h4>
+            <p>Maintain operational control as the business grows and organizational complexity increases.</p>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <h2>Use Cases</h2>
+        <div class="use-cases-grid">
+          <div class="use-case-tag">Startup Operations</div>
+          <div class="use-case-tag">Enterprise Management</div>
+          <div class="use-case-tag">Service Businesses</div>
+          <div class="use-case-tag">Sales Organizations</div>
+          <div class="use-case-tag">Multi-Team Organizations</div>
+          <div class="use-case-tag">Digital Transformation Teams</div>
+        </div>
+
+        <!-- Vision -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl);">
+          <h2 style="margin-top: 0; color: var(--accent);">Vision</h2>
+          <p style="margin-bottom: 0;">Mission Control aims to become the digital command center for modern organizations — where operational data, business intelligence, and AI-driven decision support converge into a single platform. By transforming fragmented information into actionable insights, it empowers leaders to move from reactive management to proactive, intelligence-driven execution.</p>
+        </div>
+
+        <div class="quote-box">
+          <blockquote>"See clearly, decide confidently, execute effectively."</blockquote>
+          <cite>Mission Control</cite>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="project-sidebar">
+        <div class="tech-stack-panel">
+          <h3>Technology Stack</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
+            Built on a real-time infrastructure stack with TypeScript, PostgreSQL, Redis, WebSockets, and webhook ingestion — designed for enterprise-grade operational monitoring at scale.
+          </p>
+          <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Technologies</h4>
+          <div class="tech-badges-grid">
+            <span class="tech-stack-badge">TypeScript</span>
+            <span class="tech-stack-badge">PostgreSQL</span>
+            <span class="tech-stack-badge">Redis</span>
+            <span class="tech-stack-badge">WebSockets</span>
+            <span class="tech-stack-badge">Webhook Ingestion</span>
+            <span class="tech-stack-badge">AI Analysis Engine</span>
+            <span class="tech-stack-badge">Real-Time Monitoring</span>
+            <span class="tech-stack-badge">Data Integration</span>
+            <span class="tech-stack-badge">Alert Engine</span>
+            <span class="tech-stack-badge">Executive Reporting</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-name">Sagar M</div>
+        <div class="footer-title">AI Full Stack Developer</div>
+        <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
+        <div class="footer-links">
+          <a href="mailto:contact.sagar3004@gmail.com" id="footer-email">Email</a>
+          <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
+          <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
+        </div>
+        <div class="footer-copy">&copy; 2025 Sagar M. All rights reserved. Built with precision.</div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+  <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <div class="modal-container glass-card" id="start-project-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Start a Project</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-start-project">
+        <input type="hidden" name="formType" value="start-project">
+        <div class="form-group">
+          <label for="start-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="start-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
+          <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        <div class="form-group">
+          <label for="start-company">Company Name</label>
+          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+        </div>
+        <div class="form-group">
+          <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
+          <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Strategy Call Requested!</h3>
+        <p>Your request has been received. Sagar will reach out within 24 hours.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <div class="modal-container glass-card" id="automation-audit-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Free Automation Audit</h3>
+        <p>Expose hidden inefficiencies and map manual processes to digital agent targets.</p>
+      </div>
+      <form class="modal-form" id="form-automation-audit">
+        <input type="hidden" name="formType" value="automation-audit">
+        <div class="form-group">
+          <label for="audit-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="audit-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label for="audit-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="audit-company">Company</label>
+            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+          </div>
+          <div class="form-group">
+            <label for="audit-website">Website</label>
+            <input type="url" id="audit-website" name="website" placeholder="https://company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
+          <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Get Free AI Automation Audit</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Audit Request Submitted!</h3>
+        <p>Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const auditBtn = document.getElementById('btn-trigger-audit');
+      if (auditBtn) {
+        auditBtn.addEventListener('click', () => {
+          const textarea = document.getElementById('audit-process');
+          if (textarea) {
+            textarea.value = "I am interested in deploying 'Mission Control' — an AI-powered operational command center for my organization. I'd like to explore how unified business monitoring, real-time alerts, and AI decision support can be implemented for my operations.";
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
