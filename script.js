@@ -322,6 +322,41 @@ document.addEventListener('DOMContentLoaded', () => {
       const inputHidden = document.getElementById('interest-project-name');
       if (displayStrong) displayStrong.textContent = projectName;
       if (inputHidden) inputHidden.value = projectName;
+
+      // Prefill businessInfo and outcome fields
+      const bizTextarea = targetModal.querySelector('#interest-business');
+      const outcomeTextarea = targetModal.querySelector('#interest-outcome');
+      if (bizTextarea && outcomeTextarea) {
+        const lowerProj = projectName.toLowerCase();
+        if (lowerProj.includes('sunny')) {
+          bizTextarea.value = "We are developing an educational or children's application and need a safe, age-appropriate conversational AI interface with content filtering and guided learning.";
+          outcomeTextarea.value = "Integrate a child-friendly conversational assistant similar to Sunny AI, incorporating safety moderation guardrails, interactive storytelling, and kid-appropriate language models.";
+        } else if (lowerProj.includes('hunter')) {
+          bizTextarea.value = "We want to scale our outbound B2B sales development. We currently have a team of SDRs manually searching LinkedIn, scraping websites, and writing personalized cold emails.";
+          outcomeTextarea.value = "Deploy a customized version of HunterOS to automate B2B lead generation, scraping, and personalized outreach, aiming to double our booked demo rate.";
+        } else if (lowerProj.includes('life')) {
+          bizTextarea.value = "I want to manage my personal daily routines, task scheduling, notes, and personal learning in a single unified AI-powered interface rather than using multiple disconnected apps.";
+          outcomeTextarea.value = "Deploy a customized personal workspace modeled after LifeOS, utilizing local AI agents and cognitive memory search to help me manage my daily schedule and capture insights.";
+        } else if (lowerProj.includes('rag')) {
+          bizTextarea.value = "We have massive internal company documentation (PDFs, wikis, Notion pages) and need a secure internal AI chatbot. Data security, user permissions, and LLM API cost monitoring are critical for us.";
+          outcomeTextarea.value = "Implement a secure Enterprise RAG chatbot that connects to our company knowledge base, enforces role-based access, and tracks LLM token usage/costs across departments.";
+        } else if (lowerProj.includes('receptionist') || lowerProj.includes('ojas')) {
+          bizTextarea.value = "We run an educational institute or service business with high volumes of incoming student and parent inquiries via web and phone. Staff spend hours manually answering FAQs and scheduling tours.";
+          outcomeTextarea.value = "Deploy an AI receptionist and inquiry automation system based on Ojas.ai to automatically answer common questions, route leads, and schedule student bookings.";
+        } else if (lowerProj.includes('shadow')) {
+          bizTextarea.value = "We have complex operational processes across multiple legacy business systems. We want to identify inefficiencies and automatically map background operations to find opportunities for automation.";
+          outcomeTextarea.value = "Set up an operation mapping system based on the ShadowOS framework to log workflow steps, trace bottlenecks, and identify potential automation targets.";
+        } else if (lowerProj.includes('route') || lowerProj.includes('swift')) {
+          bizTextarea.value = "We run a logistics and dispatch operation with multiple vehicles. We currently coordinate routes and assign tasks to drivers using manual spreadsheets and unstructured phone calls.";
+          outcomeTextarea.value = "Deploy an intelligent dispatch dashboard like SwiftRoute AI to automate vehicle routing, parse operator messages into structured telemetry, and optimize driver delivery schedules.";
+        } else if (lowerProj.includes('mission') || lowerProj.includes('control')) {
+          bizTextarea.value = "We operate a high-volume system with real-time webhooks, event ingestion, and infrastructure metrics. We need a live, interactive operations dashboard with WebSockets connectivity.";
+          outcomeTextarea.value = "Create a high-performance live operations console modeled after Mission Control, to monitor real-time infrastructure status and handle low-latency system telemetry.";
+        } else {
+          bizTextarea.value = `We are interested in adapting the architecture of the '${projectName}' system for our custom business requirements.`;
+          outcomeTextarea.value = `Deploy a custom tailored solution based on the architecture of the '${projectName}' project.`;
+        }
+      }
     } else if (modalId === 'automation-audit-modal' && projectName) {
       const textarea = targetModal.querySelector('#audit-process');
       if (textarea) {
@@ -468,8 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Check if this modal targets one of our protected forms
       const protectedModals = [
         'start-project-modal',
-        'project-consultation-modal',
-        'project-interest-modal'
+        'project-consultation-modal'
       ];
 
       const isAuthSupported = window.originyxAuth && window.originyxAuth.configured && document.getElementById('auth-modal');
@@ -480,9 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sourceCta = trigger.textContent.trim();
         let productInterest = 'Originyx';
 
-        if (modalId === 'project-interest-modal' && projectName) {
-          productInterest = projectName;
-        } else if (modalId === 'project-consultation-modal') {
+        if (modalId === 'project-consultation-modal') {
           productInterest = 'Consultation';
         }
 
