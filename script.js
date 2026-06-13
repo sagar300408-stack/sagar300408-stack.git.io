@@ -271,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Mobile Navigation ---------- */
   const navToggle = document.getElementById('nav-toggle');
-  const navLinksContainer = document.getElementById('nav-links');
   const navOverlay = document.getElementById('nav-overlay');
 
   function openMobileNav() {
