@@ -4,6 +4,194 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Dynamic Navbar Adaptation for Project Subpages
+  const navLinksContainer = document.getElementById('nav-links');
+  if (navLinksContainer && !document.getElementById('nav-sign-in-btn')) {
+    const existingCta = navLinksContainer.querySelector('.nav-cta[data-modal-target="start-project-modal"]');
+    if (existingCta) {
+      const signInBtn = document.createElement('button');
+      signInBtn.className = 'nav-cta';
+      signInBtn.id = 'nav-sign-in-btn';
+      signInBtn.textContent = 'Sign In';
+
+      const profileDropdown = document.createElement('div');
+      profileDropdown.className = 'nav-profile-dropdown hidden';
+      profileDropdown.id = 'nav-profile-dropdown';
+      profileDropdown.innerHTML = `
+        <button class="nav-profile-trigger" id="nav-profile-trigger">
+          <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
+        </button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
+          <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
+        </div>
+      `;
+
+      existingCta.parentNode.replaceChild(signInBtn, existingCta);
+      signInBtn.parentNode.insertBefore(profileDropdown, signInBtn.nextSibling);
+    }
+  }
+
+  // Dynamic Modal Injection for Authentication/Requests if missing
+  const modalWrapper = document.getElementById('modal-wrapper');
+  if (modalWrapper && !document.getElementById('auth-modal')) {
+    const authModalHTML = `
+    <!-- ============ AUTHENTICATION MODAL ============ -->
+    <div class="modal-container glass-card" id="auth-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text" id="auth-modal-title">Sign In</h3>
+        <p id="auth-modal-subtitle">Log in or create an account to start your project.</p>
+      </div>
+
+      <!-- Setup Error State (shown if Supabase keys are missing) -->
+      <div class="auth-setup-error hidden" id="auth-setup-error">
+        <div class="error-icon">⚠️</div>
+        <h4>Configuration Incomplete</h4>
+        <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
+      </div>
+
+      <!-- Main Auth Container -->
+      <div id="auth-main-container">
+        <!-- Social Login Buttons -->
+        <div class="social-login-buttons">
+          <button class="btn social-btn google-btn" id="btn-login-google">
+            <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.79 5.79 0 0 1 8.2 12.725a5.79 5.79 0 0 1 5.79-5.79c2.485 0 4.542 1.54 5.38 3.737l3.657-2.84C20.67 3.518 16.71 1 12.24 1 6.03 1 1 6.03 1 12.24s5.03 11.24 11.24 11.24c6.07 0 11.135-4.4 11.135-11.24 0-.712-.082-1.396-.24-1.955H12.24z"/></svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="btn social-btn microsoft-btn" id="btn-login-microsoft">
+            <svg class="social-icon" viewBox="0 0 23 23" width="18" height="18"><path fill="#00a1f1" d="M12 0h11v11H12z"/><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 12h11v11H12z"/><path fill="#ffba08" d="M0 12h11v11H0z"/></svg>
+            <span>Continue with Microsoft</span>
+          </button>
+        </div>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <!-- Auth Form Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="tab-login" data-mode="login">Sign In</button>
+          <button class="auth-tab-btn" id="tab-signup" data-mode="signup">Create Account</button>
+        </div>
+
+        <!-- Email & Password Form -->
+        <form class="modal-form" id="form-auth-email">
+          <div class="form-group" id="group-fullname" style="display: none;">
+            <label for="auth-fullname">Full Name <span class="required">*</span></label>
+            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="auth-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+          </div>
+          <div class="form-group">
+            <label for="auth-password">Password <span class="required">*</span></label>
+            <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="6">
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+    `;
+
+    const projectRequestModalHTML = `
+    <!-- ============ PROJECT REQUEST MODAL ============ -->
+    <div class="modal-container glass-card" id="project-request-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Submit Project Request</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-request">
+        <!-- Hidden Context Fields -->
+        <input type="hidden" id="req-source-page" name="sourcePage" value="/">
+        <input type="hidden" id="req-source-cta" name="sourceCta" value="Start a Project">
+        <input type="hidden" id="req-product-interest" name="productInterest" value="Originyx">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="req-business">Business Name <span class="required">*</span></label>
+            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="req-email" name="email" required readonly class="readonly-input">
+          </div>
+          <div class="form-group">
+            <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>
+            <input type="tel" id="req-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-industry">Industry <span class="required">*</span></label>
+            <input type="text" id="req-industry" name="industry" required placeholder="Logistics, Finance, Healthcare...">
+          </div>
+          <div class="form-group">
+            <label for="req-type">Project Type <span class="required">*</span></label>
+            <select id="req-type" name="projectType" required>
+              <option value="" disabled selected>Select project type...</option>
+              <option value="AI Agent">AI Agent</option>
+              <option value="AI Automation">AI Automation</option>
+              <option value="SaaS Platform">SaaS Platform</option>
+              <option value="Internal Business Tool">Internal Business Tool</option>
+              <option value="Enterprise AI System">Enterprise AI System</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="req-workflow">Current Workflow <span class="required">*</span></label>
+          <textarea id="req-workflow" name="workflowDescription" required placeholder="Describe the manual steps and processes currently being used..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-challenges">Challenges <span class="required">*</span></label>
+          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-outcome">Desired Outcome <span class="required">*</span></label>
+          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like (e.g. Save 20 hours/week, automate client outreach...)"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-notes">Additional Notes <span class="optional">(Optional)</span></label>
+          <textarea id="req-notes" name="notes" placeholder="Any other details, budget constraints, timeline expectations..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Project Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+
+      <div class="modal-success-state hidden" id="request-success-state">
+        <div class="success-checkmark">✓</div>
+        <h3>Project Request Submitted!</h3>
+        <p>Your request has been successfully recorded. Sagar will review your current workflow description, challenges, and desired outcomes and follow up with you within 24 hours.</p>
+        <button class="btn btn-primary modal-success-close">Close</button>
+      </div>
+    </div>
+    `;
+
+    modalWrapper.insertAdjacentHTML('beforeend', authModalHTML + projectRequestModalHTML);
+  }
+
   /* ---------- Loading Screen ---------- */
   const loader = document.getElementById('loader');
   
@@ -503,7 +691,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Check if this modal targets one of our protected forms
       const protectedModals = [
         'start-project-modal',
-        'project-consultation-modal'
+        'project-consultation-modal',
+        'project-interest-modal',
+        'automation-audit-modal'
       ];
 
       const isAuthSupported = window.originyxAuth && window.originyxAuth.configured && document.getElementById('auth-modal');
@@ -516,6 +706,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (modalId === 'project-consultation-modal') {
           productInterest = 'Consultation';
+        } else if (modalId === 'project-interest-modal') {
+          productInterest = projectName || 'Originyx';
+        } else if (modalId === 'automation-audit-modal') {
+          productInterest = 'Free Audit';
         }
 
         // Intercept action if user is not logged in
@@ -569,7 +763,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dropStartProject.addEventListener('click', (e) => {
       e.preventDefault();
       if (profileDropdown) profileDropdown.classList.remove('active');
-      openProjectRequestModal('/', 'Navbar Dropdown', 'Originyx');
+      openProjectRequestModal(window.location.pathname, 'Navbar Dropdown', 'Originyx');
     });
   }
 
