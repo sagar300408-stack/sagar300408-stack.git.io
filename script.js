@@ -322,6 +322,49 @@ document.addEventListener('DOMContentLoaded', () => {
       const inputHidden = document.getElementById('interest-project-name');
       if (displayStrong) displayStrong.textContent = projectName;
       if (inputHidden) inputHidden.value = projectName;
+    } else if (modalId === 'automation-audit-modal' && projectName) {
+      const textarea = targetModal.querySelector('#audit-process');
+      if (textarea) {
+        const lowerProj = projectName.toLowerCase();
+        if (lowerProj.includes('sunny')) {
+          textarea.value = "I am interested in getting a workflow efficiency and automation audit for my project 'Sunny AI Companion'. I'd like to analyze opportunities for integrating age-appropriate LLMs and content moderation layers into an educational companion.";
+        } else if (lowerProj.includes('hunter')) {
+          textarea.value = "I am interested in getting a B2B sales automation audit based on the HunterOS architecture. I'd like to analyze opportunities for integrating autonomous B2B lead generation, deep company scraping, pain point detection, and personalized email outreach.";
+        } else if (lowerProj.includes('life')) {
+          textarea.value = "I am interested in getting a personal workflow efficiency and cognitive optimization audit based on the LifeOS framework. I'd like to explore how to integrate an Intelligence Hub and Agentic Scouts to automate my personal operating environment.";
+        } else if (lowerProj.includes('rag')) {
+          textarea.value = "I am interested in getting an enterprise AI audit based on the Enterprise RAG architecture. I'd like to explore how to safely implement secure role-based access controls (RBAC) and cost monitoring for our company knowledge base.";
+        } else if (lowerProj.includes('receptionist') || lowerProj.includes('ojas')) {
+          textarea.value = "I am interested in getting an AI receptionist audit based on the Ojas.ai architecture. I'd like to explore automating inbound customer inquiries, call scheduling, and lead routing for my education institute.";
+        } else if (lowerProj.includes('shadow')) {
+          textarea.value = "I am interested in getting an operational efficiency audit based on the ShadowOS framework. I'd like to analyze how we can map manual business operations and identify hidden automation opportunities using background intelligence.";
+        } else if (lowerProj.includes('route') || lowerProj.includes('swift')) {
+          textarea.value = "I am interested in getting a logistics automation audit based on the SwiftRoute AI dashboard. I'd like to explore how to convert unstructured operator inputs into structured telemetry and dispatch tasks automatically.";
+        } else if (lowerProj.includes('mission') || lowerProj.includes('control')) {
+          textarea.value = "I am interested in getting a real-time infrastructure audit based on the Mission Control platform. I'd like to analyze webhook ingestion speed, WebSockets pipelines, and custom operations dash indicators.";
+        } else {
+          textarea.value = `I am interested in getting an AI automation audit based on the '${projectName}' architecture.`;
+        }
+      }
+    }
+
+    // Auto-fill authenticated user details if available
+    if (window.originyxAuth && typeof window.originyxAuth.isAuthenticated === 'function' && window.originyxAuth.isAuthenticated()) {
+      const user = window.originyxAuth.user;
+      if (user) {
+        const nameField = targetModal.querySelector('input[name="name"]');
+        const emailField = targetModal.querySelector('input[name="email"]');
+        const phoneField = targetModal.querySelector('input[name="phone"]');
+        if (nameField && !nameField.value) {
+          nameField.value = user.user_metadata?.full_name || '';
+        }
+        if (emailField && !emailField.value) {
+          emailField.value = user.email || '';
+        }
+        if (phoneField && !phoneField.value) {
+          phoneField.value = user.phone || '';
+        }
+      }
     }
 
     // Open wrapper and display container
@@ -426,11 +469,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const protectedModals = [
         'start-project-modal',
         'project-consultation-modal',
-        'project-interest-modal',
-        'automation-audit-modal'
+        'project-interest-modal'
       ];
 
-      if (protectedModals.includes(modalId)) {
+      const isAuthSupported = window.originyxAuth && window.originyxAuth.configured && document.getElementById('auth-modal');
+
+      if (isAuthSupported && protectedModals.includes(modalId)) {
         // Gather context
         const sourcePage = window.location.pathname;
         const sourceCta = trigger.textContent.trim();
@@ -438,8 +482,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (modalId === 'project-interest-modal' && projectName) {
           productInterest = projectName;
-        } else if (modalId === 'automation-audit-modal') {
-          productInterest = 'Free Audit';
         } else if (modalId === 'project-consultation-modal') {
           productInterest = 'Consultation';
         }
@@ -456,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
           openProjectRequestModal(sourcePage, sourceCta, productInterest);
         }
       } else {
-        // Open other modal normally (e.g. auth-modal directly)
+        // Open modal normally if not protected or if auth is not supported
         openModal(modalId, projectName);
       }
     }
