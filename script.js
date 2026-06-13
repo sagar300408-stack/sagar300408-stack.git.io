@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- MODALS SYSTEM HANDLING ---------- */
-  const modalWrapper = document.getElementById('modal-wrapper');
+  //const modalWrapper = document.getElementById('modal-wrapper');
   const modalBackdrop = document.getElementById('modal-backdrop');
   const modalContainers = document.querySelectorAll('.modal-container');
   const modalCloseBtns = document.querySelectorAll('.modal-close');
