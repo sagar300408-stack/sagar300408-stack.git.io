@@ -480,7 +480,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalContainers = document.querySelectorAll('.modal-container');
   const modalCloseBtns = document.querySelectorAll('.modal-close');
 
-  function openModal(modalId, projectName = null) {
+  // Helper: prefill name+email from authenticated user into a modal
+  function prefillUserFields(modal) {
+    if (!window.originyxAuth || !window.originyxAuth.isAuthenticated()) return;
+    const user = window.originyxAuth.user;
+    if (!user) return;
+    const userName = user.user_metadata?.full_name || user.user_metadata?.name || '';
+    const userEmail = user.email || '';
+    const nameField = modal.querySelector('input[name="name"]');
+    const emailField = modal.querySelector('input[name="email"]');
+    if (nameField) nameField.value = userName;
+    if (emailField) {
+      emailField.value = userEmail;
+      emailField.removeAttribute('readonly');
+      emailField.classList.remove('readonly-input');
+    }
+  }
+
+  function openModal(modalId, projectName = null, leadSource = null) {
     // Hide all modal containers first
     modalContainers.forEach(c => {
       c.classList.remove('active');
@@ -570,24 +587,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Auto-fill authenticated user details if available
-    if (window.originyxAuth && typeof window.originyxAuth.isAuthenticated === 'function' && window.originyxAuth.isAuthenticated()) {
-      const user = window.originyxAuth.user;
-      if (user) {
-        const nameField = targetModal.querySelector('input[name="name"]');
-        const emailField = targetModal.querySelector('input[name="email"]');
-        const phoneField = targetModal.querySelector('input[name="phone"]');
-        if (nameField && !nameField.value) {
-          nameField.value = user.user_metadata?.full_name || '';
-        }
-        if (emailField && !emailField.value) {
-          emailField.value = user.email || '';
-        }
-        if (phoneField && !phoneField.value) {
-          phoneField.value = user.phone || '';
-        }
+    // Inject lead_source hidden field
+    if (form && leadSource) {
+      let lsInput = form.querySelector('input[name="lead_source"]');
+      if (!lsInput) {
+        lsInput = document.createElement('input');
+        lsInput.type = 'hidden';
+        lsInput.name = 'lead_source';
+        form.appendChild(lsInput);
       }
+      lsInput.value = leadSource;
     }
+
+    // Inject project_name hidden field for audit modal on project pages
+    if (form && projectName && modalId === 'automation-audit-modal') {
+      let pnInput = form.querySelector('input[name="project_name"]');
+      if (!pnInput) {
+        pnInput = document.createElement('input');
+        pnInput.type = 'hidden';
+        pnInput.name = 'project_name';
+        form.appendChild(pnInput);
+      }
+      pnInput.value = projectName;
+    }
+
+    // Auto-fill authenticated user details
+    prefillUserFields(targetModal);
 
     // Open wrapper and display container
     modalWrapper.classList.add('active');
@@ -701,26 +726,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // Gather context
         const sourcePage = window.location.pathname;
         const sourceCta = trigger.textContent.trim();
-        let productInterest = 'Originyx';
 
-        if (modalId === 'project-consultation-modal') {
-          productInterest = 'Consultation';
-        } else if (modalId === 'project-interest-modal') {
-          productInterest = projectName || 'Originyx';
-        } else if (modalId === 'automation-audit-modal') {
-          productInterest = 'Free Audit';
-        }
+        // Map modal to lead_source
+        const leadSourceMap = {
+          'start-project-modal': 'Start Project',
+          'project-consultation-modal': 'Business Assessment',
+          'project-interest-modal': 'Business Assessment',
+          'automation-audit-modal': 'AI Automation Audit'
+        };
+        const leadSource = leadSourceMap[modalId] || 'Lead Form';
 
         // Intercept action if user is not logged in
         if (!window.originyxAuth.isAuthenticated()) {
           if (window.originyxAuth.configured) {
-            localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, productInterest }));
+            localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, modalId, projectName, leadSource }));
             openModal('auth-modal');
           } else {
             openSetupError();
           }
         } else {
-          openProjectRequestModal(sourcePage, sourceCta, productInterest);
+          openModal(modalId, projectName, leadSource);
         }
       } else {
         // Open modal normally if not protected or if auth is not supported
@@ -762,7 +787,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dropStartProject.addEventListener('click', (e) => {
       e.preventDefault();
       if (profileDropdown) profileDropdown.classList.remove('active');
-      openProjectRequestModal(window.location.pathname, 'Navbar Dropdown', 'Originyx');
+      openModal('start-project-modal', null, 'Start Project');
     });
   }
 
@@ -1002,7 +1027,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('originyx_pending_action');
         try {
           const pendingAction = JSON.parse(pendingActionStr);
-          openProjectRequestModal(pendingAction.sourcePage, pendingAction.sourceCta, pendingAction.productInterest);
+          openModal(pendingAction.modalId, pendingAction.projectName, pendingAction.leadSource);
         } catch (e) {
           console.error('Error executing pending action:', e);
         }
