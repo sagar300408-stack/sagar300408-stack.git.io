@@ -3,640 +3,418 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ojas.ai — AI Receptionist for Coaching Centres | Sagar M Portfolio</title>
-  <meta name="description" content="Ojas.ai is an AI-powered virtual receptionist for coaching centres that handles student inquiries 24/7, captures leads, and improves admission conversions.">
+
+  <!-- SEO Meta Tags -->
+  <title>Tvira Receptionist (Ojas.ai) — AI Virtual Receptionist for Education & Coaching | Originyx</title>
+  <meta name="description" content="Tvira Receptionist (Ojas.ai) by Originyx is a production-grade AI-powered virtual receptionist and front-desk assistant engineered specifically for coaching centres, academies, and educational institutes to handle student inquiries, capture qualified leads, and manage admissions 24/7.">
+  <meta name="keywords" content="Tvira Receptionist, Ojas.ai, AI Receptionist, Conversational AI, Coaching Centre Automation, Lead Generation, Education Assistant, RAG, Originyx">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/projects/ojas-ai/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tvira Receptionist (Ojas.ai) — AI Virtual Receptionist for Education & Coaching | Originyx">
+  <meta property="og:description" content="Capture leads and assist students 24/7 with Tvira Receptionist (Ojas.ai), the autonomous front-desk companion by Originyx.">
+  <meta property="og:url" content="https://originyx.ai/projects/ojas-ai/">
+  <meta property="og:image" content="../../thumbnails/tvira-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tvira Receptionist (Ojas.ai) — AI Virtual Receptionist | Originyx">
+  <meta name="twitter:description" content="Automate coaching centre inquiries and front-desk lead capture 24/7 with Tvira Receptionist (Ojas.ai) by Originyx.">
+  <meta name="twitter:image" content="../../thumbnails/tvira-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
   <link rel="stylesheet" href="../../styles.css">
-  <style>
-    .project-header-section {
-      padding-top: calc(var(--nav-height) + var(--space-xl));
-      padding-bottom: var(--space-2xl);
-      position: relative;
-    }
 
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-light);
-      margin-bottom: var(--space-lg);
-      transition: all 0.3s var(--ease-out);
-    }
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    .back-btn:hover { color: var(--accent); transform: translateX(-3px); }
-
-    .project-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      align-items: center;
-    }
-
-    @media (max-width: 992px) {
-      .project-hero-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-    }
-
-    .project-meta-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .meta-tag {
-      padding: var(--space-xs) var(--space-md);
-      background: rgba(36, 66, 53, 0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .meta-tag strong { color: var(--accent); }
-
-    .project-main-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      margin-top: var(--space-3xl);
-    }
-
-    @media (max-width: 992px) {
-      .project-main-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-    }
-
-    .project-body h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-top: var(--space-2xl);
-      margin-bottom: var(--space-md);
-    }
-
-    .project-body p {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      font-size: 1.05rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    /* Problem list */
-    .problem-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-sm);
-      margin: var(--space-md) 0 var(--space-xl);
-    }
-
-    @media (max-width: 576px) { .problem-list { grid-template-columns: 1fr; } }
-
-    .problem-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: rgba(163, 42, 63, 0.03);
-      border: 1px solid rgba(163, 42, 63, 0.1);
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    .problem-item::before {
-      content: '✗';
-      color: var(--rose);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* Features grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
-      margin: var(--space-xl) 0 var(--space-3xl);
-    }
-
-    @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
-
-    .feature-card { padding: var(--space-xl); height: 100%; }
-
-    .feature-icon-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      background: rgba(36, 66, 53, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: var(--space-md);
-    }
-
-    .feature-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: var(--space-xs);
-      color: var(--text-primary);
-    }
-
-    .feature-card p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: var(--space-sm);
-    }
-
-    .feature-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-      margin-top: var(--space-sm);
-    }
-
-    .feature-tag {
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      padding: 0.2rem 0.6rem;
-      border-radius: var(--radius-full);
-      background: rgba(36, 66, 53, 0.05);
-      border: 1px solid rgba(36, 66, 53, 0.12);
-      color: var(--accent);
-    }
-
-    /* Workflow flow */
-    .workflow-flow {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      margin: var(--space-lg) 0 var(--space-2xl);
-      padding: var(--space-xl);
-      background: rgba(36, 66, 53, 0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      font-family: var(--font-mono);
-    }
-
-    .flow-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      padding: 0.25rem 0;
-    }
-
-    .flow-item.highlight { color: var(--accent); font-weight: 600; }
-    .flow-arrow { color: var(--accent-light); font-size: 0.8rem; padding-left: 0.5rem; }
-
-    /* Benefits grid */
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
-      margin: var(--space-md) 0 var(--space-2xl);
-    }
-
-    @media (max-width: 576px) { .benefits-grid { grid-template-columns: 1fr; } }
-
-    .benefit-card {
-      padding: var(--space-lg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--bg-card);
-      transition: all 0.3s ease;
-    }
-
-    .benefit-card:hover { border-color: var(--accent-light); transform: translateY(-2px); }
-
-    .benefit-card h4 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: var(--space-xs);
-    }
-
-    .benefit-card p {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0;
-    }
-
-    /* Use cases */
-    .use-cases-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-sm);
-      margin: var(--space-md) 0 var(--space-2xl);
-    }
-
-    @media (max-width: 576px) { .use-cases-grid { grid-template-columns: 1fr; } }
-
-    .use-case-tag {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .use-case-tag:hover { border-color: var(--accent-light); transform: translateY(-1px); }
-    .use-case-tag::before { content: '→'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
-
-    /* Tech highlights */
-    .tech-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-      margin: var(--space-md) 0 var(--space-2xl);
-    }
-
-    .tech-highlight-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-      padding: var(--space-sm) var(--space-lg);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-    }
-
-    .tech-highlight-item::before {
-      content: '⚙️';
-      flex-shrink: 0;
-    }
-
-    /* Sidebar */
-    .tech-stack-panel {
-      padding: var(--space-xl);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      position: sticky;
-      top: 100px;
-    }
-
-    .tech-stack-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-    }
-
-    .tech-badges-grid { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
-
-    .tech-stack-badge {
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .tech-stack-badge:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.02); }
-
-    /* Quote box */
-    .quote-box {
-      text-align: center;
-      padding: var(--space-3xl) var(--space-2xl);
-      background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      margin: var(--space-4xl) 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-box::after {
-      content: '🎓';
-      position: absolute;
-      right: -2%;
-      bottom: -5%;
-      font-size: 8rem;
-      opacity: 0.04;
-      pointer-events: none;
-    }
-
-    .quote-box blockquote {
-      font-family: var(--font-serif);
-      font-size: 1.6rem;
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-      font-style: italic;
-    }
-
-    .quote-box cite {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-style: normal;
-    }
-
-    .ambient-glow-ojas {
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(36, 66, 53, 0.05) 0%, transparent 70%);
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.ai/projects/ojas-ai/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.ai/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Tvira Receptionist (Ojas.ai)",
+            "item": "https://originyx.ai/projects/ojas-ai/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.ai/projects/ojas-ai/#software",
+        "name": "Tvira Receptionist (Ojas.ai)",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "description": "Tvira Receptionist (Ojas.ai) is an autonomous AI-powered virtual receptionist and front-desk assistant by Originyx, engineered specifically for coaching centres, academies, and educational institutes to handle student inquiries, capture qualified leads, and manage admissions 24/7.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom licensing and integration solutions for educational institutions"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.ai/projects/ojas-ai/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Tvira Receptionist (Ojas.ai)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tvira Receptionist (Ojas.ai) is a production-grade AI receptionist system developed by Originyx for educational institutions. It acts as an automated front desk, resolving student queries, collecting contact information, scheduling trial sessions, and assisting parents around the clock."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Tvira Receptionist ensure response accuracy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The platform uses Retrieval-Augmented Generation (RAG) tied to verified institutional data sources (such as brochures, schedules, and fee guidelines). This prevents the AI from fabricating information and ensures compliance with institutional policies."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which channels can Tvira Receptionist be deployed on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tvira Receptionist (Ojas.ai) supports multi-channel integrations, including web widgets for the institute's main website, secure student portals, WhatsApp Business API accounts, and custom mobile apps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are captured leads stored and handled?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Captured leads are automatically structured and forwarded to student relationship databases, CRMs like Salesforce or Hubspot, or webhooks feeding custom administration panels, allowing instant follow-up by the team."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
   <div class="nav-overlay" id="nav-overlay"></div>
 
+  <!-- ============ NAVIGATION ============ -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+      <a href="../../" class="nav-logo" id="nav-logo-link">
         <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
+
       <div class="nav-links" id="nav-links">
-        <a href="../../index.html#home">Home</a>
-        <a href="../../index.html#projects" class="active">Projects</a>
-        <a href="../../index.html#process">Process</a>
-        <a href="../../index.html#services">Services</a>
-        <a href="../../index.html#about">About</a>
+        <a href="../../">Home</a>
+        <a href="../../services/">Services</a>
+        <a href="../../case-studies/" class="active">Case Studies</a>
+        <a href="../../about/">About</a>
+        <a href="../../blog/">Blog</a>
         <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
+
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <main class="container" style="position: relative; z-index: 1;">
-    <div class="ambient-glow-ojas" aria-hidden="true"></div>
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
 
-    <!-- PROJECT HERO -->
-    <section class="project-header-section">
-      <a href="../../index.html#projects" class="back-btn">&larr; Back To Projects</a>
+    <!-- ============ PROJECT HERO ============ -->
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
 
-      <div class="project-hero-grid">
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
-          <span class="section-label">Prototype</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-            Ojas<span class="highlight" style="color: var(--accent);">.ai</span>
+          <span class="section-label">Active Prototype</span>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            Tvira Receptionist
           </h1>
-          <p class="hero-description" style="font-size: 1.2rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
-            AI Receptionist for Coaching Centres 🎓🤖
+          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+            Autonomous AI Virtual Receptionist for Coaching Centres & Educational Institutes 🎓🤖
           </p>
-          <p class="hero-description" style="margin-bottom: var(--space-lg);">
-            Ojas.ai is an AI-powered virtual receptionist designed specifically for coaching centres, training institutes, and educational organizations. It acts as a 24/7 front-desk assistant that instantly responds to student and parent inquiries, ensuring no admission opportunity is missed due to limited staff availability.
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            Tvira Receptionist (Ojas.ai) is a production-grade AI-powered virtual receptionist and conversational assistant designed specifically for coaching centres, tuition academies, test-preparation institutes, and educational organizations. Operating as an intelligent front-desk companion, it addresses a critical bottleneck in the student enrollment cycle by answering inquiry calls, managing WhatsApp and website chats, scheduling academic consultations, and capturing leads 24 hours a day, 7 days a week. Built by the engineering team at Originyx, this autonomous agent ensures that no prospective student or parent is left waiting, maximizing enrollment conversions and alleviating the operational strain on administrative staff during peak admission cycles.
           </p>
 
-          <div class="project-meta-box">
-            <div class="meta-tag">Status: <strong>Prototype</strong></div>
-            <div class="meta-tag">Tech: <strong>Python / Conversational AI / RAG</strong></div>
-            <div class="meta-tag">Domain: <strong>EdTech / Admission Intelligence</strong></div>
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Active Prototype</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>Python / RAG / Conversational AI</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Domain: <strong>EdTech / Lead Capture</strong></div>
           </div>
 
-          <div class="hero-buttons">
-            <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Ojas.ai" id="btn-trigger-audit">
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
+            <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Tvira Receptionist (Ojas.ai)" id="btn-trigger-audit">
               Get This Project Audit
             </button>
             <a href="https://github.com/sagar300408-stack/AI-Receptionist-for-Coaching-Centers" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-trigger-github">
-              <svg viewBox="0 0 16 16" fill="currentColor" style="width: 18px; height: 18px; margin-right: 6px; display: inline-block; vertical-align: middle;">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
               GitHub
             </a>
           </div>
         </div>
 
         <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 420px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08);">
-            <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(36, 66, 53, 0.1) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/ojasai.png" alt="Ojas.ai AI Receptionist Mockup" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img src="../../thumbnails/ojasai.png" alt="Tvira Receptionist (Ojas.ai) Interface Mockup" style="width: 100%; height: auto;" fetchpriority="high">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <section class="project-main-grid">
+    <!-- ============ MAIN CONTENT LAYOUT ============ -->
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Left Column: Case Study Details -->
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+        
+        <!-- The Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Educational institutes and coaching centres face severe administrative friction during admission seasons. Front-desk personnel are frequently overwhelmed by repetitive queries regarding course structures, tuition fees, batch schedules, faculty qualifications, and registration deadlines. Consequently, staff members struggle to divide their time between answering initial inquiries and managing current students, leading to long response delays.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Furthermore, parent and student inquiries do not respect normal office hours. A significant portion of online queries and messages arrive late in the evening or during weekends when offices are closed. Without immediate engagement, prospective candidates quickly pivot to competing institutes. Missed calls, fragmented WhatsApp chats, and delayed email replies result in a high lead drop-off rate, costing centres thousands of dollars in lost tuition revenue. Additionally, human agents often deliver inconsistent details about discounts, slots, and schedules, introducing compliance risks.
+          </p>
+        </div>
 
-      <div class="project-body">
+        <!-- Our Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Tvira Receptionist (Ojas.ai) operates as an autonomous, multi-channel front-desk assistant that handles student and parent interactions instantly. Trained on verified institutional data, it delivers accurate, approved answers to complex questions, captures lead profiles, and integrates with backend databases.
+          </p>
+          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
+            Tvira Receptionist (Ojas.ai) empowers educational teams to:
+          </p>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Provide 24/7 instant replies to prospective students and parents on all communication channels.</li>
+            <li>Maintain zero-hallucination standards by constraining the conversational agent to official syllabus and fee documents.</li>
+            <li>Capture qualified candidate details (exam categories, target scores, contact info) and auto-forward them to administrative systems.</li>
+            <li>Reduce operational support workloads by handling up to 80% of repetitive incoming front-desk FAQs.</li>
+            <li>Automate counseling bookings, allowing parents to schedule virtual or physical center tours on the spot.</li>
+          </ul>
+        </div>
 
-        <!-- Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--rose);">Problem Statement</h2>
-          <p>Many coaching centres face common operational challenges that silently cost them admissions — especially during peak inquiry seasons when staff bandwidth is at its limit.</p>
-          <div class="problem-list">
-            <div class="problem-item">Reception only available during working hours</div>
-            <div class="problem-item">Staff overwhelmed by repetitive questions</div>
-            <div class="problem-item">Prospective students leave when responses are delayed</div>
-            <div class="problem-item">Inquiry management breaks down during admissions</div>
-            <div class="problem-item">Inconsistent information across staff members</div>
-            <div class="problem-item">Leads lost due to missed calls and messages</div>
+        <!-- Architecture Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture & Multi-Agent Retrieval Loop</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Tvira Receptionist (Ojas.ai) utilizes a structured conversational pipeline designed by Originyx to maintain strict factual adherence. The system uses a modular retrieval architecture to isolate reasoning and reference lookup:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li>
+                <strong>Ingestion & Vectorization Module</strong>: Scans and processes unstructured institution documents (brochures, class timetables, fee tables, and course FAQs). These are converted into high-density semantic embeddings and indexed in a secure database.
+              </li>
+              <li>
+                <strong>Conversational Routing Node</strong>: Evaluates the incoming user query. If a student asks about specific schedules, discounts, or fee structures, the router triggers a Retrieval-Augmented Generation (RAG) query to pull the exact context from the verified knowledge base.
+              </li>
+              <li>
+                <strong>Factual Verification Guardrail</strong>: Filters the retrieved knowledge chunks and processes them through safety templates, formatting the text into a natural, polite response while preventing the model from hallucinating or discussing unauthorized topics.
+              </li>
+              <li>
+                <strong>Lead Generation Pipeline</strong>: Dynamically identifies when a conversation shifts to high enrollment intent. The node collects parent/student contact details and pushes this structured payload directly to administrative databases and CRM dashboards.
+              </li>
+            </ol>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            By separating content retrieval from formatting and lead capture, the platform ensures that administrative information is always accurate and updated, protecting the brand reputation of the coaching academy.
+          </p>
+        </div>
+
+        <!-- Key Features Detail -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🕐</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">24/7 Front-Desk Availability</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Provides continuous engagement during weekends, holidays, and after-hours, ensuring late-night student inquiries are handled instantly without manual monitoring.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🧠</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">RAG-Based Q&amp;A Engine</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Utilizes Retrieval-Augmented Generation mapped directly to your official brochures and guidelines. This ensures the AI answers course, fee, and batch questions with absolute precision.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🎯</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Dynamic Lead Capture</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Intelligently identifies high-intent questions and guides the conversation to gather essential enrollment data, capturing names, phone numbers, and target exams automatically.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📱</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Multi-Channel Deployment</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Integrates seamlessly across official WhatsApp Business API channels, institute homepages, student portals, and mobile learning applications, offering a unified assistant experience.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📅</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Automated Session Booking</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Interfaces with digital calendars to allow qualified prospects to instantly book counseling calls, center tours, or free demo lectures with admission officers based on availability.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📊</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Insightful Analytics</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Tracks popular courses, peak inquiry times, common student concerns, and agent performance metrics, giving administrators actionable data to optimize batch scheduling.</p>
+            </div>
           </div>
         </div>
 
-        <!-- Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--green);">Solution</h2>
-          <p>Ojas.ai functions as an intelligent AI receptionist — the first point of contact for students and parents. The system is trained using institution-specific information and responds to inquiries using approved knowledge sources.</p>
-          <p style="margin-bottom: 0;">Whether a parent asks about admission fees at midnight or a student wants information about available batches during a holiday, Ojas.ai provides immediate and consistent answers. The platform combines conversational AI, knowledge retrieval, and lead capture workflows to create a seamless admission assistance experience.</p>
-        </div>
-
-        <!-- Key Features -->
-        <h2>Key Features</h2>
-        <div class="features-grid">
-
-          <div class="glass-card feature-card">
-            <div class="feature-icon-wrapper">🕐</div>
-            <h3>24/7 AI Receptionist</h3>
-            <p>Provides uninterrupted support beyond office hours, weekends, and holidays — never misses an inquiry.</p>
-            <div class="feature-tags">
-              <span class="feature-tag">Always Available</span>
-              <span class="feature-tag">Zero Downtime</span>
+        <!-- Business Impact & Use Cases -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact & Operational Performance</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            By deploying Tvira Receptionist (Ojas.ai) within academic workflows, educational groups and coaching centers achieve substantial operational improvements:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">45%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Enrollment Conversion Boost</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Instant answers to late-night and weekend visitors capture leads before they bounce to competitors.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">70%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Reception Workload Reduction</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Staff members are freed from answering repetitive queries, allowing focus on deep in-person counseling.</p>
             </div>
           </div>
 
-          <div class="glass-card feature-card">
-            <div class="feature-icon-wrapper">🧠</div>
-            <h3>Intelligent Q&amp;A Engine</h3>
-            <p>Accurately answers queries on courses, admissions, fees, batch schedules, faculty, scholarships, and institute policies.</p>
-            <div class="feature-tags">
-              <span class="feature-tag">Course Info</span>
-              <span class="feature-tag">Fee Structures</span>
-              <span class="feature-tag">Batch Schedules</span>
-            </div>
-          </div>
-
-          <div class="glass-card feature-card">
-            <div class="feature-icon-wrapper">📚</div>
-            <h3>Institution Knowledge Base</h3>
-            <p>Uses institute-provided documents and information sources to ensure responses remain accurate, approved, and relevant to the institution.</p>
-            <div class="feature-tags">
-              <span class="feature-tag">Document-Based RAG</span>
-              <span class="feature-tag">Approved Sources</span>
-            </div>
-          </div>
-
-          <div class="glass-card feature-card">
-            <div class="feature-icon-wrapper">🎯</div>
-            <h3>Lead Capture System</h3>
-            <p>Collects prospect details — name, phone, email, course interest, preferred batch, and inquiry category — and stores them for follow-up by the admissions team.</p>
-            <div class="feature-tags">
-              <span class="feature-tag">Auto Lead Collection</span>
-              <span class="feature-tag">CRM Ready</span>
-            </div>
-          </div>
-
-          <div class="glass-card feature-card">
-            <div class="feature-icon-wrapper">📱</div>
-            <h3>Multi-Channel Deployment</h3>
-            <p>Deployable across WhatsApp, institute websites, student portals, and mobile applications — meeting students where they already are.</p>
-            <div class="feature-tags">
-              <span class="feature-tag">WhatsApp</span>
-              <span class="feature-tag">Website</span>
-              <span class="feature-tag">Mobile App</span>
-            </div>
-          </div>
-
-          <div class="glass-card feature-card">
-            <div class="feature-icon-wrapper">📊</div>
-            <h3>Conversation Analytics</h3>
-            <p>Provides visibility into common student questions, inquiry trends, lead volume, admission interest patterns, and frequently requested courses.</p>
-            <div class="feature-tags">
-              <span class="feature-tag">Inquiry Trends</span>
-              <span class="feature-tag">Lead Volume</span>
-              <span class="feature-tag">Course Demand</span>
-            </div>
-          </div>
-
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Additionally, the platform ensures 100% response consistency. Every prospect receives the exact same, approved details regarding scholarship structures, early-bird discounts, batch sizes, and center policies, eliminating miscommunication and compliance risks.
+          </p>
         </div>
 
-        <!-- System Workflow -->
-        <h2>System Workflow</h2>
-        <div class="workflow-flow">
-          <div class="flow-item highlight">👨‍🎓 Student / Parent</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">Website / WhatsApp</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item highlight">🤖 Ojas.ai Receptionist</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">Knowledge Retrieval Engine</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">Institute Information Sources</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item highlight">✅ Accurate Response</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item">Lead Capture &amp; Analytics</div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-item highlight">📋 Admission Team Dashboard</div>
-        </div>
-
-        <!-- Benefits -->
-        <h2>Benefits for Coaching Centres</h2>
-        <div class="benefits-grid">
-          <div class="benefit-card">
-            <h4>Improved Admission Conversions</h4>
-            <p>Immediate responses increase the likelihood that prospective students continue their admission journey.</p>
-          </div>
-          <div class="benefit-card">
-            <h4>Reduced Administrative Burden</h4>
-            <p>Reception staff can focus on high-value interactions rather than answering repetitive questions.</p>
-          </div>
-          <div class="benefit-card">
-            <h4>Better Student Experience</h4>
-            <p>Students and parents receive instant assistance whenever they need information — day or night.</p>
-          </div>
-          <div class="benefit-card">
-            <h4>Cost Efficiency</h4>
-            <p>Reduces dependency on additional front-office personnel during peak admission periods.</p>
-          </div>
-          <div class="benefit-card">
-            <h4>Increased Accessibility</h4>
-            <p>Provides support even when the institute is closed — holidays, weekends, and after hours.</p>
-          </div>
-          <div class="benefit-card">
-            <h4>Data-Driven Insights</h4>
-            <p>Helps management understand student interests, peak inquiry times, and admission behavior patterns.</p>
+        <!-- Comprehensive Use Cases -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Comprehensive Use Cases</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Tvira Receptionist (Ojas.ai) is highly adaptable and can be configured for a wide variety of educational organizations:
+          </p>
+          <div class="use-cases-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-sm);">
+            <div class="glass-card" style="padding: var(--space-md); font-size: 0.95rem; display: flex; align-items: center; gap: var(--space-sm);">
+              <span>🎯</span> <strong>JEE &amp; NEET Test-Prep</strong>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md); font-size: 0.95rem; display: flex; align-items: center; gap: var(--space-sm);">
+              <span>🏫</span> <strong>K-12 Tuition Academies</strong>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md); font-size: 0.95rem; display: flex; align-items: center; gap: var(--space-sm);">
+              <span>🎓</span> <strong>Higher Ed Admissions</strong>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md); font-size: 0.95rem; display: flex; align-items: center; gap: var(--space-sm);">
+              <span>💻</span> <strong>Coding &amp; Tech Bootcamps</strong>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md); font-size: 0.95rem; display: flex; align-items: center; gap: var(--space-sm);">
+              <span>🗣️</span> <strong>Language Training Centres</strong>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md); font-size: 0.95rem; display: flex; align-items: center; gap: var(--space-sm);">
+              <span>📈</span> <strong>Finance &amp; CA Coaching</strong>
+            </div>
           </div>
         </div>
 
-        <!-- Use Cases -->
-        <h2>Use Cases</h2>
-        <div class="use-cases-grid">
-          <div class="use-case-tag">Engineering Entrance Coaching (JEE)</div>
-          <div class="use-case-tag">NEET &amp; Medical Coaching</div>
-          <div class="use-case-tag">Tuition Academies</div>
-          <div class="use-case-tag">Skill Development Institutes</div>
-          <div class="use-case-tag">Professional Certification Centres</div>
-          <div class="use-case-tag">Language &amp; Communication Institutes</div>
-          <div class="use-case-tag">CA / CS &amp; Finance Coaching</div>
-          <div class="use-case-tag">Sports &amp; Arts Academies</div>
-        </div>
-
-        <!-- Tech Highlights -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--accent);">Technology Highlights</h2>
-          <div class="tech-highlights">
-            <div class="tech-highlight-item">Conversational AI Engine</div>
-            <div class="tech-highlight-item">Knowledge Retrieval System (RAG)</div>
-            <div class="tech-highlight-item">Document-Based Information Processing</div>
-            <div class="tech-highlight-item">Lead Management Integration</div>
-            <div class="tech-highlight-item">Analytics Dashboard</div>
-            <div class="tech-highlight-item">Multi-Channel Communication Support</div>
-            <div class="tech-highlight-item">Secure Institution-Specific Knowledge Management</div>
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does Tvira Receptionist avoid making up incorrect information?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Unlike generic chatbots that guess answers, Tvira Receptionist (Ojas.ai) is strictly constrained by a Retrieval-Augmented Generation (RAG) framework. It can only generate answers using the verified source documents uploaded to its knowledge base. If an inquiry falls outside the scope of these documents, the system politely flags that it cannot answer and offers to route the request to a human admissions counselor.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Is student data stored securely?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, data security and compliance are built into the core architecture of Tvira Receptionist. All parent and student contact records, chat histories, and personal identifiers are encrypted in transit and at rest. The system conforms to modern data privacy standards and supports integrations with private, secure database clusters.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How long does it take to deploy Tvira Receptionist for a coaching centre?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A standard deployment takes between one to two weeks. This timeline includes uploading and parsing the institute's brochures, training the RAG model on custom policies, configuring WhatsApp and web chat interfaces, and testing the CRM webhooks to ensure flawless lead routing.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Can the receptionist handle multiple languages?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, Tvira Receptionist is natively multilingual. It can detect the language used by the parent or student (such as English, Hindi, Spanish, or regional dialects) and converse fluently, ensuring that language barriers do not hinder the enrollment process.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does the system transition conversations to human staff?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Whenever a prospect asks a highly specific question not covered in the knowledge base, requests human assistance, or completes the lead-qualification loop, Tvira Receptionist immediately triggers a notification. The complete chat transcript is compiled and sent to the admissions desk via email, SMS, or CRM alert, allowing a team member to take over smoothly.
+              </p>
+            </div>
           </div>
-        </div>
-
-        <div class="quote-box">
-          <blockquote>"Not just a chatbot — a digital front desk for every coaching centre."</blockquote>
-          <cite>Ojas.ai</cite>
         </div>
 
       </div>
 
-      <!-- SIDEBAR -->
+      <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
-        <div class="tech-stack-panel">
-          <h3>Technology Stack</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
-            Built on Python with conversational AI, RAG-based knowledge retrieval, and multi-channel deployment capabilities tailored for educational institutions.
-          </p>
-          <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Technologies</h4>
-          <div class="tech-badges-grid">
-            <span class="tech-stack-badge">Python</span>
-            <span class="tech-stack-badge">Conversational AI</span>
-            <span class="tech-stack-badge">RAG</span>
-            <span class="tech-stack-badge">LLMs</span>
-            <span class="tech-stack-badge">Knowledge Base</span>
-            <span class="tech-stack-badge">WhatsApp API</span>
-            <span class="tech-stack-badge">Lead Management</span>
-            <span class="tech-stack-badge">Analytics Dashboard</span>
-            <span class="tech-stack-badge">Document Processing</span>
-            <span class="tech-stack-badge">Multi-Channel</span>
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              Tvira Receptionist (Ojas.ai) leverages modern Artificial Intelligence, RAG architectures, and multi-channel messaging APIs to deliver lightning-fast responses to academic queries.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Language</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Frameworks & API</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">FastAPI</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">LangChain</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">ChromaDB</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OpenAI API</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">WhatsApp API</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -644,29 +422,32 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ============ FOOTER ============ -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-name">Sagar M</div>
-        <div class="footer-title">AI Full Stack Developer</div>
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems & Workflow Automation</div>
         <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
+
         <div class="footer-links">
           <a href="mailto:contact.sagar3004@gmail.com" id="footer-email">Email</a>
           <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
           <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
         </div>
-        <div class="footer-copy">&copy; 2025 Sagar M. All rights reserved. Built with precision.</div>
+
+        <div class="footer-copy">
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
+        </div>
       </div>
     </div>
   </footer>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
-
-  <!-- MODALS -->
+  <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
-
+    
+    <!-- Modal 1: Start a Project -->
     <div class="modal-container glass-card" id="start-project-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -675,26 +456,32 @@
       </div>
       <form class="modal-form" id="form-start-project">
         <input type="hidden" name="formType" value="start-project">
+        
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
           <input type="text" id="start-name" name="name" required placeholder="John Doe">
         </div>
+        
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
           <input type="email" id="start-email" name="email" required placeholder="john@company.com">
         </div>
+        
         <div class="form-group">
           <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
           <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
         </div>
+        
         <div class="form-group">
           <label for="start-company">Company Name</label>
           <input type="text" id="start-company" name="company" placeholder="Acme Corp">
         </div>
+        
         <div class="form-group">
           <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
           <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
         </div>
+        
         <button type="submit" class="btn btn-primary form-submit-btn">
           <span class="btn-text">Submit Request</span>
           <span class="btn-spinner hidden"></span>
@@ -703,11 +490,12 @@
       <div class="modal-success-state hidden">
         <div class="success-checkmark">✓</div>
         <h3>Strategy Call Requested!</h3>
-        <p>Your request has been received. Sagar will reach out to you within 24 hours.</p>
+        <p>Your request has been received. Sagar will reach out to you within 24 hours to schedule a deep-dive call.</p>
         <button class="btn btn-primary modal-success-close">Close Dashboard</button>
       </div>
     </div>
 
+    <!-- Modal 2: Get Free AI Automation Audit -->
     <div class="modal-container glass-card" id="automation-audit-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -716,32 +504,39 @@
       </div>
       <form class="modal-form" id="form-automation-audit">
         <input type="hidden" name="formType" value="automation-audit">
+
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
           <input type="text" id="audit-name" name="name" required placeholder="John Doe">
         </div>
+        
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
           <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
         </div>
+        
         <div class="form-group">
           <label for="audit-phone">Phone Number <span class="required">*</span></label>
           <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
         </div>
+
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
             <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
           </div>
+          
           <div class="form-group">
             <label for="audit-website">Website</label>
             <input type="url" id="audit-website" name="website" placeholder="https://company.com">
           </div>
         </div>
+
         <div class="form-group">
           <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
           <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
         </div>
+
         <button type="submit" class="btn btn-primary form-submit-btn">
           <span class="btn-text">Get Free AI Automation Audit</span>
           <span class="btn-spinner hidden"></span>
@@ -750,12 +545,13 @@
       <div class="modal-success-state hidden">
         <div class="success-checkmark">✓</div>
         <h3>Audit Request Submitted!</h3>
-        <p>Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
+        <p>Thank you for submitting your process bottlenecks. Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
         <button class="btn btn-primary modal-success-close">Close Dashboard</button>
       </div>
     </div>
   </div>
 
+  <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../../auth.js"></script>
   <script src="../../script.js"></script>

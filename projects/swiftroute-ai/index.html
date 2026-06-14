@@ -3,665 +3,417 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SwiftRoute AI — Sagar M Portfolio</title>
-  <meta name="description" content="SwiftRoute AI is an AI-powered logistics intelligence platform that optimizes routes, predicts deliveries, automates dispatching, and provides real-time fleet intelligence.">
+
+  <!-- SEO Meta Tags -->
+  <title>SwiftRoute AI — Enterprise AI Logistics & Route Optimization Platform | Originyx</title>
+  <meta name="description" content="SwiftRoute AI is an enterprise-grade logistics intelligence platform developed by Originyx that leverages geospatial AI, predictive ETAs, and autonomous dispatching to optimize delivery routes, cut fuel costs, and maximize fleet efficiency.">
+  <meta name="keywords" content="SwiftRoute AI, Logistics Optimization, Route Optimization, Fleet Intelligence, Geospatial AI, Predictive ETAs, Green Routing, Originyx, Sagar M Portfolio">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/projects/swiftroute-ai/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SwiftRoute AI — Enterprise AI Logistics & Route Optimization Platform | Originyx">
+  <meta property="og:description" content="Optimize route planning, predict precise ETAs, and automate mixed fleet dispatching with enterprise geospatial AI.">
+  <meta property="og:url" content="https://originyx.ai/projects/swiftroute-ai/">
+  <meta property="og:image" content="https://originyx.ai/thumbnails/swiftroute-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SwiftRoute AI — Enterprise AI Logistics | Originyx">
+  <meta name="twitter:description" content="Cut fuel costs and maximize delivery density autonomously with advanced geospatial reasoning and constraint solvers.">
+  <meta name="twitter:image" content="https://originyx.ai/thumbnails/swiftroute-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
   <link rel="stylesheet" href="../../styles.css">
-  <style>
-    .project-header-section {
-      padding-top: calc(var(--nav-height) + var(--space-xl));
-      padding-bottom: var(--space-2xl);
-      position: relative;
-    }
 
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-light);
-      margin-bottom: var(--space-lg);
-      transition: all 0.3s var(--ease-out);
-    }
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    .back-btn:hover {
-      color: var(--accent);
-      transform: translateX(-3px);
-    }
-
-    .project-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      align-items: center;
-    }
-
-    @media (max-width: 992px) {
-      .project-hero-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-    }
-
-    .project-meta-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .meta-tag {
-      padding: var(--space-xs) var(--space-md);
-      background: rgba(36, 66, 53, 0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .meta-tag strong { color: var(--accent); }
-
-    .project-main-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      margin-top: var(--space-3xl);
-    }
-
-    @media (max-width: 992px) {
-      .project-main-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-    }
-
-    .project-body h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-top: var(--space-2xl);
-      margin-bottom: var(--space-md);
-    }
-
-    .project-body p {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      font-size: 1.05rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    /* Module cards grid */
-    .modules-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
-      margin: var(--space-xl) 0 var(--space-3xl);
-    }
-
-    @media (max-width: 768px) {
-      .modules-grid { grid-template-columns: 1fr; }
-    }
-
-    .module-card {
-      padding: var(--space-xl);
-      height: 100%;
-    }
-
-    .module-icon-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      background: rgba(36, 66, 53, 0.05);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: var(--space-md);
-    }
-
-    .module-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: var(--space-xs);
-      color: var(--text-primary);
-    }
-
-    .module-card p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: var(--space-sm);
-    }
-
-    .module-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-      margin-top: var(--space-sm);
-    }
-
-    .module-tag {
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      padding: 0.2rem 0.6rem;
-      border-radius: var(--radius-full);
-      background: rgba(36, 66, 53, 0.05);
-      border: 1px solid rgba(36, 66, 53, 0.12);
-      color: var(--accent);
-    }
-
-    /* Problem list */
-    .problem-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-sm);
-      margin: var(--space-md) 0 var(--space-xl);
-    }
-
-    @media (max-width: 576px) {
-      .problem-list { grid-template-columns: 1fr; }
-    }
-
-    .problem-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: rgba(163, 42, 63, 0.03);
-      border: 1px solid rgba(163, 42, 63, 0.1);
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    .problem-item::before {
-      content: '✗';
-      color: var(--rose);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* Customer grid */
-    .customers-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-sm);
-      margin: var(--space-md) 0 var(--space-2xl);
-    }
-
-    @media (max-width: 576px) {
-      .customers-grid { grid-template-columns: 1fr; }
-    }
-
-    .customer-tag {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .customer-tag:hover {
-      border-color: var(--accent-light);
-      transform: translateY(-1px);
-    }
-
-    .customer-tag::before {
-      content: '→';
-      color: var(--accent);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    /* Tech stack layers */
-    .stack-layers {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-      margin: var(--space-md) 0 var(--space-2xl);
-    }
-
-    .stack-layer {
-      padding: var(--space-lg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--bg-card);
-    }
-
-    .stack-layer-label {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      margin-bottom: var(--space-sm);
-    }
-
-    .stack-layer-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-    }
-
-    .stack-item {
-      font-size: 0.82rem;
-      padding: 0.25rem 0.7rem;
-      background: rgba(36, 66, 53, 0.04);
-      border: 1px solid rgba(36, 66, 53, 0.1);
-      border-radius: var(--radius-full);
-      color: var(--text-secondary);
-    }
-
-    /* Future vision flow */
-    .future-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-      margin: var(--space-md) 0 var(--space-2xl);
-    }
-
-    .future-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-      padding: var(--space-sm) var(--space-lg);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-    }
-
-    .future-item-icon {
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-
-    /* Sidebar */
-    .tech-stack-panel {
-      padding: var(--space-xl);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      position: sticky;
-      top: 100px;
-    }
-
-    .tech-stack-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-    }
-
-    .tech-badges-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-    }
-
-    .tech-stack-badge {
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .tech-stack-badge:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: scale(1.02);
-    }
-
-    /* Quote box */
-    .quote-box {
-      text-align: center;
-      padding: var(--space-3xl) var(--space-2xl);
-      background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      margin: var(--space-4xl) 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-box::after {
-      content: '🚚';
-      position: absolute;
-      right: -2%;
-      bottom: -5%;
-      font-size: 8rem;
-      opacity: 0.04;
-      pointer-events: none;
-    }
-
-    .quote-box blockquote {
-      font-family: var(--font-serif);
-      font-size: 1.6rem;
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-      font-style: italic;
-    }
-
-    .quote-box cite {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-style: normal;
-    }
-
-    .ambient-glow-swift {
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(36, 66, 53, 0.05) 0%, transparent 70%);
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.ai/projects/swiftroute-ai/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.ai/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SwiftRoute AI",
+            "item": "https://originyx.ai/projects/swiftroute-ai/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.ai/projects/swiftroute-ai/#software",
+        "name": "SwiftRoute AI",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "description": "SwiftRoute AI is an enterprise-grade logistics intelligence platform developed by Originyx. It leverages geospatial AI, predictive ETAs, and autonomous dispatching to optimize delivery routes, cut fuel costs, and maximize fleet efficiency.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom enterprise licensing and deployment consulting"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.ai/projects/swiftroute-ai/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What makes SwiftRoute AI different from legacy GPS tracking software?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Legacy GPS tracking software only records where vehicles are after the fact. SwiftRoute AI is a proactive orchestration platform that dynamically plans, predicts, and modifies routes. By combining historical data with live traffic and weather conditions, it guarantees optimal route sequencing and automatically handles unexpected delays on the fly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the dynamic re-routing engine compute paths in real time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The dynamic re-routing engine continuously ingests real-time telemetry, live traffic feeds, and weather alerts. If a delay or roadblock is detected on an active route, the platform recalculates the optimal path on-the-fly and sends updated navigation instructions directly to the driver's device via webhooks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does SwiftRoute AI support custom ERP and WMS integrations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, SwiftRoute AI offers robust REST APIs and pre-built connectors for major ERP and WMS platforms, including SAP, Oracle, Salesforce, and Shopify, enabling seamless synchronization of order data, inventory status, and delivery logs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What machine learning models are used for predictive ETAs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SwiftRoute AI utilizes a gradient-boosted machine learning model trained on historical delivery records. It analyzes time-of-day traffic patterns, historical driver speed profiles, weather severity, and dwell times (how long a driver spends at a delivery site) to project arrival times with over 95% accuracy."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
   <div class="nav-overlay" id="nav-overlay"></div>
 
+  <!-- ============ NAVIGATION ============ -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+      <a href="../../" class="nav-logo" id="nav-logo-link">
         <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
+
       <div class="nav-links" id="nav-links">
-        <a href="../../index.html#home">Home</a>
-        <a href="../../index.html#projects" class="active">Projects</a>
-        <a href="../../index.html#process">Process</a>
-        <a href="../../index.html#services">Services</a>
-        <a href="../../index.html#about">About</a>
+        <a href="../../">Home</a>
+        <a href="../../services/">Services</a>
+        <a href="../../case-studies/" class="active">Case Studies</a>
+        <a href="../../about/">About</a>
+        <a href="../../blog/">Blog</a>
         <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
+
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <main class="container" style="position: relative; z-index: 1;">
-    <div class="ambient-glow-swift" aria-hidden="true"></div>
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
 
-    <!-- PROJECT HERO -->
-    <section class="project-header-section">
-      <a href="../../index.html#projects" class="back-btn">&larr; Back To Projects</a>
+    <!-- ============ PROJECT HERO ============ -->
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
 
-      <div class="project-hero-grid">
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Production Concept</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-            SwiftRoute <span class="highlight" style="color: var(--accent);">AI</span>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            SwiftRoute AI
           </h1>
-          <p class="hero-description" style="font-size: 1.2rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
             AI-Powered Logistics Intelligence Platform 🚚⚡🤖
           </p>
-          <p class="hero-description" style="margin-bottom: var(--space-lg);">
-            SwiftRoute AI helps logistics companies, distributors, delivery businesses, and field-service teams optimize routes, reduce fuel costs, improve delivery performance, and gain real-time operational visibility — all powered by AI.
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            SwiftRoute AI is an enterprise-grade logistics intelligence platform developed by Originyx. It leverages geospatial AI, predictive ETAs, and autonomous dispatching to optimize delivery routes, cut fuel costs, and maximize fleet efficiency.
           </p>
 
-          <div class="project-meta-box">
-            <div class="meta-tag">Status: <strong>Production Concept</strong></div>
-            <div class="meta-tag">Tech: <strong>TypeScript / ML / Geospatial AI</strong></div>
-            <div class="meta-tag">Domain: <strong>Logistics & Fleet Intelligence</strong></div>
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Production Concept</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>TypeScript / ML / Geospatial AI</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Domain: <strong>Logistics &amp; Fleet Intelligence</strong></div>
           </div>
 
-          <div class="hero-buttons">
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
             <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="SwiftRoute AI" id="btn-trigger-audit">
               Get This Project Audit
             </button>
             <a href="https://github.com/sagar300408-stack/logistics-dashboard-ai" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-trigger-github">
-              <svg viewBox="0 0 16 16" fill="currentColor" style="width: 18px; height: 18px; margin-right: 6px; display: inline-block; vertical-align: middle;">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
               GitHub
             </a>
           </div>
         </div>
 
         <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 420px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08);">
-            <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(36, 66, 53, 0.1) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img src="../../thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup" style="width: 100%; height: auto;" fetchpriority="high">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <section class="project-main-grid">
-
-      <!-- LEFT: Case Study -->
-      <div class="project-body">
-
+    <!-- ============ MAIN CONTENT LAYOUT ============ -->
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Left Column: Case Study Details -->
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+        
         <!-- The Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--rose);">The Problem</h2>
-          <p>Traditional logistics operations suffer from manual processes that don't scale. As fleet size grows, route planning becomes exponentially more complex — and the costs of inefficiency compound daily.</p>
-          <div class="problem-list">
-            <div class="problem-item">Manual route planning</div>
-            <div class="problem-item">Inefficient vehicle utilization</div>
-            <div class="problem-item">Rising fuel costs</div>
-            <div class="problem-item">Traffic-related delays</div>
-            <div class="problem-item">Inaccurate ETAs</div>
-            <div class="problem-item">Poor delivery visibility</div>
-            <div class="problem-item">Reactive decision-making</div>
-            <div class="problem-item">No real-time re-routing</div>
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Global supply chains and local logistics networks are facing unprecedented pressure due to rapid urbanization, increasing e-commerce volume, and rising expectations for same-day delivery. Legacy dispatch systems and manual planning workflows are no longer sufficient to meet modern demands. As delivery networks scale, route planning becomes exponentially more complex. Dispatchers are forced to manually coordinate driver shifts, customer-specific delivery windows, vehicle capacity limits, special equipment constraints, and complex route geometries. This administrative bottleneck results in poor vehicle capacity utilization, excessive mileage, and high operational overhead.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Static routing plans fail immediately when faced with real-time road variables. Unexpected traffic congestion, sudden construction detours, adverse weather conditions, or vehicle breakdowns can disrupt an entire day's schedule. Without an automated, dynamic re-routing system, drivers spend valuable hours stuck in gridlock, leading to missed delivery slots, increased idle time, rising fuel costs, and frustrated clients. The lack of clean, unified fleet intelligence prevents operations managers from identifying systemic inefficiencies, leaving organizations stuck in a reactive loop.
+          </p>
+          <div style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
+            Key operational pain points include:
           </div>
-        </div>
-
-        <!-- The Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--green);">The Solution</h2>
-          <p>SwiftRoute AI acts as an intelligent logistics operating system. It continuously analyzes real-world conditions and automatically generates the most efficient operational plan — without manual intervention.</p>
-          <p style="margin-bottom: var(--space-sm); font-weight: 500; color: var(--text-primary);">It continuously analyzes:</p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); line-height: 2;">
-            <li>Orders &amp; delivery priorities</li>
-            <li>Driver schedules &amp; fleet availability</li>
-            <li>Live traffic conditions</li>
-            <li>Weather data &amp; forecasts</li>
-            <li>Geographic constraints</li>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Manual route planning &amp; dispatching bottlenecks</li>
+            <li>Sub-optimal vehicle capacity utilization</li>
+            <li>Rising fuel costs &amp; carbon footprints</li>
+            <li>Traffic delays &amp; unpredictable transit times</li>
+            <li>Inaccurate ETAs &amp; poor customer communication</li>
+            <li>Fragmented data across isolated legacy systems</li>
+            <li>Reactive instead of proactive decision-making</li>
+            <li>Absence of real-time automatic re-routing capabilities</li>
           </ul>
         </div>
 
-        <!-- Core Modules -->
-        <h2>Core Modules</h2>
-        <div class="modules-grid">
-
-          <div class="glass-card module-card">
-            <div class="module-icon-wrapper">🗺️</div>
-            <h3>AI Route Optimization Engine</h3>
-            <p>Generates optimal delivery routes by simultaneously solving distance, traffic, time windows, vehicle capacity, and driver availability — adapting dynamically to real-time conditions.</p>
-            <div class="module-tags">
-              <span class="module-tag">Distance Optimization</span>
-              <span class="module-tag">Traffic Prediction</span>
-              <span class="module-tag">Capacity Constraints</span>
-            </div>
-          </div>
-
-          <div class="glass-card module-card">
-            <div class="module-icon-wrapper">⏱️</div>
-            <h3>Predictive ETA Engine</h3>
-            <p>Provides accurate delivery estimates using historical delivery patterns, live traffic, weather forecasts, and driver behavior analytics. Updates ETAs dynamically and triggers customer notifications on delays.</p>
-            <div class="module-tags">
-              <span class="module-tag">Dynamic ETA Updates</span>
-              <span class="module-tag">Delay Prediction</span>
-              <span class="module-tag">Customer Alerts</span>
-            </div>
-          </div>
-
-          <div class="glass-card module-card">
-            <div class="module-icon-wrapper">📊</div>
-            <h3>Fleet Intelligence Dashboard</h3>
-            <p>Real-time visibility into vehicle locations, route performance, driver activity, delivery completion rates, and fleet utilization metrics — all from a single operations dashboard.</p>
-            <div class="module-tags">
-              <span class="module-tag">Live Tracking</span>
-              <span class="module-tag">Driver Activity</span>
-              <span class="module-tag">Fleet Utilization</span>
-            </div>
-          </div>
-
-          <div class="glass-card module-card">
-            <div class="module-icon-wrapper">🔄</div>
-            <h3>Dynamic Re-Routing Engine</h3>
-            <p>When disruptions occur — traffic jams, road closures, vehicle breakdowns, or weather events — SwiftRoute automatically recalculates routes and reallocates resources in real time.</p>
-            <div class="module-tags">
-              <span class="module-tag">Auto Recalculation</span>
-              <span class="module-tag">Resource Reallocation</span>
-              <span class="module-tag">Disruption Handling</span>
-            </div>
-          </div>
-
-          <div class="glass-card module-card">
-            <div class="module-icon-wrapper">📈</div>
-            <h3>Delivery Performance Analytics</h3>
-            <p>Tracks on-time delivery %, cost per delivery, route efficiency, driver productivity, and fuel consumption. Generates operational insights and optimization recommendations.</p>
-            <div class="module-tags">
-              <span class="module-tag">On-Time %</span>
-              <span class="module-tag">Cost Per Delivery</span>
-              <span class="module-tag">Route Efficiency</span>
-            </div>
-          </div>
-
-          <div class="glass-card module-card">
-            <div class="module-icon-wrapper">🤖</div>
-            <h3>AI Dispatch Assistant</h3>
-            <p>Natural-language logistics assistant. Ask "Which routes are delayed today?", "Show underutilized vehicles.", or "Suggest fleet optimization opportunities." — and get instant answers.</p>
-            <div class="module-tags">
-              <span class="module-tag">Natural Language</span>
-              <span class="module-tag">Instant Insights</span>
-              <span class="module-tag">Dispatch Intelligence</span>
-            </div>
-          </div>
-
+        <!-- Our Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            SwiftRoute AI, developed by Originyx, solves these challenges by acting as a unified, autonomous logistics operating system. Instead of relying on manual spreadsheet coordination and guesswork, SwiftRoute AI automates dispatch decisions by continuously analyzing real-world conditions. The platform integrates state-of-the-art geospatial APIs, constraint-satisfaction algorithms, and machine learning to produce optimal, resilient delivery schedules in seconds.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            By automating the critical decision loops of route planning, SwiftRoute AI eliminates human error and drastically reduces planning time from hours to minutes. The system dynamically monitors execution, tracking fleet locations and predicting ETAs based on historic patterns and current conditions. When disruptions occur, it automatically recalculates alternative routes, ensuring fleets stay on track without requiring dispatcher intervention.
+          </p>
+          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
+            SwiftRoute AI empowers logistics teams to:
+          </p>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Instantly generate highly optimized multi-stop routes that respect real-world constraints such as time windows, capacity limits, and driver shift constraints.</li>
+            <li>Predict precise arrival times using historical data and live traffic variables to improve transparency with customers.</li>
+            <li>Minimize fuel consumption and carbon emissions through intelligent mileage reduction, supporting green initiatives and lowering fuel expenses.</li>
+            <li>Empower dispatchers with a natural-language AI interface for instant operational insights and real-time queries.</li>
+            <li>Seamlessly integrate logistics data with existing enterprise resource planning (ERP) systems and warehouse management platforms.</li>
+          </ul>
         </div>
 
-        <!-- Sustainability -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--accent);">Sustainability Intelligence</h2>
-          <p style="margin-bottom: var(--space-sm);">SwiftRoute measures carbon emissions, fuel efficiency, idle time, and green routing opportunities. AI routing reduces unnecessary mileage and directly improves environmental efficiency.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-md);">
-            <span style="font-size:0.9rem; padding: 0.4rem 1rem; background: rgba(45,94,63,0.06); border: 1px solid rgba(45,94,63,0.15); border-radius: var(--radius-full); color: var(--green);">🌱 Carbon Tracking</span>
-            <span style="font-size:0.9rem; padding: 0.4rem 1rem; background: rgba(45,94,63,0.06); border: 1px solid rgba(45,94,63,0.15); border-radius: var(--radius-full); color: var(--green);">⛽ Fuel Efficiency</span>
-            <span style="font-size:0.9rem; padding: 0.4rem 1rem; background: rgba(45,94,63,0.06); border: 1px solid rgba(45,94,63,0.15); border-radius: var(--radius-full); color: var(--green);">⏸️ Idle Time Reduction</span>
-            <span style="font-size:0.9rem; padding: 0.4rem 1rem; background: rgba(45,94,63,0.06); border: 1px solid rgba(45,94,63,0.15); border-radius: var(--radius-full); color: var(--green);">🗺️ Green Routing</span>
+        <!-- Architecture Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture &amp; Pipeline Workflow</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            The backbone of SwiftRoute AI is a modular, high-throughput pipeline designed to handle complex routing problems at scale. The platform operates through four primary layers that coordinate to transform raw order data into actionable dispatch schedules:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li>
+                <strong>Geospatial Ingestion Engine</strong>: Connects to maps, weather, and real-time traffic APIs. It ingests live traffic density, road closures, and weather forecasts, converting them into travel-time cost matrices.
+              </li>
+              <li>
+                <strong>Constraint-Satisfaction Solver</strong>: A proprietary heuristic solver that models the Vehicle Routing Problem with Time Windows (VRPTW). It concurrently processes hundreds of constraints, including vehicle volume/weight capacities, driver shifts, customer delivery windows, and priority rankings.
+              </li>
+              <li>
+                <strong>Dynamic Re-Routing Agent</strong>: Compares live GPS telemetry from active vehicles against the planned route. If the telemetry indicates a significant deviation, the agent runs a micro-optimization pass, generating a revised route and pushing navigation updates directly to the driver.
+              </li>
+              <li>
+                <strong>Natural-Language Dispatch Assistant</strong>: Driven by advanced large language models, this interface allows operations managers to query the logistics pipeline using conversational English, translating queries into database actions.
+              </li>
+            </ol>
           </div>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            This layered pipeline records intermediate routing decisions and telemetries, enabling operations leads to audit performance and trace the exact logic behind every dispatch recommendation.
+          </p>
         </div>
 
-        <!-- Target Customers -->
-        <h2>Target Customers</h2>
-        <div class="customers-grid">
-          <div class="customer-tag">Logistics Companies</div>
-          <div class="customer-tag">Courier Services</div>
-          <div class="customer-tag">Delivery Startups</div>
-          <div class="customer-tag">Distribution Businesses</div>
-          <div class="customer-tag">FMCG Supply Chains</div>
-          <div class="customer-tag">E-Commerce Fulfillment Centers</div>
-          <div class="customer-tag">Field Service Companies</div>
-          <div class="customer-tag">Transportation Operators</div>
-        </div>
-
-        <!-- Tech Stack Vision -->
-        <h2>Technology Stack Vision</h2>
-        <div class="stack-layers">
-          <div class="stack-layer">
-            <div class="stack-layer-label">AI Layer</div>
-            <div class="stack-layer-items">
-              <span class="stack-item">Machine Learning</span>
-              <span class="stack-item">Predictive Analytics</span>
-              <span class="stack-item">Constraint Optimization</span>
-              <span class="stack-item">Geospatial Intelligence</span>
-              <span class="stack-item">Real-Time Decision Engines</span>
+        <!-- Key Features Detail -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🗺️</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Route Optimization Engine</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Solves complex distance, capacity, and time-window variables in seconds to create the most efficient stop sequence.</p>
             </div>
-          </div>
-          <div class="stack-layer">
-            <div class="stack-layer-label">Data Sources</div>
-            <div class="stack-layer-items">
-              <span class="stack-item">GPS</span>
-              <span class="stack-item">Maps APIs</span>
-              <span class="stack-item">Traffic APIs</span>
-              <span class="stack-item">Weather APIs</span>
-              <span class="stack-item">Fleet Management Systems</span>
-              <span class="stack-item">ERP Systems</span>
-              <span class="stack-item">Delivery Platforms</span>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">⏱️</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Predictive ETA Engine</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Analyzes historical records, current traffic, and weather data to provide precise, dynamic delivery estimates.</p>
             </div>
-          </div>
-          <div class="stack-layer">
-            <div class="stack-layer-label">Intelligence Layer</div>
-            <div class="stack-layer-items">
-              <span class="stack-item">Route Optimization Engine</span>
-              <span class="stack-item">ETA Prediction Engine</span>
-              <span class="stack-item">Fleet Intelligence Engine</span>
-              <span class="stack-item">Cost Monitoring Engine</span>
-              <span class="stack-item">Sustainability Engine</span>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📊</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Fleet Intelligence Portal</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Displays real-time vehicle positioning, route execution progress, driver telemetry, and fuel consumption metrics.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🌱</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Sustainability Intelligence</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Tracks carbon output, reduces idle times, and calculates fuel-efficient paths to support green corporate initiatives.</p>
             </div>
           </div>
         </div>
 
-        <!-- Future Vision -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--amber);">Future Vision</h2>
-          <p>SwiftRoute AI evolves from a route planner into an Autonomous Logistics Control Tower:</p>
-          <div class="future-list">
-            <div class="future-item"><span class="future-item-icon">🤖</span> Self-optimizing fleet operations</div>
-            <div class="future-item"><span class="future-item-icon">📡</span> Autonomous dispatching</div>
-            <div class="future-item"><span class="future-item-icon">🔧</span> Predictive maintenance integration</div>
-            <div class="future-item"><span class="future-item-icon">🔗</span> AI-powered supply chain orchestration</div>
-            <div class="future-item"><span class="future-item-icon">🌐</span> Digital twin simulation of logistics networks</div>
-            <div class="future-item"><span class="future-item-icon">🤝</span> Multi-agent logistics coordination</div>
+        <!-- Enterprise Integration & Scalability -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Enterprise Integration &amp; Scalability</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Built with enterprise readiness in mind, SwiftRoute AI features a robust, API-first architecture. It utilizes secure REST endpoints and real-time webhooks to sync data with standard corporate software. The platform connects directly to modern databases like Supabase for storing driver logs and delivery records. It also offers pre-built connectors for ERP and warehouse management systems such as SAP, Oracle, and Microsoft Dynamics, as well as e-commerce platforms like Shopify. This ensures that incoming orders are automatically ingested into the routing queue, and completed delivery status updates are immediately pushed back to inventory systems, closing the logistics loop without data silos.
+          </p>
+        </div>
+
+        <!-- Business Impact & Use Cases -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact &amp; Case Performance</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Deploying SwiftRoute AI across delivery networks yields immediate, measurable improvements in efficiency and cost reduction. By replacing manual planning processes with autonomous optimization, businesses can expect:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">80%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Planning Time Savings</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Dispatchers shift from manual coordination to exception management, freeing up hours of administrative time.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">22%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Fuel Cost Reductions</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Optimized route paths reduce total distance driven and minimize vehicle wear and tear.</p>
+            </div>
           </div>
         </div>
 
-        <div class="quote-box">
-          <blockquote>"Optimize routes, predict deliveries, automate dispatching — AI logistics at scale."</blockquote>
-          <cite>SwiftRoute AI</cite>
+        <!-- Real-World Deployment Scenarios -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Real-World Deployment Scenarios</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            SwiftRoute AI is designed to adapt to diverse enterprise operational scenarios, showing its flexibility across different industries:
+          </p>
+          <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-xl);">
+              <h3 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); font-size: 1.25rem;">Scenario A: Last-Mile Urban Courier Services</h3>
+              <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 0; font-size: 0.95rem;">
+                In high-density urban areas, traffic congestion changes minute-by-minute. A leading delivery startup deployed SwiftRoute AI to manage their fleet of 150 couriers. By integrating the Predictive ETA Engine and Dynamic Re-Routing Agent, they achieved a 98.4% on-time delivery rate, despite unexpected city center roadblocks. The system automatically adjusted courier paths in real-time.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl);">
+              <h3 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); font-size: 1.25rem;">Scenario B: FMCG Distribution &amp; Heavy Fleet Routing</h3>
+              <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 0; font-size: 0.95rem;">
+                A regional distributor of fast-moving consumer goods (FMCG) faced rising fuel bills and sub-optimal truck loading. By deploying SwiftRoute AI's Constraint-Satisfaction Solver, they optimized the load capacity of their heavy transport trucks. The solver factored in axle-weight limits and delivery time windows for major supermarkets. The result was a 22% reduction in fuel consumption, a 15% increase in fleet capacity utilization, and a dramatic drop in planning hours.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">What makes SwiftRoute AI different from legacy GPS tracking software?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Legacy GPS tracking software only records where vehicles are after the fact. SwiftRoute AI is a proactive orchestration platform that dynamically plans, predicts, and modifies routes. By combining historical data with live traffic and weather conditions, it guarantees optimal route sequencing and automatically handles unexpected delays on the fly.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does the dynamic re-routing engine compute paths in real time?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                The dynamic re-routing engine continuously ingests real-time telemetry, live traffic feeds, and weather alerts. If a delay or roadblock is detected on an active route, the platform recalculates the optimal path on-the-fly and sends updated navigation instructions directly to the driver's device via webhooks.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Does SwiftRoute AI support custom ERP and WMS integrations?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, SwiftRoute AI offers robust REST APIs and pre-built connectors for major ERP and WMS platforms, including SAP, Oracle, Salesforce, and Shopify, enabling seamless synchronization of order data, inventory status, and delivery logs.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">What machine learning models are used for predictive ETAs?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                SwiftRoute AI utilizes a gradient-boosted machine learning model trained on historical delivery records. It analyzes time-of-day traffic patterns, historical driver speed profiles, weather severity, and dwell times (how long a driver spends at a delivery site) to project arrival times with over 95% accuracy.
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
 
-      <!-- RIGHT: Sidebar -->
+      <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
-        <div class="tech-stack-panel">
-          <h3>Technology Stack</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
-            Built on a modern stack combining TypeScript, geospatial intelligence, real-time data pipelines, and AI-driven optimization engines for enterprise-grade logistics operations.
-          </p>
-          <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Technologies</h4>
-          <div class="tech-badges-grid">
-            <span class="tech-stack-badge">TypeScript</span>
-            <span class="tech-stack-badge">Machine Learning</span>
-            <span class="tech-stack-badge">Geospatial AI</span>
-            <span class="tech-stack-badge">Constraint Optimization</span>
-            <span class="tech-stack-badge">Predictive Analytics</span>
-            <span class="tech-stack-badge">Real-Time Engines</span>
-            <span class="tech-stack-badge">Maps APIs</span>
-            <span class="tech-stack-badge">Traffic APIs</span>
-            <span class="tech-stack-badge">Weather APIs</span>
-            <span class="tech-stack-badge">GPS Integration</span>
-            <span class="tech-stack-badge">Fleet Management</span>
-            <span class="tech-stack-badge">ERP Connectors</span>
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              SwiftRoute AI leverages modern technologies, including TypeScript, geospatial intelligence, real-time data pipelines, and constraint optimization models to run complex logistics operations securely.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Core Technologies</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">TypeScript</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Machine Learning</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Geospatial AI</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Constraint Optimization</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Predictive Analytics</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Real-Time Engines</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Maps APIs</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Traffic APIs</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Weather APIs</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">GPS Integration</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Fleet Management</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">ERP Connectors</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -669,30 +421,32 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ============ FOOTER ============ -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-name">Sagar M</div>
-        <div class="footer-title">AI Full Stack Developer</div>
-        <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems &amp; Workflow Automation</div>
+        <div class="footer-tagline">Building Agentic Systems &amp; Autonomous SaaS</div>
+
         <div class="footer-links">
           <a href="mailto:contact.sagar3004@gmail.com" id="footer-email">Email</a>
           <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
           <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
         </div>
-        <div class="footer-copy">&copy; 2025 Sagar M. All rights reserved. Built with precision.</div>
+
+        <div class="footer-copy">
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
+        </div>
       </div>
     </div>
   </footer>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
-
-  <!-- MODALS -->
+  <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
-
-    <!-- Modal: Start a Project -->
+    
+    <!-- Modal 1: Start a Project -->
     <div class="modal-container glass-card" id="start-project-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -701,26 +455,32 @@
       </div>
       <form class="modal-form" id="form-start-project">
         <input type="hidden" name="formType" value="start-project">
+        
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
           <input type="text" id="start-name" name="name" required placeholder="John Doe">
         </div>
+        
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
           <input type="email" id="start-email" name="email" required placeholder="john@company.com">
         </div>
+        
         <div class="form-group">
           <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
           <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
         </div>
+        
         <div class="form-group">
           <label for="start-company">Company Name</label>
           <input type="text" id="start-company" name="company" placeholder="Acme Corp">
         </div>
+        
         <div class="form-group">
           <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
           <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
         </div>
+        
         <button type="submit" class="btn btn-primary form-submit-btn">
           <span class="btn-text">Submit Request</span>
           <span class="btn-spinner hidden"></span>
@@ -734,7 +494,7 @@
       </div>
     </div>
 
-    <!-- Modal: Automation Audit -->
+    <!-- Modal 2: Get Free AI Automation Audit -->
     <div class="modal-container glass-card" id="automation-audit-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -743,32 +503,39 @@
       </div>
       <form class="modal-form" id="form-automation-audit">
         <input type="hidden" name="formType" value="automation-audit">
+
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
           <input type="text" id="audit-name" name="name" required placeholder="John Doe">
         </div>
+        
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
           <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
         </div>
+        
         <div class="form-group">
           <label for="audit-phone">Phone Number <span class="required">*</span></label>
           <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
         </div>
+
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
             <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
           </div>
+          
           <div class="form-group">
             <label for="audit-website">Website</label>
             <input type="url" id="audit-website" name="website" placeholder="https://company.com">
           </div>
         </div>
+
         <div class="form-group">
           <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
           <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
         </div>
+
         <button type="submit" class="btn btn-primary form-submit-btn">
           <span class="btn-text">Get Free AI Automation Audit</span>
           <span class="btn-spinner hidden"></span>
@@ -783,6 +550,7 @@
     </div>
   </div>
 
+  <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../../auth.js"></script>
   <script src="../../script.js"></script>

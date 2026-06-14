@@ -1,0 +1,38 @@
+# Originyx
+
+Originyx builds premium enterprise AI systems, autonomous multi-agent networks, workflow automation platforms, and business process intelligence tools that help organizations scale without operational complexity.
+
+## Brand Information
+- **Domain**: https://originyx.ai/
+- **Founder & AI Developer**: Sagar M
+- **Mission**: Ingesting business complexity and deploying clean, autonomous systems.
+
+## Core Services
+
+- **AI Workflow Automation**: End-to-end automation of manual processes, document pipelines, and business operations using private agentic networks.
+  - URL: https://originyx.ai/services/
+- **Custom AI Agents**: Specialized agentic systems designed for sales prospecting (SDR), customer support, operations, and compliance.
+  - URL: https://originyx.ai/services/
+- **Enterprise AI Infrastructure**: Secure Retrieval-Augmented Generation (RAG) platforms with role-based access control, cost-tracking, and audit logs.
+  - URL: https://originyx.ai/services/
+- **AI SaaS Development**: Ideation, design, and full-stack development of intelligence-first software platforms.
+  - URL: https://originyx.ai/services/
+
+## Core Products
+
+- **HunterOS**: An autonomous AI Sales Development Representative (SDR) platform that automates lead generation. It scrapes directories, analyzes target domains, detects pain points, and drafts hyper-personalized cold outreach copy.
+  - URL: https://originyx.ai/projects/hunteros/
+- **Tvira Receptionist (Ojas.ai)**: A 24/7 virtual receptionist and lead capture assistant for coaching centers, training institutes, and academies, running across WhatsApp and web.
+  - URL: https://originyx.ai/projects/ojas-ai/
+- **SwiftRoute AI**: An AI-powered logistics intelligence platform that automates dispatching, schedules routes, and provides real-time fleet analytics.
+  - URL: https://originyx.ai/projects/swiftroute-ai/
+- **ShadowOS**: An operational intelligence platform that runs stealth workflow audits, tracks data leakage, and maps business process bottlenecks.
+  - URL: https://originyx.ai/projects/shadowos/
+- **Enterprise RAG**: A secure document intelligence search engine featuring strict role-based access control, cost monitoring, and complete query observability.
+  - URL: https://originyx.ai/projects/enterprise-rag/
+- **LifeOS**: A personal AI operating system acting as a unified digital command center for productivity, knowledge management, and goal tracking.
+  - URL: https://originyx.ai/projects/lifeos/
+- **Mission Control**: A fleet management console for monitoring and orchestrating autonomous agent clusters and operational pipelines.
+  - URL: https://originyx.ai/projects/mission-control/
+- **Sunny AI Companion**: A child-friendly, safe conversational companion for exploratory learning, creative writing, and gamified education.
+  - URL: https://originyx.ai/projects/sunny-ai-companion/

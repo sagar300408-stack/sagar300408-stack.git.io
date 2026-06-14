@@ -3,98 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise RAG with RBAC & Cost Monitoring — Sagar M Portfolio</title>
-  <meta name="description" content="Enterprise-grade Retrieval-Augmented Generation platform with Role-Based Access Control, multi-tenant isolation, cost monitoring, and full observability stack.">
+
+  <!-- SEO Meta Tags -->
+  <title>Enterprise RAG — Secure Knowledge Retrieval & Cost Governance | Originyx</title>
+  <meta name="description" content="Enterprise RAG by Originyx is a secure AI knowledge retrieval engine featuring Role-Based Access Control, multi-tenant isolation, real-time cost monitoring, and deep observability.">
+  <meta name="keywords" content="Enterprise RAG, RBAC, Retrieval-Augmented Generation, AI Security, Cost Monitoring, Token Governance, Originyx, Sagar M Portfolio">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/projects/enterprise-rag/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Enterprise RAG — Secure Knowledge Retrieval & Cost Governance | Originyx">
+  <meta property="og:description" content="Deploy secure, compliant, and cost-governed AI retrieval-augmented generation systems across your enterprise.">
+  <meta property="og:url" content="https://originyx.ai/projects/enterprise-rag/">
+  <meta property="og:image" content="https://originyx.ai/thumbnails/rag-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enterprise RAG with RBAC & Cost Monitoring | Originyx">
+  <meta name="twitter:description" content="Secure AI knowledge engine with Role-Based Access Control, multi-tenancy, cost monitoring, and complete observability.">
+  <meta name="twitter:image" content="https://originyx.ai/thumbnails/rag-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
   <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.ai/projects/enterprise-rag/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.ai/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Enterprise RAG",
+            "item": "https://originyx.ai/projects/enterprise-rag/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.ai/projects/enterprise-rag/#software",
+        "name": "Enterprise RAG",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "description": "An enterprise-grade Retrieval-Augmented Generation (RAG) platform with built-in Role-Based Access Control (RBAC), multi-tenant isolation, real-time cost monitoring, and complete observability.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom B2B licensing and enterprise AI deployment consulting"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.ai/projects/enterprise-rag/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Enterprise RAG by Originyx?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enterprise RAG by Originyx is a high-performance, secure Retrieval-Augmented Generation (RAG) platform that indexes corporate documents and translates them into an active conversational knowledge base. It incorporates enterprise-level requirements including Role-Based Access Control (RBAC), multi-tenant data isolation, cost governance, and deep observability."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the Role-Based Access Control (RBAC) system work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The platform attaches security metadata (such as department access, clearance level, and tenant ID) to every ingested text chunk. When a user queries the system, their authenticated permissions are checked against this metadata prior to vector database search, ensuring they only retrieve information they are authorized to view."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the platform prevent cross-tenant data leakage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every query is automatically scoped with a unique tenant identifier (tenant_id) within the backend API layers and vector databases. This acts as a strict namespace filter, ensuring that users from Company A can never view, index, or retrieve any documents belonging to Company B."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What cost monitoring and optimization capabilities are available?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The platform tracks token consumption, latency, and cost per request across departments, users, and LLM models. It optimizes expenses by implementing Redis-based Semantic Caching to serve repeated queries locally and leverages intelligent routing to execute simple queries via faster, cheaper models."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which LLMs and vector databases are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enterprise RAG features a modular broker design that supports commercial APIs (OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet) as well as locally-hosted open-source models (Llama 3, Mistral) via Ollama/vLLM. Supported vector backends include pgvector on PostgreSQL and Pinecone."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
-    .project-header-section {
-      padding-top: calc(var(--nav-height) + var(--space-xl));
-      padding-bottom: var(--space-2xl);
-      position: relative;
-    }
-
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-light);
-      margin-bottom: var(--space-lg);
-      transition: all 0.3s var(--ease-out);
-    }
-
-    .back-btn:hover {
-      color: var(--accent);
-      transform: translateX(-3px);
-    }
-
-    .project-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      align-items: center;
-    }
-
-    @media (max-width: 992px) {
-      .project-hero-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-    }
-
-    .project-meta-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .meta-tag {
-      padding: var(--space-xs) var(--space-md);
-      background: rgba(36, 66, 53, 0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .meta-tag strong { color: var(--accent); }
-
-    .project-main-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      margin-top: var(--space-3xl);
-    }
-
-    @media (max-width: 992px) {
-      .project-main-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-    }
-
-    .project-body h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-top: var(--space-2xl);
-      margin-bottom: var(--space-md);
-    }
-
-    .project-body p {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      font-size: 1.05rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    /* Architecture flow */
+    /* Custom styles for Enterprise RAG components */
     .arch-flow {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
-      margin: var(--space-lg) 0 var(--space-2xl);
+      margin: var(--space-lg) 0 var(--space-xl);
       padding: var(--space-xl);
       background: rgba(36, 66, 53, 0.03);
       border: 1px solid var(--border);
@@ -122,7 +172,6 @@
       padding-left: 0.5rem;
     }
 
-    /* Code block style */
     .code-block {
       background: rgba(36, 66, 53, 0.04);
       border: 1px solid var(--border);
@@ -140,12 +189,11 @@
     .code-block .key { color: var(--accent); }
     .code-block .val { color: var(--green); }
 
-    /* RBAC comparison grid */
     .rbac-compare {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-lg);
-      margin: var(--space-lg) 0 var(--space-2xl);
+      margin: var(--space-lg) 0 var(--space-xl);
     }
 
     @media (max-width: 576px) {
@@ -179,19 +227,24 @@
       line-height: 2;
     }
 
-    /* Features grid */
     .features-detail-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: var(--space-lg);
-      margin: var(--space-xl) 0 var(--space-3xl);
+      margin: var(--space-xl) 0 var(--space-2xl);
     }
 
     @media (max-width: 768px) {
       .features-detail-grid { grid-template-columns: 1fr; }
     }
 
-    .feature-detail-card { padding: var(--space-xl); height: 100%; }
+    .feature-detail-card {
+      padding: var(--space-xl);
+      height: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
 
     .feature-icon-wrapper {
       width: 48px;
@@ -206,21 +259,6 @@
       margin-bottom: var(--space-md);
     }
 
-    .feature-detail-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: var(--space-xs);
-      color: var(--text-primary);
-    }
-
-    .feature-detail-card p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0;
-    }
-
-    /* Cost chart mock */
     .cost-bars {
       display: flex;
       align-items: flex-end;
@@ -258,7 +296,6 @@
       color: var(--text-muted);
     }
 
-    /* Dashboard metrics row */
     .dashboard-metrics {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -282,7 +319,6 @@
       color: var(--text-secondary);
     }
 
-    /* Tech stack table */
     .tech-table {
       width: 100%;
       border-collapse: collapse;
@@ -310,48 +346,6 @@
     .tech-table td:first-child { color: var(--accent); font-weight: 500; }
     .tech-table tr:last-child td { border-bottom: none; }
 
-    /* Sidebar */
-    .tech-stack-panel {
-      padding: var(--space-xl);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      position: sticky;
-      top: 100px;
-    }
-
-    .tech-stack-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-    }
-
-    .tech-badges-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-    }
-
-    .tech-stack-badge {
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .tech-stack-badge:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: scale(1.02);
-    }
-
-    /* Security rule box */
     .rule-box {
       background: rgba(36, 66, 53, 0.04);
       border: 1px solid var(--accent-light);
@@ -364,12 +358,11 @@
       line-height: 2;
     }
 
-    /* Pillars grid */
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-md);
-      margin: var(--space-lg) 0 var(--space-2xl);
+      margin: var(--space-lg) 0 var(--space-xl);
     }
 
     @media (max-width: 768px) {
@@ -397,14 +390,13 @@
     .pillar-icon { font-size: 2rem; margin-bottom: var(--space-sm); }
     .pillar-label { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
 
-    /* Quote box */
     .quote-box {
       text-align: center;
       padding: var(--space-3xl) var(--space-2xl);
       background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
-      margin: var(--space-4xl) 0;
+      margin: var(--space-4xl) 0 var(--space-2xl);
       position: relative;
       overflow: hidden;
     }
@@ -438,71 +430,63 @@
       letter-spacing: 0.1em;
       font-style: normal;
     }
-
-    .ambient-glow-rag {
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(36, 66, 53, 0.06) 0%, transparent 70%);
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
   </style>
 </head>
 <body>
 
   <div class="nav-overlay" id="nav-overlay"></div>
 
+  <!-- ============ NAVIGATION ============ -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+      <a href="../../" class="nav-logo" id="nav-logo-link">
         <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
+
       <div class="nav-links" id="nav-links">
-        <a href="../../index.html#home">Home</a>
-        <a href="../../index.html#projects" class="active">Projects</a>
-        <a href="../../index.html#process">Process</a>
-        <a href="../../index.html#services">Services</a>
-        <a href="../../index.html#about">About</a>
+        <a href="../../">Home</a>
+        <a href="../../services/">Services</a>
+        <a href="../../case-studies/" class="active">Case Studies</a>
+        <a href="../../about/">About</a>
+        <a href="../../blog/">Blog</a>
         <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
+
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <main class="container" style="position: relative; z-index: 1;">
-    <div class="ambient-glow-rag" aria-hidden="true"></div>
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
 
-    <!-- PROJECT HERO -->
-    <section class="project-header-section">
-      <a href="../../index.html#projects" class="back-btn">&larr; Back To Projects</a>
+    <!-- ============ PROJECT HERO ============ -->
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
 
-      <div class="project-hero-grid">
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
-          <span class="section-label">Under Construction</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-            Enterprise RAG with <span class="highlight" style="color: var(--accent);">RBAC &amp; Cost Monitoring</span>
+          <span class="section-label">Production Ready</span>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            Enterprise RAG
           </h1>
-          <p class="hero-description" style="font-size: 1.2rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
-            The Gold Standard Enterprise AI Knowledge Platform 🔒🏢
+          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+            Secure Knowledge Retrieval, Multi-Tenant Isolation &amp; Cost Governance 🔒🏢
           </p>
-          <p class="hero-description" style="margin-bottom: var(--space-lg);">
-            How do companies safely use AI on their internal documents without leaking data, losing control, or getting surprise AI bills? This platform answers that question with enterprise-grade RAG, role-based access control, multi-tenant isolation, and full cost governance — the kind of architecture used by large organizations deploying AI at scale.
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            Enterprise RAG by Originyx is the gold-standard secure AI knowledge retrieval engine designed for modern corporate data architectures. It enables organizations to query internal files safely without exposing sensitive data, violating industry compliance regulations, or incurring runaway API costs.
           </p>
 
-          <div class="project-meta-box">
-            <div class="meta-tag">Status: <strong>Under Construction</strong></div>
-            <div class="meta-tag">Tech: <strong>FastAPI / Next.js / PostgreSQL</strong></div>
-            <div class="meta-tag">Type: <strong>Enterprise AI Infrastructure</strong></div>
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Production Ready</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>FastAPI / Next.js / PostgreSQL</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Category: <strong>Enterprise AI Infrastructure</strong></div>
           </div>
 
-          <div class="hero-buttons">
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
             <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Enterprise RAG with RBAC & Cost Monitoring" id="btn-trigger-audit">
               Get This Project Audit
             </button>
@@ -510,235 +494,320 @@
         </div>
 
         <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 420px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.10);">
-            <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(36, 66, 53, 0.12) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/rag.png" alt="Enterprise RAG with RBAC & Cost Monitoring" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img src="../../thumbnails/rag.png" alt="Enterprise RAG Interface Mockup" style="width: 100%; height: auto;" fetchpriority="high">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <section class="project-main-grid">
+    <!-- ============ MAIN CONTENT LAYOUT ============ -->
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Left Column: Case Study Details -->
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+        
+        <!-- The Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Enterprise Challenge</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Enterprise knowledge is highly fragmented and unstructured. Over 80% of corporate data exists in disconnected formats such as PDFs, Word files, spreadsheets, emails, and internal wikis. Traditional search engines fail because they rely on exact keyword matches, completely missing synonyms, context, and the semantic relationships between distinct data points. This forces knowledge workers to spend up to 20% of their day digging through folders, stalling productivity and delaying decision-making cycles.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            With the rise of consumer AI platforms, employees frequently copy and paste proprietary materials into public Large Language Models (LLMs) to summarize documents or generate reports. This practice represents a massive compliance hazard, violating strict data sovereignty laws such as GDPR, SOC 2, HIPAA, and CCPA. Once data enters a public model's API without enterprise-grade security wrappers, it risks being ingested, stored, or used as training data, leading to severe corporate liability and intellectual property leaks.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Finally, basic RAG architectures treat all ingested files as a single flat pool. If a junior engineer queries a flat RAG chatbot, they could easily retrieve executive compensation spreadsheets, board minutes, or product design blueprints simply because the search vectors are semantically similar. Deploying AI across an organization requires a system that respects existing active directories and user roles. Without fine-grained, row-level access control at the vector retrieval stage, enterprise-wide AI deployment is a liability.
+          </p>
+        </div>
 
-      <!-- LEFT: Case Study -->
-      <div class="project-body">
-
-        <!-- What It Does -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--accent);">What It Does</h2>
-          <p>An organization uploads internal documents — SOPs, policies, contracts, HR documents, technical documentation, and internal knowledge bases. The platform converts them into searchable AI knowledge.</p>
-          <p style="margin-bottom: var(--space-sm); font-weight: 500; color: var(--text-primary);">Employees can then ask:</p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); line-height: 2;">
-            <li>"What is our leave policy?"</li>
-            <li>"Show me the client onboarding process."</li>
-            <li>"Summarize the security guidelines."</li>
+        <!-- Our Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">The Enterprise RAG Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Enterprise RAG by Originyx represents the next generation of secure, compliance-ready enterprise AI. Built from the ground up to support high-scale deployments, it bridges the gap between raw generative intelligence and secure data governance. The system indexes internal databases and document stores, processes files through layout-aware pipelines, and hosts the content in a private cloud environment, ensuring complete data sovereignty. Your files are never used to train public LLM models, and your data never leaves your secure infrastructure.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Furthermore, Enterprise RAG integrates seamlessly with your existing Enterprise Identity Providers (IdPs) via OAuth2, SAML, and Keycloak, dynamically enforcing access control rules in real-time. Instead of simple chatbot interfaces, the platform serves as a secure knowledge broker that verifies clearance, partitions data by corporate tenant, logs query histories for security auditing, and maintains live dashboards to track API budgets and latency spikes. Originyx empowers your enterprise to scale AI productivity with confidence, performance, and predictability.
+          </p>
+          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
+            Key Core Capabilities:
+          </p>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Zero-trust metadata-enforced document query paths</li>
+            <li>Multi-tenant isolation protecting commercial databases</li>
+            <li>Automated semantic caching to reduce token expenses</li>
+            <li>Centralized token tracking and department budget caps</li>
+            <li>Traceability metrics integrated with Langfuse and OpenTelemetry</li>
           </ul>
-          <p style="margin-bottom: 0; margin-top: var(--space-md);">Instead of manually searching hundreds of files, the AI retrieves relevant information and generates a precise answer using RAG (Retrieval-Augmented Generation).</p>
         </div>
 
-        <!-- Core Architecture -->
-        <h2>Core Architecture</h2>
-        <div class="arch-flow">
-          <div class="arch-flow-item highlight-node">📄 Documents</div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-flow-item">OCR / Parsing</div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-flow-item">Chunking</div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-flow-item">Embeddings</div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-flow-item">Vector Database</div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-flow-item highlight-node">🔒 Secure Retrieval</div>
-          <div class="arch-arrow">↓</div>
-          <div class="arch-flow-item highlight-node">🤖 LLM Response</div>
+        <!-- Architecture Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Core Architecture &amp; Ingestion Pipeline</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            An enterprise RAG system is only as good as its ingestion pipeline. The platform employs a multi-step sequence to clean, parse, embed, and secure incoming data:
+          </p>
+          <div class="arch-flow">
+            <div class="arch-flow-item highlight-node">📄 Ingested Documents</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item">OCR / Layout-Aware Parsing</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item">Recursive Semantic Chunking</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item">Metadata Tagging (Clearance, Tenant ID)</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item">Vector Embedding Generation</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item highlight-node">🔒 Zero-Trust Metadata Filtering</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item">Hybrid Vector &amp; BM25 Retrieval</div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-flow-item highlight-node">🤖 Secured Generative Synthesis</div>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            During ingestion, raw files are stripped of formatting. Scanned documents run through layout-aware OCR (Optical Character Recognition) using engines like Tesseract or LayoutLM to extract text from images and tables in their logical reading order. Next, recursive semantic chunking segments text at natural heading and paragraph boundaries, maintaining slide-overlap windows to prevent text fragmentation.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            Each segment is tagged with metadata fields including tenant_id, department, and clearance_level. These segments are processed by embedding models (such as OpenAI text-embedding-3) and written to the database. During querying, the user's roles are converted into metadata query filters. This dynamic check ensures that unauthorized vector rows are filtered out before cosine similarity calculations occur, blocking unauthorized data from ever entering the LLM prompt.
+          </p>
         </div>
 
-        <!-- Ingestion Layer -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--green);">Ingestion Layer</h2>
-          <p style="margin-bottom: var(--space-sm);">Handles PDF uploads, DOCX files, plain text files, and OCR processing. Converts raw documents into structured, searchable chunks with extracted metadata.</p>
-          <p style="margin-bottom: var(--space-sm); font-weight: 500; color: var(--text-primary);">Metadata example:</p>
-          <div class="code-block"><span class="key">{
-  "tenant_id"</span>: <span class="val">"company_a"</span>,
-  <span class="key">"department"</span>: <span class="val">"hr"</span>,
-  <span class="key">"clearance_level"</span>: <span class="val">3</span>,
-  <span class="key">"document_type"</span>: <span class="val">"policy"</span>
-<span class="key">}</span></div>
-          <p style="margin-bottom: 0;">This metadata becomes critical for security — every chunk carries its access context.</p>
-        </div>
+        <!-- Role-Based Access Control (RBAC) & Multi-Tenant Data Isolation -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Role-Based Access Control (RBAC) &amp; Multi-Tenant Isolation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Security is the primary differentiator between consumer-grade chatbots and enterprise-grade systems. Enterprise RAG implements a zero-trust model at the retrieval level. If a user tries to query documents above their clearance, the database blocks retrieval prior to generative processing.
+          </p>
 
-        <!-- RBAC -->
-        <h2>RBAC — Role-Based Access Control</h2>
-        <p>This is what makes the system enterprise-grade. Without RBAC, any employee can access everything. With RBAC, every query passes through role validation and permission checks before retrieval occurs.</p>
-
-        <div class="rbac-compare">
-          <div class="rbac-box bad">
-            <h4>❌ Without RBAC</h4>
-            <div class="flow-mini">
-              Employee<br>↓<br>Can access everything
+          <div class="rbac-compare">
+            <div class="rbac-box bad">
+              <h4>❌ Standard Flat RAG</h4>
+              <div class="flow-mini">
+                User Question<br>↓<br>Flat Vector Search<br>↓<br>Exposes all matching documents<br>↓<br>Risk: Data Leakage
+              </div>
+            </div>
+            <div class="rbac-box good">
+              <h4>✓ Enterprise RAG (RBAC)</h4>
+              <div class="flow-mini">
+                User Identity &amp; Tenant ID<br>↓<br>Metadata Security Filters<br>↓<br>Restricted Vector Search<br>↓<br>Retrieves authorized chunks only
+              </div>
             </div>
           </div>
-          <div class="rbac-box good">
-            <h4>✓ With RBAC</h4>
-            <div class="flow-mini">
-              Employee<br>↓<br>Role Validation<br>↓<br>Permission Check<br>↓<br>Filtered Retrieval
-            </div>
-          </div>
-        </div>
 
-        <p style="font-weight: 500; color: var(--text-primary);">Example — A junior employee asks: "Show executive financial reports."</p>
-        <div class="code-block">User Clearance    = <span class="val">2</span>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            In practice, when an employee submits a query, the FastAPI backend checks their session token via Keycloak or Auth0. If a junior engineer (Clearance Level 2) queries "Show executive financial reports" (Clearance Level 5), the system blocks access dynamically.
+          </p>
+          <div class="code-block">User Clearance    = <span class="val">2</span>
 Document Clearance = <span class="val">5</span>
 
 Result: <span class="key">ACCESS DENIED</span>
 → The document never reaches the AI model.</div>
 
-        <div class="rule-box">
-          Security Rule:<br>
-          clearance_level &lt;= user_clearance<br>
-          AND tenant_id == current_tenant
-        </div>
-        <p>This prevents cross-company data leakage, unauthorized document access, and compliance violations.</p>
-
-        <!-- Multi-Tenant Isolation -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--accent);">Multi-Tenant Isolation</h2>
-          <p>Company A, Company B, and Company C all use the same platform — but the system guarantees they never see each other's data. Every query is filtered by <code style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent);">tenant_id</code> before retrieval occurs. This is a critical enterprise requirement for any shared AI infrastructure.</p>
-          <p style="margin-bottom: 0;">Without tenant isolation, a single misconfigured query could expose sensitive documents from one company to another — a compliance and legal catastrophe.</p>
-        </div>
-
-        <!-- Cost Monitoring -->
-        <h2>Cost Monitoring System</h2>
-        <p>One of the most overlooked problems in AI systems — AI costs scale fast. Without monitoring, usage spikes silently until the billing shock arrives:</p>
-
-        <div class="cost-bars" aria-label="AI cost growth without monitoring">
-          <div class="cost-bar-group">
-            <div class="cost-bar m1"></div>
-            <span class="cost-bar-label">Month 1<br>$50</span>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            This filter is enforced at the database level. For example, using pgvector in PostgreSQL, the SQL query applies a strict metadata check in the `WHERE` clause:
+          </p>
+          <div class="rule-box">
+            SELECT content, metadata FROM documents<br>
+            WHERE tenant_id = :current_tenant<br>
+            AND clearance_level <= :user_clearance<br>
+            ORDER BY embedding <=> :query_embedding LIMIT 5;
           </div>
-          <div class="cost-bar-group">
-            <div class="cost-bar m2"></div>
-            <span class="cost-bar-label">Month 2<br>$400</span>
-          </div>
-          <div class="cost-bar-group">
-            <div class="cost-bar m3"></div>
-            <span class="cost-bar-label">Month 3<br>$2,000</span>
-          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            This prevents cross-company data leakage and cross-department security violations, maintaining compliance and absolute data separation across teams.
+          </p>
         </div>
 
-        <p>Every AI request is tracked and recorded:</p>
-        <div class="code-block"><span class="key">{
-  "user"</span>: <span class="val">"john"</span>,
+        <!-- Cost Monitoring, Caching, and Token Governance -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Cost Monitoring, Caching, &amp; Token Governance</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Running production AI at scale can quickly become cost-prohibitive. Long context windows and frequent search loops lead to massive token consumption and high API bills. Enterprise RAG solves this through token governance tools and semantic optimizations.
+          </p>
+
+          <div class="cost-bars" aria-label="AI cost growth without monitoring">
+            <div class="cost-bar-group">
+              <div class="cost-bar m1"></div>
+              <span class="cost-bar-label">Month 1<br>$50</span>
+            </div>
+            <div class="cost-bar-group">
+              <div class="cost-bar m2"></div>
+              <span class="cost-bar-label">Month 2<br>$400</span>
+            </div>
+            <div class="cost-bar-group">
+              <div class="cost-bar m3"></div>
+              <span class="cost-bar-label">Month 3<br>$2,000</span>
+            </div>
+          </div>
+
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            The platform features a Redis-based Semantic Cache. When a query is submitted, the platform vectorizes the question and searches the local Redis cache. If a semantically similar query was answered recently, the cache serves the generated response directly. Semantic caching reduces API fees by up to 60%, slashes latency from seconds to milliseconds, and keeps operational costs under control.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Additionally, the platform logs metadata details for every request to track usage patterns:
+          </p>
+          <div class="code-block"><span class="key">{
+  "user"</span>: <span class="val">"john_doe"</span>,
   <span class="key">"model"</span>: <span class="val">"gpt-4o"</span>,
   <span class="key">"tokens"</span>: <span class="val">4200</span>,
-  <span class="key">"cost"</span>: <span class="val">0.12</span>,
-  <span class="key">"latency"</span>: <span class="val">1.3</span>,
+  <span class="key">"cost"</span>: <span class="val">0.126</span>,
+  <span class="key">"latency"</span>: <span class="val">1.34</span>,
   <span class="key">"tenant"</span>: <span class="val">"company_a"</span>
 <span class="key">}</span></div>
 
-        <p style="font-weight: 500; color: var(--text-primary);">Dashboard tracks:</p>
-        <div class="dashboard-metrics">
-          <div class="metric-pill">📊 Daily Cost</div>
-          <div class="metric-pill">📊 Monthly Cost</div>
-          <div class="metric-pill">📊 Cost Per User</div>
-          <div class="metric-pill">📊 Cost Per Team</div>
-          <div class="metric-pill">📊 Cost Per Model</div>
-          <div class="metric-pill">📊 Token Consumption</div>
-          <div class="metric-pill">📊 Request Volume</div>
-          <div class="metric-pill">📊 Avg Latency</div>
-        </div>
-
-        <!-- Observability -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--rose);">Observability Layer</h2>
-          <p>Enterprise systems need visibility. Integrated with Langfuse, OpenTelemetry, Prometheus, and Grafana to track query performance, retrieval quality, API failures, token usage, and model response time.</p>
-          <p style="margin-bottom: 0;">This allows teams to debug AI workflows like software systems — not black boxes.</p>
-        </div>
-
-        <!-- Audit Logging -->
-        <h2>Audit Logging</h2>
-        <p>Every action is recorded. User logins, document uploads, permission changes, knowledge searches, AI queries, and admin actions — all logged for compliance, security reviews, and incident investigation.</p>
-
-        <!-- AI Guardrails -->
-        <h2>AI Guardrails</h2>
-        <div class="rbac-compare">
-          <div class="rbac-box bad" style="border-left-color: var(--accent);">
-            <h4 style="color: var(--accent);">Input Guardrails</h4>
-            <div class="flow-mini">Detect:<br>Prompt Injection<br>Malicious Inputs<br>Data Extraction Attempts</div>
-          </div>
-          <div class="rbac-box good">
-            <h4>Output Guardrails</h4>
-            <div class="flow-mini">Prevent:<br>Sensitive Data Leakage<br>Unauthorized Responses<br>Cross-Tenant Exposure</div>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Administrators can monitor cost structures across different departments and set monthly spend thresholds using the dashboard metrics panel:
+          </p>
+          <div class="dashboard-metrics">
+            <div class="metric-pill">📊 Daily Cost</div>
+            <div class="metric-pill">📊 Monthly Cost</div>
+            <div class="metric-pill">📊 Cost Per User</div>
+            <div class="metric-pill">📊 Cost Per Team</div>
+            <div class="metric-pill">📊 Cost Per Model</div>
+            <div class="metric-pill">📊 Token Consumption</div>
+            <div class="metric-pill">📊 Request Volume</div>
+            <div class="metric-pill">📊 Avg Latency</div>
           </div>
         </div>
 
-        <!-- Tech Stack Table -->
-        <h2>Tech Stack</h2>
-        <table class="tech-table">
-          <thead>
-            <tr><th>Layer</th><th>Technology</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Frontend</td><td>Next.js</td></tr>
-            <tr><td>Backend</td><td>FastAPI</td></tr>
-            <tr><td>Authentication</td><td>JWT / Auth0 / Clerk / Keycloak</td></tr>
-            <tr><td>Queue System</td><td>Celery + Redis</td></tr>
-            <tr><td>Database</td><td>PostgreSQL</td></tr>
-            <tr><td>Vector Store</td><td>pgvector / Pinecone</td></tr>
-            <tr><td>LLM</td><td>OpenAI API</td></tr>
-            <tr><td>Monitoring</td><td>Langfuse</td></tr>
-            <tr><td>Telemetry</td><td>OpenTelemetry</td></tr>
-            <tr><td>Metrics</td><td>Prometheus</td></tr>
-            <tr><td>Dashboards</td><td>Grafana</td></tr>
-          </tbody>
-        </table>
+        <!-- Observability, Tracing, and LLM Guardrails -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Observability, Tracing, &amp; LLM Guardrails</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Production systems require deep monitoring. Enterprise RAG integrates Langfuse, OpenTelemetry, Prometheus, and Grafana to track queries from start to finish. This enables team members to audit retrieval quality, identify bottlenecks, and measure cosine similarity scores to prevent system decay.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The platform also implements real-time LLM Guardrails. Input guardrails check user inputs to detect prompt injection attempts, malicious scripts, and jailbreak attempts. Output guardrails scan generated responses before they are returned to users, verifying that no PII (Personally Identifiable Information), internal code, or unauthorized references are leaked. If a guardrail is triggered, the system intercepts the response, alerts administrators, and returns a safe fallback message.
+          </p>
+        </div>
 
-        <!-- Why It Matters -->
-        <h2>Why This Project Matters</h2>
-        <p>Most RAG demos stop at PDF → Chatbot. This system goes much further — it's not just a chatbot. It's an Enterprise AI Knowledge Infrastructure Platform that combines:</p>
+        <!-- Key Features Detail -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Core Architecture Highlights</h2>
+          <div class="features-detail-grid">
+            <div class="feature-detail-card">
+              <div class="feature-icon-wrapper">🔒</div>
+              <h3>Granular RBAC Integration</h3>
+              <p>Dynamic document-level security filtering integrated with active corporate IdPs to enforce data access levels at search time.</p>
+            </div>
+            <div class="feature-detail-card">
+              <div class="feature-icon-wrapper">🏢</div>
+              <h3>Multi-Tenant Architecture</h3>
+              <p>Strict logical partition logic ensures different organizations or departments operate within separate secure database environments.</p>
+            </div>
+            <div class="feature-detail-card">
+              <div class="feature-icon-wrapper">⚡</div>
+              <h3>Performance Caching</h3>
+              <p>Redis semantic caching serves repetitive queries locally, reducing API fees, protecting rate limits, and lowering latencies.</p>
+            </div>
+            <div class="feature-detail-card">
+              <div class="feature-icon-wrapper">📊</div>
+              <h3>Observability Stack</h3>
+              <p>Full tracing of LLM prompts and vector database query steps using Langfuse and Prometheus to monitor response quality.</p>
+            </div>
+          </div>
+        </div>
 
-        <div class="pillars-grid">
-          <div class="pillar-card"><div class="pillar-icon">🔒</div><div class="pillar-label">Security</div></div>
-          <div class="pillar-card"><div class="pillar-icon">🏢</div><div class="pillar-label">Multi-Tenancy</div></div>
-          <div class="pillar-card"><div class="pillar-icon">📚</div><div class="pillar-label">Enterprise RAG</div></div>
-          <div class="pillar-card"><div class="pillar-icon">💰</div><div class="pillar-label">Cost Governance</div></div>
-          <div class="pillar-card"><div class="pillar-icon">📊</div><div class="pillar-label">Observability</div></div>
-          <div class="pillar-card"><div class="pillar-icon">📝</div><div class="pillar-label">Auditability</div></div>
+        <!-- Technical Specification Table -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Specifications</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Enterprise RAG features a modular, vendor-agnostic architecture. Every component—from the vector database to the frontend interface—can be customized or deployed in private VPC environments to meet compliance needs.
+          </p>
+          <table class="tech-table">
+            <thead>
+              <tr><th>Layer</th><th>Technology Specification</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Frontend App</td><td>Next.js with custom CSS and dashboard layouts</td></tr>
+              <tr><td>Backend API</td><td>FastAPI running asynchronously on Python</td></tr>
+              <tr><td>Identity Provider</td><td>Keycloak / Auth0 / Clerk / SAML Integration</td></tr>
+              <tr><td>Worker Queue</td><td>Celery and Redis for ingestion and processing</td></tr>
+              <tr><td>Vector Database</td><td>pgvector on PostgreSQL / Pinecone Enterprise</td></tr>
+              <tr><td>Models Supported</td><td>OpenAI (GPT-4o), Anthropic (Claude 3.5), Llama 3 via vLLM</td></tr>
+              <tr><td>Observability</td><td>Langfuse tracing / OpenTelemetry integration</td></tr>
+              <tr><td>Metrics Collection</td><td>Prometheus and Grafana dashboard suites</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Frequently Asked Questions -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does Enterprise RAG guarantee data sovereignty?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Our platform is designed for private VPC deployments (AWS, GCP, Azure) or on-premise environments. Your data is stored locally within your secure infrastructure and is never sent to public models to train commercial LLMs.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does the RBAC system sync with our existing identity providers?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Enterprise RAG connects directly with enterprise identity platforms via OAuth2 and SAML. When a user authenticates, their roles are translated into security tokens. These tokens are used by the backend to filter vector database queries in real-time.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Can the platform process scanned files and images?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. The ingestion pipeline includes layout-aware OCR models (like LayoutLM) that parse text, tables, and images in scanned PDFs and forms, ensuring that document structure and context are preserved.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Does semantic caching respect document security boundaries?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. Every item in the semantic cache is tagged with a permission hash. The cache will only serve a result if the current user's roles and tenant identifier match the permissions of the cached answer, maintaining strict access control.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div class="quote-box">
-          <blockquote>"Not just a chatbot — Enterprise AI Knowledge Infrastructure at scale."</blockquote>
+          <blockquote>"Enterprise RAG by Originyx bridges the gap between raw LLM capabilities and secure, cost-controlled business intelligence."</blockquote>
           <cite>Enterprise RAG with RBAC &amp; Cost Monitoring</cite>
         </div>
 
       </div>
 
-      <!-- RIGHT: Sidebar -->
+      <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
-        <div class="tech-stack-panel">
-          <h3>Technology Stack</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
-            Built with production-grade technologies across the full AI infrastructure stack — from document ingestion to LLM response with enterprise security controls at every layer.
-          </p>
-          <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Technologies</h4>
-          <div class="tech-badges-grid">
-            <span class="tech-stack-badge">FastAPI</span>
-            <span class="tech-stack-badge">Next.js</span>
-            <span class="tech-stack-badge">PostgreSQL</span>
-            <span class="tech-stack-badge">pgvector</span>
-            <span class="tech-stack-badge">Pinecone</span>
-            <span class="tech-stack-badge">OpenAI API</span>
-            <span class="tech-stack-badge">Redis</span>
-            <span class="tech-stack-badge">Celery</span>
-            <span class="tech-stack-badge">Langfuse</span>
-            <span class="tech-stack-badge">OpenTelemetry</span>
-            <span class="tech-stack-badge">Prometheus</span>
-            <span class="tech-stack-badge">Grafana</span>
-            <span class="tech-stack-badge">JWT / Auth0</span>
-            <span class="tech-stack-badge">RAG</span>
-            <span class="tech-stack-badge">RBAC</span>
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              Enterprise RAG leverages production-grade technologies to run secure, cost-controlled, and highly observable knowledge indexing loops.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Languages</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">TypeScript</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Backend &amp; API</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">FastAPI</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Redis / Celery</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OAuth2 / Keycloak</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Vector &amp; Data</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">PostgreSQL (pgvector)</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Pinecone</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">vLLM / HuggingFace</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Observability</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Langfuse</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OpenTelemetry</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Prometheus / Grafana</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -746,30 +815,32 @@ Result: <span class="key">ACCESS DENIED</span>
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ============ FOOTER ============ -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-name">Sagar M</div>
-        <div class="footer-title">AI Full Stack Developer</div>
-        <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems &amp; Workflow Automation</div>
+        <div class="footer-tagline">Building Agentic Systems &amp; Autonomous SaaS</div>
+
         <div class="footer-links">
           <a href="mailto:contact.sagar3004@gmail.com" id="footer-email">Email</a>
           <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
           <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
         </div>
-        <div class="footer-copy">&copy; 2025 Sagar M. All rights reserved. Built with precision.</div>
+
+        <div class="footer-copy">
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
+        </div>
       </div>
     </div>
   </footer>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
-
-  <!-- MODALS -->
+  <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
-
-    <!-- Modal: Start a Project -->
+    
+    <!-- Modal 1: Start a Project -->
     <div class="modal-container glass-card" id="start-project-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -778,26 +849,32 @@ Result: <span class="key">ACCESS DENIED</span>
       </div>
       <form class="modal-form" id="form-start-project">
         <input type="hidden" name="formType" value="start-project">
+        
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
           <input type="text" id="start-name" name="name" required placeholder="John Doe">
         </div>
+        
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
           <input type="email" id="start-email" name="email" required placeholder="john@company.com">
         </div>
+        
         <div class="form-group">
           <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
           <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
         </div>
+        
         <div class="form-group">
           <label for="start-company">Company Name</label>
           <input type="text" id="start-company" name="company" placeholder="Acme Corp">
         </div>
+        
         <div class="form-group">
           <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
           <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
         </div>
+        
         <button type="submit" class="btn btn-primary form-submit-btn">
           <span class="btn-text">Submit Request</span>
           <span class="btn-spinner hidden"></span>
@@ -811,7 +888,7 @@ Result: <span class="key">ACCESS DENIED</span>
       </div>
     </div>
 
-    <!-- Modal: Automation Audit -->
+    <!-- Modal 2: Get Free AI Automation Audit -->
     <div class="modal-container glass-card" id="automation-audit-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -820,32 +897,39 @@ Result: <span class="key">ACCESS DENIED</span>
       </div>
       <form class="modal-form" id="form-automation-audit">
         <input type="hidden" name="formType" value="automation-audit">
+
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
           <input type="text" id="audit-name" name="name" required placeholder="John Doe">
         </div>
+        
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
           <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
         </div>
+        
         <div class="form-group">
           <label for="audit-phone">Phone Number <span class="required">*</span></label>
           <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
         </div>
+
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
             <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
           </div>
+          
           <div class="form-group">
             <label for="audit-website">Website</label>
             <input type="url" id="audit-website" name="website" placeholder="https://company.com">
           </div>
         </div>
+
         <div class="form-group">
           <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
           <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
         </div>
+
         <button type="submit" class="btn btn-primary form-submit-btn">
           <span class="btn-text">Get Free AI Automation Audit</span>
           <span class="btn-spinner hidden"></span>
@@ -860,6 +944,7 @@ Result: <span class="key">ACCESS DENIED</span>
     </div>
   </div>
 
+  <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../../auth.js"></script>
   <script src="../../script.js"></script>
@@ -871,7 +956,7 @@ Result: <span class="key">ACCESS DENIED</span>
         auditBtn.addEventListener('click', () => {
           const textarea = document.getElementById('audit-process');
           if (textarea) {
-            textarea.value = "I am interested in getting a workflow audit for the 'Enterprise RAG with RBAC & Cost Monitoring' project. I'd like to explore how this architecture can be deployed for my organization's internal document intelligence and knowledge management needs.";
+            textarea.value = "I am interested in getting a workflow audit for the 'Enterprise RAG' project. I'd like to explore how this secure knowledge architecture can be deployed for my organization's internal document intelligence and compliance needs.";
           }
         });
       }

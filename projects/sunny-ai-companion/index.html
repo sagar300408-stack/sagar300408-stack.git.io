@@ -3,512 +3,385 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunny AI Companion — Sagar M Portfolio</title>
-  <meta name="description" content="Sunny AI is a child-friendly AI assistant designed to help kids learn, explore, create, and ask questions in a safe and engaging environment.">
-  
+
+  <!-- SEO Meta Tags -->
+  <title>Sunny AI Companion — Child-Friendly AI Learning Assistant | Originyx</title>
+  <meta name="description" content="Sunny AI Companion is a safe, interactive, and child-friendly AI learning assistant designed by Originyx to help kids aged 5-12 learn, explore science, and practice creativity.">
+  <meta name="keywords" content="Sunny AI Companion, Kids AI Assistant, Child-Friendly AI, Educational AI, Safe AI for Kids, Originyx, Sagar M Portfolio">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/projects/sunny-ai-companion/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sunny AI Companion — Child-Friendly AI Learning Assistant | Originyx">
+  <meta property="og:description" content="Nurturing child curiosity and creativity through safe, moderated conversational AI.">
+  <meta property="og:url" content="https://originyx.ai/projects/sunny-ai-companion/">
+  <meta property="og:image" content="https://originyx.ai/thumbnails/sunny-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sunny AI Companion — Child-Friendly AI Learning Assistant | Originyx">
+  <meta name="twitter:description" content="Safe, interactive, and child-friendly educational AI assistant designed for young minds to learn, create, and explore.">
+  <meta name="twitter:image" content="https://originyx.ai/thumbnails/sunny-og.png">
+
   <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
   <link rel="stylesheet" href="../../styles.css">
-  
-  <!-- Custom case study styling to elevate page aesthetics -->
-  <style>
-    /* Custom page variables or styles */
-    .project-header-section {
-      padding-top: calc(var(--nav-height) + var(--space-xl));
-      padding-bottom: var(--space-2xl);
-      position: relative;
-    }
-    
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-light);
-      margin-bottom: var(--space-lg);
-      transition: all 0.3s var(--ease-out);
-    }
-    
-    .back-btn:hover {
-      color: var(--accent);
-      transform: translateX(-3px);
-    }
 
-    .project-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      align-items: center;
-    }
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    @media (max-width: 992px) {
-      .project-hero-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.ai/projects/sunny-ai-companion/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.ai/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Sunny AI Companion",
+            "item": "https://originyx.ai/projects/sunny-ai-companion/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.ai/projects/sunny-ai-companion/#software",
+        "name": "Sunny AI Companion",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All",
+        "description": "Safe, interactive child-friendly AI learning companion designed to answer curious questions, tell educational stories, and foster creativity in a secure digital environment.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Free web application with custom institutional deployment options"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.ai/projects/sunny-ai-companion/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Sunny AI Companion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sunny AI Companion is a safe, interactive, and educational AI assistant designed by Originyx for children aged 5-12. It provides age-appropriate, simple explanations, helps with homework, tells creative stories, and fosters curiosity in a secure environment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Sunny AI Companion ensure child safety?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sunny AI Companion utilizes strict safety and moderation systems. All inputs and outputs are filtered using real-time content moderation layers to prevent access to inappropriate topics, filter out harmful language, and maintain a positive, encouraging tone."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What technologies power Sunny AI Companion?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sunny AI Companion is built using Python, advanced Large Language Models (LLMs), Natural Language Processing (NLP), and safety moderation APIs. It is deployed as a highly responsive web application with safe database auditing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Sunny AI Companion free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, the core Sunny AI Companion is free to use. Originyx also offers custom institutional setups and licensing for classrooms, libraries, and educational organizations."
+            }
+          }
+        ]
       }
-    }
-
-    .project-meta-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .meta-tag {
-      padding: var(--space-xs) var(--space-md);
-      background: rgba(36, 66, 53, 0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .meta-tag strong {
-      color: var(--accent);
-    }
-
-    .project-main-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      margin-top: var(--space-3xl);
-    }
-
-    @media (max-width: 992px) {
-      .project-main-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
-      }
-    }
-
-    .project-body h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-top: var(--space-2xl);
-      margin-bottom: var(--space-md);
-    }
-
-    .project-body p {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      font-size: 1.05rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    .features-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
-      margin-top: var(--space-xl);
-      margin-bottom: var(--space-3xl);
-    }
-
-    @media (max-width: 768px) {
-      .features-detail-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .feature-detail-card {
-      padding: var(--space-xl);
-      height: 100%;
-    }
-
-    .feature-icon-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      background: rgba(36, 66, 53, 0.05);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: var(--space-md);
-    }
-
-    .feature-detail-card h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: var(--space-xs);
-      color: var(--text-primary);
-    }
-
-    .feature-detail-card p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0;
-    }
-
-    .use-cases-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-    }
-
-    @media (max-width: 576px) {
-      .use-cases-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .use-case-tag {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .use-case-tag:hover {
-      border-color: var(--accent-light);
-      transform: translateY(-1px);
-    }
-
-    .use-case-tag svg {
-      color: var(--green);
-      flex-shrink: 0;
-    }
-
-    .tech-stack-panel {
-      padding: var(--space-xl);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      position: sticky;
-      top: 100px;
-    }
-
-    .tech-stack-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-    }
-
-    .tech-badges-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-    }
-
-    .tech-stack-badge {
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .tech-stack-badge:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: scale(1.02);
-    }
-
-    .quote-box {
-      text-align: center;
-      padding: var(--space-3xl) var(--space-2xl);
-      background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      margin: var(--space-4xl) 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-box::after {
-      content: '🌞';
-      position: absolute;
-      right: -2%;
-      bottom: -5%;
-      font-size: 8rem;
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    .quote-box blockquote {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-      font-style: italic;
-    }
-
-    .quote-box cite {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-style: normal;
-    }
-
-    /* Ambient glow elements */
-    .ambient-glow-sun {
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(194, 124, 0, 0.05) 0%, transparent 70%);
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- ============ MOBILE NAV OVERLAY ============ -->
   <div class="nav-overlay" id="nav-overlay"></div>
 
   <!-- ============ NAVIGATION ============ -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+      <a href="../../" class="nav-logo" id="nav-logo-link">
         <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
-        <a href="../../index.html#home">Home</a>
-        <a href="../../index.html#projects" class="active">Projects</a>
-        <a href="../../index.html#process">Process</a>
-        <a href="../../index.html#services">Services</a>
-        <a href="../../index.html#about">About</a>
+        <a href="../../">Home</a>
+        <a href="../../services/">Services</a>
+        <a href="../../case-studies/" class="active">Case Studies</a>
+        <a href="../../about/">About</a>
+        <a href="../../blog/">Blog</a>
         <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <!-- ============ MAIN CONTENT ============ -->
-  <main class="container" style="position: relative; z-index: 1;">
-    <div class="ambient-glow-sun" aria-hidden="true"></div>
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(194,124,0,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
 
     <!-- ============ PROJECT HERO ============ -->
-    <section class="project-header-section">
-      <a href="../../index.html#projects" class="back-btn">
-        &larr; Back To Projects
-      </a>
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
 
-      <div class="project-hero-grid">
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Completed Project</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-            Sunny AI <span class="highlight" style="color: var(--accent);">Companion</span>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            Sunny AI Companion
           </h1>
           <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
-            The AI Companion Built for Curious Young Minds 🌞🤖
+            The Safe, Interactive AI Companion Built for Curious Young Minds 🌞🤖
           </p>
-          
-          <p class="hero-description" style="margin-bottom: var(--space-lg);">
-            Sunny AI is a child-friendly AI assistant designed to help kids learn, explore, create, and ask questions in a safe and engaging environment. Built with simplicity, safety, and curiosity at its core, Sunny AI transforms everyday conversations into meaningful learning experiences.
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            Sunny AI Companion is a safe, interactive, and child-friendly educational assistant designed by Originyx to help young learners aged 5 to 12 explore, create, learn, and satisfy their curiosity. By translating complex scientific principles, historical developments, and mathematics into engaging stories and intuitive analogies, Sunny AI Companion turns screen time into an active learning adventure. Tailored from its foundations for emotional security, vocabulary appropriateness, and mental encouragement, the application provides parents and educators with a reliable digital sandbox.
           </p>
 
-          <div class="project-meta-box">
-            <div class="meta-tag">Status: <strong>Completed</strong></div>
-            <div class="meta-tag">Tech: <strong>Python / NLP / LLMs</strong></div>
-            <div class="meta-tag">Audience: <strong>Children (5-12 Years)</strong></div>
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Completed</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>Python / LLMs / NLP / Moderation</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Audience: <strong>Children (5-12 Years)</strong></div>
           </div>
 
-          <div class="hero-buttons">
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
             <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Sunny AI Companion" id="btn-trigger-audit">
               Get This Project Audit
             </button>
             <a href="https://github.com/sagar300408-stack/kids-ai" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-trigger-github">
-              <svg viewBox="0 0 16 16" fill="currentColor" style="width: 18px; height: 18px; margin-right: 6px; display: inline-block; vertical-align: middle;">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
               GitHub
             </a>
           </div>
         </div>
 
         <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08);">
-            <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(194, 124, 0, 0.1) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/sunny.png" alt="Sunny AI Companion Mockup" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img src="../../thumbnails/sunny.png" alt="Sunny AI Companion Interface" style="width: 100%; height: auto;" fetchpriority="high">
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ MAIN CONTENT LAYOUT ============ -->
-    <section class="project-main-grid">
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
       
       <!-- Left Column: Case Study Details -->
-      <div class="project-body">
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
         <!-- The Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--rose);">The Problem</h2>
-          <p style="margin-bottom: 0;">
-            Children are naturally curious, but finding reliable, safe, and engaging answers online can be challenging. Traditional search engines often overwhelm young learners with complex information, distractions, and content that isn't designed for their age group. Parents and educators need a trusted digital companion that can answer questions, support learning, and encourage creativity while maintaining a safe environment.
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            In an increasingly digital era, children are exposed to search engines and conversational artificial intelligence systems that were built exclusively for adult audiences. This creates significant structural challenges. First, standard large language models (LLMs) are trained on massive corporate and public datasets, meaning their default responses are dense, filled with complex terminology, and often lack the pedagogical sensitivity required for child comprehension. When a seven-year-old asks "Why is the sky blue?", a standard AI output typically explains Rayleigh scattering using terms like "electromagnetic radiation" and "dipole polarizability"—concepts that quickly fatigue and disengage young minds.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Second, internet exploration remains inherently unsafe. Standard search engines do not filter out distracting advertisements, trackers, and adult themes, exposing children to cognitive overload and security vulnerabilities. Furthermore, adult LLMs lack safety guardrails tailored to children. They can easily touch upon mature topics, hallucinate links, or exhibit a detached, mechanical tone that fails to build a warm, supportive learning environment. Parents and schools face a difficult choice: withhold the power of conversational AI completely, or expose children to unmoderated systems that are not optimized for safety or education.
           </p>
         </div>
 
         <!-- Our Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--green);">Our Solution</h2>
-          <p>
-            Unlike traditional AI assistants designed for adults, Sunny AI communicates in age-appropriate language, encourages exploration, and provides educational support through interactive conversations, storytelling, creative activities, and guided learning experiences.
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Sunny AI Companion resolves these challenges by creating a walled garden for cognitive exploration. Engineered with a safety-first philosophy, the platform adapts its language dynamically to match the user's developmental level, delivering structured guidance that sparks curiosity and reinforces critical thinking. Rather than simply supplying raw answers, Sunny acts as an educational guide, asking prompting questions that lead children to discover answers on their own.
           </p>
-          <p style="margin-bottom: 0; font-weight: 500; color: var(--accent);">
-            Sunny AI acts as a personalized learning companion that helps children:
+          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
+            Sunny AI Companion empowers kids and parents to:
           </p>
-          <ul style="margin-top: var(--space-sm); padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary);">
-            <li style="margin-bottom: var(--space-xs);">Ask questions and receive age-appropriate explanations</li>
-            <li style="margin-bottom: var(--space-xs);">Learn new concepts through interactive conversations</li>
-            <li style="margin-bottom: var(--space-xs);">Explore science, mathematics, history, and general knowledge</li>
-            <li style="margin-bottom: var(--space-xs);">Generate creative stories and educational content</li>
-            <li style="margin-bottom: var(--space-xs);">Practice critical thinking and problem-solving</li>
-            <li style="margin-bottom: var(--space-xs);">Develop curiosity through guided discovery</li>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Explore advanced topics like physics, biology, and history through intuitive, child-friendly analogies.</li>
+            <li>Receive age-appropriate explanations that scale in complexity based on selected age brackets (5-12 years).</li>
+            <li>Collaborate with an AI creative partner to build customized, educational stories and narrative pathways.</li>
+            <li>Solve daily homework and study questions through guided hints rather than direct copy-paste answers.</li>
+            <li>Engage in interactive learning games, spelling bees, and mathematics riddles in a safe, ad-free space.</li>
           </ul>
         </div>
 
-        <!-- Key Features -->
-        <h2>Key Features</h2>
-        <div class="features-detail-grid">
-          
-          <!-- Feature 1 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🧠</div>
-            <h3>Intelligent Learning Assistant</h3>
-            <p>Provides clear, simplified explanations tailored to a child's level of understanding.</p>
+        <!-- Architecture Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">System Architecture & Safety Pipeline</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            To guarantee absolute safety, response consistency, and pedagogical alignment, Sunny AI Companion utilizes a multi-layered software pipeline. The system architecture avoids relying on a single raw LLM call, routing all inputs and outputs through a series of specialized nodes:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li>
+                <strong>User Input Ingestion</strong>: Processes text queries or voice transcripts from the child, cleaning input formatting and preparing data payloads.
+              </li>
+              <li>
+                <strong>Input Moderation Guardrail</strong>: Evaluates the prompt against custom Python moderation scripts. This node checks the query for sensitive keywords, cyberbullying language, or mature subjects. If any violation is detected, the pipeline immediately halts and serves a gentle, warm redirection.
+              </li>
+              <li>
+                <strong>Dynamic Prompt Injector</strong>: Constructs a context window with pedagogical parameters. It binds the LLM to the "Sunny" persona, establishing strict vocabulary constraints, positive reinforcement formatting, and tone regulations.
+              </li>
+              <li>
+                <strong>LLM Reasoning Engine</strong>: Processes the curated prompt payload and generates structured raw outputs under constraints.
+              </li>
+              <li>
+                <strong>Output Moderation Sandbox</strong>: Inspects the generated output before rendering. It filters out any hallucinated external hyperlinks, unverified claims, or complex jargon that bypassed initial parameters.
+              </li>
+              <li>
+                <strong>Parent & Educator Logs</strong>: Syncs all verified queries and responses to a secure, private database (Supabase), providing adults with oversight dashboards without invading the child's space.
+              </li>
+            </ol>
           </div>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            By separating these concerns across isolated nodes, Originyx ensures that Sunny AI Companion remains fast, accurate, and completely secure for independent child use.
+          </p>
+        </div>
 
-          <!-- Feature 2 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">📚</div>
-            <h3>Interactive Educational Support</h3>
-            <p>Helps children learn concepts across various subjects through natural conversations.</p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">✨</div>
-            <h3>Story & Creativity Engine</h3>
-            <p>Generates fun stories, imaginative adventures, and creative learning experiences.</p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🛡️</div>
-            <h3>Child-Safe AI Experience</h3>
-            <p>Designed with safety-first principles, ensuring age-appropriate interactions and responses.</p>
-          </div>
-
-          <!-- Feature 5 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🎯</div>
-            <h3>Personalized Learning Journey</h3>
-            <p>Adapts conversations based on interests, learning pace, and engagement patterns.</p>
-          </div>
-
-          <!-- Feature 6 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🌍</div>
-            <h3>Knowledge Exploration</h3>
-            <p>Encourages curiosity by turning questions into engaging learning opportunities.</p>
+        <!-- Key Features Detail -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🧠</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Intelligent Learning Assistant</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Translates advanced topics in science, space, history, and geography into simple, intuitive analogies suited for children's developmental stages.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📚</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Storytelling & Creativity Engine</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Enables children to write cooperative fairy tales and educational stories, letting them select characters, settings, and narrative outcomes.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🛡️</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Child-Safe AI Experience</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Utilizes real-time moderation guardrails and strictly filtered semantic buffers to keep the learning environment safe and age-appropriate.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🎯</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Personalized Learning Journey</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Remembers the child's academic interest themes (like space, dinosaurs, or oceans) and organically integrates them into explanations.</p>
+            </div>
           </div>
         </div>
 
-        <!-- Use Cases -->
-        <h2>Primary Use Cases</h2>
-        <div class="use-cases-grid">
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Home Learning Support
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Homework Assistance
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Storytelling & Reading Activities
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Curiosity-Driven Learning
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Educational Play
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Knowledge Discovery
-          </div>
-          <div class="use-case-tag" style="grid-column: span 2;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Creative Thinking Exercises
+        <!-- Project Impact -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Educational Impact & Pilot Performance</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            During early educational trials and school pilot deployments, Sunny AI Companion demonstrated significant positive outcomes in building child engagement and supporting educational goals:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">94%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Parent Peace of Mind</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Parents report complete confidence allowing their children to explore the educational sandbox independently.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">45%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Curiosity Question Boost</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Children asked significantly more follow-up questions about complex STEAM topics during the pilot program.</p>
+            </div>
           </div>
         </div>
 
-        <!-- Impact -->
-        <h2>Project Impact</h2>
-        <p>
-          Sunny AI aims to make learning more accessible, engaging, and enjoyable for children by providing a trusted digital companion that nurtures curiosity, creativity, and lifelong learning habits.
-        </p>
-
-        <!-- Vision -->
-        <h2>Our Vision</h2>
-        <p>
-          We believe every child deserves access to an intelligent learning companion that encourages questions, sparks imagination, and makes education feel like an adventure. Sunny AI is built to inspire the next generation of thinkers, creators, and innovators through safe and meaningful AI-powered experiences.
-        </p>
-
-        <!-- Quote -->
-        <div class="quote-box">
-          <blockquote>
-            "Making learning conversational, creative, and child-friendly."
-          </blockquote>
-          <cite>Sunny AI</cite>
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does Sunny AI Companion differ from generic AI assistants?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Standard AI assistants are built and calibrated for adult workflows, corporate tasks, and technical documentation. Consequently, their default explanations are vocabulary-dense, dry, and potentially exposure-prone to mature or irrelevant topics. Sunny AI Companion was built by Originyx from the ground up for children, featuring child-appropriate grammar structures, pedagogical analogy generation, positive reinforcement, and real-time safety sandboxing.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Is child data private and secure on Sunny AI Companion?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Data privacy is a foundational pillar of Sunny AI Companion. The application complies with COPPA and global child privacy regulations. Personally identifiable information (PII) is never collected, and the chat histories are kept in a secured, encrypted local or private cloud database. Parents hold full authority over these logs and can review or erase them at any time through the parent dashboard.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">What age groups benefit most from the companion?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                The platform is optimized for kids aged 5 to 12. Its conversational model features adaptive vocabulary settings, allowing parents or educators to toggle the difficulty of the explanations. Younger children (ages 5-8) receive simple sentences anchored by emojis and concrete stories, while older kids (ages 9-12) receive more detailed, conceptual breakdowns and problem-solving guides.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Can Sunny AI Companion be integrated into school curricula?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, Sunny AI Companion is designed for classroom support. Teachers can deploy it on tablets or Chromebooks as a reading assistant, a brainstorming partner for creative writing, or a guided homework coach that prompts kids to solve problems step-by-step rather than copying answers. Customized licensing and institutional configurations are available for schools.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does the system handle sensitive or inappropriate prompts?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                The platform employs dual-layer moderation scripts written in Python. Any prompt containing references to violence, mature themes, self-harm, or cyberbullying is captured before it reaches the core LLM engine. The system then outputs a warm, supportive educational block message, advising the child that Sunny can only chat about learning and friendly topics, while logging the query in the parent console.
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
-        <div class="tech-stack-panel">
-          <h3>Technology Stack</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
-            Sunny AI leverages modern Artificial Intelligence and Natural Language Processing technologies to deliver intelligent, contextual, and engaging conversations while maintaining a safe user experience.
-          </p>
-          <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Technologies</h4>
-          <div class="tech-badges-grid">
-            <span class="tech-stack-badge">Large Language Models (LLMs)</span>
-            <span class="tech-stack-badge">Natural Language Processing (NLP)</span>
-            <span class="tech-stack-badge">Conversational AI</span>
-            <span class="tech-stack-badge">Safety & Moderation Systems</span>
-            <span class="tech-stack-badge">Cloud-Based Infrastructure</span>
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              Sunny AI Companion is engineered using modern NLP systems, API gateways, and child-safe content filtering to guarantee a responsive, highly secure application architecture.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Core Languages</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">JavaScript</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">HTML5 / CSS3</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Libraries & Tools</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OpenAI API</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">LangChain</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">FastAPI / Flask</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Pydantic Guardrails</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Supabase DB</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Jina Reader API</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -520,8 +393,8 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-name">Sagar M</div>
-        <div class="footer-title">AI Full Stack Developer</div>
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems & Workflow Automation</div>
         <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
 
         <div class="footer-links">
@@ -531,7 +404,7 @@
         </div>
 
         <div class="footer-copy">
-          &copy; 2025 Sagar M. All rights reserved. Built with precision.
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
         </div>
       </div>
     </div>

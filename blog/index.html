@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Tags -->
+  <title>AI Engineering & Workflow Automation Blog | Originyx</title>
+  <meta name="description" content="Technical insights and guides on AI agent design patterns, secure Enterprise RAG engineering, and automating B2B sales development processes.">
+  <meta name="keywords" content="AI Blog, Agentic Workflows, AI Engineering, RAG Systems, Sagar M Blog">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/blog/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Engineering & Workflow Automation Blog | Originyx">
+  <meta property="og:description" content="Technical articles on building, evaluating, and monitoring autonomous enterprise AI systems.">
+  <meta property="og:url" content="https://originyx.ai/blog/">
+  <meta property="og:image" content="https://originyx.ai/profile.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Engineering & Workflow Automation Blog | Originyx">
+  <meta name="twitter:description" content="Sagar M writes about AI agent orchestration, structured data parsing, and cost-control stacks.">
+  <meta name="twitter:image" content="https://originyx.ai/profile.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../logo.png">
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://originyx.ai/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://originyx.ai/blog/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="../" class="nav-logo" id="nav-logo-link">
+        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="../">Home</a>
+        <a href="../services/">Services</a>
+        <a href="../case-studies/">Case Studies</a>
+        <a href="../about/">About</a>
+        <a href="./" class="active">Blog</a>
+        <a href="../contact/" class="nav-cta-link"><button class="nav-cta">Contact</button></a>
+      </div>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl); position: relative; z-index: 1;">
+    <div class="ambient-glow" style="position: absolute; top: 10%; right: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
+
+    <section class="blog-hero" style="margin-bottom: var(--space-3xl);">
+      <span class="section-label">Engineering Insights</span>
+      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
+        The <span class="highlight">Originyx Blog</span>
+      </h1>
+      <p class="section-subtitle" style="font-size: 1.25rem;">
+        Deep technical articles exploring LLM chunking strategies, multi-agent coordination states, structured output parsing, and real-world ROI benchmarks.
+      </p>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Article 1 -->
+      <article class="glass-card" style="display: flex; flex-direction: column; height: 100%;">
+        <div style="padding: var(--space-lg); display: flex; flex-direction: column; flex-grow: 1;">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-light); text-transform: uppercase;">Agent Design Patterns</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.35rem; margin: var(--space-xs) 0 var(--space-sm) 0; line-height: 1.3;">
+            Designing Resilient Multi-Agent Networks for B2B Sourcing
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: var(--space-md); flex-grow: 1;">
+            Why single-prompt wrappers fail at scale. An in-depth look at state-machine design patterns, memory caching, and fallback policies when orchestrating Prospector and Writer agents.
+          </p>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: var(--space-md); margin-top: auto;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">June 12, 2026 &bull; 8 min read</span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-light); cursor: not-allowed; opacity: 0.6;">Read Article &rarr;</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="glass-card" style="display: flex; flex-direction: column; height: 100%;">
+        <div style="padding: var(--space-lg); display: flex; flex-direction: column; flex-grow: 1;">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--rose); text-transform: uppercase;">Enterprise RAG</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.35rem; margin: var(--space-xs) 0 var(--space-sm) 0; line-height: 1.3;">
+            Pgvector and PostgreSQL: Achieving Zero-Leak Document Retrieval
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: var(--space-md); flex-grow: 1;">
+            Implementing strict document security at the database layer. How to combine Supabase Row Level Security (RLS) with vector indexes to prevent cross-tenant knowledge leaks.
+          </p>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: var(--space-md); margin-top: auto;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">May 28, 2026 &bull; 12 min read</span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-light); cursor: not-allowed; opacity: 0.6;">Read Article &rarr;</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="glass-card" style="display: flex; flex-direction: column; height: 100%;">
+        <div style="padding: var(--space-lg); display: flex; flex-direction: column; flex-grow: 1;">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--amber); text-transform: uppercase;">Calculated ROI</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.35rem; margin: var(--space-xs) 0 var(--space-sm) 0; line-height: 1.3;">
+            Beyond the Hype: Auditing Workflows for Real AI Cost Savings
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: var(--space-md); flex-grow: 1;">
+            A practical guide for executives. How to map team workflows, calculate task unit costs, and model API cost-efficiency before greenlighting an automation pipeline.
+          </p>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: var(--space-md); margin-top: auto;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">May 14, 2026 &bull; 6 min read</span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-light); cursor: not-allowed; opacity: 0.6;">Read Article &rarr;</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems & Workflow Automation</div>
+        <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
+
+        <div class="footer-links">
+          <a href="mailto:contact.sagar3004@gmail.com" id="footer-email">Email</a>
+          <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
+          <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
+        </div>
+
+        <div class="footer-copy">
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../script.js"></script>
+</body>
+</html>

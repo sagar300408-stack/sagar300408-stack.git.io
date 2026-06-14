@@ -3,12 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LifeOS — Sagar M Portfolio</title>
-  <meta name="description" content="LifeOS is an AI-powered personal operating system designed to act as a unified command center for decision-making, productivity, and growth.">
-  
-  <!-- Core stylesheet -->
+
+  <!-- SEO Meta Tags -->
+  <title>LifeOS — Autonomous AI Personal Operating System | Originyx</title>
+  <meta name="description" content="LifeOS by Originyx is an autonomous AI personal operating system and cognitive companion that unifies your tasks, knowledge graph, vector memories, and planning into one system.">
+  <meta name="keywords" content="LifeOS, Personal Operating System, AI Productivity, Agentic Scouts, Knowledge Graph, Sagar M Portfolio, Originyx">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/projects/lifeos/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LifeOS — Autonomous AI Personal Operating System | Originyx">
+  <meta property="og:description" content="Centralize tasks, memories, knowledge, and planning into a single intelligent local-first cockpit.">
+  <meta property="og:url" content="https://originyx.ai/projects/lifeos/">
+  <meta property="og:image" content="../../thumbnails/lifeos-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LifeOS — Autonomous AI Personal Operating System | Originyx">
+  <meta name="twitter:description" content="Unify your cognitive workspace with specialized agentic scouts, memory graphs, and custom task workflows.">
+  <meta name="twitter:image" content="../../thumbnails/lifeos-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
   <link rel="stylesheet" href="../../styles.css">
-  
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <!-- Custom case study styling to elevate page aesthetics (Visionary Dark Theme) -->
   <style>
     /* Custom page variables for dark-theme overrides */
@@ -402,6 +433,95 @@
       z-index: 0;
     }
   </style>
+
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.ai/projects/lifeos/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.ai/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "LifeOS",
+            "item": "https://originyx.ai/projects/lifeos/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.ai/projects/lifeos/#software",
+        "name": "LifeOS",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "All",
+        "description": "LifeOS is an AI-powered personal operating system designed to act as a unified command center for decision-making, productivity, and growth.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom licensing and deployment consulting"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.ai/projects/lifeos/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is LifeOS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "LifeOS is an AI-powered personal operating system that acts as a unified command center for decision-making, productivity, and personal growth. It consolidates tasks, planning, note-taking, and knowledge representation into a single, cohesive local-first dashboard."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do Agentic Scouts work in LifeOS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Agentic Scouts are autonomous background AI processes that actively monitor your goals, simulate hypothetical future scenarios, analyze cognitive load, and execute background scripts (such as data syncing or calendar optimization) without manual trigger."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is LifeOS a local-first system?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, LifeOS prioritizes user privacy. It stores knowledge, tasks, and memory graphs locally while utilizing encrypted cloud synchronizations and secure local vector search to keep personal data completely under user control."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I integrate LifeOS with existing tools like Notion, Google Calendar, or Obsidian?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The LifeOS Action Engine contains custom connectors and synchronization scripts that interface directly with standard APIs (Notion, Google Calendar, Obsidian) to synthesize and normalize all scattered data into a single unified knowledge graph."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -411,17 +531,17 @@
   <!-- ============ NAVIGATION ============ -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+      <a href="../../" class="nav-logo" id="nav-logo-link">
         <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
-        <a href="../../index.html#home">Home</a>
-        <a href="../../index.html#projects" class="active">Projects</a>
-        <a href="../../index.html#process">Process</a>
-        <a href="../../index.html#services">Services</a>
-        <a href="../../index.html#about">About</a>
+        <a href="../../">Home</a>
+        <a href="../../services/">Services</a>
+        <a href="../../case-studies/" class="active">Case Studies</a>
+        <a href="../../about/">About</a>
+        <a href="../../blog/">Blog</a>
         <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
 
@@ -434,19 +554,19 @@
   </nav>
 
   <!-- ============ MAIN CONTENT ============ -->
-  <main class="container" style="position: relative; z-index: 1;">
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
     <div class="ambient-glow-lifeos" aria-hidden="true"></div>
 
     <!-- ============ PROJECT HERO ============ -->
     <section class="project-header-section">
-      <a href="../../index.html#projects" class="back-btn">
-        &larr; Back To Projects
+      <a href="../../case-studies/" class="back-btn">
+        &larr; Back to Case Studies
       </a>
 
       <div class="project-hero-grid">
         <div class="hero-content">
           <span class="section-label" style="background: rgba(0, 255, 213, 0.08); border-color: rgba(0, 255, 213, 0.2); color: var(--accent);">Visionary Core</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             LifeOS
           </h1>
           <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent); margin-bottom: var(--space-md);">
@@ -454,7 +574,7 @@
           </p>
           
           <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
-            LifeOS is an AI-powered personal operating system designed to act as a unified command center for decision-making, productivity, knowledge management, planning, learning, and personal growth. Instead of forcing users to switch between dozens of disconnected apps, LifeOS creates a single intelligent workspace where information, goals, tasks, notes, memories, projects, and AI assistance work together.
+            LifeOS by Originyx is an autonomous personal operating system and cognitive companion designed to serve as a unified command center. It integrates local-first databases, vector memory layers, semantic knowledge graphs, and agentic workflows to centralize your task management, personal knowledge, calendars, habit metrics, and strategic planning into one intelligent environment. By shifting administrative overhead to background agents, LifeOS frees up mental bandwidth, allowing you to operate at your peak cognitive capacity. Rather than forcing you to adjust to pre-configured templates, LifeOS adapts to your unique workflow, ingesting voice memos, daily notes, and calendar events into a single private space.
           </p>
 
           <div class="project-meta-box">
@@ -477,9 +597,9 @@
         </div>
 
         <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(0, 255, 213, 0.06); border-color: rgba(0, 255, 213, 0.1);">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(0, 255, 213, 0.06); border-color: rgba(0, 255, 213, 0.1); overflow: hidden; border-radius: var(--radius-xl); border: 1px solid var(--border);">
             <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(0, 255, 213, 0.1) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/lifeos.png" alt="LifeOS Interface Mockup" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+            <img src="../../thumbnails/lifeos.png" alt="LifeOS Interface Mockup" style="width: 100%; height: auto;" fetchpriority="high">
           </div>
         </div>
       </div>
@@ -495,7 +615,7 @@
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl); background: rgba(244, 63, 94, 0.02); border-color: rgba(244, 63, 94, 0.15);">
           <h2 style="margin-top: 0; color: var(--rose);">The Problem</h2>
           <p style="margin-bottom: 0; color: var(--text-secondary);">
-            Traditional productivity applications manage isolated metrics. You write your tasks in one app, take notes in another, schedule events in a third, and outline long-term goals elsewhere. This leaves your digital life highly fractured, requiring huge administrative effort to manually sync data, align context, and plan objectives, rather than executing them.
+            Modern professionals are drowning in an ocean of fragmented applications. We manage tasks in one app, document ideas in another, coordinate calendars in a third, and outline goals inside isolated files. This digital noise leads to cognitive overload, tab fatigue, and lost information. The average user spends more time maintaining and syncing their productivity stack than actually executing their goals. Furthermore, traditional software remains passive; it stores text and numbers but fails to understand semantic relationships between daily logs and long-term career plans. When tools do not communicate, context is lost, and decision-making becomes reactive. This lack of centralized intelligence represents a major bottleneck for high performers seeking to optimize their focus.
           </p>
         </div>
 
@@ -503,20 +623,17 @@
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.01);">
           <h2 style="margin-top: 0; color: var(--accent);">Our Solution</h2>
           <p style="color: var(--text-secondary);">
-            At its core, LifeOS functions as a digital executive assistant that continuously understands context, organizes information, tracks objectives, and helps users make better decisions. It transforms scattered data into actionable insights, enabling users to focus on execution rather than administration.
+            Originyx designed LifeOS to serve as a proactive digital companion that shifts the paradigm from passive data logging to autonomous intelligence. LifeOS operates as a central brain that sits on top of your digital environment. By integrating local-first data stores with advanced Large Language Model reasoning, the system continuously monitors your inputs, constructs a private semantic memory, and identifies actionable paths toward your objectives.
           </p>
           <p style="color: var(--text-secondary);">
-            Unlike traditional productivity applications that manage isolated tasks, LifeOS is designed to manage the entire operating environment around a user. It learns from interactions, remembers context, connects information across domains, and becomes increasingly valuable over time.
-          </p>
-          <p style="margin-bottom: 0; font-weight: 500; color: var(--accent);">
-            The platform combines AI agents, memory systems, automation workflows, knowledge graphs, planning tools, and personalized intelligence into a single ecosystem. Users can manage projects, track habits, store knowledge, receive AI-driven recommendations, automate repetitive work, and maintain a clear overview of their personal and professional life from one interface.
+            Unlike traditional productivity applications that manage isolated tasks, LifeOS is designed to manage the entire operating environment around a user. The platform combines AI agents, memory systems, automation workflows, knowledge graphs, planning tools, and personalized intelligence into a single ecosystem. Users can manage projects, track habits, store knowledge, receive AI-driven recommendations, and maintain a clear overview of their personal and professional life from one interface.
           </p>
         </div>
 
         <!-- What Makes LifeOS Different? -->
         <div class="vision-diff-section">
           <h2>What Makes LifeOS Different?</h2>
-          <p style="color: var(--text-secondary);">LifeOS shifts the paradigm of personal tooling from reactive records to proactive intelligence.</p>
+          <p style="color: var(--text-secondary);">LifeOS shifts the paradigm of personal tooling from reactive records to proactive intelligence:</p>
           
           <div class="vision-diff-grid">
             
@@ -524,11 +641,11 @@
             <div class="diff-row">
               <div class="diff-left">
                 <strong>Standard AI Tools</strong>
-                Answer queries and generate one-off outputs without long-term local context.
+                Answer queries and generate one-off outputs without long-term local context or historical workspace connection.
               </div>
               <div class="diff-right">
                 <strong>🧠 LifeOS Intelligence</strong>
-                Remembers interactions, organizes structural context, plans strategies, and executes scripts.
+                Remembers interactions, organizes structural context, plans multi-step strategies, and executes custom scripts based on history.
               </div>
             </div>
 
@@ -536,11 +653,11 @@
             <div class="diff-row">
               <div class="diff-left">
                 <strong>Productivity Apps</strong>
-                Act as passive storage databases holding isolated, unlinked folders and lists.
+                Act as passive storage databases holding isolated, unlinked folders, markdown files, and static task tables.
               </div>
               <div class="diff-right">
                 <strong>📚 LifeOS Knowledge Graph</strong>
-                Understands semantic relationships between tasks, journals, contacts, and active projects.
+                Understands semantic relationships between tasks, journals, contacts, and active projects, mirroring human memory.
               </div>
             </div>
 
@@ -548,11 +665,11 @@
             <div class="diff-row">
               <div class="diff-left">
                 <strong>Automation Engines</strong>
-                Automate linear software tasks (e.g. sending a document copy from A to B).
+                Automate simple linear software actions that break easily under API changes or minor details.
               </div>
               <div class="diff-right">
                 <strong>⚡ LifeOS Automation</strong>
-                Automates complete life workflows, running scouts to actively monitor personal objectives.
+                Automates complete life workflows, running background scouts to actively monitor progress and coordinate schedules.
               </div>
             </div>
 
@@ -560,11 +677,11 @@
             <div class="diff-row">
               <div class="diff-left">
                 <strong>Standard Planners</strong>
-                Act as static checklists that passively record goals and milestones.
+                Act as static checklists that passively record goals and milestones, requiring manual updates.
               </div>
               <div class="diff-right">
                 <strong>🎯 Active Planning</strong>
-                Continuously analyzes progress, adjusts timelines, and suggests steps to help achieve goals.
+                Continuously analyzes progress, adjusts timelines, models execution risks, and suggests steps to help achieve goals.
               </div>
             </div>
 
@@ -572,7 +689,7 @@
             <div class="diff-row">
               <div class="diff-left">
                 <strong>Single-Task Platforms</strong>
-                Solve a single narrow utility, increasing app fatigue and scattered information.
+                Solve a single narrow utility, increasing app fatigue and scattered information across devices.
               </div>
               <div class="diff-right">
                 <strong>🔗 Central Intelligence Layer</strong>
@@ -583,7 +700,7 @@
           </div>
         </div>
 
-        <!-- Key Features -->
+        <!-- Core System Components -->
         <h2>Core System Components</h2>
         <div class="features-detail-grid">
           
@@ -614,9 +731,23 @@
             <h3>Action Engine</h3>
             <p>Runs automated triggers, coordinates complex calendars, and optimizes habits based on cognitive load.</p>
           </div>
+
+          <!-- Feature 5 -->
+          <div class="feature-detail-card glass-card">
+            <div class="feature-icon-wrapper">📊</div>
+            <h3>Habit & Energy Tracker</h3>
+            <p>Correlates daily subjective energy ratings and habit completion rates to discover your optimal working hours.</p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-detail-card glass-card">
+            <div class="feature-icon-wrapper">🎯</div>
+            <h3>Strategic Goal Planner</h3>
+            <p>Translates long-term visions into monthly milestones, weekly goals, and daily tasks.</p>
+          </div>
         </div>
 
-        <!-- Use Cases -->
+        <!-- Visionary Scopes -->
         <h2>Visionary Scopes</h2>
         <div class="use-cases-grid">
           <div class="use-case-tag">
@@ -659,24 +790,55 @@
           <cite>LifeOS Tagline</cite>
         </div>
 
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">What is LifeOS?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                LifeOS is an AI-powered personal operating system that acts as a unified command center for decision-making, productivity, and growth. It unifies tasks, planning, memory, and knowledge graph mapping.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How do Agentic Scouts work?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Agentic Scouts are autonomous background AI processes that actively monitor your goals, simulate hypothetical future scenarios, analyze cognitive load, and execute background scripts without manual triggers.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Is LifeOS a local-first system?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, LifeOS prioritizes user privacy. It stores knowledge, tasks, and memory graphs locally while utilizing encrypted cloud synchronizations and secure local vector search to keep personal data under your control.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Can I integrate LifeOS with existing tools?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. The LifeOS Action Engine contains custom connectors and synchronization scripts that interface directly with standard APIs like Google Calendar, Notion, and Obsidian to aggregate all data into a single knowledge graph.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
-        <div class="tech-stack-panel" style="background: var(--bg-tertiary); border-color: var(--border);">
+        <div class="tech-stack-panel" style="background: var(--bg-tertiary); border-color: var(--border); position: sticky; top: calc(var(--nav-height) + var(--space-md));">
           <h3>Technology Stack</h3>
           <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
-            LifeOS integrates modern Agentic Architectures, Vector Memory Layers, and Custom Automation Pipelines into a secure, responsive, and unified client workspace.
+            LifeOS leverages modern Agentic Architectures, Vector Memory Layers, and Custom Automation Pipelines into a secure, responsive, and unified client workspace.
           </p>
           <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Layers</h4>
           <div class="tech-badges-grid">
             <span class="tech-stack-badge">Python</span>
-            <span class="tech-stack-badge">Agentic Scouts ( CrewAI / AutoGen )</span>
-            <span class="tech-stack-badge">Knowledge Graph ( Neo4j )</span>
-            <span class="tech-stack-badge">Vector Memory ( pgvector / Qdrant )</span>
-            <span class="tech-stack-badge">Personal Intelligence Hub</span>
-            <span class="tech-stack-badge">Task Automation Workflows</span>
-            <span class="tech-stack-badge">Secure Local Memory Storage</span>
+            <span class="tech-stack-badge">CrewAI / AutoGen</span>
+            <span class="tech-stack-badge">Neo4j Graph</span>
+            <span class="tech-stack-badge">pgvector / Qdrant</span>
+            <span class="tech-stack-badge">Intelligence Hub</span>
+            <span class="tech-stack-badge">Task Automation</span>
+            <span class="tech-stack-badge">Secure Local Memory</span>
           </div>
         </div>
       </div>
@@ -688,8 +850,8 @@
   <footer class="footer" role="contentinfo" style="border-top: 1px solid var(--border);">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-name">Sagar M</div>
-        <div class="footer-title">AI Full Stack Developer</div>
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems & Workflow Automation</div>
         <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
 
         <div class="footer-links">
@@ -699,7 +861,7 @@
         </div>
 
         <div class="footer-copy">
-          &copy; 2025 Sagar M. All rights reserved. Built with precision.
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
         </div>
       </div>
     </div>

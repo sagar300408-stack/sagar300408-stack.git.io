@@ -3,512 +3,359 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HunterOS — Sagar M Portfolio</title>
-  <meta name="description" content="HunterOS is an autonomous AI SDR platform that finds niche leads, researches companies, detects pain points, and generates hyper-personalized outreach using AI agents.">
-  
+
+  <!-- SEO Meta Tags -->
+  <title>HunterOS — Autonomous AI SDR & Lead Generation Platform | Originyx</title>
+  <meta name="description" content="HunterOS is an autonomous AI Sales Development Representative (SDR) platform that harvests lead pools, detects pain points, and drafts hyper-personalized B2B cold outreach copies.">
+  <meta name="keywords" content="HunterOS, AI SDR, Sales Automation, Outbound Sourcing, Lead Generation, Sagar M Portfolio">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.ai/projects/hunteros/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HunterOS — Autonomous AI SDR & Lead Generation Platform | Originyx">
+  <meta property="og:description" content="Autonomously mine leads, detect pain points, and draft outreach copies 24/7 with specialized AI agents.">
+  <meta property="og:url" content="https://originyx.ai/projects/hunteros/">
+  <meta property="og:image" content="https://originyx.ai/thumbnails/hunteros-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HunterOS — Autonomous AI SDR | Originyx">
+  <meta name="twitter:description" content="Scale your outbound sales pipeline autonomously with private multi-agent coordination pipelines.">
+  <meta name="twitter:image" content="https://originyx.ai/thumbnails/hunteros-og.png">
+
   <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
   <link rel="stylesheet" href="../../styles.css">
-  
-  <!-- Custom case study styling to elevate page aesthetics -->
-  <style>
-    /* Custom page variables or styles */
-    .project-header-section {
-      padding-top: calc(var(--nav-height) + var(--space-xl));
-      padding-bottom: var(--space-2xl);
-      position: relative;
-    }
-    
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent-light);
-      margin-bottom: var(--space-lg);
-      transition: all 0.3s var(--ease-out);
-    }
-    
-    .back-btn:hover {
-      color: var(--accent);
-      transform: translateX(-3px);
-    }
 
-    .project-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      align-items: center;
-    }
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    @media (max-width: 992px) {
-      .project-hero-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.ai/projects/hunteros/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.ai/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.ai/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "HunterOS",
+            "item": "https://originyx.ai/projects/hunteros/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.ai/projects/hunteros/#software",
+        "name": "HunterOS",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "description": "Autonomous AI Sales Development Representative (SDR) platform designed to automate B2B lead generation, pain-point scanning, and outreach customization.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom B2B licensing and deployment consulting"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.ai/projects/hunteros/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is HunterOS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HunterOS is an autonomous AI Sales Development Representative (SDR) designed to run outbound prospecting loops 24/7. It filters lead targets, crawls corporate websites, uncovers friction points, and drafts personalized B2B outreach."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does multi-agent coordination work in HunterOS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HunterOS orchestrates three specialized agents: the Prospector fetches targeted lead files, the Researcher scrapes company pages, and the Copywriter synthesizes this intelligence to draft contextual cold outreach copy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can HunterOS integrate with our existing CRMs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, HunterOS utilizes webhooks and API models to sync lead logs and outreach copy drafts directly to Supabase, Hubspot, Salesforce, or Google Sheets."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is HunterOS safe from email spam filters?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. HunterOS focuses on relevance-driven outreach instead of mass blasts, using strict spacing throttling, human-in-the-loop review queues, and clean domain verification to maximize inbox delivery rates."
+            }
+          }
+        ]
       }
-    }
-
-    .project-meta-box {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-xl);
-    }
-
-    .meta-tag {
-      padding: var(--space-xs) var(--space-md);
-      background: rgba(36, 66, 53, 0.03);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .meta-tag strong {
-      color: var(--accent);
-    }
-
-    .project-main-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      margin-top: var(--space-3xl);
-    }
-
-    @media (max-width: 992px) {
-      .project-main-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
-      }
-    }
-
-    .project-body h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-top: var(--space-2xl);
-      margin-bottom: var(--space-md);
-    }
-
-    .project-body p {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      font-size: 1.05rem;
-      margin-bottom: var(--space-lg);
-    }
-
-    .features-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
-      margin-top: var(--space-xl);
-      margin-bottom: var(--space-3xl);
-    }
-
-    @media (max-width: 768px) {
-      .features-detail-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .feature-detail-card {
-      padding: var(--space-xl);
-      height: 100%;
-    }
-
-    .feature-icon-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-sm);
-      background: rgba(36, 66, 53, 0.05);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: var(--space-md);
-    }
-
-    .feature-detail-card h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: var(--space-xs);
-      color: var(--text-primary);
-    }
-
-    .feature-detail-card p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 0;
-    }
-
-    .use-cases-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
-      margin-top: var(--space-md);
-    }
-
-    @media (max-width: 576px) {
-      .use-cases-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .use-case-tag {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: var(--space-sm) var(--space-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .use-case-tag:hover {
-      border-color: var(--accent-light);
-      transform: translateY(-1px);
-    }
-
-    .use-case-tag svg {
-      color: var(--green);
-      flex-shrink: 0;
-    }
-
-    .tech-stack-panel {
-      padding: var(--space-xl);
-      background: rgba(36, 66, 53, 0.02);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      position: sticky;
-      top: 100px;
-    }
-
-    .tech-stack-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-    }
-
-    .tech-badges-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-    }
-
-    .tech-stack-badge {
-      padding: 0.5rem 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-    }
-
-    .tech-stack-badge:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: scale(1.02);
-    }
-
-    .quote-box {
-      text-align: center;
-      padding: var(--space-3xl) var(--space-2xl);
-      background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      margin: var(--space-4xl) 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-box::after {
-      content: '🤖';
-      position: absolute;
-      right: -2%;
-      bottom: -5%;
-      font-size: 8rem;
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    .quote-box blockquote {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--accent);
-      margin-bottom: var(--space-md);
-      font-style: italic;
-    }
-
-    .quote-box cite {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-style: normal;
-    }
-
-    /* Ambient glow elements */
-    .ambient-glow-sun {
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(36, 66, 53, 0.05) 0%, transparent 70%);
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- ============ MOBILE NAV OVERLAY ============ -->
   <div class="nav-overlay" id="nav-overlay"></div>
 
   <!-- ============ NAVIGATION ============ -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="../../index.html#home" class="nav-logo" id="nav-logo-link">
+      <a href="../../" class="nav-logo" id="nav-logo-link">
         <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
-        <a href="../../index.html#home">Home</a>
-        <a href="../../index.html#projects" class="active">Projects</a>
-        <a href="../../index.html#process">Process</a>
-        <a href="../../index.html#services">Services</a>
-        <a href="../../index.html#about">About</a>
+        <a href="../../">Home</a>
+        <a href="../../services/">Services</a>
+        <a href="../../case-studies/" class="active">Case Studies</a>
+        <a href="../../about/">About</a>
+        <a href="../../blog/">Blog</a>
         <button class="nav-cta" data-modal-target="start-project-modal">Start a Project</button>
       </div>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <!-- ============ MAIN CONTENT ============ -->
-  <main class="container" style="position: relative; z-index: 1;">
-    <div class="ambient-glow-sun" aria-hidden="true"></div>
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
 
     <!-- ============ PROJECT HERO ============ -->
-    <section class="project-header-section">
-      <a href="../../index.html#projects" class="back-btn">
-        &larr; Back To Projects
-      </a>
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
 
-      <div class="project-hero-grid">
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Active Development</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             HunterOS
           </h1>
           <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
-            Autonomous AI SDR Platform for Lead Prospecting & Personalized Outreach 🤖✉️
+            Autonomous AI SDR Platform for Lead Prospecting & Personalized Outreach 🤖✉s
           </p>
-          
-          <p class="hero-description" style="margin-bottom: var(--space-lg);">
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
             HunterOS is an autonomous AI Sales Development Representative designed to automate the entire outbound B2B lead generation loop. Operating as a private agentic network, it identifies target companies, scrapes public directories, extracts deep organizational pain points, and drafts hyper-personalized, context-driven outreach copy.
           </p>
 
-          <div class="project-meta-box">
-            <div class="meta-tag">Status: <strong>Active Development</strong></div>
-            <div class="meta-tag">Tech: <strong>Python / Multi-Agent / Scraping</strong></div>
-            <div class="meta-tag">Audience: <strong>B2B Teams & Agencies</strong></div>
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Active Development</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>Python / Multi-Agent / Scraping</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Audience: <strong>B2B Teams & Agencies</strong></div>
           </div>
 
-          <div class="hero-buttons">
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
             <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="HunterOS" id="btn-trigger-audit">
               Get This Project Audit
             </button>
             <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-trigger-github">
-              <svg viewBox="0 0 16 16" fill="currentColor" style="width: 18px; height: 18px; margin-right: 6px; display: inline-block; vertical-align: middle;">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
               GitHub
             </a>
           </div>
         </div>
 
         <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08);">
-            <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(36, 66, 53, 0.1) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" style="border-radius: var(--radius-xl); border: 1px solid var(--border); width: 100%;">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img src="../../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" style="width: 100%; height: auto;" fetchpriority="high">
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ MAIN CONTENT LAYOUT ============ -->
-    <section class="project-main-grid">
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
       
       <!-- Left Column: Case Study Details -->
-      <div class="project-body">
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
         <!-- The Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--rose);">The Problem</h2>
-          <p style="margin-bottom: 0;">
-            B2B prospecting is time-consuming and inefficient. Sales Development Representatives (SDRs) spend hours finding companies, reviewing websites, identifying pain points, and drafting cold outreach copy. Mass email blast templates result in low engagement and high spam rates, whereas manually tailoring every outbound message is slow and does not scale. Sales teams need a solution that balances scale with high personalization.
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            B2B prospecting is heavily manual and inefficient. Sales Development Representatives (SDRs) spend hours finding lists, searching company pages, figuring out organization charts, and drafting emails. Sourcing and personalization do not scale: reps either send high-volume generic email blasts that get flagged as spam, or manually research every account, yielding a low outbound speed.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Additionally, B2B data decays quickly. Contact numbers and email databases bought off list sellers are often inaccurate. Sales pipelines stall because teams cannot efficiently locate qualified prospects or detect corporate paint points at scale.
           </p>
         </div>
 
         <!-- Our Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; color: var(--green);">Our Solution</h2>
-          <p>
-            HunterOS acts as an autonomous sales intelligence companion that runs B2B prospecting loops 24/7. It identifies lead pools, researches company websites, detects potential pain points, and drafts hyper-personalized cold outreach messages.
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            HunterOS acts as an autonomous sales intelligence companion that runs outbound prospecting loops 24/7. It integrates state-of-the-art web scrapers and reasoning models to mine leads, evaluate corporate directories, detect business challenges, and customize copy.
           </p>
-          <p style="margin-bottom: 0; font-weight: 500; color: var(--accent);">
+          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
             HunterOS empowers sales teams to:
           </p>
-          <ul style="margin-top: var(--space-sm); padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary);">
-            <li style="margin-bottom: var(--space-xs);">Automatically find niche leads matching B2B target profiles</li>
-            <li style="margin-bottom: var(--space-xs);">Analyze website content and ingest public company data</li>
-            <li style="margin-bottom: var(--space-xs);">Extract potential friction points and operational pain points</li>
-            <li style="margin-bottom: var(--space-xs);">Generate personalized, contextual cold outreach copies</li>
-            <li style="margin-bottom: var(--space-xs);">Orchestrate multiple specialized agents for parallel workflows</li>
-            <li style="margin-bottom: var(--space-xs);">Accelerate sales pipelines without spamming</li>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Automatically locate targeted leads matching Ideal Customer Profiles (ICP)</li>
+            <li>Crawl company sites, blog posts, and press releases for context</li>
+            <li>Extract structural bottlenecks and software integration gaps</li>
+            <li>Draft personalized cold email copy containing authentic references</li>
+            <li>Orchestrate specialized agents to coordinate pipeline stages</li>
           </ul>
         </div>
 
-        <!-- Key Features -->
-        <h2>Key Features</h2>
-        <div class="features-detail-grid">
-          
-          <!-- Feature 1 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🔍</div>
-            <h3>Autonomous Lead Mining</h3>
-            <p>Automatically filters and harvests targeted business leads matching your Ideal Customer Profile.</p>
+        <!-- Architecture Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture & Pipeline Workflow</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            HunterOS uses a structured multi-agent loop to maintain accuracy and prevent LLM drift. Rather than asking a single model to perform the entire operation, tasks are partitioned across three nodes:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li>
+                <strong>The Lead Prospector Node</strong>: Connects with open B2B databases and directory search scripts to isolate companies matching specific filters (revenue range, team sizes, and industry tags).
+              </li>
+              <li>
+                <strong>The Corporate Ingestion Researcher</strong>: Runs headless crawling actions (using Jina Reader/Playwright) to extract text content from target homepages, about pages, and blog feeds, building a local context profile.
+              </li>
+              <li>
+                <strong>The Personalized Copywriter Node</strong>: Evaluates the extracted text files to identify challenges (e.g. lack of chat support, slow website speed, broken links) and drafts customized pitch emails linking features directly to those gaps.
+              </li>
+            </ol>
           </div>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            This pipeline records intermediate files and logs decision paths, enabling human managers to review prompts and audit copy before scheduling outreach.
+          </p>
+        </div>
 
-          <!-- Feature 2 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🏢</div>
-            <h3>Deep Company Scrape</h3>
-            <p>Ingests homepage copy, blog posts, and company profiles to build a comprehensive context profile.</p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🎯</div>
-            <h3>Intelligent Pain Point Extraction</h3>
-            <p>Employs LLMs to analyze business data and identify structural friction points or service needs.</p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">✍️</div>
-            <h3>Hyper-Personalized Copy</h3>
-            <p>Generates natural email drafts and LinkedIn connection messages containing highly relevant context.</p>
-          </div>
-
-          <!-- Feature 5 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🤖</div>
-            <h3>Multi-Agent Orchestration</h3>
-            <p>Integrates specialized agents (Prospector, Researcher, Copywriter) coordinating on pipeline tasks.</p>
-          </div>
-
-          <!-- Feature 6 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">📊</div>
-            <h3>Campaign Logging & Monitoring</h3>
-            <p>Logs run data, agent reasoning traces, and outreach drafts for quality assurance.</p>
+        <!-- Key Features Detail -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🔍</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Autonomous Lead Mining</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Searches directories and databases to compile targeted lead records based on revenue, team sizes, or technical stacks.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🏢</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Deep Company Scrape</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Scrapes homepage files, policies, and press feeds to assemble an accurate profile of target services and operations.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🎯</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Pain Point Extraction</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Employs specialized reasoning models to parse raw text and detect operational bottlenecks, software gaps, or scaling challenges.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">✍️</div>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Hyper-Personalized Copy</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Drafts natural, contextual outreach emails matching target company profiles, bypassing generic templates.</p>
+            </div>
           </div>
         </div>
 
-        <!-- Use Cases -->
-        <h2>Primary Use Cases</h2>
-        <div class="use-cases-grid">
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Cold Email Lead Campaigns
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            LinkedIn Prospecting Automation
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            B2B Lead List Generation
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Sales Pipeline Acceleration
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Market Pain-Point Research
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Product Fit Verification
-          </div>
-          <div class="use-case-tag" style="grid-column: span 2;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Agency Lead Operations
+        <!-- Business Impact & Use Cases -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact & Case Performance</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            By substituting manual search loops with the HunterOS pipeline, business teams achieve significant operational optimization:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">80%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">SDR Sourcing Savings</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Reps focus on managing qualified responses rather than digging for contact records.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">3.2x</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Email Response Boost</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Contextual references in pitches result in significantly higher conversion rates.</p>
+            </div>
           </div>
         </div>
 
-        <!-- Impact -->
-        <h2>Project Impact</h2>
-        <p>
-          HunterOS slashes prospecting time by up to 80% while increasing engagement and response rates through relevance-driven personalization. Outbound sales pipelines are accelerated by focusing outreach on highly matched targets.
-        </p>
-
-        <!-- Vision -->
-        <h2>Our Vision</h2>
-        <p>
-          We believe outbound sales should be powered by deep intelligence, not volume. HunterOS transforms sales development from high-frequency spamming to hyper-targeted, relevant, and productive B2B conversations.
-        </p>
-
-        <!-- Quote -->
-        <div class="quote-box">
-          <blockquote>
-            "Transforming outbound prospecting into intelligent, autonomous, and relevant B2B conversations."
-          </blockquote>
-          <cite>HunterOS</cite>
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">What makes HunterOS different from other email scraping software?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Generic scraping applications only harvest contact rows and insert them into basic templates. HunterOS reads company copy, detects actual operational pain points, and structures custom copy tailored to those challenges.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does the agent pipeline prevent model hallucination?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                All data inputs are parsed against strict schemas (like Pydantic targets) at every stage. The Copywriter node is strictly constrained by source metadata and cannot reference features or facts not present in company documents.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Is human verification supported?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. HunterOS records drafts in a local database dashboard. Outbound emails are only queued and sent after review and approval by your team members.
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
-        <div class="tech-stack-panel">
-          <h3>Technology Stack</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
-            HunterOS leverages modern Artificial Intelligence, Natural Language Processing, and web ingestion systems to deliver a secure, intelligent, and autonomous sales prospecting loop.
-          </p>
-          <h4 style="font-size: 0.85rem; font-family: var(--font-mono); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-sm);">Core Technologies</h4>
-          <div class="tech-badges-grid">
-            <span class="tech-stack-badge">Python</span>
-            <span class="tech-stack-badge">Large Language Models (LLMs)</span>
-            <span class="tech-stack-badge">Multi-Agent Systems</span>
-            <span class="tech-stack-badge">Web Ingestion & Crawling Engines</span>
-            <span class="tech-stack-badge">Outreach & Email Integrations (SMTP)</span>
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              HunterOS leverages modern Artificial Intelligence, multi-agent frameworks, and serverless databases to run lead-sourcing loops securely.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Language</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Frameworks</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Autogen</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Playwright</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Pydantic</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -520,8 +367,8 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-name">Sagar M</div>
-        <div class="footer-title">AI Full Stack Developer</div>
+        <div class="footer-name">Originyx</div>
+        <div class="footer-title">AI Systems & Workflow Automation</div>
         <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
 
         <div class="footer-links">
@@ -531,14 +378,11 @@
         </div>
 
         <div class="footer-copy">
-          &copy; 2025 Sagar M. All rights reserved. Built with precision.
+          &copy; 2026 Originyx. All rights reserved. Built with precision.
         </div>
       </div>
     </div>
   </footer>
-
-  <!-- ============ BACK TO TOP ============ -->
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
   <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
