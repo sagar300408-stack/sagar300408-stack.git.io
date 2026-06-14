@@ -228,12 +228,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Back to top button
-    if (scrollY > 500) {
-      backToTop.classList.add('visible');
-    } else {
-      backToTop.classList.remove('visible');
-    }
-
+   if (backToTop) {
+  if (scrollY > 500) {
+    backToTop.classList.add('visible');
+  } else {
+    backToTop.classList.remove('visible');
+  }
+}
     // Active nav link
     let current = '';
     sections.forEach(section => {
