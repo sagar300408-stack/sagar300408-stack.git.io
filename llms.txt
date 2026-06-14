@@ -36,3 +36,17 @@ Originyx builds premium enterprise AI systems, autonomous multi-agent networks, 
   - URL: https://originyx.ai/projects/mission-control/
 - **Sunny AI Companion**: A child-friendly, safe conversational companion for exploratory learning, creative writing, and gamified education.
   - URL: https://originyx.ai/projects/sunny-ai-companion/
+
+## Industry-Specific Solutions
+
+- **AI for Real Estate Brokerages**: Automated lead intake, Zillow lead parsing, property valuation database synchronizations, and active buyer-listing matching.
+  - URL: https://originyx.ai/ai-for-real-estate/
+- **AI for Logistics & Supply Chain**: Multi-stop routing engines, driver WhatsApp dispatch assistants, and real-time cargo delivery dashboards.
+  - URL: https://originyx.ai/ai-for-logistics/
+- **AI Receptionist for Coaching Centers**: WhatsApp chatbots loaded with syllabus and fee documentation to capture and pre-qualify admission leads 24/7.
+  - URL: https://originyx.ai/ai-for-coaching-centers/
+
+## Local Presence & Service Hubs
+
+- **AI Automation & Development India**: Core consulting services serving Bangalore, Mysore, Hyderabad, Pune, Mumbai, and Delhi NCR with secure, scalable automation projects.
+  - URL: https://originyx.ai/ai-automation-india/

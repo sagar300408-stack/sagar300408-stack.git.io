@@ -11,12 +11,15 @@ const coreUrls = [
   { loc: '/services/', priority: '0.8', changefreq: 'monthly' },
   { loc: '/case-studies/', priority: '0.8', changefreq: 'weekly' },
   { loc: '/contact/', priority: '0.8', changefreq: 'monthly' },
-  { loc: '/blog/', priority: '0.7', changefreq: 'weekly' },
   { loc: '/ai-workflow-automation/', priority: '0.9', changefreq: 'monthly' },
   { loc: '/autonomous-agents/', priority: '0.9', changefreq: 'monthly' },
   { loc: '/ai-receptionist/', priority: '0.9', changefreq: 'monthly' },
   { loc: '/enterprise-rag/', priority: '0.9', changefreq: 'monthly' },
-  { loc: '/lead-generation-automation/', priority: '0.9', changefreq: 'monthly' }
+  { loc: '/lead-generation-automation/', priority: '0.9', changefreq: 'monthly' },
+  { loc: '/ai-for-real-estate/', priority: '0.9', changefreq: 'monthly' },
+  { loc: '/ai-for-logistics/', priority: '0.9', changefreq: 'monthly' },
+  { loc: '/ai-for-coaching-centers/', priority: '0.9', changefreq: 'monthly' },
+  { loc: '/ai-automation-india/', priority: '0.9', changefreq: 'monthly' }
 ];
 
 function generateSitemap() {
