@@ -916,7 +916,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnMicrosoft.addEventListener('click', async (e) => {
       e.preventDefault();
       try {
-        await window.originyxAuth.signInWithOAuth('microsoft');
+        await window.originyxAuth.signInWithOAuth('azure');
       } catch (err) {
         alert(err.message || 'Failed to start Microsoft Sign In.');
       }
