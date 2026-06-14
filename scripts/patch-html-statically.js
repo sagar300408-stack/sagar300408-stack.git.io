@@ -1,195 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#000000">
-  <link rel="manifest" href="../site.webmanifest">
+const fs = require('fs');
+const path = require('path');
 
-  <!-- SEO Meta Tags -->
-  <title>AI for Real Estate Companies & Brokerages | Originyx</title>
-  <meta name="description" content="Deploy custom AI in your real estate operations. We build automated lead qualification pipelines, MLS database scrapers, and property valuation matching systems.">
-  <meta name="keywords" content="AI for Real Estate, Real Estate Automation, Property Valuation AI, MLS Scraping, Brokerage Automation">
-  <meta name="author" content="Sagar M">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://originyx.ai/ai-for-real-estate/">
+const rootDir = 'c:\\Users\\acer\\OneDrive\\Documents\\GitHub\\sagar300408-stack.git.io';
 
-  <!-- Search Console Verification Support -->
-  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
-  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+const files = [
+  'index.html',
+  'about/index.html',
+  'services/index.html',
+  'case-studies/index.html',
+  'contact/index.html',
+  'blog/index.html',
+  'ai-workflow-automation/index.html',
+  'autonomous-agents/index.html',
+  'ai-receptionist/index.html',
+  'enterprise-rag/index.html',
+  'lead-generation-automation/index.html',
+  'ai-for-real-estate/index.html',
+  'ai-for-logistics/index.html',
+  'ai-for-coaching-centers/index.html',
+  'ai-automation-india/index.html',
+  'projects/enterprise-rag/index.html',
+  'projects/hunteros/index.html',
+  'projects/lifeos/index.html',
+  'projects/mission-control/index.html',
+  'projects/ojas-ai/index.html',
+  'projects/shadowos/index.html',
+  'projects/sunny-ai-companion/index.html',
+  'projects/swiftroute-ai/index.html'
+];
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="AI for Real Estate Companies & Brokerages | Originyx">
-  <meta property="og:description" content="Automate buyer lead intake, property matches, and valuation analysis with secure AI systems.">
-  <meta property="og:url" content="https://originyx.ai/ai-for-real-estate/">
-  <meta property="og:image" content="https://originyx.ai/profile.png">
-  <meta property="og:site_name" content="Originyx">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI for Real Estate Services | Originyx">
-  <meta name="twitter:description" content="Sagar M designs custom AI workflows for real estate brokers, agencies, and SaaS platforms.">
-  <meta name="twitter:image" content="https://originyx.ai/profile.png">
-
-  <!-- Favicon / Core stylesheet -->
-  <link rel="icon" href="../logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="../logo.png">
-  <link rel="stylesheet" href="../styles.css">
-
-  <!-- Preconnect for fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Breadcrumb Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://originyx.ai/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "AI for Real Estate",
-        "item": "https://originyx.ai/ai-for-real-estate/"
-      }
-    ]
-  }
-  </script>
-</head>
-<body>
-
-  <div class="nav-overlay" id="nav-overlay"></div>
-
-  <!-- ============ NAVIGATION ============ -->
-  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="container">
-      <a href="../" class="nav-logo" id="nav-logo-link">
-        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24">
-      </a>
-
-      <div class="nav-links" id="nav-links">
-        <a href="../">Home</a>
-        <a href="../services/">Services</a>
-        <a href="../case-studies/">Case Studies</a>
-        <a href="../about/">About</a>
-        <a href="../contact/">Contact</a>
-        <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
-        <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
-          <button class="nav-profile-trigger" id="nav-profile-trigger">
-            <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
-          </button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
-            <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
-          </div>
-        </div>
-      </div>
-
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <main class="container" style="padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl); position: relative; z-index: 1;">
-    <div class="ambient-glow" style="position: absolute; top: 10%; left: 5%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
-
-    <section style="margin-bottom: var(--space-3xl);">
-      <span class="section-label">Real Estate AI</span>
-      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
-        Custom AI for <span class="highlight">Real Estate Brokerages</span>
-      </h1>
-      <p class="section-subtitle" style="font-size: 1.25rem;">
-        Qualify inbound buyer leads instantly, automate property database syncing, and generate hyper-personalized outreach campaigns to match active buyers with new market listings.
-      </p>
-    </section>
-
-    <!-- Content Layout -->
-    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl);">
-      
-      <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-        
-        <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Automating Real Estate Transactions</h2>
-          <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
-            Real estate agencies spend thousands of hours manually sorting through Zillow leads, answering repetitive customer questions about square footage or local school districts, and matching MLS listings to clients.
-          </p>
-          <p style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.7;">
-            Originyx builds custom intelligence pipelines that ingest Zillow alerts, scrape local MLS databases, and run automated WhatsApp agents. These systems qualify leads, book calendar listings for property tours, and flag undervalued properties.
-          </p>
-        </div>
-
-        <h2 style="font-family: var(--font-serif); font-weight: 500;">Core Real Estate AI Solutions</h2>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
-          <div class="glass-card" style="padding: var(--space-xl);">
-            <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📞</div>
-            <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Lead Qualification Bots</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Automated virtual assistants that text or email buyers, qualify budget parameters, gather timelines, and book property tours.</p>
-          </div>
-          <div class="glass-card" style="padding: var(--space-xl);">
-            <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📋</div>
-            <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">MLS Scraping & Syncing</h3>
-            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Headless scraping loops that parse MLS systems, formatting data changes and syncing them to internal database tables.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Sidebar -->
-      <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-        <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
-          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Request Real Estate Audit</h3>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">
-            Discuss your team's manual operations and let Sagar design an intake system that qualifiers buyer leads instantly.
-          </p>
-          <a href="../contact/" style="width: 100%;"><button class="btn btn-primary" style="width: 100%;">Contact AI Architect</button></a>
-        </div>
-
-        <div class="glass-card" style="padding: var(--space-xl);">
-          <h4 style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">Key Metrics</h4>
-          <ul style="display: flex; flex-direction: column; gap: var(--space-sm); font-size: 0.9rem; color: var(--text-secondary);">
-            <li>⚡ <strong>Response Time</strong>: &lt; 5 seconds for Zillow/WhatsApp leads</li>
-            <li>💼 <strong>CRM Integrations</strong>: Follow Up Boss, Hubspot, custom CRM</li>
-            <li>📊 <strong>observability</strong>: Lead logs & conversion tracing dashboards</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-name">Originyx</div>
-        <div class="footer-title">AI Systems & Workflow Automation</div>
-        <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
-
-        <div class="footer-links">
-          <a href="mailto:contact.sagar3004@gmail.com" id="footer-email">Email</a>
-          <a href="https://www.linkedin.com/in/upscalewithsagar" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
-          <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
-        </div>
-
-        <div class="footer-copy">
-          &copy; 2026 Originyx. All rights reserved. Built with precision.
-        </div>
-      </div>
-    </div>
-  </footer>
-
-        <!-- ============ MODALS SYSTEM ============ -->
+// Complete standard modals block (path-adjusted template)
+function getModalsHtml(prefix) {
+  return `  <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     
@@ -497,11 +339,108 @@
         <button class="btn btn-primary modal-success-close">Close</button>
       </div>
     </div>
-  </div>
+  </div>`;
+}
 
-  <!-- ============ SCRIPTS ============ -->
+// Statically generate navigationLinks
+function getNavbarHtml(prefix, activePage, isHome) {
+  const logoHref = isHome ? '#home' : prefix;
+  return `<nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="${logoHref}" class="nav-logo" id="nav-logo-link">
+        <img src="${prefix}logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img src="${prefix}brand.png" alt="ORIGINYX" class="brand-img" height="24">
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="${prefix}"${activePage === 'home' ? ' class="active"' : ''}>Home</a>
+        <a href="${prefix}services/"${activePage === 'services' ? ' class="active"' : ''}>Services</a>
+        <a href="${prefix}case-studies/"${activePage === 'case-studies' ? ' class="active"' : ''}>Case Studies</a>
+        <a href="${prefix}about/"${activePage === 'about' ? ' class="active"' : ''}>About</a>
+        <a href="${prefix}contact/"${activePage === 'contact' ? ' class="active"' : ''}>Contact</a>
+        <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
+        <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
+          <button class="nav-profile-trigger" id="nav-profile-trigger">
+            <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
+            <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>`;
+}
+
+function patchFiles() {
+  files.forEach(relPath => {
+    const fullPath = path.join(rootDir, relPath);
+    if (!fs.existsSync(fullPath)) {
+      console.error(`[ERROR] File missing: ${relPath}`);
+      return;
+    }
+
+    const depth = relPath.split('/').filter(Boolean).length - 1;
+    const prefix = '../'.repeat(depth);
+    const isHome = relPath === 'index.html';
+
+    // Determine active page
+    let activePage = 'none';
+    if (isHome) activePage = 'home';
+    else if (relPath.includes('services/')) activePage = 'services';
+    else if (relPath.includes('case-studies/')) activePage = 'case-studies';
+    else if (relPath.includes('about/')) activePage = 'about';
+    else if (relPath.includes('contact/')) activePage = 'contact';
+
+    let content = fs.readFileSync(fullPath, 'utf8');
+
+    // 1. Navbar Replacement
+    const navRegex = /<nav class="navbar[\s\S]*?<\/nav>/gi;
+    const newNav = getNavbarHtml(prefix, activePage, isHome);
+    content = content.replace(navRegex, newNav);
+
+    // 2. Modals wrapper replacement or injection
+    const newModals = getModalsHtml(prefix);
+    const modalsAndScriptsRegex = /(?:<!--\s*={4,}\s*MODALS SYSTEM\s*={4,}\s*-->|<!--\s*={4,}\s*MODALS\s*={4,}\s*-->|<!--\s*Modals\s*-->|<div\s+class=["']modal-wrapper["']\s+id=["']modal-wrapper["'])[\s\S]*?(?=<!--\s*={4,}\s*SCRIPTS\s*={4,}\s*-->|<!--\s*Scripts\s*-->|<script\s+src="https:\/\/cdn\.jsdelivr\.net\/npm\/@supabase|<script\s+src="[^"]*auth\.js")/gi;
+
+    if (modalsAndScriptsRegex.test(content)) {
+      content = content.replace(modalsAndScriptsRegex, newModals + '\n\n  ');
+    } else {
+      // If no wrapper, inject it right before script tags
+      const scriptCommentRegex = /(?=<!--\s*={4,}\s*SCRIPTS\s*={4,}\s*-->|<!--\s*Scripts\s*-->|<script\s+src="[^"]*(?:script|auth|supabase)[^"]*")/gi;
+      if (scriptCommentRegex.test(content)) {
+        // Replace only the first occurrence
+        let first = true;
+        content = content.replace(scriptCommentRegex, match => {
+          if (first) {
+            first = false;
+            return newModals + '\n\n  ';
+          }
+          return match;
+        });
+      }
+    }
+
+    // 3. Scripts block standardization
+    const scriptsRegex = /(?:<!--\s*={4,}\s*SCRIPTS\s*={4,}\s*-->|<!--\s*Scripts\s*-->)[\s\S]*?<\/body>/gi;
+    const newScriptsBlock = `<!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../auth.js"></script>
-  <script src="../script.js"></script>
-</body>
-</html>
+  <script src="${prefix}auth.js"></script>
+  <script src="${prefix}script.js"></script>
+</body>`;
+
+    content = content.replace(scriptsRegex, newScriptsBlock);
+
+    fs.writeFileSync(fullPath, content, 'utf8');
+    console.log(`[PATCHED] ${relPath} (depth: ${depth}, prefix: "${prefix}", active: "${activePage}")`);
+  });
+
+  console.log('\nAll HTML files statically patched and updated successfully!');
+}
+
+patchFiles();

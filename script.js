@@ -4,212 +4,37 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Dynamic Navbar Adaptation for Project Subpages
   const navLinksContainer = document.getElementById('nav-links');
-  if (navLinksContainer && !document.getElementById('nav-sign-in-btn')) {
-    const existingCta = navLinksContainer.querySelector('.nav-cta[data-modal-target="start-project-modal"]');
-    if (existingCta) {
-      const signInBtn = document.createElement('button');
-      signInBtn.className = 'nav-cta';
-      signInBtn.id = 'nav-sign-in-btn';
-      signInBtn.textContent = 'Sign In';
-
-      const profileDropdown = document.createElement('div');
-      profileDropdown.className = 'nav-profile-dropdown hidden';
-      profileDropdown.id = 'nav-profile-dropdown';
-      profileDropdown.innerHTML = `
-        <button class="nav-profile-trigger" id="nav-profile-trigger">
-          <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
-        </button>
-        <div class="dropdown-menu">
-          <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
-          <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
-        </div>
-      `;
-
-      existingCta.parentNode.replaceChild(signInBtn, existingCta);
-      signInBtn.parentNode.insertBefore(profileDropdown, signInBtn.nextSibling);
-    }
-  }
-
-  // Dynamic Modal Injection for Authentication/Requests if missing
-  const modalWrapper = document.getElementById('modal-wrapper');
-  if (modalWrapper && !document.getElementById('auth-modal')) {
-    const authModalHTML = `
-    <!-- ============ AUTHENTICATION MODAL ============ -->
-    <div class="modal-container glass-card" id="auth-modal">
-      <button class="modal-close" aria-label="Close modal">&times;</button>
-      <div class="modal-header">
-        <h3 class="gradient-text" id="auth-modal-title">Sign In</h3>
-        <p id="auth-modal-subtitle">Log in or create an account to start your project.</p>
-      </div>
-
-      <!-- Setup Error State (shown if Supabase keys are missing) -->
-      <div class="auth-setup-error hidden" id="auth-setup-error">
-        <div class="error-icon">⚠️</div>
-        <h4>Configuration Incomplete</h4>
-        <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
-      </div>
-
-      <!-- Main Auth Container -->
-      <div id="auth-main-container">
-        <!-- Social Login Buttons -->
-        <div class="social-login-buttons">
-          <button class="btn social-btn google-btn" id="btn-login-google">
-            <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.79 5.79 0 0 1 8.2 12.725a5.79 5.79 0 0 1 5.79-5.79c2.485 0 4.542 1.54 5.38 3.737l3.657-2.84C20.67 3.518 16.71 1 12.24 1 6.03 1 1 6.03 1 12.24s5.03 11.24 11.24 11.24c6.07 0 11.135-4.4 11.135-11.24 0-.712-.082-1.396-.24-1.955H12.24z"/></svg>
-            <span>Continue with Google</span>
-          </button>
-          <button class="btn social-btn microsoft-btn" id="btn-login-microsoft">
-            <svg class="social-icon" viewBox="0 0 23 23" width="18" height="18"><path fill="#00a1f1" d="M12 0h11v11H12z"/><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 12h11v11H12z"/><path fill="#ffba08" d="M0 12h11v11H0z"/></svg>
-            <span>Continue with Microsoft</span>
-          </button>
-        </div>
-
-        <div class="auth-divider">
-          <span>or</span>
-        </div>
-
-        <!-- Auth Form Tabs -->
-        <div class="auth-tabs">
-          <button class="auth-tab-btn active" id="tab-login" data-mode="login">Sign In</button>
-          <button class="auth-tab-btn" id="tab-signup" data-mode="signup">Create Account</button>
-        </div>
-
-        <!-- Email & Password Form -->
-        <form class="modal-form" id="form-auth-email">
-          <div class="form-group" id="group-fullname" style="display: none;">
-            <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
-          </div>
-          <div class="form-group">
-            <label for="auth-password">Password <span class="required">*</span></label>
-            <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="6">
-          </div>
-          
-          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
-            <span class="btn-text">Sign In</span>
-            <span class="btn-spinner hidden"></span>
-          </button>
-        </form>
-      </div>
-    </div>
-    `;
-
-    const projectRequestModalHTML = `
-    <!-- ============ PROJECT REQUEST MODAL ============ -->
-    <div class="modal-container glass-card" id="project-request-modal">
-      <button class="modal-close" aria-label="Close modal">&times;</button>
-      <div class="modal-header">
-        <h3 class="gradient-text">Submit Project Request</h3>
-        <p>Let's map out your autonomous AI architecture.</p>
-      </div>
-      <form class="modal-form" id="form-project-request">
-        <!-- Hidden Context Fields -->
-        <input type="hidden" id="req-source-page" name="sourcePage" value="/">
-        <input type="hidden" id="req-source-cta" name="sourceCta" value="Start a Project">
-        <input type="hidden" id="req-product-interest" name="productInterest" value="Originyx">
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required readonly class="readonly-input">
-          </div>
-          <div class="form-group">
-            <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>
-            <input type="tel" id="req-phone" name="phone" placeholder="+1 (555) 000-0000">
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="req-industry">Industry <span class="required">*</span></label>
-            <input type="text" id="req-industry" name="industry" required placeholder="Logistics, Finance, Healthcare...">
-          </div>
-          <div class="form-group">
-            <label for="req-type">Project Type <span class="required">*</span></label>
-            <select id="req-type" name="projectType" required>
-              <option value="" disabled selected>Select project type...</option>
-              <option value="AI Agent">AI Agent</option>
-              <option value="AI Automation">AI Automation</option>
-              <option value="SaaS Platform">SaaS Platform</option>
-              <option value="Internal Business Tool">Internal Business Tool</option>
-              <option value="Enterprise AI System">Enterprise AI System</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="req-workflow">Current Workflow <span class="required">*</span></label>
-          <textarea id="req-workflow" name="workflowDescription" required placeholder="Describe the manual steps and processes currently being used..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="req-challenges">Challenges <span class="required">*</span></label>
-          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow?"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="req-outcome">Desired Outcome <span class="required">*</span></label>
-          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like (e.g. Save 20 hours/week, automate client outreach...)"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="req-notes">Additional Notes <span class="optional">(Optional)</span></label>
-          <textarea id="req-notes" name="notes" placeholder="Any other details, budget constraints, timeline expectations..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary form-submit-btn">
-          <span class="btn-text">Submit Project Request</span>
-          <span class="btn-spinner hidden"></span>
-        </button>
-      </form>
-
-      <div class="modal-success-state hidden" id="request-success-state">
-        <div class="success-checkmark">✓</div>
-        <h3>Project Request Submitted!</h3>
-        <p>Your request has been successfully recorded. Sagar will review your current workflow description, challenges, and desired outcomes and follow up with you within 24 hours.</p>
-        <button class="btn btn-primary modal-success-close">Close</button>
-      </div>
-    </div>
-    `;
-
-    modalWrapper.insertAdjacentHTML('beforeend', authModalHTML + projectRequestModalHTML);
-  }
 
   /* ---------- Loading Screen ---------- */
   const loader = document.getElementById('loader');
+  let revealInitialized = false;
   
   function hideLoader() {
     if (loader && !loader.classList.contains('hidden')) {
       loader.classList.add('hidden');
       document.body.classList.remove('loading');
+    }
+    if (!revealInitialized) {
+      revealInitialized = true;
       initReveal();
     }
   }
 
-  // Trigger when window fully loads
-  window.addEventListener('load', () => {
-    setTimeout(hideLoader, 1500); // Premium delay to show transition
-  });
+  if (loader) {
+    // Trigger when window fully loads
+    window.addEventListener('load', () => {
+      setTimeout(hideLoader, 1500); // Premium delay to show transition
+    });
 
-  // Fallback — dismiss loader after 3s max to prevent lockup
-  setTimeout(hideLoader, 3000);
+    // Fallback — dismiss loader after 3s max to prevent lockup
+    setTimeout(hideLoader, 3000);
+  } else {
+    // No loader present — initialize reveal immediately!
+    document.body.classList.remove('loading');
+    initReveal();
+    revealInitialized = true;
+  }
 
   /* ---------- Navbar scroll effect ---------- */
   const navbar = document.getElementById('navbar');
@@ -262,11 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        // Close mobile nav if open
-        closeMobileNav();
-        target.scrollIntoView({ behavior: 'smooth' });
+      try {
+        const href = this.getAttribute('href');
+        if (href === '#' || !href) return;
+        const target = document.querySelector(href);
+        if (target) {
+          // Close mobile nav if open
+          closeMobileNav();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      } catch (err) {
+        console.error('Error on smooth scroll:', err);
       }
     });
   });
@@ -276,33 +107,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const navOverlay = document.getElementById('nav-overlay');
 
   function openMobileNav() {
-    navToggle.classList.add('active');
-    navLinksContainer.classList.add('open');
-    navOverlay.classList.add('active');
+    if (navToggle) navToggle.classList.add('active');
+    if (navLinksContainer) navLinksContainer.classList.add('open');
+    if (navOverlay) navOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeMobileNav() {
-    navToggle.classList.remove('active');
-    navLinksContainer.classList.remove('open');
-    navOverlay.classList.remove('active');
+    if (navToggle) navToggle.classList.remove('active');
+    if (navLinksContainer) navLinksContainer.classList.remove('open');
+    if (navOverlay) navOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  navToggle.addEventListener('click', () => {
-    if (navLinksContainer.classList.contains('open')) {
-      closeMobileNav();
-    } else {
-      openMobileNav();
-    }
-  });
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      if (navLinksContainer && navLinksContainer.classList.contains('open')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+  }
 
-  navOverlay.addEventListener('click', closeMobileNav);
+  if (navOverlay) {
+    navOverlay.addEventListener('click', closeMobileNav);
+  }
 
   // Close mobile nav when a link is clicked
-  navLinksContainer.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMobileNav);
-  });
+  if (navLinksContainer) {
+    navLinksContainer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobileNav);
+    });
+  }
 
   /* ---------- Back to Top ---------- */
   if (backToTop) {
@@ -479,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- MODALS SYSTEM HANDLING ---------- */
-  //const modalWrapper = document.getElementById('modal-wrapper');
+  const modalWrapper = document.getElementById('modal-wrapper');
   const modalBackdrop = document.getElementById('modal-backdrop');
   const modalContainers = document.querySelectorAll('.modal-container');
   const modalCloseBtns = document.querySelectorAll('.modal-close');
@@ -619,16 +456,20 @@ document.addEventListener('DOMContentLoaded', () => {
     prefillUserFields(targetModal);
 
     // Open wrapper and display container
-    modalWrapper.classList.add('active');
-    modalWrapper.setAttribute('aria-hidden', 'false');
+    if (modalWrapper) {
+      modalWrapper.classList.add('active');
+      modalWrapper.setAttribute('aria-hidden', 'false');
+    }
     targetModal.classList.add('active');
     targetModal.style.display = 'block';
     document.body.classList.add('loading'); // Reuse lock-scroll class
   }
 
   function closeModal() {
-    modalWrapper.classList.remove('active');
-    modalWrapper.setAttribute('aria-hidden', 'true');
+    if (modalWrapper) {
+      modalWrapper.classList.remove('active');
+      modalWrapper.setAttribute('aria-hidden', 'true');
+    }
     modalContainers.forEach(c => {
       c.classList.remove('active');
       setTimeout(() => { c.style.display = 'none'; }, 300);
@@ -719,9 +560,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Check if this modal targets one of our protected forms
       const protectedModals = [
         'start-project-modal',
-        'project-consultation-modal',
         'project-interest-modal',
-        'automation-audit-modal'
+        'automation-audit-modal',
+        'project-request-modal'
       ];
 
       const isAuthSupported = window.originyxAuth && window.originyxAuth.configured && document.getElementById('auth-modal');
@@ -734,9 +575,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Map modal to lead_source
         const leadSourceMap = {
           'start-project-modal': 'Start Project',
-          'project-consultation-modal': 'Business Assessment',
           'project-interest-modal': 'Business Assessment',
-          'automation-audit-modal': 'AI Automation Audit'
+          'automation-audit-modal': 'AI Automation Audit',
+          'project-request-modal': 'Project Request'
         };
         const leadSource = leadSourceMap[modalId] || 'Lead Form';
 
@@ -775,7 +616,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
 
   // Press ESC to close
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalWrapper.classList.contains('active')) {
+    if (e.key === 'Escape' && modalWrapper && modalWrapper.classList.contains('active')) {
       closeModal();
     }
   });
@@ -843,7 +684,8 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       tabSignup.classList.remove('active');
       if (groupFullname) {
         groupFullname.style.display = 'none';
-        groupFullname.querySelector('input').removeAttribute('required');
+        const input = groupFullname.querySelector('input');
+        if (input) input.removeAttribute('required');
       }
       if (authSubmitBtn) {
         const textEl = authSubmitBtn.querySelector('.btn-text');
@@ -858,7 +700,8 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       tabLogin.classList.remove('active');
       if (groupFullname) {
         groupFullname.style.display = 'flex';
-        groupFullname.querySelector('input').setAttribute('required', 'true');
+        const input = groupFullname.querySelector('input');
+        if (input) input.setAttribute('required', 'true');
       }
       if (authSubmitBtn) {
         const textEl = authSubmitBtn.querySelector('.btn-text');
@@ -874,13 +717,16 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   if (authForm) {
     authForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('auth-email').value;
-      const password = document.getElementById('auth-password').value;
+      const emailEl = document.getElementById('auth-email');
+      const email = emailEl ? emailEl.value : '';
+      const passwordEl = document.getElementById('auth-password');
+      const password = passwordEl ? passwordEl.value : '';
       const fullNameInput = document.getElementById('auth-fullname');
       const fullName = fullNameInput ? fullNameInput.value : '';
       
-      const isSignUp = tabSignup.classList.contains('active');
+      const isSignUp = tabSignup && tabSignup.classList.contains('active');
       const submitBtn = document.getElementById('btn-auth-submit');
+      if (!submitBtn) return;
       const btnText = submitBtn.querySelector('.btn-text');
       const btnSpinner = submitBtn.querySelector('.btn-spinner');
 
@@ -938,15 +784,16 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   }
 
   /* ---------- PROJECT REQUEST FORM SUBMISSION ---------- */
-  const projectRequestForm = document.getElementById('form-project-request');
-  if (projectRequestForm) {
+  const projectRequestForms = document.querySelectorAll('#form-project-request, #form-contact-page-request');
+  projectRequestForms.forEach(projectRequestForm => {
     projectRequestForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const submitBtn = projectRequestForm.querySelector('.form-submit-btn');
+      if (!submitBtn) return;
       const btnText = submitBtn.querySelector('.btn-text');
       const btnSpinner = submitBtn.querySelector('.btn-spinner');
-      const successState = document.getElementById('request-success-state');
+      const successState = projectRequestForm.parentNode.querySelector('.modal-success-state') || document.getElementById('request-success-state');
 
       // Enter loading state
       submitBtn.disabled = true;
@@ -1000,7 +847,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         if (btnSpinner) btnSpinner.classList.add('hidden');
       }
     });
-  }
+  });
 
   /* ---------- AUTH STATE OBSERVER ---------- */
   function updateAuthStateUI(configured, authenticated, user) {
@@ -1070,13 +917,13 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       e.preventDefault();
 
       const submitBtn = form.querySelector('.form-submit-btn');
-      const btnText = submitBtn.querySelector('.btn-text');
-      const btnSpinner = submitBtn.querySelector('.btn-spinner');
+      const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+      const btnSpinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
       const targetModal = form.closest('.modal-container');
-      const successState = targetModal.querySelector('.modal-success-state');
+      const successState = targetModal ? targetModal.querySelector('.modal-success-state') : null;
 
       // Enter loading state
-      submitBtn.disabled = true;
+      if (submitBtn) submitBtn.disabled = true;
       if (btnText) btnText.style.opacity = '0.5';
       if (btnSpinner) btnSpinner.classList.remove('hidden');
 
@@ -1115,7 +962,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         alert('A network error occurred. Please verify your connection and try again.');
       } finally {
         // Exit loading state
-        submitBtn.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
         if (btnText) btnText.style.opacity = '1';
         if (btnSpinner) btnSpinner.classList.add('hidden');
       }
@@ -1179,12 +1026,13 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   });
 
   // Autoplay control on hover
-  if (sliderContainer) {
-    sliderContainer.addEventListener('mouseenter', stopAutoplay);
-    sliderContainer.addEventListener('mouseleave', startAutoplay);
+  if (slides.length > 0) {
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', stopAutoplay);
+      sliderContainer.addEventListener('mouseleave', startAutoplay);
+    }
+    // Initialize
+    startAutoplay();
   }
-
-  // Initialize
-  startAutoplay();
 
 });
