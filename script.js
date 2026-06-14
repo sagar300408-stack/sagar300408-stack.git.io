@@ -805,6 +805,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       formData.forEach((value, key) => {
         payload[key] = value;
       });
+      //new element to identify form type on backend for routing (14 - 06 - 2026)
       payload.formType = 'project-consultation'
 
       const token = window.originyxAuth.session?.access_token;
