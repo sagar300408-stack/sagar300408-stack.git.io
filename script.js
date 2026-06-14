@@ -759,9 +759,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Bind close triggers
-  modalCloseBtns.forEach(btn => btn.addEventListener('click', closeModal));
+  if (modalCloseBtns) {
+  modalCloseBtns.forEach(btn =>
+    btn.addEventListener('click', closeModal)
+  );
+}
+
+if (modalBackdrop) {
   modalBackdrop.addEventListener('click', closeModal);
-  document.querySelectorAll('.modal-success-close').forEach(btn => btn.addEventListener('click', closeModal));
+}
+
+document.querySelectorAll('.modal-success-close').forEach(btn =>
+  btn.addEventListener('click', closeModal)
+);
 
   // Press ESC to close
   window.addEventListener('keydown', (e) => {
