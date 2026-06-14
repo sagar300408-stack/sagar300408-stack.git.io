@@ -221,20 +221,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.scrollY;
 
     // Navbar background
-    if (scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    // Back to top button
-   if (backToTop) {
-  if (scrollY > 500) {
-    backToTop.classList.add('visible');
+   if (navbar) {
+  if (scrollY > 60) {
+    navbar.classList.add('scrolled');
   } else {
-    backToTop.classList.remove('visible');
+    navbar.classList.remove('scrolled');
   }
 }
+    // Back to top button
+   if (backToTop) {
+    if (scrollY > 500) {
+      backToTop.classList.add('visible');
+    } else {
+    backToTop.classList.remove('visible');
+    } 
+    }
     // Active nav link
     let current = '';
     sections.forEach(section => {
@@ -304,9 +305,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------- Back to Top ---------- */
+  if (backToTop) {
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+}
 
   /* ---------- Scroll Reveal ---------- */
   function initReveal() {
