@@ -805,6 +805,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       formData.forEach((value, key) => {
         payload[key] = value;
       });
+      payload.formType = 'project-consultation'
 
       const token = window.originyxAuth.session?.access_token;
       if (!token) {
