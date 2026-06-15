@@ -120,6 +120,33 @@
       return data;
     },
 
+    // Reset Password Request
+    async resetPassword(email) {
+      if (!this.configured) throw new Error('Auth system not configured.');
+      
+      // Redirect back to the page from which the reset was initiated
+      const redirectUrl = window.location.href.split('#')[0].split('?')[0];
+
+      const { data, error } = await this.client.auth.resetPasswordForEmail(email, {
+        redirectTo: redirectUrl
+      });
+
+      if (error) throw error;
+      return data;
+    },
+
+    // Update Password (used in Password Recovery flow)
+    async updatePassword(newPassword) {
+      if (!this.configured) throw new Error('Auth system not configured.');
+
+      const { data, error } = await this.client.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+      return data;
+    },
+
     // Sign Out
     async signOut() {
       if (!this.configured) return;

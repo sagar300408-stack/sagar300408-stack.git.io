@@ -138,7 +138,7 @@
   <div class="nav-overlay" id="nav-overlay"></div>
 
   <!-- ============ NAVIGATION ============ -->
-  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="#home" class="nav-logo" id="nav-logo-link">
         <img src="logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
@@ -146,10 +146,11 @@
       </a>
 
       <div class="nav-links" id="nav-links">
-        <a href="./" class="active">Home</a>
+        <a href="" class="active">Home</a>
         <a href="services/">Services</a>
         <a href="case-studies/">Case Studies</a>
         <a href="about/">About</a>
+        <a href="contact/">Contact</a>
         <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
         <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
           <button class="nav-profile-trigger" id="nav-profile-trigger">
@@ -163,9 +164,7 @@
       </div>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
@@ -825,7 +824,7 @@
   <!-- ============ BACK TO TOP ============ -->
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
-  <!-- ============ MODALS SYSTEM ============ -->
+    <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     
@@ -877,157 +876,7 @@
       </div>
     </div>
 
-    <!-- Modal 2: Discuss Your AI Project -->
-    <div class="modal-container glass-card" id="project-consultation-modal">
-      <button class="modal-close" aria-label="Close modal">&times;</button>
-      <div class="modal-header">
-        <h3 class="gradient-text">Project Consultation</h3>
-        <p>Define your system outcomes, timeline, and ROI parameters.</p>
-      </div>
-      <form class="modal-form" id="form-project-consultation">
-        <input type="hidden" name="formType" value="project-consultation">
-        
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="consult-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="consult-name" name="name" required placeholder="John Doe">
-          </div>
-          
-          <div class="form-group">
-            <label for="consult-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="consult-email" name="email" required placeholder="john@company.com">
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="consult-phone">Phone Number <span class="required">*</span></label>
-            <input type="tel" id="consult-phone" name="phone" required placeholder="+1 (555) 000-0000">
-          </div>
-          
-          <div class="form-group">
-            <label for="consult-company">Company</label>
-            <input type="text" id="consult-company" name="company" placeholder="Acme Corp">
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="consult-type">Project Type <span class="required">*</span></label>
-            <select id="consult-type" name="projectType" required>
-              <option value="" disabled selected>Select option...</option>
-              <option value="AI Agent">AI Agent</option>
-              <option value="AI Automation">AI Automation</option>
-              <option value="SaaS Platform">SaaS Platform</option>
-              <option value="Internal Business Tool">Internal Business Tool</option>
-              <option value="Enterprise AI System">Enterprise AI System</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="consult-impact">Expected Monthly Revenue Impact <span class="required">*</span></label>
-            <select id="consult-impact" name="revenueImpact" required>
-              <option value="" disabled selected>Select impact range...</option>
-              <option value="<$1,000">&lt; $1,000</option>
-              <option value="$1,000-$10,000">$1,000 - $10,000</option>
-              <option value="$10,000-$50,000">$10,000 - $50,000</option>
-              <option value="$50,000+">$50,000+</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="consult-desc">Project Description <span class="required">*</span></label>
-          <textarea id="consult-desc" name="description" required placeholder="What operational workflow should this system execute autonomously?"></textarea>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="consult-budget">Budget Range <span class="required">*</span></label>
-            <select id="consult-budget" name="budget" required>
-              <option value="" disabled selected>Select budget...</option>
-              <option value="Under $1,000">Under $1,000</option>
-              <option value="$1,000 - $5,000">$1,000 - $5,000</option>
-              <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-              <option value="$10,000+">$10,000+</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="consult-timeline">Timeline <span class="required">*</span></label>
-            <input type="text" id="consult-timeline" name="timeline" required placeholder="e.g., 4 weeks, ASAP">
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary form-submit-btn">
-          <span class="btn-text">Schedule Discussion</span>
-          <span class="btn-spinner hidden"></span>
-        </button>
-      </form>
-      <div class="modal-success-state hidden">
-        <div class="success-checkmark">✓</div>
-        <h3>Intake Strategy Logged!</h3>
-        <p>Thank you for submitting your project parameters. Sagar will review your budget, timeline, and expected ROI targets and follow up via email.</p>
-        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
-      </div>
-    </div>
-
-    <!-- Modal 3: Try This For My Business -->
-    <div class="modal-container glass-card" id="project-interest-modal">
-      <button class="modal-close" aria-label="Close modal">&times;</button>
-      <div class="modal-header">
-        <h3 class="gradient-text">Deploy Custom Solution</h3>
-        <p>Request a custom system based on the <strong id="interest-project-display">HunterOS</strong> architecture.</p>
-      </div>
-      <form class="modal-form" id="form-project-interest">
-        <input type="hidden" name="formType" value="project-interest">
-        <input type="hidden" id="interest-project-name" name="projectName" value="">
-
-        <div class="form-group">
-          <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
-        </div>
-        
-        <div class="form-group">
-          <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="interest-phone">Phone Number <span class="required">*</span></label>
-          <input type="tel" id="interest-phone" name="phone" required placeholder="+1 (555) 000-0000">
-        </div>
-        
-        <div class="form-group">
-          <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
-        </div>
-
-        <div class="form-group">
-          <label for="interest-business">Tell us about your business <span class="required">*</span></label>
-          <textarea id="interest-business" name="businessInfo" required placeholder="What industry are you in? What is your current workflow?"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="interest-outcome">What outcome are you looking for? <span class="required">*</span></label>
-          <textarea id="interest-outcome" name="outcome" required placeholder="e.g. Save 15 hours/week, automate company outreach leads..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary form-submit-btn">
-          <span class="btn-text">Request Similar Solution</span>
-          <span class="btn-spinner hidden"></span>
-        </button>
-      </form>
-      <div class="modal-success-state hidden">
-        <div class="success-checkmark">✓</div>
-        <h3>Solution Request Logged!</h3>
-        <p>Your interest in this specific system has been documented. Sagar will reach out shortly to discuss adapting this architecture for your custom business requirements.</p>
-        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
-      </div>
-    </div>
-
-    <!-- Modal 4: Get Free AI Automation Audit -->
+    <!-- Modal 2: Get Free AI Automation Audit -->
     <div class="modal-container glass-card" id="automation-audit-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -1082,7 +931,61 @@
       </div>
     </div>
 
-    <!-- ============ AUTHENTICATION MODAL ============ -->
+    <!-- Modal 3: Try This For My Business -->
+    <div class="modal-container glass-card" id="project-interest-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Deploy Custom Solution</h3>
+        <p>Request a custom system based on this architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-interest">
+        <input type="hidden" name="formType" value="project-interest">
+        <input type="hidden" id="interest-project-name" name="projectName" value="">
+
+        <div class="form-group">
+          <label for="interest-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="interest-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-company">Company Name</label>
+          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-business">Tell us about your business <span class="required">*</span></label>
+          <textarea id="interest-business" name="businessInfo" required placeholder="What industry are you in? What is your current workflow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-outcome">What outcome are you looking for? <span class="required">*</span></label>
+          <textarea id="interest-outcome" name="outcome" required placeholder="e.g. Save 15 hours/week, automate company outreach leads..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Request Similar Solution</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Solution Request Logged!</h3>
+        <p>Your interest in this specific system has been documented. Sagar will reach out shortly to discuss adapting this architecture for your custom business requirements.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 4: Authentication Modal -->
     <div class="modal-container glass-card" id="auth-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -1096,6 +999,9 @@
         <h4>Configuration Incomplete</h4>
         <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
       </div>
+
+      <!-- Inline Error/Success Message Banner -->
+      <div class="auth-error-message hidden" id="auth-error-message" style="display: none; color: var(--rose); background: rgba(163, 42, 63, 0.05); border: 1px solid rgba(163, 42, 63, 0.2); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); margin-bottom: var(--space-md); font-size: 0.9rem; text-align: center;"></div>
 
       <!-- Main Auth Container -->
       <div id="auth-main-container">
@@ -1132,8 +1038,18 @@
             <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
           </div>
           <div class="form-group">
-            <label for="auth-password">Password <span class="required">*</span></label>
-            <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="6">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+              <label for="auth-password" style="margin-bottom: 0;">Password <span class="required">*</span></label>
+              <a href="#" id="auth-forgot-password-link" style="font-size: 0.8rem; color: var(--accent-light); text-decoration: underline;">Forgot Password?</a>
+            </div>
+            <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="group-confirm-password" style="display: none;">
+            <label for="auth-confirm-password">Confirm Password <span class="required">*</span></label>
+            <input type="password" id="auth-confirm-password" name="confirmPassword" placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-password-guidance" style="display: none; font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
@@ -1142,9 +1058,49 @@
           </button>
         </form>
       </div>
+
+      <!-- Forgot Password Container -->
+      <div id="auth-forgot-password-container" style="display: none;">
+        <form class="modal-form" id="form-forgot-password">
+          <div class="form-group">
+            <label for="forgot-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
+            <span class="btn-text">Send Reset Link</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+        <div style="text-align: center; margin-top: var(--space-md);">
+          <a href="#" id="link-back-to-signin" style="font-size: 0.9rem; color: var(--accent-light); text-decoration: underline;">Back to Sign In</a>
+        </div>
+      </div>
+
+      <!-- Update Password Container (Recovery Flow) -->
+      <div id="auth-update-password-container" style="display: none;">
+        <form class="modal-form" id="form-update-password">
+          <div class="form-group">
+            <label for="update-password">New Password <span class="required">*</span></label>
+            <input type="password" id="update-password" name="newPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="update-confirm-password">Confirm New Password <span class="required">*</span></label>
+            <input type="password" id="update-confirm-password" name="confirmNewPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-update-password-guidance" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-update-submit">
+            <span class="btn-text">Update Password</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
     </div>
 
-    <!-- ============ PROJECT REQUEST MODAL ============ -->
+    <!-- Modal 5: Project Request Modal -->
     <div class="modal-container glass-card" id="project-request-modal">
       <button class="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-header">
@@ -1152,7 +1108,6 @@
         <p>Let's map out your autonomous AI architecture.</p>
       </div>
       <form class="modal-form" id="form-project-request">
-        <!-- Hidden Context Fields -->
         <input type="hidden" id="req-source-page" name="sourcePage" value="/">
         <input type="hidden" id="req-source-cta" name="sourceCta" value="Start a Project">
         <input type="hidden" id="req-product-interest" name="productInterest" value="Originyx">
@@ -1205,17 +1160,17 @@
 
         <div class="form-group">
           <label for="req-challenges">Challenges <span class="required">*</span></label>
-          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow?"></textarea>
+          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow..."></textarea>
         </div>
 
         <div class="form-group">
           <label for="req-outcome">Desired Outcome <span class="required">*</span></label>
-          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like (e.g. Save 20 hours/week, automate client outreach...)"></textarea>
+          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like..."></textarea>
         </div>
 
         <div class="form-group">
           <label for="req-notes">Additional Notes <span class="optional">(Optional)</span></label>
-          <textarea id="req-notes" name="notes" placeholder="Any other details, budget constraints, timeline expectations..."></textarea>
+          <textarea id="req-notes" name="notes" placeholder="Any other details..."></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary form-submit-btn">
@@ -1223,7 +1178,6 @@
           <span class="btn-spinner hidden"></span>
         </button>
       </form>
-
       <div class="modal-success-state hidden" id="request-success-state">
         <div class="success-checkmark">✓</div>
         <h3>Project Request Submitted!</h3>
@@ -1237,6 +1191,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth.js"></script>
   <script src="script.js"></script>
-
 </body>
 </html>

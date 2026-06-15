@@ -453,7 +453,7 @@
     </div>
   </footer>
 
-        <!-- ============ MODALS SYSTEM ============ -->
+          <!-- ============ MODALS SYSTEM ============ -->
   <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
     <div class="modal-backdrop" id="modal-backdrop"></div>
     
@@ -629,6 +629,9 @@
         <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
       </div>
 
+      <!-- Inline Error/Success Message Banner -->
+      <div class="auth-error-message hidden" id="auth-error-message" style="display: none; color: var(--rose); background: rgba(163, 42, 63, 0.05); border: 1px solid rgba(163, 42, 63, 0.2); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); margin-bottom: var(--space-md); font-size: 0.9rem; text-align: center;"></div>
+
       <!-- Main Auth Container -->
       <div id="auth-main-container">
         <!-- Social Login Buttons -->
@@ -664,12 +667,62 @@
             <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
           </div>
           <div class="form-group">
-            <label for="auth-password">Password <span class="required">*</span></label>
-            <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="6">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+              <label for="auth-password" style="margin-bottom: 0;">Password <span class="required">*</span></label>
+              <a href="#" id="auth-forgot-password-link" style="font-size: 0.8rem; color: var(--accent-light); text-decoration: underline;">Forgot Password?</a>
+            </div>
+            <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="group-confirm-password" style="display: none;">
+            <label for="auth-confirm-password">Confirm Password <span class="required">*</span></label>
+            <input type="password" id="auth-confirm-password" name="confirmPassword" placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-password-guidance" style="display: none; font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
             <span class="btn-text">Sign In</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Forgot Password Container -->
+      <div id="auth-forgot-password-container" style="display: none;">
+        <form class="modal-form" id="form-forgot-password">
+          <div class="form-group">
+            <label for="forgot-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
+            <span class="btn-text">Send Reset Link</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+        <div style="text-align: center; margin-top: var(--space-md);">
+          <a href="#" id="link-back-to-signin" style="font-size: 0.9rem; color: var(--accent-light); text-decoration: underline;">Back to Sign In</a>
+        </div>
+      </div>
+
+      <!-- Update Password Container (Recovery Flow) -->
+      <div id="auth-update-password-container" style="display: none;">
+        <form class="modal-form" id="form-update-password">
+          <div class="form-group">
+            <label for="update-password">New Password <span class="required">*</span></label>
+            <input type="password" id="update-password" name="newPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="update-confirm-password">Confirm New Password <span class="required">*</span></label>
+            <input type="password" id="update-confirm-password" name="confirmNewPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-update-password-guidance" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-update-submit">
+            <span class="btn-text">Update Password</span>
             <span class="btn-spinner hidden"></span>
           </button>
         </form>

@@ -4,6 +4,127 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- Auth Helper Functions ---------- */
+  function validatePasswordStrength(password) {
+    if (password.length < 8) return false;
+    if (!/[A-Z]/.test(password)) return false;
+    if (!/[a-z]/.test(password)) return false;
+    if (!/[0-9]/.test(password)) return false;
+    return true;
+  }
+
+  function showAuthError(message, actions = null) {
+    const errorEl = document.getElementById('auth-error-message');
+    if (!errorEl) {
+      alert(message);
+      return;
+    }
+    errorEl.innerHTML = '';
+    
+    const textSpan = document.createElement('span');
+    textSpan.textContent = message;
+    errorEl.appendChild(textSpan);
+    
+    if (actions) {
+      const actionsDiv = document.createElement('div');
+      actionsDiv.style.marginTop = 'var(--space-xs)';
+      actionsDiv.style.display = 'flex';
+      actionsDiv.style.justifyContent = 'center';
+      actionsDiv.style.gap = 'var(--space-sm)';
+      
+      actions.forEach(action => {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = action.text;
+        link.style.color = 'var(--accent-light)';
+        link.style.textDecoration = 'underline';
+        link.style.fontSize = '0.85rem';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          action.callback();
+        });
+        actionsDiv.appendChild(link);
+      });
+      errorEl.appendChild(actionsDiv);
+    }
+    
+    errorEl.style.color = 'var(--rose)';
+    errorEl.style.backgroundColor = 'rgba(163, 42, 63, 0.05)';
+    errorEl.style.borderColor = 'rgba(163, 42, 63, 0.2)';
+    errorEl.style.display = 'block';
+    errorEl.classList.remove('hidden');
+  }
+
+  function showAuthSuccess(message) {
+    const errorEl = document.getElementById('auth-error-message');
+    if (!errorEl) {
+      alert(message);
+      return;
+    }
+    errorEl.innerHTML = '';
+    
+    const textSpan = document.createElement('span');
+    textSpan.textContent = message;
+    errorEl.appendChild(textSpan);
+    
+    errorEl.style.color = 'var(--green)';
+    errorEl.style.backgroundColor = 'rgba(45, 94, 63, 0.05)';
+    errorEl.style.borderColor = 'rgba(45, 94, 63, 0.2)';
+    errorEl.style.display = 'block';
+    errorEl.classList.remove('hidden');
+  }
+
+  function clearAuthError() {
+    const errorEl = document.getElementById('auth-error-message');
+    if (errorEl) {
+      errorEl.style.display = 'none';
+      errorEl.classList.add('hidden');
+      errorEl.innerHTML = '';
+    }
+  }
+
+  function switchToLoginTab() {
+    const tabLogin = document.getElementById('tab-login');
+    if (tabLogin) tabLogin.click();
+  }
+
+  function openForgotPasswordFlow(email = '') {
+    clearAuthError();
+    const authMainContainer = document.getElementById('auth-main-container');
+    const forgotPasswordContainer = document.getElementById('auth-forgot-password-container');
+    const authModalTitle = document.getElementById('auth-modal-title');
+    const authModalSubtitle = document.getElementById('auth-modal-subtitle');
+    
+    if (authMainContainer) authMainContainer.style.display = 'none';
+    if (forgotPasswordContainer) {
+      forgotPasswordContainer.style.display = 'block';
+      const forgotEmailInput = document.getElementById('forgot-email');
+      if (forgotEmailInput) {
+        forgotEmailInput.value = email || document.getElementById('auth-email')?.value || '';
+      }
+    }
+    if (authModalTitle) authModalTitle.textContent = 'Reset Password';
+    if (authModalSubtitle) authModalSubtitle.textContent = 'Enter your email to receive a password reset link.';
+  }
+
+  function openUpdatePasswordFlow() {
+    clearAuthError();
+    const authMainContainer = document.getElementById('auth-main-container');
+    const forgotPasswordContainer = document.getElementById('auth-forgot-password-container');
+    const updatePasswordContainer = document.getElementById('auth-update-password-container');
+    const authModalTitle = document.getElementById('auth-modal-title');
+    const authModalSubtitle = document.getElementById('auth-modal-subtitle');
+    
+    if (authMainContainer) authMainContainer.style.display = 'none';
+    if (forgotPasswordContainer) forgotPasswordContainer.style.display = 'none';
+    if (updatePasswordContainer) updatePasswordContainer.style.display = 'block';
+    
+    if (authModalTitle) authModalTitle.textContent = 'Set New Password';
+    if (authModalSubtitle) authModalSubtitle.textContent = 'Enter and confirm your new password below.';
+    
+    openModal('auth-modal');
+  }
+
   const navLinksContainer = document.getElementById('nav-links');
 
   /* ---------- Loading Screen ---------- */
@@ -361,6 +482,29 @@ document.addEventListener('DOMContentLoaded', () => {
       successState.style.display = 'none';
     }
 
+    if (modalId === 'auth-modal') {
+      clearAuthError();
+      const authMainContainer = document.getElementById('auth-main-container');
+      const forgotPasswordContainer = document.getElementById('auth-forgot-password-container');
+      const updatePasswordContainer = document.getElementById('auth-update-password-container');
+      
+      if (authMainContainer) authMainContainer.style.display = 'block';
+      if (forgotPasswordContainer) forgotPasswordContainer.style.display = 'none';
+      if (updatePasswordContainer) updatePasswordContainer.style.display = 'none';
+      
+      // Reset all auth forms
+      const emailForm = document.getElementById('form-auth-email');
+      if (emailForm) emailForm.reset();
+      const forgotForm = document.getElementById('form-forgot-password');
+      if (forgotForm) forgotForm.reset();
+      const updateForm = document.getElementById('form-update-password');
+      if (updateForm) updateForm.reset();
+
+      // Ensure tab returns to default Login tab
+      const tabLogin = document.getElementById('tab-login');
+      if (tabLogin) tabLogin.click();
+    }
+
     // Auto-fill project interest fields if provided
     if (modalId === 'project-interest-modal' && projectName) {
       const displayStrong = document.getElementById('interest-project-display');
@@ -674,18 +818,33 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   const tabLogin = document.getElementById('tab-login');
   const tabSignup = document.getElementById('tab-signup');
   const groupFullname = document.getElementById('group-fullname');
+  const groupConfirmPassword = document.getElementById('group-confirm-password');
+  const authPasswordGuidance = document.getElementById('auth-password-guidance');
+  const authForgotPasswordLink = document.getElementById('auth-forgot-password-link');
   const authSubmitBtn = document.getElementById('btn-auth-submit');
   const authModalTitle = document.getElementById('auth-modal-title');
   const authModalSubtitle = document.getElementById('auth-modal-subtitle');
 
   if (tabLogin && tabSignup) {
     tabLogin.addEventListener('click', () => {
+      clearAuthError();
       tabLogin.classList.add('active');
       tabSignup.classList.remove('active');
       if (groupFullname) {
         groupFullname.style.display = 'none';
         const input = groupFullname.querySelector('input');
         if (input) input.removeAttribute('required');
+      }
+      if (groupConfirmPassword) {
+        groupConfirmPassword.style.display = 'none';
+        const input = groupConfirmPassword.querySelector('input');
+        if (input) input.removeAttribute('required');
+      }
+      if (authPasswordGuidance) {
+        authPasswordGuidance.style.display = 'none';
+      }
+      if (authForgotPasswordLink) {
+        authForgotPasswordLink.style.display = 'inline-block';
       }
       if (authSubmitBtn) {
         const textEl = authSubmitBtn.querySelector('.btn-text');
@@ -696,12 +855,24 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     });
 
     tabSignup.addEventListener('click', () => {
+      clearAuthError();
       tabSignup.classList.add('active');
       tabLogin.classList.remove('active');
       if (groupFullname) {
         groupFullname.style.display = 'flex';
         const input = groupFullname.querySelector('input');
         if (input) input.setAttribute('required', 'true');
+      }
+      if (groupConfirmPassword) {
+        groupConfirmPassword.style.display = 'flex';
+        const input = groupConfirmPassword.querySelector('input');
+        if (input) input.setAttribute('required', 'true');
+      }
+      if (authPasswordGuidance) {
+        authPasswordGuidance.style.display = 'block';
+      }
+      if (authForgotPasswordLink) {
+        authForgotPasswordLink.style.display = 'none';
       }
       if (authSubmitBtn) {
         const textEl = authSubmitBtn.querySelector('.btn-text');
@@ -717,18 +888,38 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   if (authForm) {
     authForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      const submitBtn = document.getElementById('btn-auth-submit');
+      if (!submitBtn || submitBtn.disabled) return; // Prevent double submission
+
       const emailEl = document.getElementById('auth-email');
-      const email = emailEl ? emailEl.value : '';
+      const email = emailEl ? emailEl.value.trim() : '';
       const passwordEl = document.getElementById('auth-password');
       const password = passwordEl ? passwordEl.value : '';
       const fullNameInput = document.getElementById('auth-fullname');
-      const fullName = fullNameInput ? fullNameInput.value : '';
+      const fullName = fullNameInput ? fullNameInput.value.trim() : '';
       
       const isSignUp = tabSignup && tabSignup.classList.contains('active');
-      const submitBtn = document.getElementById('btn-auth-submit');
-      if (!submitBtn) return;
       const btnText = submitBtn.querySelector('.btn-text');
       const btnSpinner = submitBtn.querySelector('.btn-spinner');
+
+      clearAuthError();
+
+      // Client-side validations for Sign Up
+      if (isSignUp) {
+        const confirmPasswordEl = document.getElementById('auth-confirm-password');
+        const confirmPassword = confirmPasswordEl ? confirmPasswordEl.value : '';
+
+        if (password !== confirmPassword) {
+          showAuthError('Passwords do not match.');
+          return;
+        }
+
+        if (!validatePasswordStrength(password)) {
+          showAuthError('Password must contain at least 8 characters, including an uppercase letter and a number.');
+          return;
+        }
+      }
 
       // Enter loading state
       submitBtn.disabled = true;
@@ -738,8 +929,17 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       try {
         if (isSignUp) {
           const data = await window.originyxAuth.signUp(email, password, fullName);
-          if (!data.session) {
-            alert('Sign up successful! Please check your email for verification instructions.');
+          
+          // Detect if user already registered (empty identities array)
+          if (data && data.user && (!data.user.identities || data.user.identities.length === 0)) {
+            showAuthError('This email is already registered. Sign in or reset your password.', [
+              { text: 'Sign In', callback: switchToLoginTab },
+              { text: 'Forgot Password', callback: () => openForgotPasswordFlow(email) }
+            ]);
+          } else if (!data.session) {
+            showAuthSuccess('Sign up successful! Please check your email for verification instructions.');
+            // Auto close after 4 seconds to let them read success message
+            setTimeout(() => closeModal(), 4000);
           } else {
             closeModal();
           }
@@ -749,7 +949,15 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         }
       } catch (err) {
         console.error('Auth action error:', err);
-        alert(err.message || 'An error occurred during authentication.');
+        const errMsg = err.message || '';
+        if (errMsg.includes('already') || errMsg.includes('registered') || errMsg.includes('exists')) {
+          showAuthError('This email is already registered. Sign in or reset your password.', [
+            { text: 'Sign In', callback: switchToLoginTab },
+            { text: 'Forgot Password', callback: () => openForgotPasswordFlow(email) }
+          ]);
+        } else {
+          showAuthError(err.message || 'An error occurred during authentication.');
+        }
       } finally {
         submitBtn.disabled = false;
         if (btnText) btnText.style.opacity = '1';
@@ -763,10 +971,13 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   if (btnGoogle) {
     btnGoogle.addEventListener('click', async (e) => {
       e.preventDefault();
+      if (btnGoogle.disabled) return;
+      btnGoogle.disabled = true;
       try {
         await window.originyxAuth.signInWithOAuth('google');
       } catch (err) {
         alert(err.message || 'Failed to start Google Sign In.');
+        btnGoogle.disabled = false;
       }
     });
   }
@@ -775,16 +986,141 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   if (btnMicrosoft) {
     btnMicrosoft.addEventListener('click', async (e) => {
       e.preventDefault();
+      if (btnMicrosoft.disabled) return;
+      btnMicrosoft.disabled = true;
       try {
         await window.originyxAuth.signInWithOAuth('azure');
       } catch (err) {
         alert(err.message || 'Failed to start Microsoft Sign In.');
+        btnMicrosoft.disabled = false;
+      }
+    });
+  }
+
+  /* ---------- FORGOT PASSWORD FLOW ---------- */
+  const forgotPasswordLink = document.getElementById('auth-forgot-password-link');
+  if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openForgotPasswordFlow();
+    });
+  }
+
+  const backToSignInLink = document.getElementById('link-back-to-signin');
+  if (backToSignInLink) {
+    backToSignInLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      clearAuthError();
+      const forgotPasswordContainer = document.getElementById('auth-forgot-password-container');
+      const authMainContainer = document.getElementById('auth-main-container');
+      if (forgotPasswordContainer) forgotPasswordContainer.style.display = 'none';
+      if (authMainContainer) authMainContainer.style.display = 'block';
+      switchToLoginTab();
+    });
+  }
+
+  const forgotForm = document.getElementById('form-forgot-password');
+  if (forgotForm) {
+    forgotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('btn-forgot-submit');
+      if (!submitBtn || submitBtn.disabled) return; // Prevent double submission
+
+      const emailEl = document.getElementById('forgot-email');
+      const email = emailEl ? emailEl.value.trim() : '';
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnSpinner = submitBtn.querySelector('.btn-spinner');
+
+      clearAuthError();
+
+      if (!email) {
+        showAuthError('Please enter a valid email address.');
+        return;
+      }
+
+      // Enter loading state
+      submitBtn.disabled = true;
+      if (btnText) btnText.style.opacity = '0.5';
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+
+      try {
+        await window.originyxAuth.resetPassword(email);
+        // Email Enumeration Protection: Always show success message
+        showAuthSuccess('If an account exists for this email, a password reset link has been sent.');
+      } catch (err) {
+        console.error('Forgot password action error:', err);
+        // Still always show success to protect against email enumeration, or show error if it is a system/connection failure (not email-existence related)
+        if (err.message && (err.message.includes('valid') || err.message.includes('rate limit') || err.message.includes('network'))) {
+          showAuthError(err.message);
+        } else {
+          showAuthSuccess('If an account exists for this email, a password reset link has been sent.');
+        }
+      } finally {
+        submitBtn.disabled = false;
+        if (btnText) btnText.style.opacity = '1';
+        if (btnSpinner) btnSpinner.classList.add('hidden');
+      }
+    });
+  }
+
+  /* ---------- UPDATE PASSWORD FLOW (RECOVERY) ---------- */
+  const updateForm = document.getElementById('form-update-password');
+  if (updateForm) {
+    updateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('btn-update-submit');
+      if (!submitBtn || submitBtn.disabled) return; // Prevent double submission
+
+      const newPasswordEl = document.getElementById('update-password');
+      const newPassword = newPasswordEl ? newPasswordEl.value : '';
+      const confirmNewPasswordEl = document.getElementById('update-confirm-password');
+      const confirmNewPassword = confirmNewPasswordEl ? confirmNewPasswordEl.value : '';
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnSpinner = submitBtn.querySelector('.btn-spinner');
+
+      clearAuthError();
+
+      if (newPassword !== confirmNewPassword) {
+        showAuthError('Passwords do not match.');
+        return;
+      }
+
+      if (!validatePasswordStrength(newPassword)) {
+        showAuthError('Password must contain at least 8 characters, including an uppercase letter and a number.');
+        return;
+      }
+
+      // Enter loading state
+      submitBtn.disabled = true;
+      if (btnText) btnText.style.opacity = '0.5';
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+
+      try {
+        await window.originyxAuth.updatePassword(newPassword);
+        showAuthSuccess('Password updated successfully. You are now logged in.');
+        setTimeout(() => {
+          closeModal();
+          // Reset auth modal states
+          const updatePasswordContainer = document.getElementById('auth-update-password-container');
+          const authMainContainer = document.getElementById('auth-main-container');
+          if (updatePasswordContainer) updatePasswordContainer.style.display = 'none';
+          if (authMainContainer) authMainContainer.style.display = 'block';
+        }, 2000);
+      } catch (err) {
+        console.error('Update password action error:', err);
+        showAuthError(err.message || 'Failed to update password.');
+      } finally {
+        submitBtn.disabled = false;
+        if (btnText) btnText.style.opacity = '1';
+        if (btnSpinner) btnSpinner.classList.add('hidden');
       }
     });
   }
 
   /* ---------- PROJECT REQUEST FORM SUBMISSION ---------- */
-  const projectRequestForms = document.querySelectorAll('#form-project-request, #form-contact-page-request');
+  const projectRequestForms = document.querySelectorAll('#form-project-request');
   projectRequestForms.forEach(projectRequestForm => {
     projectRequestForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -903,8 +1239,11 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
 
   // Bind auth state change custom event
   window.addEventListener('originyx-auth-state-change', (e) => {
-    const { configured, authenticated, user } = e.detail;
+    const { configured, authenticated, user, event } = e.detail;
     updateAuthStateUI(configured, authenticated, user);
+    if (event === 'PASSWORD_RECOVERY') {
+      openUpdatePasswordFlow();
+    }
   });
 
   // Re-dispatch current state on initialization in case scripts raced
@@ -922,7 +1261,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
       const btnSpinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
       const targetModal = form.closest('.modal-container');
-      const successState = targetModal ? targetModal.querySelector('.modal-success-state') : null;
+      const successState = targetModal ? targetModal.querySelector('.modal-success-state') : (form.parentNode ? form.parentNode.querySelector('.modal-success-state') : null);
 
       // Enter loading state
       if (submitBtn) submitBtn.disabled = true;
@@ -935,6 +1274,15 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       formData.forEach((value, key) => {
         payload[key] = value;
       });
+
+      if (form.id === 'form-contact-page-request') {
+        payload.formType = 'project-consultation';
+        payload.company = payload.businessName;
+        payload.description = payload.workflowDescription;
+        payload.outcome = payload.desiredOutcome;
+      }
+
+      console.log('Submitting payload:', payload);
 
       try {
         const response = await fetch('/api/send', {
