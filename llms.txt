@@ -22,6 +22,8 @@ Originyx builds premium enterprise AI systems, autonomous multi-agent networks, 
 
 - **HunterOS**: An autonomous AI Sales Development Representative (SDR) platform that automates lead generation. It scrapes directories, analyzes target domains, detects pain points, and drafts hyper-personalized cold outreach copy.
   - URL: https://originyx.ai/projects/hunteros/
+- **HunterOS Engage**: An AI-powered customer engagement platform that qualifies leads, automates follow-ups, and schedules meetings across WhatsApp and web channels, tracking conversions inside a unified dashboard.
+  - URL: https://originyx.ai/projects/hunteros-engage/
 - **Tvira Receptionist (Ojas.ai)**: A 24/7 virtual receptionist and lead capture assistant for coaching centers, training institutes, and academies, running across WhatsApp and web.
   - URL: https://originyx.ai/projects/ojas-ai/
 - **SwiftRoute AI**: An AI-powered logistics intelligence platform that automates dispatching, schedules routes, and provides real-time fleet analytics.

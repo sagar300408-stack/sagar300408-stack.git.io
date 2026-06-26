@@ -21,6 +21,7 @@ const files = [
   'ai-automation-india/index.html',
   'projects/enterprise-rag/index.html',
   'projects/hunteros/index.html',
+  'projects/hunteros-engage/index.html',
   'projects/lifeos/index.html',
   'projects/mission-control/index.html',
   'projects/ojas-ai/index.html',

@@ -520,6 +520,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lowerProj.includes('sunny')) {
           bizTextarea.value = "We are developing an educational or children's application and need a safe, age-appropriate conversational AI interface with content filtering and guided learning.";
           outcomeTextarea.value = "Integrate a child-friendly conversational assistant similar to Sunny AI, incorporating safety moderation guardrails, interactive storytelling, and kid-appropriate language models.";
+        } else if (lowerProj.includes('engage')) {
+          bizTextarea.value = "We want to automate incoming customer engagement, lead qualification, and appointment scheduling across WhatsApp and phone. Currently, follow-ups are manual and leads get cold.";
+          outcomeTextarea.value = "Deploy a customized version of HunterOS Engage to automatically capture, qualify, and follow up with leads, and coordinate bookings inside a unified business dashboard.";
         } else if (lowerProj.includes('hunter')) {
           bizTextarea.value = "We want to scale our outbound B2B sales development. We currently have a team of SDRs manually searching LinkedIn, scraping websites, and writing personalized cold emails.";
           outcomeTextarea.value = "Deploy a customized version of HunterOS to automate B2B lead generation, scraping, and personalized outreach, aiming to double our booked demo rate.";
@@ -552,6 +555,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const lowerProj = projectName.toLowerCase();
         if (lowerProj.includes('sunny')) {
           textarea.value = "I am interested in getting a workflow efficiency and automation audit for my project 'Sunny AI Companion'. I'd like to analyze opportunities for integrating age-appropriate LLMs and content moderation layers into an educational companion.";
+        } else if (lowerProj.includes('engage')) {
+          textarea.value = "I am interested in getting a customer engagement automation audit based on the HunterOS Engage architecture. I'd like to analyze opportunities for integrating automatic lead qualification, WhatsApp support, automated follow-ups, and calendar scheduling.";
         } else if (lowerProj.includes('hunter')) {
           textarea.value = "I am interested in getting a B2B sales automation audit based on the HunterOS architecture. I'd like to analyze opportunities for integrating autonomous B2B lead generation, deep company scraping, pain point detection, and personalized email outreach.";
         } else if (lowerProj.includes('life')) {
