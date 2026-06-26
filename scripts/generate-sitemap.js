@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const domain = 'https://originyx.ai';
+const domain = 'https://originyx.in';
 const rootDir = path.resolve(__dirname, '..');
 
 // Hardcoded core pages and their configurations
