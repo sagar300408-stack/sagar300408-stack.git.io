@@ -182,7 +182,7 @@ Originyx Lead Acquisition Platform
 
       try {
         await resend.emails.send({
-          from: 'Originyx Platform <onboarding@resend.dev>',
+          from: 'Originyx Platform <sagar@originyx.in>',
           to: ['sagar@originyx.in'],
           subject: subject,
           text: emailText,
