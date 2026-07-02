@@ -105,6 +105,12 @@
 
     <section style="margin-bottom: var(--space-3xl);">
       <span class="section-label">Conversational AI</span>
+      <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+        <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+        <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+          Originyx builds intelligent, omnichannel virtual receptionists that instantly handle customer inquiries across WhatsApp and web chat. Operating 24/7, these AI agents qualify leads, automate calendar scheduling, and sync conversational data directly into CRMs to eliminate missed opportunities.
+        </p>
+      </div>
       <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
         Automate Front-Desk Operations 24/7
       </h1>
@@ -118,8 +124,21 @@
       
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Service Focus</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">AI Receptionist & Customer Support</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Target Audience</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sales & Service Businesses</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Tech Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, FastAPI, Meta API</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Value</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">24/7 Lead Capture & Qualification</td></tr>
+            </tbody>
+          </table>
+        </div>
+        
         <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Why Deploy an AI Receptionist?</h2>
+          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Business Context</h2>
           <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
             Inbound customer leads lose value quickly. If a prospective student, parent, or client has to wait hours for a reply about pricing, availability, or syllabus contents, they will go to a competitor. Traditional support bots only offer fixed menus, causing customer frustration.
           </p>
@@ -139,10 +158,45 @@
           <a href="../projects/ojas-ai/" style="font-weight: 600; color: var(--accent-light); font-size: 0.9rem;">View Tvira Receptionist Case Study &rarr;</a>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Coaching centers managing high volumes of student inquiries via WhatsApp.</li>
+            <li>Real estate agents needing 24/7 automated site visit scheduling.</li>
+            <li>Clinics and salons automating appointment bookings natively in chat.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Businesses providing high-touch, hyper-personalized luxury services (like bespoke wealth management) may find automated conversational agents too impersonal for establishing trust in the early stages of relationship building.
+          </p>
+        </div>
+        
       </div>
 
       <!-- Sidebar -->
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+        
+        <!-- Knowledge Panel -->
+        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); background: var(--bg-card); border-color: var(--border);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Service Type</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Conversational AI</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Primary Benefit</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Zero missed leads & 24/7 engagement</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Key Technologies</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, WhatsApp API, LLMs</span>
+          </div>
+        </div>
+
         <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
           <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Request Receptionist Demo</h3>
           <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">

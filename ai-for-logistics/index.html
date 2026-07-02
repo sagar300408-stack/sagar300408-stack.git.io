@@ -105,6 +105,12 @@
 
     <section style="margin-bottom: var(--space-3xl);">
       <span class="section-label">Logistics AI</span>
+      <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+        <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+        <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+          Originyx builds custom AI solutions for the logistics and supply chain sector. Our autonomous dispatch systems automatically parse driver communications, match cargo requirements to optimal routes, and update real-time fleet telemetry dashboards without manual dispatcher intervention.
+        </p>
+      </div>
       <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
         Automate Outbound Dispatching & <span class="highlight">Logistics Planning</span>
       </h1>
@@ -118,8 +124,21 @@
       
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Logistics & Supply Chain</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Target Audience</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Dispatchers, Fleet Managers</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Tech Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, Mapping APIs, LLMs</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Value</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Automated fleet dispatch routing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        
         <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Why Introduce AI in Logistics?</h2>
+          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Business Context</h2>
           <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
             Logistics dispatchers spend hours translating raw customer cargo requests, matching cargo parameters (weight, dimensions, target destination) to truck availability, and manually calculating routes.
           </p>
@@ -139,10 +158,45 @@
           <a href="../projects/swiftroute-ai/" style="font-weight: 600; color: var(--accent-light); font-size: 0.9rem;">View Case Study &rarr;</a>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Automating driver communication via WhatsApp to track delivery statuses natively.</li>
+            <li>Matching cargo lists to optimal fleet routes instantly without spreadsheet mapping.</li>
+            <li>Generating automated operational safety alerts for fleet managers based on log telemetry.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Complex physical maintenance scheduling or purely hardware-based vehicle IoT tracking is outside this scope. Our automation layers focus on the software-driven administrative, routing, and communication pipelines of the dispatch office.
+          </p>
+        </div>
+        
       </div>
 
       <!-- Sidebar -->
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+        
+        <!-- Knowledge Panel -->
+        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); background: var(--bg-card); border-color: var(--border);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry Segment</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Logistics AI</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Primary Benefit</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Zero-delay dispatch mapping</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Key Technologies</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, Mapping APIs, LLMs</span>
+          </div>
+        </div>
+
         <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
           <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Discuss Logistics AI</h3>
           <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">

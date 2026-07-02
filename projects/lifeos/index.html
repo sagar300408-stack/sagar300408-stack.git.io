@@ -600,6 +600,12 @@
       <div class="project-hero-grid">
         <div class="hero-content">
           <span class="section-label" style="background: rgba(0, 255, 213, 0.08); border-color: rgba(0, 255, 213, 0.2); color: var(--accent);">Visionary Core</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              LifeOS is an autonomous personal operating system and cognitive companion that unifies task management, personal knowledge, calendars, and strategic planning into a local-first ecosystem. It uses Agentic Scouts and a Neo4j knowledge graph to proactively automate routines and optimize cognitive load, creating a private central intelligence layer.
+            </p>
+          </div>
           <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             LifeOS
           </h1>
@@ -645,9 +651,27 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent); margin-bottom: var(--space-xl);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Autonomous Personal OS & Cognitive Companion</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Productivity / Knowledge Management</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, JavaScript</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Multi-Agent Network & Graph RAG</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL (pgvector), Neo4j</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Local-First / Private Cloud</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Active Development</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- The Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl); background: rgba(244, 63, 94, 0.02); border-color: rgba(244, 63, 94, 0.15);">
-          <h2 style="margin-top: 0; color: var(--rose);">The Problem</h2>
+          <h2 style="margin-top: 0; color: var(--rose);">Business Problem</h2>
           <p style="margin-bottom: 0; color: var(--text-secondary);">
             Modern professionals are drowning in an ocean of fragmented applications. We manage tasks in one app, document ideas in another, coordinate calendars in a third, and outline goals inside isolated files. This digital noise leads to cognitive overload, tab fatigue, and lost information. The average user spends more time maintaining and syncing their productivity stack than actually executing their goals. Furthermore, traditional software remains passive; it stores text and numbers but fails to understand semantic relationships between daily logs and long-term career plans. When tools do not communicate, context is lost, and decision-making becomes reactive. This lack of centralized intelligence represents a major bottleneck for high performers seeking to optimize their focus.
           </p>
@@ -906,6 +930,23 @@
           <cite>LifeOS Tagline</cite>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>High-performance knowledge workers who want a single dashboard that integrates their calendar, notes, and tasks semantically.</li>
+            <li>Founders and executives who need an autonomous system to organize scattered brainstorming inputs (voice notes, text) into actionable projects.</li>
+            <li>Individuals seeking a privacy-first, local AI companion that acts as a second brain without sending personal life data to public LLM APIs.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-bottom: var(--space-xl); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Users who only need a simple to-do list app or those who are heavily reliant on highly collaborative, multi-user enterprise systems (like Jira or Asana) for team-based task management might find a unified personal OS overly complex for simple list-making.
+          </p>
+        </div>
+
         <!-- FAQ Section -->
         <div>
           <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
@@ -942,6 +983,32 @@
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
         <div class="tech-stack-panel" style="background: var(--bg-tertiary); border-color: var(--border); position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg); background: var(--bg-card); border-color: var(--border);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Productivity Tech</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Reduce cognitive overload through AI automation</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Executives, founders, and high-performance knowledge workers</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Local-First & Private Cloud</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, PostgreSQL, Neo4j Graph, React</span>
+            </div>
+          </div>
+
           <h3>Technology Stack</h3>
           <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
             LifeOS leverages modern Agentic Architectures, Vector Memory Layers, and Custom Automation Pipelines into a secure, responsive, and unified client workspace.

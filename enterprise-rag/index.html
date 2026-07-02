@@ -105,6 +105,12 @@
 
     <section style="margin-bottom: var(--space-3xl);">
       <span class="section-label">Knowledge Infrastructure</span>
+      <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+        <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+        <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+          Originyx engineers secure Enterprise RAG (Retrieval-Augmented Generation) architectures that allow employees to query internal databases, technical docs, and SOPs using natural language. Built on strict RBAC models, these AI search engines cite verified sources instantly without compromising data privacy.
+        </p>
+      </div>
       <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
         High-Accuracy <span class="highlight">Internal Search Platforms</span>
       </h1>
@@ -118,8 +124,21 @@
       
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Service Focus</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise Search & RAG Systems</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Target Audience</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Medium & Large Enterprises</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Tech Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, Pgvector, LangChain</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Value</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Instant Secure Knowledge Retrieval</td></tr>
+            </tbody>
+          </table>
+        </div>
+        
         <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">What is Enterprise RAG?</h2>
+          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Business Context</h2>
           <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
             Retrieval-Augmented Generation (RAG) is the process of retrieving documents from an external collection to ground an LLM's response. This guarantees that answers are built on verified data rather than model weights.
           </p>
@@ -139,10 +158,45 @@
           <a href="../projects/enterprise-rag/" style="font-weight: 600; color: var(--accent-light); font-size: 0.9rem;">View Case Study &rarr;</a>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Customer support teams searching through complex product documentation to answer tickets.</li>
+            <li>HR departments centralizing employee policies and benefits into an AI portal.</li>
+            <li>Legal and compliance teams parsing long technical contracts for specific clauses.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            If your data consists solely of highly structured, exact-match relational tables (e.g., just SQL rows of transaction data), a standard SQL query system is faster and cheaper. RAG is designed to interpret unstructured, semantic text (PDFs, wikis, articles).
+          </p>
+        </div>
+        
       </div>
 
       <!-- Sidebar -->
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+        
+        <!-- Knowledge Panel -->
+        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); background: var(--bg-card); border-color: var(--border);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Service Type</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Knowledge Infrastructure</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Primary Benefit</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Secure, cited internal search</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Key Technologies</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Pgvector, LangChain, Supabase</span>
+          </div>
+        </div>
+
         <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
           <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Discuss RAG Architecture</h3>
           <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">

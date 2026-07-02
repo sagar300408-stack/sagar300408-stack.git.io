@@ -171,6 +171,12 @@
       <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Active Development</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              HunterOS is an autonomous AI sales development platform that researches companies, qualifies leads, personalizes outreach, and automates follow-up workflows for B2B businesses. It replaces manual SDR sourcing loops by extracting corporate pain points and drafting highly contextual outbound emails.
+            </p>
+          </div>
           <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             HunterOS
           </h1>
@@ -211,9 +217,28 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
-        <!-- The Problem -->
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">AI Workflow Automation</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">B2B Sales & Agencies</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Framework</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">FastAPI, Autogen</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Frontend</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Next.js</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL (pgvector)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Cloud / AWS</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Active Development</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Business Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             B2B prospecting is heavily manual and inefficient. Sales Development Representatives (SDRs) spend hours finding lists, searching company pages, figuring out organization charts, and drafting emails. Sourcing and personalization do not scale: reps either send high-volume generic email blasts that get flagged as spam, or manually research every account, yielding a low outbound speed. 
           </p>
@@ -222,20 +247,20 @@
           </p>
         </div>
 
-        <!-- Business Context -->
+        <!-- Business Outcome -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
-          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Outcome</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             At Originyx, led by Sagar M, we recognized that the operational bottleneck in modern SaaS growth wasn't product quality, but distribution. Traditional outreach tools simply send templated messages to scraped lists. The modern buyer, however, demands deep contextual relevance.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            We needed a system that acts as a human SDR—capable of understanding a company's specific current bottlenecks, mapping those to our product offerings, and executing outbound campaigns asynchronously. HunterOS was conceived to bridge this gap, bringing autonomous AI orchestration into the revenue generation cycle.
+            We needed a system that acts as a human SDR—capable of understanding a company's specific current bottlenecks, mapping those to our product offerings, and executing outbound campaigns asynchronously. HunterOS bridges this gap, saving up to 80% of SDR sourcing time and multiplying email response rates by delivering highly relevant pitches.
           </p>
         </div>
 
-        <!-- Our Solution & Workflow -->
+        <!-- Implementation Overview -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution & Workflow</h2>
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Implementation Overview</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
             HunterOS acts as an autonomous sales intelligence companion that runs outbound prospecting loops 24/7. Developed by Sagar M at Originyx, it integrates state-of-the-art web scrapers and reasoning models to mine leads, evaluate corporate directories, detect business challenges, and customize copy.
           </p>
@@ -373,11 +398,55 @@
           </div>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Autonomous B2B Lead Qualification</li>
+            <li>Cold Outreach Automation & Copy Personalization</li>
+            <li>Detecting organizational bottlenecks from public PR and blogs</li>
+            <li>Enriching CRM databases with deep contextual pain points</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Businesses with highly regulated enterprise sales cycles requiring manual legal review for every outbound communication may not benefit from fully autonomous outreach. Similarly, B2C companies where sales volume depends on mass marketing rather than hyper-personalized 1-to-1 account-based marketing should rely on standard ad platforms rather than an autonomous SDR.
+          </p>
+        </div>
+
       </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
         <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">B2B Sales & Agencies</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Automate outbound prospecting and lead qualification</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">SaaS companies scaling their outbound engine</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Cloud / AWS</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, Next.js, PostgreSQL</span>
+            </div>
+          </div>
+
           <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
             <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
             <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">

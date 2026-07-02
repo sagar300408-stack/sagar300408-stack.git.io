@@ -198,6 +198,12 @@
       <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Active Development</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              ShadowOS is an AI-powered operational intelligence platform that acts as a diagnostic layer to map shadow workflows and compute financial waste. It ingests telemetry from CRMs and tools to detect bottlenecks and run automation simulations before developers write any code.
+            </p>
+          </div>
           <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             ShadowOS
           </h1>
@@ -238,9 +244,28 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Operational Intelligence</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise Operations</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">TypeScript, Python</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Framework</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">FastAPI, Express</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Frontend</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">React</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Cloud / On-Prem</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Active Development</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Problem</h2>
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Modern organizations are drowning in process complexity. While teams use modern SaaS platforms (like CRMs, accounting portals, and ticketing tools), a significant amount of day-to-day operations occurs in 'shadow workflows'—namely local spreadsheets, manual email copy-pasting, chat threads, and unrecorded personal checklists. This creates massive fragmentation where leadership has zero visibility into how work is actually executed.
           </p>
@@ -249,9 +274,9 @@
           </p>
         </div>
 
-        <!-- Business Context -->
+        <!-- Business Outcome -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
-          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Outcome</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             The enterprise environment requires continuous operational intelligence. Without diagnostic data, automation initiatives fail because they build on top of broken, unoptimized workflows. Originyx designed ShadowOS as an observation and diagnostic layer to identify double-handling and repetitious data transfers.
           </p>
@@ -281,9 +306,9 @@
           </div>
         </div>
 
-        <!-- Workflow -->
+        <!-- Implementation Overview -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Workflow</h2>
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Implementation Overview</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
             The workflow within ShadowOS is seamless and automated:
           </p>
@@ -382,11 +407,55 @@
           </div>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Identifying manual data entry redundancy across disjointed SaaS platforms</li>
+            <li>Simulating ROI for potential automation builds</li>
+            <li>Tracking 'shadow IT' and informal operations via event telemetry</li>
+            <li>Process mining for enterprise compliance auditing</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Small businesses or early-stage startups lacking a significant volume of internal data, formalized CRM usage, or established operational history will not have enough telemetry to produce statistically significant workflow mapping. In these cases, manual shadowing is still the best approach.
+          </p>
+        </div>
+
       </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
         <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Enterprise Operations</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Detect operational waste and simulate ROI for automation</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Enterprises with high manual administrative overhead</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Cloud / On-Prem</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">TypeScript, React, Node.js, Express, Python, FastAPI, PostgreSQL, Pydantic</span>
+            </div>
+          </div>
+
           <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
             <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
             <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">

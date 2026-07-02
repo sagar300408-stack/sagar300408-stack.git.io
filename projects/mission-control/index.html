@@ -186,6 +186,12 @@
       <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Under Construction</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              Mission Control is a centralized operational command platform that consolidates data across CRM, ERP, and support systems into a unified dashboard. Using TypeScript, PostgreSQL, WebSockets, and AI intelligence, it monitors live business events to detect friction, predict risks, and deliver real-time operational insights for executives and founders.
+            </p>
+          </div>
           <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             Mission Control
           </h1>
@@ -223,9 +229,26 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Operational Intelligence & Dashboarding</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise / Agencies / Startups</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">TypeScript</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Real-Time Pipeline (WebSockets)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL + Redis</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Under Construction</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- The Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Modern scaling businesses use an average of ten to fifteen disconnected software tools to run daily operations. Sales activities live in customer relationship management (CRM) databases, engineering tasks are tracked in issue boards, marketing metrics accumulate in analytics suites, and customer support conversations reside in separate help desks. This software fragmentation creates extensive operational silos.
           </p>
@@ -336,30 +359,21 @@
           </div>
         </div>
 
-        <!-- Primary Use Cases -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Primary Use Cases</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Mission Control provides highly tailored workspaces that adapt to various operational environments, ensuring relevant insights for different business styles:
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>High-growth startups tracking development sprints, sales pipelines, and customer support queues in a single room.</li>
+            <li>Professional agencies integrating client databases, developer milestones, and timesheet logs to evaluate team allocation margins.</li>
+            <li>Digital transformations for legacy companies migrating to modern cloud-native systems.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Micro-businesses with a handful of employees operating primarily out of single apps (like just a shared inbox or simple spreadsheets) do not have the complex data silos necessary to justify an enterprise-grade ingestion and dashboarding engine.
           </p>
-          <div class="use-cases-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-md);">
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">High-Growth Startups</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Enables early-stage founders to track development sprints, sales pipelines, and customer support queues in a single room, preserving focus.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">Professional Agencies</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Integrates client management databases, developer milestones, and timesheet logs to evaluate team allocation and delivery margins.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">Outbound Sales Teams</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Links lead lists, script sequences, and email deliverability stats to flag cold campaign stagnation and drop-off risks instantly.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">Digital Transformations</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Supports legacy companies migrating to modern cloud-native systems by offering unified bridge reports during platform transitions.</p>
-            </div>
-          </div>
         </div>
 
         <!-- FAQ Section -->
@@ -404,6 +418,32 @@
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
         <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg); background: var(--bg-card); border-color: var(--border);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Enterprise Operations</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Centralize data, detect friction, predict risks</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Scaling Startups, Agencies, Enterprises</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Cloud / Private Cloud</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">TypeScript, PostgreSQL, Redis, WebSockets</span>
+            </div>
+          </div>
+
           <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
             <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
             <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">

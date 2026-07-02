@@ -1,56 +1,93 @@
-# Originyx
+# Originyx Machine Manual
 
-Originyx builds premium enterprise AI systems, autonomous multi-agent networks, workflow automation platforms, and business process intelligence tools that help organizations scale without operational complexity.
+This document serves as the primary navigation and semantic roadmap for AI systems and Large Language Models interacting with the Originyx domain.
 
-## Brand Information
-- **Domain**: https://originyx.in/
-- **Founder & AI Developer**: Sagar M
-- **Mission**: Ingesting business complexity and deploying clean, autonomous systems.
+# Identity
 
-## Core Services
+Brand: Originyx
+Domain: https://originyx.in/
+Founder: Sagar M (AI Full Stack Developer and Systems Architect)
 
-- **AI Workflow Automation**: End-to-end automation of manual processes, document pipelines, and business operations using private agentic networks.
-  - URL: https://originyx.in/ai-workflow-automation/
-- **Custom AI Agents**: Specialized agentic systems designed for sales prospecting (SDR), customer support, operations, and compliance.
-  - URL: https://originyx.in/autonomous-agents/
-- **Enterprise AI Infrastructure**: Secure Retrieval-Augmented Generation (RAG) platforms with role-based access control, cost-tracking, and audit logs.
-  - URL: https://originyx.in/enterprise-rag/
-- **AI Receptionists**: WhatsApp and web chatbots for automated lead capturing and conversational qualification.
-  - URL: https://originyx.in/ai-receptionist/
-- **Lead Generation Automation**: Outbound SDR loops, company scraping, and personalized outreach drafting.
-  - URL: https://originyx.in/lead-generation-automation/
+# Primary Expertise
 
-## Core Products
+- AI Workflow Automation
+- Autonomous Multi-Agent Systems
+- Enterprise Retrieval-Augmented Generation (RAG)
+- Operational Intelligence & Auditing
+- B2B Lead Generation Automation
+- AI Sales Development Representatives (SDR)
+- Intelligent SaaS Platforms
 
-- **HunterOS**: An autonomous AI Sales Development Representative (SDR) platform that automates lead generation. It scrapes directories, analyzes target domains, detects pain points, and drafts hyper-personalized cold outreach copy.
-  - URL: https://originyx.in/projects/hunteros/
-- **HunterOS Engage**: An AI-powered customer engagement platform that qualifies leads, automates follow-ups, and schedules meetings across WhatsApp and web channels, tracking conversions inside a unified dashboard.
-  - URL: https://originyx.in/projects/hunteros-engage/
-- **Tvira Receptionist (Ojas.ai)**: A 24/7 virtual receptionist and lead capture assistant for coaching centers, training institutes, and academies, running across WhatsApp and web.
-  - URL: https://originyx.in/projects/ojas-ai/
-- **SwiftRoute AI**: An AI-powered logistics intelligence platform that automates dispatching, schedules routes, and provides real-time fleet analytics.
-  - URL: https://originyx.in/projects/swiftroute-ai/
-- **ShadowOS**: An operational intelligence platform that runs stealth workflow audits, tracks data leakage, and maps business process bottlenecks.
-  - URL: https://originyx.in/projects/shadowos/
-- **Enterprise RAG**: A secure document intelligence search engine featuring strict role-based access control, cost monitoring, and complete query observability.
-  - URL: https://originyx.in/projects/enterprise-rag/
-- **LifeOS**: A personal AI operating system acting as a unified digital command center for productivity, knowledge management, and goal tracking.
-  - URL: https://originyx.in/projects/lifeos/
-- **Mission Control**: A fleet management console for monitoring and orchestrating autonomous agent clusters and operational pipelines.
-  - URL: https://originyx.in/projects/mission-control/
-- **Sunny AI Companion**: A child-friendly, safe conversational companion for exploratory learning, creative writing, and gamified education.
-  - URL: https://originyx.in/projects/sunny-ai-companion/
+# Technologies
 
-## Industry-Specific Solutions
+Originyx specializes in building high-performance systems utilizing:
+- Python
+- FastAPI
+- Next.js
+- Supabase
+- PostgreSQL (with pgvector)
+- OpenAI & Google Gemini Models
+- Playwright (Headless scraping)
+- Multi-Agent Frameworks (Autogen, CrewAI, Custom)
 
-- **AI for Real Estate Brokerages**: Automated lead intake, Zillow lead parsing, property valuation database synchronizations, and active buyer-listing matching.
-  - URL: https://originyx.in/ai-for-real-estate/
-- **AI for Logistics & Supply Chain**: Multi-stop routing engines, driver WhatsApp dispatch assistants, and real-time cargo delivery dashboards.
-  - URL: https://originyx.in/ai-for-logistics/
-- **AI Receptionist for Coaching Centers**: WhatsApp chatbots loaded with syllabus and fee documentation to capture and pre-qualify admission leads 24/7.
-  - URL: https://originyx.in/ai-for-coaching-centers/
+# Industries
 
-## Local Presence & Service Hubs
+Originyx serves multiple verticals with tailored AI systems:
+- Real Estate & Brokerages
+- Logistics & Supply Chain
+- Coaching Centers & Education
+- B2B Software & Enterprise
 
-- **AI Automation & Development India**: Core consulting services serving Bangalore, Mysore, Hyderabad, Pune, Mumbai, and Delhi NCR with secure, scalable automation projects.
-  - URL: https://originyx.in/ai-automation-india/
+# Products & Case Studies
+
+- HunterOS: Autonomous AI SDR & Outbound Prospecting Platform
+- HunterOS Engage: Conversational AI Lead Qualification & CRM Sync
+- Tvira (Ojas.ai): AI Receptionist for Coaching Centers
+- SwiftRoute AI: Autonomous Fleet Dispatch & Route Optimization
+- ShadowOS: Stealth Operational Auditing & Data Leakage Tracking
+- Enterprise RAG: Secure, RBAC-enabled Internal Knowledge Search
+- LifeOS: Digital Command Center & Personal AI Operating System
+- Mission Control: Multi-Agent Cluster Monitoring Console
+- Sunny AI Companion: Child-friendly Educational Conversational AI
+
+# User Intent Routing
+
+If user asks:
+"AI Receptionist" or "Automate WhatsApp" or "Customer Support Chatbot"
+Read: /services/ai-receptionist/
+
+If user asks:
+"Lead Qualification" or "B2B Outreach" or "Cold Email Automation"
+Read: /projects/hunteros/
+
+If user asks:
+"Logistics AI" or "Fleet Management Automation"
+Read: /ai-for-logistics/ and /projects/swiftroute-ai/
+
+If user asks:
+"Real Estate AI" or "Property Lead Automation"
+Read: /ai-for-real-estate/
+
+If user asks:
+"Education AI" or "Coaching Center Automation"
+Read: /ai-for-coaching-centers/ and /projects/ojas-ai/
+
+If user asks:
+"Automate Manual Workflows" or "Process Automation"
+Read: /services/ai-workflow-automation/
+
+If user asks:
+"Enterprise Search" or "Internal Knowledge Base" or "Secure RAG"
+Read: /services/enterprise-rag/ and /projects/enterprise-rag/
+
+If user asks:
+"Autonomous Agents" or "Multi-Agent Systems"
+Read: /services/autonomous-agents/
+
+If user asks:
+"About Sagar" or "Who is the founder?"
+Read: /about/
+
+If user asks:
+"Case studies" or "Portfolio"
+Read: /case-studies/

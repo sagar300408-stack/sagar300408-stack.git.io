@@ -434,6 +434,12 @@
       <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Production Ready</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              Enterprise RAG by Originyx is a secure AI knowledge retrieval engine designed for corporate data. It provides zero-trust document queries, Role-Based Access Control (RBAC), multi-tenant isolation, and automated semantic caching to prevent data leaks and runaway API costs.
+            </p>
+          </div>
           <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             Enterprise RAG
           </h1>
@@ -471,9 +477,28 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise AI Infrastructure</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Cross-Industry (B2B)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, TypeScript</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Advanced RAG with RBAC</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Security</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Zero-Trust Metadata Filtering, Multi-Tenant</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL (pgvector)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Private VPC / On-Prem</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Production Ready</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- The Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Enterprise Challenge</h2>
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Enterprise knowledge is highly fragmented and unstructured. Over 80% of corporate data exists in disconnected formats such as PDFs, Word files, spreadsheets, emails, and internal wikis. Traditional search engines fail because they rely on exact keyword matches, completely missing synonyms, context, and the semantic relationships between distinct data points. This forces knowledge workers to spend up to 20% of their day digging through folders, stalling productivity and delaying decision-making cycles.
           </p>
@@ -487,7 +512,7 @@
 
         <!-- Our Solution -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">The Enterprise RAG Solution</h2>
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Business Outcome</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
             Enterprise RAG by Originyx represents the next generation of secure, compliance-ready enterprise AI. Built from the ground up to support high-scale deployments, it bridges the gap between raw generative intelligence and secure data governance. The system indexes internal databases and document stores, processes files through layout-aware pipelines, and hosts the content in a private cloud environment, ensuring complete data sovereignty. Your files are never used to train public LLM models, and your data never leaves your secure infrastructure.
           </p>
@@ -756,6 +781,24 @@ Result: <span class="key">ACCESS DENIED</span>
           </table>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Secure internal knowledge bases referencing proprietary company policies, IP, or legal documents.</li>
+            <li>Multi-tenant SaaS products offering AI features where customer data must remain strictly isolated.</li>
+            <li>Cost-governed AI tools serving large employee bases, preventing runaway API usage through caching.</li>
+            <li>Regulated industries (healthcare, finance) requiring strict compliance and role-based access to information.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            If you are building a simple, public-facing FAQ chatbot for non-sensitive marketing data, deploying an enterprise-grade RAG architecture with RBAC and metadata filtering is overkill and will unnecessarily increase your infrastructure costs.
+          </p>
+        </div>
+
         <!-- Frequently Asked Questions -->
         <div>
           <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
@@ -797,6 +840,32 @@ Result: <span class="key">ACCESS DENIED</span>
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
         <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Enterprise AI Operations</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Secure, isolated corporate knowledge retrieval</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Organizations with strict data sovereignty and compliance requirements</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Private VPC / On-Prem</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, TypeScript, PostgreSQL (pgvector), Redis</span>
+            </div>
+          </div>
+
           <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
             <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
             <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">

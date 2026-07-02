@@ -207,6 +207,12 @@
       <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
         <div class="hero-content">
           <span class="section-label">Production Concept</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              SwiftRoute AI is an enterprise-grade logistics intelligence platform built to optimize delivery routes, dispatch autonomous fleets, and cut fuel costs. It leverages geospatial AI, predictive ETAs, and real-time telemetry to replace manual route planning for growing logistics networks.
+            </p>
+          </div>
           <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
             SwiftRoute AI
           </h1>
@@ -247,16 +253,35 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Fleet Intelligence & Automation</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Logistics</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, TypeScript</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Framework</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">FastAPI</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Frontend</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">React</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL, PostGIS</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Cloud</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Production Concept</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- Problem & Business Context -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-2xl);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Problem</h2>
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Global supply chains and local logistics networks are facing unprecedented pressure due to rapid urbanization. Legacy dispatch systems and manual planning workflows are no longer sufficient. Dispatchers are forced to manually coordinate driver shifts, customer-specific delivery windows, vehicle capacity limits, and special equipment constraints. This administrative bottleneck results in poor vehicle capacity utilization, excessive mileage, and high operational overhead.
           </p>
         </div>
         
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
-          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Outcome</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
             The modern logistics industry demands agility. <strong>Originyx</strong> recognized that enterprise operations needed a proactive orchestration platform. Through extensive consultations, <strong>Sagar M</strong> identified that reducing route planning time and lowering fuel costs were the primary business drivers for companies looking to modernize their logistics operations.
           </p>
@@ -278,7 +303,7 @@
         </div>
         
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Workflow</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation Overview</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
             The platform operates through a coordinated workflow to transform raw order data into actionable dispatch schedules:
           </p>
@@ -313,9 +338,9 @@
           </div>
         </div>
 
-        <!-- Implementation -->
+        <!-- Deployment -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Deployment</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
             Implementing SwiftRoute AI required seamless integration with existing enterprise resource planning (ERP) systems. Sagar M designed secure REST endpoints and real-time webhooks to sync data effortlessly. By leveraging <strong>PostgreSQL</strong> for transactional consistency and <strong>FastAPI</strong> for microservices architecture, the implementation scaled gracefully to accommodate heavy operational loads.
           </p>
@@ -390,11 +415,55 @@
           </div>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Dynamic real-time fleet dispatching</li>
+            <li>Predictive maintenance based on IoT sensors</li>
+            <li>Geospatial route optimization for multi-stop deliveries</li>
+            <li>Reducing operational overhead by automating ERP and WMS synchronizations</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Logistics providers operating exclusively point-to-point (e.g. fixed single-stop trucking routes on long hauls) without dynamic load changes or high stop volume per day will likely see diminishing returns from real-time spatial optimization algorithms compared to simple navigation tools.
+          </p>
+        </div>
+
       </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
         <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Logistics & Supply Chain</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Optimize delivery routes and automate dispatch</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Companies managing large, dynamic fleet networks</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Cloud</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, TypeScript, React, PostgreSQL, PostGIS, Maps APIs</span>
+            </div>
+          </div>
+
           <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
             <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
             <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">

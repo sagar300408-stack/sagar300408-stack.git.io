@@ -105,6 +105,12 @@
 
     <section style="margin-bottom: var(--space-3xl);">
       <span class="section-label">Agentic Frameworks</span>
+      <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+        <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+        <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+          Originyx constructs highly autonomous, multi-agent networks capable of handling long-running, multi-step goals. Instead of relying on a single prompt, these systems use specialized agent nodes (e.g., Prospector, Researcher, Copywriter) that collaborate, share context, and execute complex business operations reliably 24/7.
+        </p>
+      </div>
       <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
         Collaborative <span class="highlight">Multi-Agent Orchestration</span> Loops
       </h1>
@@ -118,8 +124,21 @@
       
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         
+        <!-- Quick Facts -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Service Focus</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Multi-Agent Orchestration</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Target Audience</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise Sales & Ops Teams</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Tech Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, LangChain, Multi-Agent Frameworks</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Value</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Scalable Autonomous Execution</td></tr>
+            </tbody>
+          </table>
+        </div>
+        
         <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Why Multi-Agent Systems?</h2>
+          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Business Context</h2>
           <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
             When an agent is asked to perform too many tasks at once (e.g. scrape a site, extract pain points, determine target profiles, draft emails, clean files), it loses context, encounters tool conflicts, and hallucinates.
           </p>
@@ -148,10 +167,45 @@
           <a href="../projects/shadowos/" style="font-weight: 600; color: var(--cyan-light); font-size: 0.9rem;">View ShadowOS Case Study &rarr;</a>
         </div>
 
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>B2B sales teams automating end-to-end prospecting, scraping, and initial outreach.</li>
+            <li>Operational intelligence teams requiring continuous background auditing of logs.</li>
+            <li>Data-heavy research departments automating the aggregation of competitor data.</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Simple tasks that require one clear API call or basic string formatting do not need multi-agent overhead. We recommend multi-agent systems exclusively for workflows with high failure rates using standard linear scripts.
+          </p>
+        </div>
+
       </div>
 
       <!-- Sidebar -->
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
+        
+        <!-- Knowledge Panel -->
+        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); background: var(--bg-card); border-color: var(--border);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Service Type</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Agentic Frameworks</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Primary Benefit</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Resilient multi-step automation</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Key Technologies</span>
+            <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, LangGraph, LLMs</span>
+          </div>
+        </div>
+
         <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
           <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Discuss Agent Design</h3>
           <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">
