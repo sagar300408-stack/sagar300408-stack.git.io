@@ -669,282 +669,135 @@
           </table>
         </div>
 
-        <!-- The Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl); background: rgba(244, 63, 94, 0.02); border-color: rgba(244, 63, 94, 0.15);">
-          <h2 style="margin-top: 0; color: var(--rose);">Business Problem</h2>
-          <p style="margin-bottom: 0; color: var(--text-secondary);">
-            Modern professionals are drowning in an ocean of fragmented applications. We manage tasks in one app, document ideas in another, coordinate calendars in a third, and outline goals inside isolated files. This digital noise leads to cognitive overload, tab fatigue, and lost information. The average user spends more time maintaining and syncing their productivity stack than actually executing their goals. Furthermore, traditional software remains passive; it stores text and numbers but fails to understand semantic relationships between daily logs and long-term career plans. When tools do not communicate, context is lost, and decision-making becomes reactive. This lack of centralized intelligence represents a major bottleneck for high performers seeking to optimize their focus.
+        <!-- Business Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); background: rgba(244, 63, 94, 0.02); border-color: rgba(244, 63, 94, 0.15);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Modern professionals are drowning in an ocean of fragmented applications. We manage tasks in one app, document ideas in another, coordinate calendars in a third, and outline goals inside isolated files. This digital noise leads to cognitive overload, tab fatigue, and lost information. The average user spends more time maintaining and syncing their productivity stack than actually executing their goals.
           </p>
-        </div>
-
-        <!-- Our Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent);">Our Solution</h2>
-          <p style="color: var(--text-secondary);">
-            Originyx designed LifeOS to serve as a proactive digital companion that shifts the paradigm from passive data logging to autonomous intelligence. LifeOS operates as a central brain that sits on top of your digital environment. By integrating local-first data stores with advanced Large Language Model reasoning, the system continuously monitors your inputs, constructs a private semantic memory, and identifies actionable paths toward your objectives.
-          </p>
-          <p style="color: var(--text-secondary);">
-            Unlike traditional productivity applications that manage isolated tasks, LifeOS is designed to manage the entire operating environment around a user. The platform combines AI agents, memory systems, automation workflows, knowledge graphs, planning tools, and personalized intelligence into a single ecosystem. Users can manage projects, track habits, store knowledge, receive AI-driven recommendations, and maintain a clear overview of their personal and professional life from one interface.
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Furthermore, traditional software remains passive; it stores text and numbers but fails to understand semantic relationships between daily logs and long-term career plans. When tools do not communicate, context is lost, and decision-making becomes reactive.
           </p>
         </div>
 
         <!-- Business Context -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent-light); margin-bottom: var(--space-xl); background: rgba(103, 255, 232, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent-light);">Business Context</h2>
-          <p style="color: var(--text-secondary);">
-            Developed by <strong>Sagar M</strong> at <strong>Originyx</strong>, LifeOS was designed to address the productivity gap experienced by executives, developers, and knowledge workers. The fragmentation of apps impacts bottom-line performance. By centralizing operations into one intelligent hub, Originyx creates immense value for users seeking autonomous organizational capabilities, transforming how daily and strategic tasks are executed.
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); background: rgba(0, 255, 213, 0.01);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Developed by Sagar M at Originyx, LifeOS was designed to address the productivity gap experienced by executives, founders, and knowledge workers. The fragmentation of apps impacts bottom-line performance. By centralizing operations into one intelligent hub, Originyx creates immense value for users seeking autonomous organizational capabilities, transforming how daily and strategic tasks are executed.
           </p>
         </div>
 
-        <!-- Technical Architecture -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent);">Technical Architecture</h2>
-          <p style="color: var(--text-secondary);">
-            The backbone of LifeOS relies on modern scalable solutions. We architected the backend utilizing <strong>FastAPI</strong> for high-throughput, low-latency concurrent processing. A local-first <strong>PostgreSQL</strong> database with pgvector extensions drives the vector memory layer, allowing lightning-fast semantic search over thousands of personal notes and tasks.
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            LifeOS was built by **Originyx** under the technical leadership of founder **Sagar M** as a proactive personal operating system and cognitive companion. It unifies tasks, notes, habits, calendars, and strategic planning into a private, local-first dashboard.
           </p>
-          <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
-            <li><strong>Data Ingestion:</strong> Automated pipelines continuously pull from calendar APIs and local markdown repositories.</li>
-            <li><strong>Agent Orchestration:</strong> Utilizing frameworks like CrewAI and AutoGen to manage stateful, multi-agent background tasks.</li>
-            <li><strong>Graph Layer:</strong> A Neo4j knowledge graph maps the complex relationships between entities such as projects, people, and daily logs.</li>
-          </ul>
-        </div>
-
-        <!-- Workflow -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent-dark); margin-bottom: var(--space-xl); background: rgba(0, 179, 149, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent-dark);">Workflow</h2>
-          <p style="color: var(--text-secondary);">
-            The workflow begins with seamless natural language input. Users interact with LifeOS through text or voice. The natural language processing engine (hosted within the FastAPI microservices) extracts intents, creates actionable structured tasks in PostgreSQL, and simultaneously updates the Neo4j graph. Agentic Scouts then evaluate the new state to autonomously schedule follow-ups or fetch contextual resources.
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The solution utilizes background AI agents ("Agentic Scouts") to actively monitor user goals, model execution risks, and suggest daily prioritization schedules based on subjective cognitive load metrics.
           </p>
         </div>
 
-        <!-- Technology Stack Details -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); margin-bottom: var(--space-xl); background: rgba(16, 185, 129, 0.01);">
-          <h2 style="margin-top: 0; color: var(--green);">Technology Stack</h2>
-          <p style="color: var(--text-secondary);">
-            Our selected technologies guarantee security, speed, and intelligence. The core stack includes:
+        <!-- Architecture -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Sagar M engineered a hybrid vector-and-graph memory model to index personal knowledge assets cleanly:
           </p>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-            <span class="meta-tag"><strong>Python</strong> (Core Logic)</span>
-            <span class="meta-tag"><strong>FastAPI</strong> (API Layer)</span>
-            <span class="meta-tag"><strong>PostgreSQL & pgvector</strong> (Data & Embedding Storage)</span>
-            <span class="meta-tag"><strong>Neo4j</strong> (Knowledge Graph)</span>
-            <span class="meta-tag"><strong>React/Vanilla JS</strong> (Frontend Dashboard)</span>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li><strong>Data Ingestion Node:</strong> Connects securely to Google Calendar, Notion, and local markdown files via FastAPI, normalizing data feeds into a unified schema.</li>
+              <li><strong>Graph Memory Layer (Neo4j):</strong> Maps semantic relationships between people, projects, journal entries, and tasks, building a personal cognitive graph.</li>
+              <li><strong>Semantic Embeddings Node (PostgreSQL):</strong> Stores vector representations of notes using pgvector for context-aware hybrid search.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); margin-top: 0; margin-bottom: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">FastAPI & Python</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Powers the background API layer, ingestion tasks, and multi-agent scheduling loops.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">PostgreSQL & pgvector</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Handles task tables, session logs, and semantic searches over personal text embeddings.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Neo4j Database</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Maintains the dynamic personal knowledge graph, mapping contacts to project milestones.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">React & TypeScript</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Drives the local-first administration control panel and strategic planner visualization.</p>
+            </div>
           </div>
         </div>
 
         <!-- Implementation -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent);">Implementation</h2>
-          <p style="color: var(--text-secondary);">
-            Implementing LifeOS at <strong>Originyx</strong> meant rigorous testing of the agentic frameworks to ensure they do not hallucinate critical scheduling details. The implementation rolled out in three phases:
-            <br><br>
-            1. <strong>Foundation:</strong> Setting up the local PostgreSQL database and basic CRUD operations via FastAPI.
-            <br>
-            2. <strong>Intelligence:</strong> Integrating the LLM endpoints and setting up the vector storage for semantic retrieval.
-            <br>
-            3. <strong>Autonomy:</strong> Deploying the Agentic Scouts to monitor the system state and execute complex cron-like background jobs intelligently.
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); background: rgba(244, 63, 94, 0.01);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The rollout of LifeOS by Originyx, led by Sagar M, addressed two key system bottlenecks:
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>1. Hybrid Graph-Relational Sync:</strong> Syncing real-time updates between PostgreSQL task tables and the Neo4j graph database often caused locking conflicts. We implemented transaction rollbacks and event-driven update queues in FastAPI to ensure perfect consistency.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>2. Local Embedding Generation:</strong> Vectorizing notes on-device threatened system battery life and latency. Sagar M integrated optimized local models running asynchronously on background threads, triggered only during device charging states.
           </p>
         </div>
 
-        <!-- Challenges -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-xl); background: rgba(244, 63, 94, 0.01);">
-          <h2 style="margin-top: 0; color: var(--rose);">Challenges</h2>
-          <p style="color: var(--text-secondary);">
-            The primary challenge was managing the latency of LLM queries within real-time workflows. <strong>Sagar M</strong> spearheaded the optimization effort by utilizing intelligent caching and background processing queues. Additionally, ensuring that the local-first PostgreSQL schema remained in perfect sync with the graph database required complex transaction management and robust rollback mechanisms.
-          </p>
-        </div>
-
-        <!-- Results -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent-light); margin-bottom: var(--space-xl); background: rgba(103, 255, 232, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent-light);">Results</h2>
-          <p style="color: var(--text-secondary);">
-            The deployment of LifeOS has yielded remarkable results in cognitive load reduction. Users report a 40% decrease in time spent managing tasks across different tools. The combination of FastAPI's swift responses and PostgreSQL's reliable data handling provides a seamless, virtually zero-latency experience for querying personal knowledge graphs.
-          </p>
-        </div>
-
-        <!-- Future Improvements -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.01);">
-          <h2 style="margin-top: 0; color: var(--accent);">Future Improvements</h2>
-          <p style="color: var(--text-secondary);">
-            Looking ahead, <strong>Originyx</strong> plans to introduce decentralized peer-to-peer sync for teams, allowing multiple LifeOS instances to collaborate without a central cloud server. Further performance optimizations for edge-device LLMs are also on the roadmap, bringing absolute privacy and offline capabilities to the next level.
-          </p>
-        </div>
-
-        <!-- What Makes LifeOS Different? -->
-        <div class="vision-diff-section">
-          <h2>What Makes LifeOS Different?</h2>
-          <p style="color: var(--text-secondary);">Engineered by Sagar M at Originyx, LifeOS shifts the paradigm of personal tooling from reactive records to proactive intelligence powered by FastAPI and PostgreSQL:</p>
-          
-          <div class="vision-diff-grid">
-            
-            <!-- Diff 1 -->
-            <div class="diff-row">
-              <div class="diff-left">
-                <strong>Standard AI Tools</strong>
-                Answer queries and generate one-off outputs without long-term local context or historical workspace connection.
-              </div>
-              <div class="diff-right">
-                <strong>🧠 LifeOS Intelligence</strong>
-                Remembers interactions, organizes structural context, plans multi-step strategies, and executes custom scripts based on history.
-              </div>
+        <!-- Business Impact -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">40%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Cycle Time Reduction</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Users spend less time manual-syncing checklists and note folders across tools.</p>
             </div>
-
-            <!-- Diff 2 -->
-            <div class="diff-row">
-              <div class="diff-left">
-                <strong>Productivity Apps</strong>
-                Act as passive storage databases holding isolated, unlinked folders, markdown files, and static task tables.
-              </div>
-              <div class="diff-right">
-                <strong>📚 LifeOS Knowledge Graph</strong>
-                Understands semantic relationships between tasks, journals, contacts, and active projects, mirroring human memory.
-              </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">4.5h</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Weekly Focus Hours Saved</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Background Agentic Scouts proactively handle calendar scheduling conflicts.</p>
             </div>
-
-            <!-- Diff 3 -->
-            <div class="diff-row">
-              <div class="diff-left">
-                <strong>Automation Engines</strong>
-                Automate simple linear software actions that break easily under API changes or minor details.
-              </div>
-              <div class="diff-right">
-                <strong>⚡ LifeOS Automation</strong>
-                Automates complete life workflows, running background scouts to actively monitor progress and coordinate schedules.
-              </div>
-            </div>
-
-            <!-- Diff 4 -->
-            <div class="diff-row">
-              <div class="diff-left">
-                <strong>Standard Planners</strong>
-                Act as static checklists that passively record goals and milestones, requiring manual updates.
-              </div>
-              <div class="diff-right">
-                <strong>🎯 Active Planning</strong>
-                Continuously analyzes progress, adjusts timelines, models execution risks, and suggests steps to help achieve goals.
-              </div>
-            </div>
-
-            <!-- Diff 5 -->
-            <div class="diff-row">
-              <div class="diff-left">
-                <strong>Single-Task Platforms</strong>
-                Solve a single narrow utility, increasing app fatigue and scattered information across devices.
-              </div>
-              <div class="diff-right">
-                <strong>🔗 Central Intelligence Layer</strong>
-                Acts as a single brain connecting every part of your personal and professional digital environment.
-              </div>
-            </div>
-
           </div>
         </div>
 
-        <!-- Core System Components -->
-        <h2>Core System Components</h2>
-        <div class="features-detail-grid">
-          
-          <!-- Feature 1 -->
-          <div class="glass-card feature-detail-card">
-            <div class="feature-icon-wrapper">🧠</div>
-            <h3>Intelligence Hub</h3>
-            <p>Continuously ingests context, structures personal memories, and operates as your private intelligence database.</p>
-          </div>
-
-          <!-- Feature 2 -->
-          <div class="feature-detail-card glass-card">
-            <div class="feature-icon-wrapper">🛰️</div>
-            <h3>Agentic Scouts</h3>
-            <p>Autonomous background AI agents that proactively simulate scenarios, monitor targets, and execute scripts.</p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="feature-detail-card glass-card">
-            <div class="feature-icon-wrapper">🕸️</div>
-            <h3>Dynamic Knowledge Graph</h3>
-            <p>Connects notes, active goals, contacts, and memories semantically to reflect real-world relationships.</p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div class="feature-detail-card glass-card">
-            <div class="feature-icon-wrapper">⚡</div>
-            <h3>Action Engine</h3>
-            <p>Runs automated triggers, coordinates complex calendars, and optimizes habits based on cognitive load.</p>
-          </div>
-
-          <!-- Feature 5 -->
-          <div class="feature-detail-card glass-card">
-            <div class="feature-icon-wrapper">📊</div>
-            <h3>Habit & Energy Tracker</h3>
-            <p>Correlates daily subjective energy ratings and habit completion rates to discover your optimal working hours.</p>
-          </div>
-
-          <!-- Feature 6 -->
-          <div class="feature-detail-card glass-card">
-            <div class="feature-icon-wrapper">🎯</div>
-            <h3>Strategic Goal Planner</h3>
-            <p>Translates long-term visions into monthly milestones, weekly goals, and daily tasks.</p>
-          </div>
-        </div>
-
-        <!-- Visionary Scopes -->
-        <h2>Visionary Scopes</h2>
-        <div class="use-cases-grid">
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Personal Command Center
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Cognitive Load Optimization
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Autonomous Life Automations
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Long-Term Personal Growth
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Decision-Support Analytics
-          </div>
-          <div class="use-case-tag">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Proactive Future Simulation
-          </div>
-        </div>
-
-        <!-- Vision -->
-        <h2>Vision</h2>
-        <p style="color: var(--text-secondary);">
-          LifeOS aims to become the personal operating system for the AI era, where every individual has access to an intelligent companion capable of managing knowledge, coordinating tasks, supporting decisions, automating routine work, and helping them operate at their highest potential.
-        </p>
-
-        <!-- Quote -->
-        <div class="quote-box" style="border-color: rgba(0, 255, 213, 0.15); background: linear-gradient(135deg, rgba(0, 255, 213, 0.04), rgba(15, 18, 21, 0.1));">
-          <blockquote>
-            "Your Life. One System."
-          </blockquote>
-          <cite>LifeOS Tagline</cite>
-        </div>
-
-        <!-- Use Cases & Limitations -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-bottom: var(--space-xl); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
-          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green); background: rgba(0, 255, 213, 0.01);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
           <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>High-performance knowledge workers who want a single dashboard that integrates their calendar, notes, and tasks semantically.</li>
-            <li>Founders and executives who need an autonomous system to organize scattered brainstorming inputs (voice notes, text) into actionable projects.</li>
-            <li>Individuals seeking a privacy-first, local AI companion that acts as a second brain without sending personal life data to public LLM APIs.</li>
+            <li>Integrating peer-to-peer (P2P) sync to share select project branches securely with teams.</li>
+            <li>Enforcing offline-first LLM execution utilizing WebGPU-accelerated models.</li>
+            <li>Voice-driven journal parsing that auto-detects daily habit compliance.</li>
           </ul>
         </div>
-        
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-bottom: var(--space-xl); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
-          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Users who only need a simple to-do list app or those who are heavily reliant on highly collaborative, multi-user enterprise systems (like Jira or Asana) for team-based task management might find a unified personal OS overly complex for simple list-making.
-          </p>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../services/" class="about-skill-tag" style="text-decoration:none;">AI Consulting & Engineering</a>
+              <a href="../../autonomous-agents/" class="about-skill-tag" style="text-decoration:none;">Custom AI Agents</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../sunny-ai-companion/" class="about-skill-tag" style="text-decoration:none;">Sunny AI Companion</a>
+              <a href="../ojas-ai/" class="about-skill-tag" style="text-decoration:none;">Tvira Receptionist</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-coaching-centers/" class="about-skill-tag" style="text-decoration:none;">Coaching Centers</a>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">AI Automation India</a>
+            </div>
+          </div>
         </div>
 
         <!-- FAQ Section -->
@@ -1070,12 +923,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -1085,7 +938,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -1118,12 +971,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -1134,7 +987,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -1174,12 +1027,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -1189,7 +1042,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -1261,11 +1114,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -1294,7 +1147,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -1345,18 +1198,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

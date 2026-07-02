@@ -236,157 +236,161 @@
           </table>
         </div>
 
-        <!-- Problem -->
+        <!-- Business Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             In an increasingly digital era, children are exposed to search engines and conversational artificial intelligence systems built exclusively for adult audiences. This creates significant structural challenges. First, standard large language models (LLMs) are trained on massive corporate and public datasets, meaning their default responses are dense and lack the pedagogical sensitivity required for child comprehension. When a young user asks a simple question, the response is often filled with complex terminology that disengages young minds.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Second, unmoderated internet exploration is inherently unsafe. Adult LLMs lack safety guardrails tailored to children. Parents and educators face a difficult choice: withhold the power of conversational AI completely or expose children to unmoderated systems that are not optimized for safety or education. This gap highlighted the urgent need for a bespoke solution.
+            Second, unmoderated internet exploration is inherently unsafe. Adult LLMs lack safety guardrails tailored to children. Parents and educators face a difficult choice: withhold the power of conversational AI completely or expose children to unmoderated systems that are not optimized for safety or education.
           </p>
         </div>
 
         <!-- Business Context -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
           <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Originyx, under the leadership of Sagar M, recognized a critical market opportunity to bridge the gap between advanced AI capabilities and early childhood education. Educational institutions and parents were actively seeking secure, scalable platforms that offered interactive learning without the risks associated with open-ended AI models. 
-          </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            The objective was to create a commercially viable, white-labeled solution that schools and learning centers could deploy securely. By positioning Sunny AI Companion as a "walled garden" for cognitive exploration, Originyx aimed to capture a niche yet rapidly expanding sector of the EdTech market.
+            Originyx, under the leadership of Sagar M, recognized a critical market opportunity to bridge the gap between advanced AI capabilities and early childhood education. Educational institutions and parents were actively seeking secure, scalable platforms that offered interactive learning without the risks associated with open-ended AI models. The objective was to create a commercially viable, white-labeled solution that schools and learning centers could deploy securely.
           </p>
         </div>
 
-        <!-- Technical Architecture -->
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Sunny AI Companion was built by **Originyx** under the technical direction of founder **Sagar M** as a safe, walled-garden educational AI assistant.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The platform provides children with a friendly conversational agent ("Sunny") that simplifies complex scientific and historical topics into story-driven explanations while enforcing strict moderation guardrails to filter out inappropriate subject matters.
+          </p>
+        </div>
+
+        <!-- Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            To guarantee absolute safety, response consistency, and high availability, Sagar M architected a robust backend leveraging Python and FastAPI. The architecture separates concerns into specialized microservices, ensuring that content moderation operates independently from the core language generation model.
+            Sagar M designed a multi-layered safety check gateway running asynchronously on Python to moderate inputs and outputs in real-time:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
             <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
-              <li style="color: var(--text-secondary);"><strong>API Gateway & Routing:</strong> Built with FastAPI to handle asynchronous requests, providing sub-second latency for chat interactions.</li>
-              <li style="color: var(--text-secondary);"><strong>LLM Orchestration:</strong> LangChain is utilized to manage conversational memory and dynamically inject pedagogical context into the prompt payloads.</li>
-              <li style="color: var(--text-secondary);"><strong>Data Persistence:</strong> A highly scalable PostgreSQL database manages user sessions, chat histories, and anonymized analytics for educator dashboards.</li>
-              <li style="color: var(--text-secondary);"><strong>Security Layer:</strong> Pydantic Guardrails strictly validate outputs, ensuring that the model's responses adhere to pre-defined vocabulary and safety constraints.</li>
+              <li><strong>Pre-Moderation Handler:</strong> Scans user text payloads against deterministic blocklists and semantic intent classifiers in FastAPI before sending queries to the LLM.</li>
+              <li><strong>Prompt Sandbox:</strong> Wraps user queries in child-friendly system prompts detailing language simplicity parameters.</li>
+              <li><strong>Post-Moderation Validator:</strong> Scans generated tokens utilizing Pydantic output validation to detect and scrub hallucinations or links before final presentation.</li>
             </ul>
           </div>
-        </div>
-
-        <!-- Workflow -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Workflow</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The data flow within Sunny AI Companion is meticulously designed to prioritize child safety and response accuracy. Every interaction passes through a multi-layered pipeline:
-          </p>
-          <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); color: var(--text-secondary);">
-            <li><strong>Input Ingestion:</strong> The child submits a query via the interactive frontend.</li>
-            <li><strong>Pre-Moderation Check:</strong> Custom Python scripts evaluate the input against a strict database of prohibited terms and topics.</li>
-            <li><strong>Contextual Prompt Engineering:</strong> If safe, the query is combined with system prompts that instruct the LLM to respond as "Sunny", maintaining a friendly, educational tone.</li>
-            <li><strong>Inference & Generation:</strong> The LLM generates a response based on the engineered prompt.</li>
-            <li><strong>Post-Moderation Sandbox:</strong> The output is scanned for hallucinations or inappropriate links before being delivered.</li>
-            <li><strong>Audit Logging:</strong> The transaction is securely logged into the PostgreSQL database for parental oversight.</li>
-          </ol>
         </div>
 
         <!-- Technology Stack -->
         <div>
           <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
-          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); margin-top: 0; margin-bottom: var(--space-lg);">
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🐍</div>
               <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Python & FastAPI</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Powers the high-performance asynchronous backend, ensuring rapid response times and scalable API endpoints.</p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Powers the backend API layer and hosts async validation guardrail routines.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🗄️</div>
               <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">PostgreSQL</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Provides robust, relational data storage for user accounts, session tracking, and secure audit logs.</p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Maintains student accounts, session logs, and parental dashboard histories.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🧠</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">LangChain & LLMs</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Orchestrates complex conversational flows, memory management, and dynamic prompt injection.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">LangChain & OpenAI</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Orchestrates conversational memory and simplifies text responses into stories.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🛡️</div>
               <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Pydantic Guardrails</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Enforces strict data validation and structural constraints on the AI's outputs to guarantee safety.</p>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Enforces structural type validation on outbound JSON objects to prevent leaks.</p>
             </div>
           </div>
         </div>
 
-        <!-- Use Cases & Limitations -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
-          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Interactive tutoring applications for young learners (ages 5-12) where complex topics are explained via storytelling.</li>
-            <li>EdTech platforms for primary schools requiring a safe, walled-garden AI capable of strict conversational boundaries.</li>
-            <li>Parent-controlled educational apps where adult supervisors need detailed audit logs of interactions and safety adherence.</li>
-          </ul>
-        </div>
-        
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
-          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            This architecture restricts the model's vocabulary and topics deliberately. It is highly unsuitable for general-purpose high school or university research applications where advanced, uncensored domain knowledge and deep factual retrieval across unrestricted web sources are necessary.
-          </p>
-        </div>
-
         <!-- Implementation -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The implementation phase led by Sagar M at Originyx focused on iterative prototyping and rigorous security testing. The backend was developed using FastAPI to handle concurrent user connections seamlessly. Special attention was paid to the moderation pipelines, where regex-based filtering was combined with semantic analysis to catch nuanced inappropriate content.
-          </p>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            The frontend interface was crafted with a focus on accessibility and child-friendly design principles. Large, readable fonts and intuitive interactive elements were integrated to ensure young users could navigate the application effortlessly. The integration with PostgreSQL was optimized using connection pooling to maintain performance during peak usage hours in classrooms.
-          </p>
-        </div>
-
-        <!-- Challenges -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Challenges & Solutions</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            <strong style="color: var(--rose);">Challenge:</strong> One of the most significant hurdles was preventing the LLM from generating "jailbreak" responses—situations where users could trick the AI into bypassing its safety constraints. <br>
-            <strong style="color: var(--green);">Solution:</strong> We implemented a dual-layer moderation system. The initial layer uses deterministic filtering via Python scripts, while a secondary lightweight ML model evaluates the semantic intent of the query before it reaches the main generation engine.
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The technical deployment of Sunny AI Companion by Originyx, led by Sagar M, addressed two primary system bottlenecks:
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>1. Jailbreak Mitigation:</strong> Standard LLMs can be tricked into generating adult content using adversarial prompts. Sagar M designed a dual-layer check combining deterministic string matches with a semantic classification pass to intercept prompt attacks.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            <strong style="color: var(--rose);">Challenge:</strong> Balancing latency with comprehensive moderation.<br>
-            <strong style="color: var(--green);">Solution:</strong> By leveraging FastAPI's asynchronous capabilities and parallelizing the pre-moderation checks, we maintained an average response time of under 1.2 seconds without compromising security.
+            <strong>2. Latency Optimization:</strong> Multi-tiered moderation checks threatened to make the conversational agent feel laggy. We utilized FastAPI's asynchronous task scheduling to run pre-moderation checks in parallel, keeping response times under 1.2 seconds.
           </p>
         </div>
 
-        <!-- Results -->
+        <!-- Business Impact -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results & Impact</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Sunny AI Companion successfully transitioned from a proof-of-concept to a robust platform trusted by early pilot programs. The integration of cutting-edge technologies by Originyx yielded measurable improvements in educational engagement.
-          </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">99.9%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Safety Compliance</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Successfully blocked inappropriate content during extensive beta testing.</p>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Blocked adult or inappropriate subjects during pilot sandbox evaluations.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">60%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Engagement Increase</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Observed increase in sustained session lengths for interactive story creation.</p>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Observed increase in sustained student interaction during storytelling loops.</p>
             </div>
           </div>
         </div>
 
-        <!-- Future Improvements -->
+        <!-- Future Roadmap -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Improvements</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Moving forward, Sagar M and the Originyx team are exploring the integration of multi-modal capabilities, allowing Sunny to analyze and respond to images or drawings submitted by the child. Additionally, we plan to enhance the analytics dashboard, providing educators with deeper insights into learning patterns and cognitive milestones using advanced data visualization techniques powered by Python and PostgreSQL.
-          </p>
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Integrating multi-modal capabilities to analyze drawings and visual homework.</li>
+            <li>Enabling self-hosted offline execution utilizing WebGPU-accelerated models.</li>
+            <li>Releasing an open-source library of child-safe prompt templates.</li>
+          </ul>
         </div>
 
-      </div>
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../services/" class="about-skill-tag" style="text-decoration:none;">AI Consulting & Engineering</a>
+              <a href="../../autonomous-agents/" class="about-skill-tag" style="text-decoration:none;">Custom AI Agents</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../lifeos/" class="about-skill-tag" style="text-decoration:none;">LifeOS</a>
+              <a href="../ojas-ai/" class="about-skill-tag" style="text-decoration:none;">Tvira Receptionist</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-coaching-centers/" class="about-skill-tag" style="text-decoration:none;">Coaching Centers</a>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">AI Automation India</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does Sunny AI Companion guarantee safety?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                The platform runs a dual-layer moderation pipeline. Deterministic filters detect explicit prohibited terms immediately, while a semantic classification pass evaluates the overall intent of student questions before sending them to the generative model.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Can educators or parents review chat logs?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. User session records and transcript logs are written securely to a PostgreSQL database, allowing parents and supervisors to inspect student conversation patterns through an administrative interface.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Is this app suitable for teenagers?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Sunny AI Companion is optimized for early childhood education (ages 5-12). It restricts advanced vocabulary and uncensored internet searches, making it less ideal for high school students who require unrestricted academic research tools.
+              </p>
+            </div>
+          </div>
+        </div>
 
       <!-- Right Column: Tech Stack Panel -->
       <div class="project-sidebar">
@@ -488,12 +492,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -503,7 +507,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -536,12 +540,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -552,7 +556,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -592,12 +596,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -607,7 +611,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -679,11 +683,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -712,7 +716,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -763,18 +767,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

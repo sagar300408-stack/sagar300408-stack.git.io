@@ -246,106 +246,95 @@
           </table>
         </div>
 
-        <!-- The Problem -->
+        <!-- Business Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Modern scaling businesses use an average of ten to fifteen disconnected software tools to run daily operations. Sales activities live in customer relationship management (CRM) databases, engineering tasks are tracked in issue boards, marketing metrics accumulate in analytics suites, and customer support conversations reside in separate help desks. This software fragmentation creates extensive operational silos.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Because these tools do not natively communicate, organizations face significant friction. Founders and managers spend up to 20% of their workweeks manually copying records, hunting for status updates, and logging metrics across platforms. Important operational bottlenecks, such as support response delays, product delivery issues, and sales pipeline stagnation, are often identified too late. Reactive management becomes the standard mode of operation, causing customer churn, team misalignment, and lost revenue opportunities.
+            Because these tools do not natively communicate, organizations face significant friction. Founders and managers spend up to 20% of their workweeks manually copying records, hunting for status updates, and logging metrics across platforms. Important operational bottlenecks, such as support response delays, product delivery issues, and sales pipeline stagnation, are often identified too late.
           </p>
         </div>
 
-        <!-- Our Solution -->
+        <!-- Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Organizations operating in hyper-competitive markets require real-time visibility to manage resources effectively. Information latency causes operational decay. High-growth startups, agency collectives, and professional services groups need a single operational pane to detect client delivery friction and optimize team performance without changing their entire software stack.
+          </p>
+        </div>
+
+        <!-- Solution -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Mission Control by Originyx acts as a unified digital nervous system for your business. Instead of forcing your teams to migrate to a new, unfamiliar software package, Mission Control connects to your existing software stack using secure webhooks, scheduled API polling scripts, and direct database adapters.
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Mission Control was built by <strong>Originyx</strong> under the technical direction of founder <strong>Sagar M</strong>. It is an operational command dashboard and business intelligence platform that integrates fragmented SaaS tools into a single database.
           </p>
-          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
-            Mission Control empowers organizations to:
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The platform connects to HubSpot, Jira, Slack, and GitHub via secure webhooks, aggregating telemetry data live to calculate department performance metrics, build executive summaries, and generate predictive risk alerts.
           </p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Consolidate performance metrics from sales, engineering, and support into a single dashboard.</li>
-            <li>Monitor live system events, conversion trends, and team productivity markers in real-time.</li>
-            <li>Detect hidden workflow friction, operational bottlenecks, and client delivery risks automatically.</li>
-            <li>Receive strategic, data-backed recommendations for resource planning and risk mitigation.</li>
-            <li>Generate plain-language executive reports that synthesize data across departments instantly.</li>
-          </ul>
         </div>
 
-        <!-- Architecture Section -->
+        <!-- Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture & Pipeline Workflow</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            To maintain high data integrity and absolute responsiveness, Mission Control uses a multi-tier operational pipeline. This setup processes events at scale, runs logical checks, and feeds live information back to dashboards:
+            Sagar M designed an event-driven, decoupled microservices model to process high-frequency webhooks without degrading API responsiveness:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
-            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
-              <li>
-                <strong>Unified Ingestion Engine</strong>: Collects event payloads via webhook endpoints and API polling routines, filtering out noise and standardizing payload schemas across tools.
-              </li>
-              <li>
-                <strong>Operational Event Ledger</strong>: Commits normalized events to a PostgreSQL database, tracking user actions, milestone achievements, and operational timestamps chronologically.
-              </li>
-              <li>
-                <strong>Real-Time Analytics & WebSocket Layer</strong>: Broadcasts critical metric updates and user status changes instantly via WebSocket connections, keeping team views synchronized.
-              </li>
-              <li>
-                <strong>AI Inference & Reasoning Node</strong>: Runs background analysis jobs that compare current operational speeds against historical averages to locate lag and predict risks.
-              </li>
-            </ol>
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li><strong>Ingestion Router:</strong> A lightweight TypeScript endpoint that ingests payloads, cleans schema variance, and pushes events to a Redis queue.</li>
+              <li><strong>Asynchronous Processing Engine:</strong> Celery workers write structured log records into a PostgreSQL datastore.</li>
+              <li><strong>WebSocket Broadcast Manager:</strong> Distributes live state updates to the React client, ensuring multi-user coordination.</li>
+            </ul>
           </div>
-          <p style="color: var(--text-secondary); line-height: 1.8;">
-            By separating ingestion, storage, live delivery, and AI inference, Mission Control maintains sub-second responsiveness while running resource-intensive forecasting and summarization algorithms.
-          </p>
         </div>
 
-        <!-- Key Features Detail -->
+        <!-- Technology Stack -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
           <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🖥️</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Unified Dashboard</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Aggregates operational indicators across sales pipeline, support ticket queues, marketing campaigns, and active engineering sprints.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">TypeScript & Node.js</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Powers the real-time event router and active WebSocket streaming nodes.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🧠</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">AI Intelligence</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Employs advanced language and reasoning models to analyze database events, detecting operational bottlenecks and capacity constraints.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">PostgreSQL & Redis</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Provides historical transactional logging and handles message brokers for webhook queues.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📡</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Real-Time Tracking</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Tracks key activity indicators, ticket volumes, page engagement, and revenue fluctuations live using performant WebSocket connections.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">React & Next.js</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Builds the executive dashboard interface featuring real-time event widgets.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🔔</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Intelligent Alerts</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Filters operational noise and compiles prioritized event notifications, highlighting anomalies such as spikes in ticket response times.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🤖</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Decision Engine</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Calculates resource allocation strategies and mitigations when projects are flagged at risk, recommending team adjustments.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📋</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Executive Insights</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Translates deep multi-platform event logs into high-level, human-readable briefs for executive officers and founders.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">OpenAI & LangChain</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Generates plain-text briefs summarizing ticket backlogs and weekly performance metrics.</p>
             </div>
           </div>
         </div>
 
-        <!-- Business Impact & Use Cases -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact & Case Performance</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Deploying Mission Control by Originyx unlocks new levels of organizational performance, transforming business management from reactive responses to proactive strategy. Organizations experience significant, measurable improvements:
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The technical deployment of Mission Control by Originyx, led by Sagar M, overcame two primary operational engineering challenges:
           </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>1. Ingestion Rate Limiting:</strong> High-frequency GitHub commit and Jira updates threatened database lockouts. Sagar M implemented Redis buffering streams to throttle database operations during development sprints.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>2. API Schema Drift:</strong> Outbound payloads from external SaaS products changes without notice. We designed a dynamic validation layer utilizing TypeScript schemas to quarantine unexpected fields, maintaining system uptime.
+          </p>
+        </div>
+
+        <!-- Business Impact -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Deploying Mission Control has yielded immediate operational improvements across teams:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">15+ Hours</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Saved Per Week</span>
@@ -359,21 +348,36 @@
           </div>
         </div>
 
-        <!-- Use Cases & Limitations -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
-          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
           <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>High-growth startups tracking development sprints, sales pipelines, and customer support queues in a single room.</li>
-            <li>Professional agencies integrating client databases, developer milestones, and timesheet logs to evaluate team allocation margins.</li>
-            <li>Digital transformations for legacy companies migrating to modern cloud-native systems.</li>
+            <li>Integrating natural-language search vectors to query historical event charts dynamically.</li>
+            <li>Enforcing strict two-way sync parameters to edit tasks directly from the command center.</li>
+            <li>Open-sourcing the Redis event validation routing middleware.</li>
           </ul>
         </div>
-        
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
-          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Micro-businesses with a handful of employees operating primarily out of single apps (like just a shared inbox or simple spreadsheets) do not have the complex data silos necessary to justify an enterprise-grade ingestion and dashboarding engine.
-          </p>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../services/" class="about-skill-tag" style="text-decoration:none;">AI Consulting & Engineering</a>
+              <a href="../../ai-workflow-automation/" class="about-skill-tag" style="text-decoration:none;">AI Workflow Automation</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../shadowos/" class="about-skill-tag" style="text-decoration:none;">ShadowOS</a>
+              <a href="../swiftroute-ai/" class="about-skill-tag" style="text-decoration:none;">SwiftRoute AI</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">AI Automation India</a>
+              <a href="../../ai-for-logistics/" class="about-skill-tag" style="text-decoration:none;">Logistics AI</a>
+            </div>
+          </div>
         </div>
 
         <!-- FAQ Section -->
@@ -516,12 +520,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -531,7 +535,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -564,12 +568,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -580,7 +584,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -620,12 +624,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -635,7 +639,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -707,11 +711,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -740,7 +744,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -791,18 +795,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

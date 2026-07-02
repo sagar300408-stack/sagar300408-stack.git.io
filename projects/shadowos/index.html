@@ -263,33 +263,44 @@
           </table>
         </div>
 
-        <!-- Problem -->
+        <!-- Business Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Modern organizations are drowning in process complexity. While teams use modern SaaS platforms (like CRMs, accounting portals, and ticketing tools), a significant amount of day-to-day operations occurs in 'shadow workflows'—namely local spreadsheets, manual email copy-pasting, chat threads, and unrecorded personal checklists. This creates massive fragmentation where leadership has zero visibility into how work is actually executed.
           </p>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
-            As explored by <strong style="color: var(--text-primary);">Sagar M</strong> and the team at <strong style="color: var(--text-primary);">Originyx</strong>, this lack of process clarity leads to silent revenue leakage due to process delays, double-handling of customer records, and unresolved bottlenecks. When companies try to automate workflows, they often target the wrong processes, wasting engineering capital.
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            This lack of process clarity leads to silent revenue leakage due to process delays, double-handling of customer records, and unresolved bottlenecks. When companies try to automate workflows, they often target the wrong processes, wasting engineering capital.
           </p>
         </div>
 
-        <!-- Business Outcome -->
+        <!-- Business Context -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
-          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Outcome</h2>
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
-            The enterprise environment requires continuous operational intelligence. Without diagnostic data, automation initiatives fail because they build on top of broken, unoptimized workflows. Originyx designed ShadowOS as an observation and diagnostic layer to identify double-handling and repetitious data transfers.
+            The enterprise environment requires continuous operational intelligence. Without diagnostic data, automation initiatives fail because they build on top of broken, unoptimized workflows. Process mining is highly complex and typically requires expensive enterprise tools that are difficult to integrate.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Operations teams, growth-stage startups, and enterprise organizations in real estate and professional services need a platform like ShadowOS to compute financial waste and build clean transition blueprints for software developers.
+            Operations teams, growth-stage startups, and enterprise organizations in real estate and professional services need a lightweight, non-intrusive diagnostic platform to identify double-handling and compute financial waste before writing code.
           </p>
         </div>
 
-        <!-- Technical Architecture -->
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            ShadowOS was built by **Originyx** under the technical leadership of founder **Sagar M** as a secure, non-intrusive operational intelligence platform. It connects to existing corporate data streams, system logs, and communication archives to map out the 'shadow operations' of an organization.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            By analyzing hidden inefficiencies, estimating manual task costs, and generating future-state workflow simulations, ShadowOS provides leadership teams with a clear, data-driven blueprint for automation before any code is written.
+          </p>
+        </div>
+
+        <!-- Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            ShadowOS uses a secure, non-intrusive pipeline powered by robust backend technologies, spearheaded by Sagar M. The backend relies heavily on <strong style="color: var(--text-primary);">FastAPI</strong> for high-performance, asynchronous REST APIs and <strong style="color: var(--text-primary);">PostgreSQL</strong> for complex relational queries and event storage.
+            ShadowOS uses a secure, non-intrusive pipeline powered by robust backend technologies. Speared by Sagar M, the system's architecture runs asynchronous process mining nodes connected to a central relational database:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
             <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
@@ -304,21 +315,6 @@
               </li>
             </ul>
           </div>
-        </div>
-
-        <!-- Implementation Overview -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Implementation Overview</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The workflow within ShadowOS is seamless and automated:
-          </p>
-          <ol style="padding-left: var(--space-lg); color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li><strong>Ingestion:</strong> Telemetry from CRMs and internal tools flows into the FastAPI endpoints.</li>
-            <li><strong>Normalization:</strong> Pydantic models validate and structure data in PostgreSQL.</li>
-            <li><strong>Analysis:</strong> AI reasoning engines flag operational waste and compliance risks.</li>
-            <li><strong>Simulation:</strong> The platform runs 'what-if' automation scenarios.</li>
-            <li><strong>Reporting:</strong> Executive intelligence reports are synthesized, detailing ROI and prioritizing development.</li>
-          </ol>
         </div>
 
         <!-- Technology Stack -->
@@ -345,27 +341,22 @@
         </div>
 
         <!-- Implementation -->
-        <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif);">Implementation</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             The implementation of ShadowOS by Originyx involved integrating numerous fragmented APIs into a unified event stream. Sagar M and the engineering team deployed FastAPI microservices to handle concurrent webhooks from platforms like Salesforce and Jira. Utilizing process mining algorithms, the system translates timestamped activities into visual workflow graphs.
           </p>
-        </div>
-
-        <!-- Challenges -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Challenges</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
-            A major challenge was dealing with unstructured, missing, or inconsistent event data across different enterprise tools. Normalizing this into PostgreSQL required dynamic schema mapping.
+            <strong>Challenge 1: Unstructured Telemetry:</strong> Normalizing inconsistent logs from Salesforce, Jira, and Slack required building dynamic Pydantic mapping models in FastAPI.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Additionally, performing graph analysis on millions of nodes in real-time posed latency issues. We introduced asynchronous processing and optimized graph queries to reduce analysis times by 80%.
+            <strong>Challenge 2: Query Latency:</strong> Performing graph analysis on millions of nodes in real-time posed database bottlenecks. Sagar M introduced asynchronous processing and optimized PostgreSQL queries, reducing process mining runtimes by 80%.
           </p>
         </div>
 
-        <!-- Results -->
+        <!-- Business Impact -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">65%</h3>
@@ -380,12 +371,34 @@
           </div>
         </div>
 
-        <!-- Future Improvements -->
+        <!-- Future Roadmap -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Improvements</h2>
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
             Looking ahead, Originyx plans to introduce automated remediation agents. Once a bottleneck is identified, ShadowOS will not only simulate the fix but also generate and deploy the Python automation scripts directly into the client's environment. We are also expanding PostgreSQL integrations with vector databases to support semantic search over workflow archives.
           </p>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../ai-workflow-automation/" class="about-skill-tag" style="text-decoration:none;">AI Workflow Automation</a>
+              <a href="../../autonomous-agents/" class="about-skill-tag" style="text-decoration:none;">Autonomous Agent Orchestration</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../hunteros/" class="about-skill-tag" style="text-decoration:none;">HunterOS</a>
+              <a href="../mission-control/" class="about-skill-tag" style="text-decoration:none;">Mission Control</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-logistics/" class="about-skill-tag" style="text-decoration:none;">Logistics AI</a>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">Enterprise India</a>
+            </div>
+          </div>
         </div>
 
         <!-- FAQ Section -->
@@ -522,12 +535,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -537,7 +550,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -570,12 +583,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -586,7 +599,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -626,12 +639,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -641,7 +654,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -679,13 +692,13 @@
 
         <div class="form-group">
           <label for="req-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="req-name" name="name" required placeholder="John Doe">
+          <input type="text" id="req-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

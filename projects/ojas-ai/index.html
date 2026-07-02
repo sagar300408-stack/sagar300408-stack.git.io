@@ -273,33 +273,44 @@
           </table>
         </div>
 
-        <!-- The Problem -->
+        <!-- Business Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Educational institutes and coaching centres face severe administrative friction during admission seasons. Front-desk personnel are frequently overwhelmed by repetitive queries regarding course structures, tuition fees, batch schedules, faculty qualifications, and registration deadlines. Consequently, staff members struggle to divide their time between answering initial inquiries and managing current students, leading to long response delays.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Furthermore, parent and student inquiries do not respect normal office hours. A significant portion of online queries and messages arrive late in the evening or during weekends when offices are closed. Without immediate engagement, prospective candidates quickly pivot to competing institutes. Missed calls, fragmented WhatsApp chats, and delayed email replies result in a high lead drop-off rate, costing centres thousands of dollars in lost tuition revenue. Additionally, human agents often deliver inconsistent details about discounts, slots, and schedules, introducing compliance risks. This lack of an optimized funnel underscored the need for a robust conversational AI solution by <strong>Originyx</strong>.
+            Furthermore, parent and student inquiries do not respect normal office hours. A significant portion of online queries and messages arrive late in the evening or during weekends when offices are closed. Without immediate engagement, prospective candidates quickly pivot to competing institutes. Missed calls, fragmented WhatsApp chats, and delayed email replies result in a high lead drop-off rate, costing centres thousands of dollars in lost tuition revenue. Additionally, human agents often deliver inconsistent details about discounts, slots, and schedules, introducing compliance risks.
           </p>
         </div>
 
-        <!-- Business Outcome -->
+        <!-- Business Context -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
-          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Outcome</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            In the highly competitive EdTech and physical coaching space, immediate lead response time directly correlates to conversion rates. Parents evaluating tutoring academies for their children are highly likely to enroll with the first institute that provides clear, accurate pricing and batch availability details. <strong>Sagar M</strong> and the team at Originyx realized that traditional IVR systems and basic decision-tree chatbots were falling short, lacking the semantic understanding to parse nuanced questions like, "Do you have a weekend crash course for JEE Mains that starts next month?"
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            In the highly competitive EdTech and physical coaching space, immediate lead response time directly correlates to conversion rates. Parents evaluating tutoring academies for their children are highly likely to enroll with the first institute that provides clear, accurate pricing and batch availability details.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            The objective was clear: architect an AI virtual receptionist capable of handling complex natural language inquiries 24/7, converting anonymous traffic into qualified leads, and seamlessly synchronizing with existing institute CRMs and PostgreSQL databases.
+            Sagar M and the team at Originyx realized that traditional IVR systems and basic decision-tree chatbots were falling short, lacking the semantic understanding to parse nuanced questions like, "Do you have a weekend crash course for JEE Mains that starts next month?" The objective was clear: architect an AI virtual receptionist capable of handling complex natural language inquiries 24/7.
           </p>
         </div>
 
-        <!-- Technical Architecture -->
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Tvira Receptionist (Ojas.ai) was built by **Originyx** under the technical leadership of founder **Sagar M** as an autonomous conversational agent for coaching centers and training institutes. Operating 24/7 on WhatsApp and web chat, the system answers syllabus, fee, and timing queries with approved brochure data.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The solution employs an advanced lead-capture flow that collects student contact records, academic goals, and preferred slots, routing qualified records directly to the admissions team's CRM while scheduling follow-up consultation calls.
+          </p>
+        </div>
+
+        <!-- Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Tvira Receptionist leverages a cutting-edge Retrieval-Augmented Generation (RAG) pipeline built to ensure zero hallucinations. Designed with a microservices approach by Originyx, the core logic is powered by FastAPI, ensuring high-throughput and low-latency responses necessary for real-time messaging on platforms like WhatsApp.
+            Tvira Receptionist leverages a cutting-edge Retrieval-Augmented Generation (RAG) pipeline built to ensure zero hallucinations. Designed with a microservices approach by Originyx, the core logic is powered by FastAPI, ensuring high-throughput and low-latency responses:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
             <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
@@ -317,21 +328,6 @@
               </li>
             </ul>
           </div>
-        </div>
-
-        <!-- Workflow -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation Overview</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The lifecycle of a user interaction with Tvira Receptionist is highly optimized for conversion:
-          </p>
-          <ol style="padding-left: var(--space-lg); color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            <li><strong>Entry Point:</strong> A prospective student sends a WhatsApp message or interacts with the website widget.</li>
-            <li><strong>Intent Recognition:</strong> The FastAPI backend receives the webhook payload, parses the text, and identifies the core intent (e.g., inquiry, fee structure, booking a demo).</li>
-            <li><strong>Knowledge Retrieval:</strong> Relevant course details are pulled from the vector store. The response is formulated by the LLM and sent back to the user within seconds.</li>
-            <li><strong>Lead Capture Trigger:</strong> Once the user indicates strong intent, the AI systematically asks for their name, grade, and contact details.</li>
-            <li><strong>CRM Sync:</strong> Captured leads are serialized and inserted into a PostgreSQL table and forwarded via webhook to the institute's CRM system for human follow-up.</li>
-          </ol>
         </div>
 
         <!-- Technology Stack -->
@@ -357,37 +353,27 @@
           </div>
         </div>
 
-        <!-- Deployment -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Deployment</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            During the implementation phase, <strong>Sagar M</strong> prioritized modularity. By abstracting the LLM provider interface, the system can seamlessly switch between OpenAI, Anthropic, or local open-source models depending on the client's data privacy requirements.
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            During the implementation phase at Originyx, Sagar M prioritized modularity. By abstracting the LLM provider interface, the system can seamlessly switch between OpenAI, Anthropic, or local open-source models depending on the client's data privacy requirements.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>Challenge 1: Context Window Exceeded:</strong> Multi-day conversation logs exceeded LLM context boundaries. Sagar M resolved this by implementing an intelligent semantic summary loop that condenses older chat segments while retaining critical customer attributes.
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            A major milestone in the development of Tvira Receptionist by Originyx was the integration of the WhatsApp Cloud API. Webhook verification, signature validation, and reliable message queuing were implemented to ensure zero message drops even during peak inquiry traffic spikes, such as right after national exam results are announced. The FastAPI application processes incoming requests asynchronously, preventing thread blocking and enabling massive concurrency.
+            <strong>Challenge 2: Multi-page Table Ingestion:</strong> Institute brochures contain complex PDF tuition schedules that lose formatting when parsed. We wrote custom OCR parsing scripts to map tabular pricing arrays cleanly into ChromaDB.
           </p>
         </div>
 
-        <!-- Challenges -->
+        <!-- Business Impact -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Challenges</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Building a production-ready conversational AI entails overcoming several technical hurdles:
-          </p>
-          <ul style="padding-left: var(--space-lg); color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li><strong>Mitigating Hallucinations:</strong> The most significant challenge was ensuring the AI never invents fee structures. This was solved by aggressively tuning the generation prompt to only output facts grounded in the retrieved ChromaDB chunks, and appending strict disclaimers for uncertain edge cases.</li>
-            <li><strong>Context Window Management:</strong> Long conversational threads could exceed token limits. We implemented an intelligent summarization buffer that condenses older chat history while preserving the user's core intent and demographic info.</li>
-            <li><strong>Parsing Complex Documents:</strong> Institutes often use messy PDFs with complex table structures for their schedules. Custom OCR and layout-aware parsing scripts were written to properly ingest these tables into vector formats.</li>
-          </ul>
-        </div>
-
-        <!-- Results -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results & Impact</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
             By deploying Tvira Receptionist within academic workflows, educational groups and coaching centers achieved substantial operational improvements. Originyx measured the following impact metrics across our pilot deployments:
           </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">45%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Enrollment Conversion Boost</span>
@@ -399,17 +385,36 @@
               <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Staff members are freed from answering repetitive queries, allowing focus on deep in-person counseling.</p>
             </div>
           </div>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Additionally, the platform ensures 100% response consistency. Every prospect receives the exact same, approved details regarding scholarship structures, early-bird discounts, and center policies, completely eliminating miscommunication and compliance risks.
-          </p>
         </div>
 
-        <!-- Future Improvements -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--text-primary); margin-bottom: var(--space-xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif);">Future Improvements</h2>
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
             The roadmap for Tvira Receptionist includes implementing voice AI capabilities for real-time inbound call handling, integrating natively with prominent EdTech LMS platforms, and introducing predictive analytics dashboards. These dashboards will analyze historical inquiry data stored in PostgreSQL to forecast admission trends and automatically suggest new course offerings to institute administrators.
           </p>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../ai-receptionist/" class="about-skill-tag" style="text-decoration:none;">AI Receptionist Service</a>
+              <a href="../../lead-generation-automation/" class="about-skill-tag" style="text-decoration:none;">Lead Generation Automation</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../sunny-ai-companion/" class="about-skill-tag" style="text-decoration:none;">Sunny AI Companion</a>
+              <a href="../lifeos/" class="about-skill-tag" style="text-decoration:none;">LifeOS</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-coaching-centers/" class="about-skill-tag" style="text-decoration:none;">Coaching Centers</a>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">AI Automation India</a>
+            </div>
+          </div>
         </div>
 
         <!-- Use Cases & Limitations -->
@@ -563,12 +568,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -578,7 +583,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -611,12 +616,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -627,7 +632,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -667,12 +672,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -682,7 +687,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -754,11 +759,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -787,7 +792,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -838,18 +843,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

@@ -48,12 +48,12 @@ function getModalsHtml(prefix) {
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -63,7 +63,7 @@ function getModalsHtml(prefix) {
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -96,12 +96,12 @@ function getModalsHtml(prefix) {
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -112,7 +112,7 @@ function getModalsHtml(prefix) {
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -152,12 +152,12 @@ function getModalsHtml(prefix) {
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -167,7 +167,7 @@ function getModalsHtml(prefix) {
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -239,11 +239,11 @@ function getModalsHtml(prefix) {
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -272,7 +272,7 @@ function getModalsHtml(prefix) {
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -323,18 +323,18 @@ function getModalsHtml(prefix) {
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

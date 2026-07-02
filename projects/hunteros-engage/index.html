@@ -279,159 +279,160 @@
           </table>
         </div>
 
-        <!-- The Problem -->
+        <!-- Business Problem -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
             Businesses lose customers every day, not because they have a poor product, but because conversations are forgotten, follow-ups never happen, appointments are missed, and valuable leads disappear before becoming customers.
           </p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-sm);">
-            <li>Customer inquiries are scattered across WhatsApp and phone calls.</li>
-            <li>Follow-ups depend on human memory and are often forgotten.</li>
-            <li>Leads become cold because businesses respond too late.</li>
-            <li>Meeting and site visit scheduling takes unnecessary time.</li>
-            <li>Sales teams have no complete view of customer conversations.</li>
-            <li>Business owners struggle to track conversions, appointments, and sales performance.</li>
-          </ul>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Customer inquiries are scattered across WhatsApp and phone calls, and manual follow-ups depend entirely on human memory. Because businesses respond too late, leads go cold, causing sales pipelines to stagnate.
+          </p>
         </div>
 
         <!-- Business Context -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Context</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
             Designed by Sagar M at Originyx, HunterOS Engage was conceived out of a crucial market gap: small and medium enterprises (SMEs) were drowning in manual conversational overhead. By leveraging robust frameworks like FastAPI and scalable persistence with PostgreSQL, Originyx aimed to bridge the gap between high-level CRM tools and accessible chat interfaces like WhatsApp. The objective was to create an autonomous pipeline capable of qualifying leads exactly when they are most engaged.
           </p>
         </div>
 
-        <!-- Our Solution -->
+        <!-- Solution -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            HunterOS Engage transforms customer communication into an intelligent sales process by acting as your AI-powered customer engagement team, available 24/7. It doesn't replace your sales team—it empowers them by organizing conversations, eliminating manual follow-ups, and ensuring every customer receives timely attention. Engineered at Originyx, this platform guarantees uninterrupted engagement.
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            HunterOS Engage was built by **Originyx** under the technical direction of founder **Sagar M** as an omnichannel customer engagement and sales automation platform.
           </p>
-          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
-            With HunterOS Engage, businesses can:
-          </p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>AI responds instantly to customer inquiries.</li>
-            <li>Every lead is automatically captured and qualified.</li>
-            <li>Meetings and site visits are scheduled without manual coordination.</li>
-            <li>Customer conversations are securely remembered for future interactions.</li>
-            <li>Automated follow-ups ensure no opportunity is forgotten.</li>
-            <li>A centralized dashboard provides complete visibility into leads, appointments, conversations, and business performance.</li>
-          </ul>
-        </div>
-
-        <!-- Workflow -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">The Workflow</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The workflow begins the moment a customer sends a message on WhatsApp or the Web Widget. The AI agent instantly processes the natural language input, matching it against business context. If the user indicates intent, the agent autonomously triggers the lead qualification protocol. Following qualification, the agent seamlessly invokes the scheduling API to offer immediate calendar slots, successfully converting a passive inquiry into an actionable appointment within minutes.
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The platform interfaces with WhatsApp and web chat interfaces, deploying conversational AI agents to qualify inbound leads, schedule meetings, automate recurring follow-ups, and structure records inside a centralized visual dashboard.
           </p>
         </div>
 
-        <!-- System Architecture Section (Expanded) -->
+        <!-- Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            HunterOS Engage uses a unified cognitive framework architected by Sagar M. The system operates on scalable infrastructure, blending real-time messaging with asynchronous task queues. The platform operates on these primary modules:
+            Sagar M designed an event-driven conversational routing layout to process incoming webhook events asynchronously:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
-            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
-              <li>
-                <strong>Omnichannel Ingestion Agent (FastAPI)</strong>: Natively connects to WhatsApp (via Twilio/Meta Business API) and Web Widgets. Built on FastAPI for high throughput, it manages incoming webhooks in real-time, matching messages to unified lead profiles.
-              </li>
-              <li>
-                <strong>Contextual Memory Hub (PostgreSQL + Supabase)</strong>: Keeps structured records of customer choices, past interactions, and requirements. By leveraging PostgreSQL via Supabase, it ensures the AI rapidly references prior details on subsequent follow-ups.
-              </li>
-              <li>
-                <strong>Autonomous Scheduling Node</strong>: Connects with booking platforms (Google Calendar/Cal.com) through secure OAuth flows to automatically propose open slots, coordinate, and reserve tours, meetings, or calls.
-              </li>
-            </ol>
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li><strong>Omnichannel Ingestion Agent (FastAPI):</strong> Connects natively to Twilio and Meta API endpoints, routing incoming customer text messages to worker nodes.</li>
+              <li><strong>Conversational Core (LangChain):</strong> Manages session storage and applies RAG context checks to verify prompt responses.</li>
+              <li><strong>Scheduling Node:</strong> Syncs directly with Google Calendar and Cal.com via OAuth2 integrations to propose open appointment slots.</li>
+            </ul>
           </div>
-          <p style="color: var(--text-secondary); line-height: 1.8;">
-            Intermediate lead logs and details are securely synced to the frontend dashboard built with React and TailwindCSS, giving business owners full operational visibility.
-          </p>
         </div>
 
-        <!-- Use Cases & Limitations -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
-          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Real estate agencies needing automated responses and site visit scheduling from WhatsApp ads.</li>
-            <li>Coaching centers managing student onboarding, queries, and class bookings.</li>
-            <li>Professional service firms (legal, accounting) looking to pre-qualify high-volume incoming leads without hiring more reception staff.</li>
-          </ul>
+        <!-- Technology Stack -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); margin-top: 0; margin-bottom: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">FastAPI & Python</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Handles asynchronous HTTP requests and runs worker processes for message queues.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">PostgreSQL & Supabase</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Hosts structured customer profiles, qualified lead tables, and session histories.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Twilio & Meta APIs</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Acts as the messaging provider, connecting FastAPI backend routers directly to WhatsApp.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">React & Tailwind</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Drives the unified lead tracking dashboard, visualization charts, and metric tables.</p>
+            </div>
+          </div>
         </div>
-        
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
-          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The technical deployment of HunterOS Engage by Originyx, led by Sagar M, addressed two primary system hurdles:
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>1. Context Window Bloat:</strong> Long chat histories consumed excessive LLM tokens, slowing down response latencies. Sagar M implemented a rolling window memory cache that summary-vectorized older exchanges to preserve context bounds.
+          </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Businesses with an extremely small volume of high-value, bespoke client interactions (e.g. boutique investment banking) may find automated AI engagement too impersonal. It's built for scale and volume, not for handling deeply nuanced relationship-building requiring extensive human emotional intelligence.
+            <strong>2. Webhook Timeouts:</strong> WhatsApp Meta webhooks require 200 OK responses within 3 seconds, or they re-send messages. We integrated Celery and Redis message brokers to consume incoming payloads asynchronously, instantly freeing the FastAPI router.
           </p>
         </div>
 
-        <!-- Implementation & Challenges -->
+        <!-- Business Impact -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation & Challenges</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            During the development phase at Originyx, one of the primary technical hurdles was managing context windows for conversational AI during lengthy customer interactions. Retaining historical context without overflowing LLM token limits required designing a smart summarization and retrieval-augmented generation (RAG) pipeline. Furthermore, ensuring a seamless connection between the WhatsApp Meta API and our internal FastAPI infrastructure necessitated robust webhook security and asynchronous processing using Celery and Redis to prevent timeouts during peak traffic.
-          </p>
-        </div>
-
-        <!-- Key Features Detail -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
-          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">⚡</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Instant AI Responder</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Responds to customer queries instantly, 24 hours a day, 7 days a week, preventing cold leads.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📋</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Lead Qualification</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Conversational AI gathers customer intent, contact details, and qualifications automatically.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📅</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Auto-Scheduling</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Proposes open slots and registers appointments or site visits without manual steps.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🧠</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Persistent Memory</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Remembers customer requirements, past touchpoints, and custom notes for personalized follow-ups.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Business Impact & Results -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results & Impact</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Implementing HunterOS Engage has profoundly transformed how service businesses handle inbound flow. Whether a customer is ready to buy today or six months from now, the system remembers, follows up, and converts more conversations into lasting customer relationships.
-          </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">100%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Lead Capture Rate</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">No inquiry is missed. Every WhatsApp or web contact is automatically captured and qualified.</p>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Every inbound message is instantly structured into a lead profile.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
-              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">0</h3>
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">Zero</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Missed Follow-Ups</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">AI handles recurring follow-up loops so leads never go cold based on human memory gaps.</p>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">AI handles recurring follow-up loops so leads never go cold based on memory gaps.</p>
             </div>
           </div>
         </div>
-        
-        <!-- Future Improvements -->
+
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Integrating voice agents to manage inbound phone call qualifications natively.</li>
+            <li>Adding multi-lingual capability filters for local Indian dialects.</li>
+            <li>Enforcing predictive dashboards to forecast conversions based on chat sentiment logs.</li>
+          </ul>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../lead-generation-automation/" class="about-skill-tag" style="text-decoration:none;">Lead Generation Automation</a>
+              <a href="../../ai-receptionist/" class="about-skill-tag" style="text-decoration:none;">AI Receptionist</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../hunteros/" class="about-skill-tag" style="text-decoration:none;">HunterOS</a>
+              <a href="../ojas-ai/" class="about-skill-tag" style="text-decoration:none;">Tvira Receptionist</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-real-estate/" class="about-skill-tag" style="text-decoration:none;">Real Estate AI</a>
+              <a href="../../ai-for-coaching-centers/" class="about-skill-tag" style="text-decoration:none;">Coaching Centers</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Future Improvements</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Going forward, Originyx plans to expand the ecosystem of HunterOS Engage. Enhancements will include voice agent integration for handling direct inbound phone calls, deeper multi-lingual support tailored for diverse demographic regions, and advanced predictive analytics within the business dashboard to forecast conversion rates based on conversational sentiment analysis.
-          </p>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does the WhatsApp Lead Qualification agent work?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                The platform intercepts incoming messages using FastAPI. If a lead initiates a chat, the AI agent asks structured questions to identify budget, timeline, and product fit, then writes qualified leads directly to your database.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Does the platform connect directly to CRMs?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. Outbound webhooks and sync scripts write lead profiles, qualified responses, and calendar bookings into Supabase, HubSpot, or custom enterprise CRM suites.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Can we override the automated AI to chat manually?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. The centralized dashboard contains a "pause agent" trigger for each conversation, allowing sales reps to assume manual control of the WhatsApp stream instantly.
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -531,12 +532,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -546,7 +547,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -579,12 +580,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -595,7 +596,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -635,12 +636,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -650,7 +651,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -722,11 +723,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -755,7 +756,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -806,18 +807,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

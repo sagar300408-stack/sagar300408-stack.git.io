@@ -239,27 +239,42 @@
 
     <!-- Consulting Process -->
     <section class="services-process" style="margin-bottom: var(--space-3xl);">
-      <h2 style="font-family: var(--font-serif); text-align: center; margin-bottom: var(--space-xl);">Our Consulting Framework</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-lg);">
+      <h2 style="font-family: var(--font-serif); text-align: center; margin-bottom: var(--space-xl);">Our Architecture & Implementation Blueprint</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-2xl);">
         <div class="glass-card" style="padding: var(--space-xl);">
           <div style="font-size: 1.8rem; margin-bottom: var(--space-sm);">🔍</div>
-          <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">1. Audit</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We document your team's manual actions to extract process bottlenecks and calculate potential time savings.</p>
+          <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">1. Discovery Audit</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We conduct a workflow discovery process to analyze your current manual tasks, recording time spent and data formats to identify automation candidates.</p>
         </div>
         <div class="glass-card" style="padding: var(--space-xl);">
           <div style="font-size: 1.8rem; margin-bottom: var(--space-sm);">📐</div>
-          <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">2. Architecture</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We design the system model, selecting the best models, embedding chunk sizes, databases, and schemas.</p>
+          <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">2. System Design</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We design the system model under Sagar M's technical guidance, defining schema validation rules, RAG chunking parameters, and vector database pipelines.</p>
         </div>
         <div class="glass-card" style="padding: var(--space-xl);">
           <div style="font-size: 1.8rem; margin-bottom: var(--space-sm);">⚙️</div>
-          <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">3. Sprint Build</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We build out the backend loops, autonomous agents, database tables, RLS policy files, and responsive interfaces in fast sprints using Python, FastAPI, Next.js, and PostgreSQL.</p>
+          <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">3. Dev Sprint</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We write the backend routing using Python/FastAPI, construct multi-agent networks, design Supabase/PostgreSQL tables, and implement client dashboard interfaces.</p>
         </div>
         <div class="glass-card" style="padding: var(--space-xl);">
           <div style="font-size: 1.8rem; margin-bottom: var(--space-sm);">🚀</div>
           <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">4. Deployment</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We launch the infrastructure in your cloud environment (Vercel, AWS, etc.) and run thorough validation checks.</p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We launch the infrastructure in your cloud environment (AWS, GCP, Vercel) with strict tenant isolation, RBAC policy sets, and logging monitoring.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
+        <div class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: var(--space-xs);">Privacy & Data Sovereignty</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+            All client integrations run on zero-retention parameters. Client data is never sent to train public LLM models, and private data vector stores are isolated per database schema.
+          </p>
+        </div>
+        <div class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--cyan);">
+          <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: var(--space-xs);">Support & Telemetry SLA</h3>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+            Production code is integrated with structured error logging dashboards. Standard maintenance contracts include a 24-hour response SLA for prompt optimization and agent debugging.
+          </p>
         </div>
       </div>
     </section>
@@ -311,12 +326,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -326,7 +341,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -359,12 +374,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -375,7 +390,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -415,12 +430,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -430,7 +445,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -502,11 +517,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -535,7 +550,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -586,18 +601,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>

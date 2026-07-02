@@ -272,26 +272,38 @@
           </table>
         </div>
 
-        <!-- Problem & Business Context -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-2xl);">
+        <!-- Business Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
             Global supply chains and local logistics networks are facing unprecedented pressure due to rapid urbanization. Legacy dispatch systems and manual planning workflows are no longer sufficient. Dispatchers are forced to manually coordinate driver shifts, customer-specific delivery windows, vehicle capacity limits, and special equipment constraints. This administrative bottleneck results in poor vehicle capacity utilization, excessive mileage, and high operational overhead.
           </p>
         </div>
         
+        <!-- Business Context -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
-          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Outcome</h2>
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            The modern logistics industry demands agility. <strong>Originyx</strong> recognized that enterprise operations needed a proactive orchestration platform. Through extensive consultations, <strong>Sagar M</strong> identified that reducing route planning time and lowering fuel costs were the primary business drivers for companies looking to modernize their logistics operations.
+            The modern logistics industry demands agility. Originyx recognized that enterprise operations needed a proactive orchestration platform. Through extensive consultations, Sagar M identified that reducing route planning time and lowering fuel costs were the primary business drivers for companies looking to modernize their logistics operations.
           </p>
         </div>
 
-        <!-- Technical Architecture & Workflow -->
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            SwiftRoute AI was built by **Originyx** under the technical leadership of founder **Sagar M** as a fleet intelligence platform. It leverages geospatial AI, predictive ETAs, and autonomous dispatching to optimize delivery routes, cut fuel costs, and maximize fleet efficiency.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The platform processes hundreds of daily delivery nodes, automatically matching truck sizes and equipment limits against driver schedules, and dispatching dynamic route lists via SMS or custom driver portals.
+          </p>
+        </div>
+
+        <!-- Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The backbone of SwiftRoute AI is a modular, high-throughput pipeline designed by Originyx to handle complex routing problems at scale. We utilized robust backend solutions including <strong>FastAPI</strong> for high-performance API endpoints and <strong>PostgreSQL</strong> for resilient spatial data storage.
+            The backbone of SwiftRoute AI is a modular, high-throughput pipeline designed by Originyx to handle complex routing problems at scale. We utilized robust backend solutions including FastAPI for high-performance API endpoints and PostgreSQL for resilient spatial data storage:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
             <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
@@ -300,19 +312,6 @@
               <li><strong>Solver Engine:</strong> A proprietary heuristic solver built to model the Vehicle Routing Problem with Time Windows (VRPTW).</li>
             </ul>
           </div>
-        </div>
-        
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation Overview</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The platform operates through a coordinated workflow to transform raw order data into actionable dispatch schedules:
-          </p>
-          <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); color: var(--text-secondary);">
-            <li><strong>Geospatial Ingestion Engine</strong>: Connects to maps, weather, and real-time traffic APIs.</li>
-            <li><strong>Constraint-Satisfaction Solver</strong>: Processes hundreds of constraints concurrently.</li>
-            <li><strong>Dynamic Re-Routing Agent</strong>: Compares live GPS telemetry against planned routes and recalculates if needed.</li>
-            <li><strong>Natural-Language Dispatch Assistant</strong>: Driven by advanced language models to query the logistics pipeline natively.</li>
-          </ol>
         </div>
 
         <!-- Technology Stack -->
@@ -338,33 +337,27 @@
           </div>
         </div>
 
-        <!-- Deployment -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Deployment</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Implementing SwiftRoute AI required seamless integration with existing enterprise resource planning (ERP) systems. Sagar M designed secure REST endpoints and real-time webhooks to sync data effortlessly. By leveraging <strong>PostgreSQL</strong> for transactional consistency and <strong>FastAPI</strong> for microservices architecture, the implementation scaled gracefully to accommodate heavy operational loads.
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Implementing SwiftRoute AI required seamless integration with existing enterprise resource planning (ERP) systems. Sagar M designed secure REST endpoints and real-time webhooks to sync data. By leveraging PostgreSQL for transactional consistency and FastAPI for microservices architecture, the implementation scaled gracefully to accommodate heavy operational loads.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>Challenge 1: Real-time Telemetry:</strong> Managing thousands of concurrent GPS pings without overwhelming the database was solved by implementing RabbitMQ queues in FastAPI.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>Challenge 2: Legacy ERP Systems:</strong> Integrating with outdated dispatch APIs required building secure translation middleware to map telemetry logs to post-routing data structures.
           </p>
         </div>
 
-        <!-- Challenges -->
+        <!-- Business Impact -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Challenges</h2>
-          <div class="glass-card" style="padding: var(--space-xl); border-left: 4px solid var(--orange);">
-            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); color: var(--text-secondary);">
-              <li><strong>Real-time Telemetry:</strong> Managing thousands of concurrent GPS pings without overwhelming the database required implementing message queues.</li>
-              <li><strong>Heuristic Accuracy:</strong> Tuning the VRPTW solver to balance computation speed with route optimality.</li>
-              <li><strong>Legacy System Integration:</strong> Working around rate limits and inconsistent data schemas from older ERP solutions.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Results -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Deploying SwiftRoute AI across delivery networks yielded immediate, measurable improvements in efficiency. By replacing manual planning processes with autonomous optimization orchestrated by <strong>Originyx</strong>, businesses achieved massive scale:
+            Deploying SwiftRoute AI across delivery networks yielded immediate, measurable improvements in efficiency. By replacing manual planning processes with autonomous optimization orchestrated by Originyx, businesses achieved massive scale:
           </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">80%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Planning Time Savings</span>
@@ -376,12 +369,34 @@
           </div>
         </div>
 
-        <!-- Future Improvements -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Future Improvements</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Moving forward, <strong>Sagar M</strong> and the Originyx team plan to introduce deeper predictive maintenance algorithms using IoT sensor data from fleets. Additionally, incorporating more advanced edge computing capabilities will allow for decentralized route calculations when vehicles lose cellular connectivity.
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Moving forward, Sagar M and the Originyx team plan to introduce deeper predictive maintenance algorithms using IoT sensor data from fleets. Additionally, incorporating more advanced edge computing capabilities will allow for decentralized route calculations when vehicles lose cellular connectivity.
           </p>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../ai-workflow-automation/" class="about-skill-tag" style="text-decoration:none;">AI Workflow Automation</a>
+              <a href="../../autonomous-agents/" class="about-skill-tag" style="text-decoration:none;">Autonomous Agent Orchestration</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../shadowos/" class="about-skill-tag" style="text-decoration:none;">ShadowOS</a>
+              <a href="../mission-control/" class="about-skill-tag" style="text-decoration:none;">Mission Control</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-logistics/" class="about-skill-tag" style="text-decoration:none;">Logistics AI</a>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">Enterprise India</a>
+            </div>
+          </div>
         </div>
 
         <!-- FAQ Section -->
@@ -530,12 +545,12 @@
         
         <div class="form-group">
           <label for="start-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="start-name" name="name" required placeholder="John Doe">
+          <input type="text" id="start-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="start-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="start-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -545,7 +560,7 @@
         
         <div class="form-group">
           <label for="start-company">Company Name</label>
-          <input type="text" id="start-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
         </div>
         
         <div class="form-group">
@@ -578,12 +593,12 @@
 
         <div class="form-group">
           <label for="audit-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="audit-name" name="name" required placeholder="John Doe">
+          <input type="text" id="audit-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="audit-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="audit-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -594,7 +609,7 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="audit-company">Company</label>
-            <input type="text" id="audit-company" name="company" placeholder="Acme Corp">
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
           </div>
           
           <div class="form-group">
@@ -634,12 +649,12 @@
 
         <div class="form-group">
           <label for="interest-name">Full Name <span class="required">*</span></label>
-          <input type="text" id="interest-name" name="name" required placeholder="John Doe">
+          <input type="text" id="interest-name" name="name" required placeholder="Your  Name">
         </div>
         
         <div class="form-group">
           <label for="interest-email">Email Address <span class="required">*</span></label>
-          <input type="email" id="interest-email" name="email" required placeholder="john@company.com">
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
         </div>
         
         <div class="form-group">
@@ -649,7 +664,7 @@
         
         <div class="form-group">
           <label for="interest-company">Company Name</label>
-          <input type="text" id="interest-company" name="company" placeholder="Acme Corp">
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
         </div>
 
         <div class="form-group">
@@ -721,11 +736,11 @@
         <form class="modal-form" id="form-auth-email">
           <div class="form-group" id="group-fullname" style="display: none;">
             <label for="auth-fullname">Full Name <span class="required">*</span></label>
-            <input type="text" id="auth-fullname" name="fullname" placeholder="John Doe">
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="auth-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="auth-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
@@ -754,7 +769,7 @@
         <form class="modal-form" id="form-forgot-password">
           <div class="form-group">
             <label for="forgot-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="forgot-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
           </div>
           
           <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
@@ -805,18 +820,18 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="req-name">Full Name <span class="required">*</span></label>
-            <input type="text" id="req-name" name="name" required placeholder="John Doe">
+            <input type="text" id="req-name" name="name" required placeholder="Your  Name">
           </div>
           <div class="form-group">
             <label for="req-business">Business Name <span class="required">*</span></label>
-            <input type="text" id="req-business" name="businessName" required placeholder="Acme Corp">
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label for="req-email">Email Address <span class="required">*</span></label>
-            <input type="email" id="req-email" name="email" required placeholder="john@company.com">
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
           </div>
           <div class="form-group">
             <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>
