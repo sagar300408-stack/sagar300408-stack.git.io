@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Auth Helper Functions ---------- */
   function validatePasswordStrength(password) {
     if (password.length < 8) return false;
+    if (password.length > 128) return false;
     if (!/[A-Z]/.test(password)) return false;
     if (!/[a-z]/.test(password)) return false;
     if (!/[0-9]/.test(password)) return false;
@@ -851,6 +852,12 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       if (authForgotPasswordLink) {
         authForgotPasswordLink.style.display = 'inline-block';
       }
+      const groupCompliance = document.getElementById('group-compliance');
+      if (groupCompliance) {
+        groupCompliance.style.display = 'none';
+        const complianceCheck = groupCompliance.querySelector('input');
+        if (complianceCheck) complianceCheck.removeAttribute('required');
+      }
       if (authSubmitBtn) {
         const textEl = authSubmitBtn.querySelector('.btn-text');
         if (textEl) textEl.textContent = 'Sign In';
@@ -878,6 +885,12 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       }
       if (authForgotPasswordLink) {
         authForgotPasswordLink.style.display = 'none';
+      }
+      const groupCompliance = document.getElementById('group-compliance');
+      if (groupCompliance) {
+        groupCompliance.style.display = 'flex';
+        const complianceCheck = groupCompliance.querySelector('input');
+        if (complianceCheck) complianceCheck.setAttribute('required', 'true');
       }
       if (authSubmitBtn) {
         const textEl = authSubmitBtn.querySelector('.btn-text');
@@ -921,7 +934,13 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         }
 
         if (!validatePasswordStrength(password)) {
-          showAuthError('Password must contain at least 8 characters, including an uppercase letter and a number.');
+          showAuthError('Password must be 8-128 characters, including an uppercase letter, a lowercase letter, and a number.');
+          return;
+        }
+
+        const complianceCheck = document.getElementById('auth-compliance');
+        if (complianceCheck && !complianceCheck.checked) {
+          showAuthError('You must agree to the Privacy Policy and Terms & Conditions.');
           return;
         }
       }
@@ -1256,8 +1275,9 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     updateAuthStateUI(window.originyxAuth.configured, window.originyxAuth.isAuthenticated(), window.originyxAuth.user);
   }
 
-  /* ---------- ORIGINAL FORMS DISPATCH FALLBACK ---------- */
-  const modalForms = document.querySelectorAll('.modal-form:not(#form-auth-email):not(#form-project-request)');
+  /* ---------- ORIGINAL FORMS DISPATCH ---------- */
+  // Handle generic modal forms (contact, project requests) but exclude all auth-related forms
+  const modalForms = document.querySelectorAll('.modal-form:not(#form-auth-email):not(#form-project-request):not(#form-forgot-password):not(#form-update-password)');
   modalForms.forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1389,5 +1409,37 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     // Initialize
     startAutoplay();
   }
+
+  /* ---------- PASSWORD VISIBILITY TOGGLE ---------- */
+  const togglePasswordBtns = document.querySelectorAll('.btn-toggle-password');
+  togglePasswordBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const form = btn.closest('form');
+      if (form) {
+        const inputs = form.querySelectorAll('input[type="password"], input[type="text"].auth-pw-revealed');
+        const btns = form.querySelectorAll('.btn-toggle-password');
+        
+        let currentlyHidden = false;
+        if (inputs.length > 0 && inputs[0].type === 'password') {
+          currentlyHidden = true;
+        }
+
+        inputs.forEach(input => {
+          if (currentlyHidden) {
+            input.type = 'text';
+            input.classList.add('auth-pw-revealed');
+          } else {
+            input.type = 'password';
+            input.classList.remove('auth-pw-revealed');
+          }
+        });
+
+        btns.forEach(b => {
+          b.textContent = currentlyHidden ? '👁 Hide' : '👁 Show';
+        });
+      }
+    });
+  });
 
 });

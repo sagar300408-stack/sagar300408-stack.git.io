@@ -75,7 +75,7 @@
     },
 
     // Email + Password Sign Up
-    async signUp(email, password, fullName) {
+    async signUp(email, password, fullName, termsAccepted = true) {
       if (!this.configured) throw new Error('Auth system not configured.');
       
       const { data, error } = await this.client.auth.signUp({
@@ -83,7 +83,12 @@
         password,
         options: {
           data: {
-            full_name: fullName
+            full_name: fullName,
+            accepted_terms: termsAccepted,
+            accepted_privacy: termsAccepted,
+            terms_version: "2026-07-v1",
+            privacy_version: "2026-07-v1",
+            accepted_at: new Date().toISOString()
           }
         }
       });
@@ -124,8 +129,8 @@
     async resetPassword(email) {
       if (!this.configured) throw new Error('Auth system not configured.');
       
-      // Redirect back to the page from which the reset was initiated
-      const redirectUrl = window.location.href.split('#')[0].split('?')[0];
+      // Redirect to the dedicated reset password page
+      const redirectUrl = 'https://originyx.in/reset-password/';
 
       const { data, error } = await this.client.auth.resetPasswordForEmail(email, {
         redirectTo: redirectUrl
