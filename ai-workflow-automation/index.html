@@ -105,18 +105,18 @@
 
     <section style="margin-bottom: var(--space-3xl);">
       <span class="section-label">Solutions Suite</span>
-      <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
+        Scale Operations with <span class="highlight">AI-Powered Pipelines</span>
+      </h1>
+      <p class="section-subtitle" style="font-size: 1.25rem; margin-bottom: var(--space-md);">
+        Manual data matching, complex document review, and operations dispatching are major operational expenses. Originyx designs private, secure AI automation systems that coordinate to resolve workflows instantly.
+      </p>
+      <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md); max-width: 650px;">
         <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
         <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
           Originyx engineers custom AI workflow automation pipelines to replace manual data entry and repetitive operations. Using advanced LLMs and Python/FastAPI backends, these pipelines seamlessly route documents, validate data, and trigger enterprise system updates at scale.
         </p>
       </div>
-      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
-        Scale Operations with <span class="highlight">AI-Powered Pipelines</span>
-      </h1>
-      <p class="section-subtitle" style="font-size: 1.25rem;">
-        Manual data matching, complex document review, and operations dispatching are major operational expenses. Originyx designs private, secure AI automation systems that coordinate to resolve workflows instantly.
-      </p>
     </section>
 
     <!-- Main Content Layout -->
@@ -124,27 +124,79 @@
       
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         
-        <!-- Quick Facts -->
+        <!-- Retrieval Metadata -->
         <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
-          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Quick Facts</h3>
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Retrieval Metadata</h3>
           <table style="width: 100%; border-collapse: collapse; text-align: left;">
             <tbody>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Service Focus</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">AI Workflow Automation</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Target Audience</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise & Operations Teams</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Tech Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, FastAPI, LLMs</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Value</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Eliminates manual bottlenecks</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Function</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Operations & Data Routing</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Real Estate, Logistics, Coaching, Enterprise</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Ideal Customer</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">COOs, Operations Directors, Business Owners</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Company Size</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">10–500 employees</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Secure VPC, Private Cloud, Supabase Database</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Technologies</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, FastAPI, Supabase, PostgreSQL</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Typical Integrations</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">WhatsApp, Gmail, Hubspot, Google Sheets</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Complexity</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Moderate</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Use Cases</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Document extraction, order dispatch routing</td></tr>
             </tbody>
           </table>
         </div>
         
+        <!-- Definition Block -->
+        <div class="glass-card" style="padding: var(--space-xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-sm);">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase;">Definition</strong>
+          <p style="margin: var(--space-xs) 0 0 0; color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">
+            <strong>AI Workflow Automation</strong> is the practice of combining artificial intelligence models with traditional software pipelines to read unstructured business files (e.g., invoices, emails, customer support tickets), make context-aware operational decisions, and execute database or CRM updates automatically.
+          </p>
+        </div>
+
+        <!-- Business Context -->
         <div class="glass-card" style="padding: var(--space-2xl);">
           <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Business Context</h2>
           <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
             Traditional workflow automation relies on simple, brittle triggers (e.g. if A happens, copy to B). When faced with unstructured formats like email attachments, customer query nuances, or messy CSV layouts, these systems break down.
           </p>
           <p style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.7;">
-            **AI Workflow Automation** integrates Large Language Models (LLMs) and custom vector databases as intelligent routing layers. These components read context, extract key parameters, validate them against schemas, and trigger database actions, enabling human-grade decision-making at automated speeds.
+            Originyx integrates Large Language Models (LLMs) and custom vector databases as intelligent routing layers. These components read context, extract key parameters, validate them against schemas, and trigger database actions, enabling human-grade decision-making at automated speeds.
           </p>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Traditional Workflow vs AI Workflow Automation</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border);"><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Feature</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Traditional Automation (Zapier/APIs)</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Originyx AI Workflows</th></tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Input Data</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Strictly structured JSON/CSV</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Unstructured PDFs, emails, images</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Decision Logic</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Brittle conditional (IF/ELSE) loops</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Contextual, semantic reasoning models</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Failure Rate</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">High (breaks on minor layout shifts)</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Low (supported by schema validators)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Decision Guide -->
+        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin: 0; font-size: 1.25rem;">Workflow Suitability Guide</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+            <div style="border-left: 3px solid var(--green); padding-left: var(--space-sm);">
+              <h4 style="color: var(--green); font-size: 0.95rem; margin-top: 0; margin-bottom: var(--space-xs);">Choose this solution if:</h4>
+              <ul style="padding-left: var(--space-md); font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 4px;">
+                <li>You process high-volume unstructured forms, PDFs, or email requests daily.</li>
+                <li>Your team wastes 10+ hours a week copying data between database platforms.</li>
+                <li>Your current integrations break whenever API formats or data formats change.</li>
+              </ul>
+            </div>
+            <div style="border-left: 3px solid var(--amber); padding-left: var(--space-sm);">
+              <h4 style="color: var(--amber); font-size: 0.95rem; margin-top: 0; margin-bottom: var(--space-xs);">Do NOT choose this solution if:</h4>
+              <ul style="padding-left: var(--space-md); font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 4px;">
+                <li>Your processes require physical document management or offline logistics.</li>
+                <li>Your operational routing requires emotional evaluation or custom artistic output.</li>
+                <li>You only run simple workflows with less than 20 operations a month.</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <h2 style="font-family: var(--font-serif); font-weight: 500;">Tailored Automation Systems</h2>
@@ -167,21 +219,51 @@
           <a href="../projects/swiftroute-ai/" style="font-weight: 600; color: var(--accent-light); font-size: 0.9rem;">View SwiftRoute AI Case Study &rarr;</a>
         </div>
 
-        <!-- Use Cases & Limitations -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); background: rgba(0, 255, 213, 0.02); border-color: rgba(0, 255, 213, 0.15);">
-          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Automated extraction and processing of unstructured data (invoices, forms, PDFs).</li>
-            <li>Real-time syncing of customer data between disparate CRM and ERP systems.</li>
-            <li>Logistics and dispatch automation (e.g. intelligent route planning and instructions).</li>
-          </ul>
+        <!-- Semantic Relationships -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../lead-generation-automation/" class="about-skill-tag" style="text-decoration:none;">Lead Generation Automation</a>
+              <a href="../ai-receptionist/" class="about-skill-tag" style="text-decoration:none;">AI Receptionist</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../projects/hunteros-engage/" class="about-skill-tag" style="text-decoration:none;">HunterOS Engage</a>
+              <a href="../projects/mission-control/" class="about-skill-tag" style="text-decoration:none;">Mission Control</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../ai-for-logistics/" class="about-skill-tag" style="text-decoration:none;">Logistics AI</a>
+              <a href="../ai-for-real-estate/" class="about-skill-tag" style="text-decoration:none;">Real Estate AI</a>
+            </div>
+          </div>
         </div>
-        
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.02); border-color: rgba(245, 158, 11, 0.15);">
-          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Operations that rely heavily on deeply nuanced, creative, or unpredictable human intuition are less suited for rigid automation pipelines. Our solutions excel in high-volume, repetitive data routing.
-          </p>
+
+        <!-- Common Questions Answered (Intent-Driven) -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Common Questions Answered</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does AI workflow automation work?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Originyx configures webhooks and serverless functions to intercept incoming documents or email alerts. The AI model extracts relevant text variables, verifies them using Pydantic schema validation layers, and routes the data directly into your database or CRM.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Can AI integrate with existing CRM systems?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. Originyx builds integrations connecting to Hubspot, Supabase, PostgreSQL, Salesforce, and custom REST API endpoints, syncing records securely.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How long does implementation usually take?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A standard custom automation pipeline is developed, tested, and deployed to your secure cloud space in 3 to 6 weeks.
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
