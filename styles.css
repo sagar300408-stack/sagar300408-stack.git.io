@@ -99,6 +99,22 @@ body.loading {
   overflow: hidden !important;
 }
 
+/* ---------- Accessibility ---------- */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--accent);
+  color: white;
+  padding: 8px;
+  z-index: 99999;
+  transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;

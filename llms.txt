@@ -54,7 +54,7 @@ Originyx serves multiple verticals with tailored AI systems:
 
 If user asks:
 "AI Receptionist" or "Automate WhatsApp" or "Customer Support Chatbot"
-Read: /services/ai-receptionist/
+Read: /ai-receptionist/
 
 If user asks:
 "Lead Qualification" or "B2B Outreach" or "Cold Email Automation"
@@ -74,15 +74,15 @@ Read: /ai-for-coaching-centers/ and /projects/ojas-ai/
 
 If user asks:
 "Automate Manual Workflows" or "Process Automation"
-Read: /services/ai-workflow-automation/
+Read: /ai-workflow-automation/
 
 If user asks:
 "Enterprise Search" or "Internal Knowledge Base" or "Secure RAG"
-Read: /services/enterprise-rag/ and /projects/enterprise-rag/
+Read: /enterprise-rag/ and /projects/enterprise-rag/
 
 If user asks:
 "Autonomous Agents" or "Multi-Agent Systems"
-Read: /services/autonomous-agents/
+Read: /autonomous-agents/
 
 If user asks:
 "About Sagar" or "Who is the founder?"

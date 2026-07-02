@@ -89,6 +89,12 @@
     }
   }
   </script>
+  <link rel="preload" href="../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
 </head>
 <body>
 
@@ -98,8 +104,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../" class="nav-logo" id="nav-logo-link">
-        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+        <img decoding="async" src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img decoding="async" src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -695,7 +701,7 @@
 
   <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../auth.js"></script>
-  <script src="../script.js"></script>
+  <script defer src="../auth.js"></script>
+  <script defer src="../script.js"></script>
 </body>
 </html>

@@ -81,6 +81,12 @@
     ]
   }
   </script>
+  <link rel="preload" href="../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
 </head>
 <body>
 
@@ -90,8 +96,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../" class="nav-logo" id="nav-logo-link">
-        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+        <img decoding="async" src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img decoding="async" src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -290,7 +296,7 @@
       <!-- Sidebar Visual -->
       <div class="about-sidebar" style="display: flex; flex-direction: column; gap: var(--space-xl);">
         <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; align-items: center; text-align: center;">
-          <img src="../profile.png" alt="Sagar M — Founder & AI Full Stack Architect" width="240" height="240" loading="lazy" style="border-radius: var(--radius-xl); margin-bottom: var(--space-md); width: 100%; max-width: 240px; border: 1px solid var(--border);">
+          <img decoding="async" src="../profile.png" alt="Sagar M — Founder & AI Full Stack Architect" width="240" height="240" loading="lazy" style="border-radius: var(--radius-xl); margin-bottom: var(--space-md); width: 100%; max-width: 240px; border: 1px solid var(--border);">
           <h3 style="font-family: var(--font-serif); margin-bottom: 2px;">Sagar M</h3>
           <span style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-light); text-transform: uppercase;">Founder & AI Architect</span>
           <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: var(--space-sm); line-height: 1.5;">
@@ -707,7 +713,7 @@
 
   <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../auth.js"></script>
-  <script src="../script.js"></script>
+  <script defer src="../auth.js"></script>
+  <script defer src="../script.js"></script>
 </body>
 </html>

@@ -549,6 +549,12 @@
     ]
   }
   </script>
+  <link rel="preload" href="../../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
 </head>
 <body>
 
@@ -559,8 +565,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../../" class="nav-logo" id="nav-logo-link">
-        <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32" loading="lazy">
-        <img src="../../brand.png" alt="ORIGINYX brand text logo" class="brand-img" width="100" height="24" loading="lazy">
+        <img decoding="async" src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32" loading="lazy">
+        <img decoding="async" src="../../brand.png" alt="ORIGINYX brand text logo" class="brand-img" width="100" height="24" loading="lazy">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -639,7 +645,7 @@
         <div class="hero-visual">
           <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(0, 255, 213, 0.06); border-color: rgba(0, 255, 213, 0.1); overflow: hidden; border-radius: var(--radius-xl); border: 1px solid var(--border);">
             <div class="hero-image-glow" style="background: radial-gradient(circle, rgba(0, 255, 213, 0.1) 0%, transparent 70%);"></div>
-            <img src="../../thumbnails/lifeos.png" alt="LifeOS Interface Mockup" width="400" height="300" style="width: 100%; height: auto;" fetchpriority="high" loading="lazy">
+            <img decoding="async" src="../../thumbnails/lifeos.png" alt="LifeOS Interface Mockup" width="400" height="300" style="width: 100%; height: auto;" fetchpriority="high" loading="lazy">
           </div>
         </div>
       </div>
@@ -1272,7 +1278,7 @@
 
   <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../../auth.js"></script>
-  <script src="../../script.js"></script>
+  <script defer src="../../auth.js"></script>
+  <script defer src="../../script.js"></script>
 </body>
 </html>

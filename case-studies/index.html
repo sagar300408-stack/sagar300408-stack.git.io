@@ -79,6 +79,12 @@
     }
   }
   </script>
+  <link rel="preload" href="../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
 </head>
 <body>
 
@@ -88,8 +94,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../" class="nav-logo" id="nav-logo-link">
-        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+        <img decoding="async" src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img decoding="async" src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -155,7 +161,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/hunteros/" class="project-image-link" aria-label="View HunterOS case study details">
-            <img src="../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-development">Active Development</span>
         </div>
@@ -175,7 +181,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/hunteros-engage/" class="project-image-link" aria-label="View HunterOS Engage case study details">
-            <img src="../thumbnails/hunteros-engage.png" alt="HunterOS Engage Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/hunteros-engage.png" alt="HunterOS Engage Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-production">Production</span>
         </div>
@@ -195,7 +201,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/ojas-ai/" class="project-image-link" aria-label="View Ojas.ai case study details">
-            <img src="../thumbnails/ojasai.png" alt="Ojas.ai AI Receptionist Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/ojasai.png" alt="Ojas.ai AI Receptionist Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-production">Production</span>
         </div>
@@ -215,7 +221,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/enterprise-rag/" class="project-image-link" aria-label="View Enterprise RAG case study details">
-            <img src="../thumbnails/rag.png" alt="Enterprise RAG Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/rag.png" alt="Enterprise RAG Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-construction">Under Construction</span>
         </div>
@@ -235,7 +241,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/swiftroute-ai/" class="project-image-link" aria-label="View SwiftRoute AI case study details">
-            <img src="../thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-development">Active Development</span>
         </div>
@@ -255,7 +261,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/shadowos/" class="project-image-link" aria-label="View ShadowOS case study details">
-            <img src="../thumbnails/shadowos.png" alt="ShadowOS Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/shadowos.png" alt="ShadowOS Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-development">Active Development</span>
         </div>
@@ -275,7 +281,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/lifeos/" class="project-image-link" aria-label="View LifeOS case study details">
-            <img src="../thumbnails/lifeos.png" alt="LifeOS Interface Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/lifeos.png" alt="LifeOS Interface Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-production">Production</span>
         </div>
@@ -295,7 +301,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/mission-control/" class="project-image-link" aria-label="View Mission Control case study details">
-            <img src="../thumbnails/missioncontrol.png" alt="Mission Control Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/missioncontrol.png" alt="Mission Control Dashboard Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-construction">Under Construction</span>
         </div>
@@ -315,7 +321,7 @@
       <div class="glass-card project-card reveal" style="display: flex; flex-direction: column; height: 100%;">
         <div class="project-image-container">
           <a href="../projects/sunny-ai-companion/" class="project-image-link" aria-label="View Sunny AI Companion case study details">
-            <img src="../thumbnails/sunny.png" alt="Sunny AI Companion Mockup" class="project-card-image" loading="lazy" width="480" height="270">
+            <img decoding="async" src="../thumbnails/sunny.png" alt="Sunny AI Companion Mockup" class="project-card-image" loading="lazy" width="480" height="270">
           </a>
           <span class="project-tag tag-production">Production</span>
         </div>
@@ -729,7 +735,7 @@
 
   <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../auth.js"></script>
-  <script src="../script.js"></script>
+  <script defer src="../auth.js"></script>
+  <script defer src="../script.js"></script>
 </body>
 </html>
