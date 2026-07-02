@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +9,11 @@
   <link rel="manifest" href="../../site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>Mission Control — Centralized AI Operations & Command Center | Originyx</title>
-  <meta name="description" content="Mission Control is a centralized AI-driven command and operational intelligence platform designed by Originyx to monitor, manage, and optimize business processes in real-time.">
-  <meta name="keywords" content="Mission Control, AI Operations, Command Center, Operational Intelligence, Sagar M Portfolio, Originyx">
+  <title>Mission Control - AI Operations & Command Center by Sagar M | Originyx</title>
+  <meta name="description" content="Mission Control by Originyx, developed by Sagar M, is a centralized AI command center utilizing FastAPI and PostgreSQL to monitor, manage, and optimize real-time business operations.">
+  <meta name="keywords" content="Mission Control, AI Operations, Command Center, Operational Intelligence, Sagar M Portfolio, Originyx, FastAPI, PostgreSQL">
   <meta name="author" content="Sagar M">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://originyx.in/projects/mission-control/">
 
   <!-- Search Console Verification Support -->
@@ -19,17 +21,20 @@
   <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Mission Control — Centralized AI Operations & Command Center | Originyx">
-  <meta property="og:description" content="Unify your operational data, monitor workflows, and drive decision-making in real-time with an AI-powered command center.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mission Control - AI Operations & Command Center by Sagar M">
+  <meta property="og:description" content="Unify your operational data, monitor workflows, and drive decision-making in real-time with an AI-powered command center. Engineered by Sagar M for Originyx.">
   <meta property="og:url" content="https://originyx.in/projects/mission-control/">
   <meta property="og:image" content="https://originyx.in/thumbnails/missioncontrol-og.png">
+  <meta property="og:image:alt" content="Mission Control Dashboard Mockup">
   <meta property="og:site_name" content="Originyx">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mission Control — Centralized AI Command Center | Originyx">
-  <meta name="twitter:description" content="Integrate your fragmented business systems and orchestrate operational intelligence 24/7 with Mission Control by Originyx.">
+  <meta name="twitter:site" content="@originyx">
+  <meta name="twitter:creator" content="@sagar_m">
+  <meta name="twitter:title" content="Mission Control - AI Operations & Command Center by Originyx">
+  <meta name="twitter:description" content="Integrate your fragmented business systems and orchestrate operational intelligence 24/7 with Mission Control. Built by Sagar M.">
   <meta name="twitter:image" content="https://originyx.in/thumbnails/missioncontrol-og.png">
 
   <!-- Favicon / Core stylesheet -->
@@ -42,7 +47,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <!-- Structured Data: Comprehensive JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,24 +56,9 @@
         "@type": "BreadcrumbList",
         "@id": "https://originyx.in/projects/mission-control/#breadcrumb",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://originyx.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Case Studies",
-            "item": "https://originyx.in/case-studies/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Mission Control",
-            "item": "https://originyx.in/projects/mission-control/"
-          }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://originyx.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://originyx.in/case-studies/" },
+          { "@type": "ListItem", "position": 3, "name": "Mission Control", "item": "https://originyx.in/projects/mission-control/" }
         ]
       },
       {
@@ -77,7 +67,8 @@
         "name": "Mission Control",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
-        "description": "Centralized AI-driven operational command platform designed to monitor, manage, and optimize business processes, workflows, and key performance indicators in real-time.",
+        "softwareVersion": "1.0.0",
+        "description": "Centralized AI-driven operational command platform by Originyx using FastAPI and PostgreSQL to monitor, manage, and optimize business processes.",
         "offers": {
           "@type": "Offer",
           "price": "0.00",
@@ -87,53 +78,47 @@
         "brand": {
           "@type": "Brand",
           "name": "Originyx"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "Sagar M",
+          "url": "https://originyx.in/about/"
         }
       },
       {
-        "@type": "FAQPage",
-        "@id": "https://originyx.in/projects/mission-control/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Mission Control?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Mission Control is a centralized operational command center designed by Originyx. It acts as an intelligence hub, integrating scattered data sources (like CRM, ERP, and project managers) into one visual dashboard, using advanced AI models to monitor operations, flag performance anomalies, and provide strategic recommendations."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does the AI Operational Intelligence engine identify workflow bottlenecks?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The platform constantly analyzes event logs, database changes, and webhook events. By modeling standard operation durations and task relationships, its AI agents automatically isolate lag times, capacity constraints, and operational blockages before they delay client delivery."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What data sources can Mission Control integrate with?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Mission Control features a flexible webhook ingestion layer and pre-built API integrations for HubSpot, Salesforce, GitHub, Slack, Jira, PostgreSQL databases, and custom REST endpoints. This ensures all tools feed into a single source of truth."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can we configure custom automated alerts?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Mission Control includes a robust rule-based and AI-driven alert compiler. You can set triggers for quantitative changes (such as a drop in daily demo bookings or an increase in server response times) as well as qualitative triggers like negative sentiment spikes in customer support tickets."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does Mission Control assist executives and founders in decision-making?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Rather than presenting overwhelming spreadsheets, Mission Control leverages LLM summarization and forecasting engines to generate high-level, human-readable executive briefs. These briefs offer context-aware suggestions for resource reallocation, cost savings, and high-impact operational priorities."
-            }
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/mission-control/#article",
+        "headline": "Mission Control - AI Operations & Command Center",
+        "description": "Technical case study of Mission Control, an AI operational command platform built by Originyx.",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M",
+          "url": "https://originyx.in/about/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Originyx",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://originyx.in/logo.png"
           }
+        },
+        "mainEntityOfPage": "https://originyx.in/projects/mission-control/",
+        "about": [
+          { "@type": "Thing", "name": "AI Operations" },
+          { "@type": "ProgrammingLanguage", "name": "TypeScript" },
+          { "@type": "ProgrammingLanguage", "name": "Python" },
+          { "@type": "Thing", "name": "FastAPI" },
+          { "@type": "Thing", "name": "PostgreSQL" }
         ]
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Mission Control Technical Architecture",
+        "creator": {
+          "@type": "Person",
+          "name": "Sagar M"
+        }
       }
     ]
   }
@@ -147,8 +132,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../../" class="nav-logo" id="nav-logo-link">
-        <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+        <img src="../../logo.png" alt="Originyx Logo - AI Systems" class="logo-img" width="32" height="32" loading="lazy">
+        <img src="../../brand.png" alt="Originyx Brand Name" class="brand-img" width="100" height="24" loading="lazy">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -173,240 +158,6 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
-
-  <!-- ============ MAIN CONTENT ============ -->
-  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
-    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
-
-    <!-- ============ PROJECT HERO ============ -->
-    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
-      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
-
-      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
-        <div class="hero-content">
-          <span class="section-label">Under Construction</span>
-          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
-            Mission Control
-          </h1>
-          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
-            AI-Powered Operational Command Center for Real-Time Insights & Automation 🎯⚡📊
-          </p>
-          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
-            Mission Control by Originyx is a centralized, production-grade operational command platform designed to monitor, manage, and optimize business processes. By integrating data across scattered company systems, the platform provides leadership teams and operators with a unified view of organizational activity. Mission Control continuously evaluates your pipeline performance, flags critical events, and suggests process improvements using advanced operational intelligence models.
-          </p>
-
-          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
-            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Under Construction</strong></div>
-            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>TypeScript / PostgreSQL / WebSockets</strong></div>
-            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Audience: <strong>Operations & Founders</strong></div>
-          </div>
-
-          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
-            <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Mission Control" id="btn-trigger-audit">
-              Get This Project Audit
-            </button>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
-            <img src="../../thumbnails/missioncontrol.png" alt="Mission Control Dashboard Mockup" style="width: 100%; height: auto;" fetchpriority="high">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ MAIN CONTENT LAYOUT ============ -->
-    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
-      
-      <!-- Left Column: Case Study Details -->
-      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
-        
-        <!-- The Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
-            Modern scaling businesses use an average of ten to fifteen disconnected software tools to run daily operations. Sales activities live in customer relationship management (CRM) databases, engineering tasks are tracked in issue boards, marketing metrics accumulate in analytics suites, and customer support conversations reside in separate help desks. This software fragmentation creates extensive operational silos.
-          </p>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Because these tools do not natively communicate, organizations face significant friction. Founders and managers spend up to 20% of their workweeks manually copying records, hunting for status updates, and logging metrics across platforms. Important operational bottlenecks, such as support response delays, product delivery issues, and sales pipeline stagnation, are often identified too late. Reactive management becomes the standard mode of operation, causing customer churn, team misalignment, and lost revenue opportunities.
-          </p>
-        </div>
-
-        <!-- Our Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Mission Control by Originyx acts as a unified digital nervous system for your business. Instead of forcing your teams to migrate to a new, unfamiliar software package, Mission Control connects to your existing software stack using secure webhooks, scheduled API polling scripts, and direct database adapters.
-          </p>
-          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
-            Mission Control empowers organizations to:
-          </p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Consolidate performance metrics from sales, engineering, and support into a single dashboard.</li>
-            <li>Monitor live system events, conversion trends, and team productivity markers in real-time.</li>
-            <li>Detect hidden workflow friction, operational bottlenecks, and client delivery risks automatically.</li>
-            <li>Receive strategic, data-backed recommendations for resource planning and risk mitigation.</li>
-            <li>Generate plain-language executive reports that synthesize data across departments instantly.</li>
-          </ul>
-        </div>
-
-        <!-- Architecture Section -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture & Pipeline Workflow</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            To maintain high data integrity and absolute responsiveness, Mission Control uses a multi-tier operational pipeline. This setup processes events at scale, runs logical checks, and feeds live information back to dashboards:
-          </p>
-          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
-            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
-              <li>
-                <strong>Unified Ingestion Engine</strong>: Collects event payloads via webhook endpoints and API polling routines, filtering out noise and standardizing payload schemas across tools.
-              </li>
-              <li>
-                <strong>Operational Event Ledger</strong>: Commits normalized events to a PostgreSQL database, tracking user actions, milestone achievements, and operational timestamps chronologically.
-              </li>
-              <li>
-                <strong>Real-Time Analytics & WebSocket Layer</strong>: Broadcasts critical metric updates and user status changes instantly via WebSocket connections, keeping team views synchronized.
-              </li>
-              <li>
-                <strong>AI Inference & Reasoning Node</strong>: Runs background analysis jobs that compare current operational speeds against historical averages to locate lag and predict risks.
-              </li>
-            </ol>
-          </div>
-          <p style="color: var(--text-secondary); line-height: 1.8;">
-            By separating ingestion, storage, live delivery, and AI inference, Mission Control maintains sub-second responsiveness while running resource-intensive forecasting and summarization algorithms.
-          </p>
-        </div>
-
-        <!-- Key Features Detail -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
-          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🖥️</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Unified Dashboard</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Aggregates operational indicators across sales pipeline, support ticket queues, marketing campaigns, and active engineering sprints.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🧠</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">AI Intelligence</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Employs advanced language and reasoning models to analyze database events, detecting operational bottlenecks and capacity constraints.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📡</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Real-Time Tracking</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Tracks key activity indicators, ticket volumes, page engagement, and revenue fluctuations live using performant WebSocket connections.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🔔</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Intelligent Alerts</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Filters operational noise and compiles prioritized event notifications, highlighting anomalies such as spikes in ticket response times.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🤖</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Decision Engine</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Calculates resource allocation strategies and mitigations when projects are flagged at risk, recommending team adjustments.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📋</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Executive Insights</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Translates deep multi-platform event logs into high-level, human-readable briefs for executive officers and founders.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Business Impact & Use Cases -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact & Case Performance</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Deploying Mission Control by Originyx unlocks new levels of organizational performance, transforming business management from reactive responses to proactive strategy. Organizations experience significant, measurable improvements:
-          </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
-            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
-              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">15+ Hours</h3>
-              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Saved Per Week</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Managers spend less time scheduling alignment meetings and compiling status updates.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
-              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">40% Faster</h3>
-              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Anomaly Resolution</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Operational anomalies, checkout errors, and ticket backlogs are resolved before escalation.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Primary Use Cases -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Primary Use Cases</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Mission Control provides highly tailored workspaces that adapt to various operational environments, ensuring relevant insights for different business styles:
-          </p>
-          <div class="use-cases-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-md);">
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">High-Growth Startups</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Enables early-stage founders to track development sprints, sales pipelines, and customer support queues in a single room, preserving focus.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">Professional Agencies</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Integrates client management databases, developer milestones, and timesheet logs to evaluate team allocation and delivery margins.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">Outbound Sales Teams</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Links lead lists, script sequences, and email deliverability stats to flag cold campaign stagnation and drop-off risks instantly.</p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h3 style="margin-top: 0; margin-bottom: var(--space-xs); font-size: 1.1rem; color: var(--accent);">Digital Transformations</h3>
-              <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">Supports legacy companies migrating to modern cloud-native systems by offering unified bridge reports during platform transitions.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ Section -->
-        <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
-          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); font-size: 1.1rem;">What is Mission Control?</h4>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
-                Mission Control is a centralized operational command center designed by Originyx. It acts as an intelligence hub, integrating scattered data sources (like CRM, ERP, and project managers) into one visual dashboard, using advanced AI models to monitor operations, flag performance anomalies, and provide strategic recommendations.
-              </p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); font-size: 1.1rem;">How does the AI Operational Intelligence engine identify workflow bottlenecks?</h4>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
-                The platform constantly analyzes event logs, database changes, and webhook events. By modeling standard operation durations and task relationships, its AI agents automatically isolate lag times, capacity constraints, and operational blockages before they delay client delivery.
-              </p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); font-size: 1.1rem;">What data sources can Mission Control integrate with?</h4>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
-                Mission Control features a flexible webhook ingestion layer and pre-built API integrations for HubSpot, Salesforce, GitHub, Slack, Jira, PostgreSQL databases, and custom REST endpoints. This ensures all tools feed into a single source of truth.
-              </p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); font-size: 1.1rem;">Can we configure custom automated alerts?</h4>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
-                Yes. Mission Control includes a robust rule-based and AI-driven alert compiler. You can set triggers for quantitative changes (such as a drop in daily demo bookings or an increase in server response times) as well as qualitative triggers like negative sentiment spikes in customer support tickets.
-              </p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-lg);">
-              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); font-size: 1.1rem;">How does Mission Control assist executives and founders in decision-making?</h4>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
-                Rather than presenting overwhelming spreadsheets, Mission Control leverages LLM summarization and forecasting engines to generate high-level, human-readable executive briefs. These briefs offer context-aware suggestions for resource reallocation, cost savings, and high-impact operational priorities.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right Column: Tech Stack Panel -->
-      <div class="project-sidebar">
-        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
-          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
-            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
               Mission Control utilizes modern software architectures, secure cloud databases, real-time message brokers, and large language model frameworks to run command-center hubs reliably.
             </p>
             <div style="display: flex; flex-direction: column; gap: var(--space-xs);">

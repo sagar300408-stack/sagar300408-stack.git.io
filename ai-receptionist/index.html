@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +9,9 @@
   <link rel="manifest" href="../site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>WhatsApp AI Receptionist & Front-Desk Customer Support | Originyx</title>
-  <meta name="description" content="Capture B2B leads 24/7. We design and build custom WhatsApp AI receptionists and web customer support assistants to handle student and parent inquiries.">
-  <meta name="keywords" content="AI Receptionist, WhatsApp Support Bot, Front Desk Automation, Lead Acquisition Platform">
+  <title>AI Receptionist & Front-Desk Automation | Originyx by Sagar M</title>
+  <meta name="description" content="Originyx, led by Sagar M, deploys Next.js and FastAPI powered AI Receptionists for WhatsApp and web. Automate your AI Workflow Automation, front-desk, and lead generation 24/7.">
+  <meta name="keywords" content="AI Receptionist, WhatsApp Support Bot, Front Desk Automation, Lead Acquisition Platform, Originyx, Sagar M, AI Workflow Automation, FastAPI, Next.js">
   <meta name="author" content="Sagar M">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://originyx.in/ai-receptionist/">
@@ -63,6 +65,49 @@
     ]
   }
   </script>
+
+  <!-- Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI Receptionist Services",
+    "provider": {
+      "@type": "Organization",
+      "name": "Originyx",
+      "url": "https://originyx.in/"
+    },
+    "description": "Custom AI Receptionists for WhatsApp and web. Automate front-desk support, student inquiries, and lead capture 24/7.",
+    "areaServed": "Worldwide",
+    "url": "https://originyx.in/ai-receptionist/"
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the AI Receptionist integrate with WhatsApp?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We build custom AI Workflow Automation using FastAPI and Python to connect directly with the WhatsApp Business API, ensuring seamless 24/7 customer support and lead generation automation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can it handle complex student inquiries or booking requests?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our AI receptionists use enterprise RAG to pull accurate answers from your database and can route qualified leads to humans when necessary. It's built with high-performance Next.js interfaces for monitoring."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -72,8 +117,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../" class="nav-logo" id="nav-logo-link">
-        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32" loading="lazy">
+        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24" width="auto" loading="lazy">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -101,70 +146,19 @@
   </nav>
 
   <main class="container" style="padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl); position: relative; z-index: 1;">
-    <div class="ambient-glow" style="position: absolute; top: 10%; left: 5%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
-
-    <section style="margin-bottom: var(--space-3xl);">
-      <span class="section-label">Conversational AI</span>
-      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
-        Automate Front-Desk Operations 24/7
-      </h1>
-      <p class="section-subtitle" style="font-size: 1.25rem;">
-        Never lose a lead to slow responses. We deploy secure virtual receptionist networks that answer common customer queries, capture contact details, and schedule calls natively across WhatsApp and web chat.
-      </p>
+    <section class="faq-section" style="margin-top: var(--space-3xl);">
+      <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-lg);">Frequently Asked Questions</h2>
+      <div class="glass-card" style="padding: var(--space-xl); margin-bottom: var(--space-md);">
+        <h2 style="font-size: 1.25rem; margin-bottom: var(--space-xs);">How does the AI Receptionist integrate with WhatsApp?</h2>
+        <p style="color: var(--text-secondary); line-height: 1.6;">We build custom AI Workflow Automation using FastAPI and Python to connect directly with the WhatsApp Business API, ensuring seamless 24/7 customer support and lead generation automation.</p>
+      </div>
+      <div class="glass-card" style="padding: var(--space-xl); margin-bottom: var(--space-md);">
+        <h2 style="font-size: 1.25rem; margin-bottom: var(--space-xs);">Can it handle complex student inquiries or booking requests?</h2>
+        <p style="color: var(--text-secondary); line-height: 1.6;">Yes, our AI receptionists use enterprise RAG to pull accurate answers from your database and can route qualified leads to humans when necessary. It's built with high-performance Next.js interfaces for monitoring.</p>
+      </div>
     </section>
-
-    <!-- Content Layout -->
-    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl);">
-      
-      <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-        
-        <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">Why Deploy an AI Receptionist?</h2>
-          <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
-            Inbound customer leads lose value quickly. If a prospective student, parent, or client has to wait hours for a reply about pricing, availability, or syllabus contents, they will go to a competitor. Traditional support bots only offer fixed menus, causing customer frustration.
-          </p>
-          <p style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.7;">
-            Our **AI Receptionists** utilize retrieval models trained on your approved company documents. They answer complex questions with natural, context-rich details while logging lead information (name, phone, query objective) to your CRM or database automatically.
-          </p>
-        </div>
-
-        <h2 style="font-family: var(--font-serif); font-weight: 500;">Featured Deployments</h2>
-        
-        <!-- Target Product: Tvira Receptionist -->
-        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-sm); border-left: 4px solid var(--accent);">
-          <h3 style="margin: 0; font-family: var(--font-serif);"><a href="../projects/ojas-ai/">Tvira Receptionist (Ojas.ai) &mdash; AI Front-Desk</a></h3>
-          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: var(--space-xs);">
-            Built specifically for coaching centers and training academies, Tvira Receptionist automates response flows on WhatsApp. It manages student queries, collects admission leads, and logs student details.
-          </p>
-          <a href="../projects/ojas-ai/" style="font-weight: 600; color: var(--accent-light); font-size: 0.9rem;">View Tvira Receptionist Case Study &rarr;</a>
-        </div>
-
-      </div>
-
-      <!-- Sidebar -->
-      <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-        <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
-          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Request Receptionist Demo</h3>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">
-            Explore how an automated virtual assistant can capture and qualify inbound leads for your specific business.
-          </p>
-          <a href="../contact/" style="width: 100%;"><button class="btn btn-primary" style="width: 100%;">Get a Demo Audit</button></a>
-        </div>
-
-        <div class="glass-card" style="padding: var(--space-xl);">
-          <h4 style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">Support Telemetry</h4>
-          <ul style="display: flex; flex-direction: column; gap: var(--space-sm); font-size: 0.9rem; color: var(--text-secondary);">
-            <li>💬 <strong>Channels</strong>: WhatsApp Cloud API & Web Chat</li>
-            <li>⚡ <strong>Response Time</strong>: &lt; 2 seconds</li>
-            <li>📋 <strong>CRM Sync</strong>: Supabase / Hubspot / custom API</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">

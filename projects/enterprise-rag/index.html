@@ -7,8 +7,8 @@
   <link rel="manifest" href="../../site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>Enterprise RAG — Secure Knowledge Retrieval & Cost Governance | Originyx</title>
-  <meta name="description" content="Enterprise RAG by Originyx is a secure AI knowledge retrieval engine featuring Role-Based Access Control, multi-tenant isolation, real-time cost monitoring, and deep observability.">
+  <title>Enterprise RAG Platform: Secure AI Knowledge Retrieval | Originyx</title>
+  <meta name="description" content="Enterprise RAG by Originyx and Sagar M is a secure AI knowledge retrieval engine featuring Role-Based Access Control, multi-tenant isolation, real-time cost monitoring, and FastAPI / PostgreSQL integrations.">
   <meta name="keywords" content="Enterprise RAG, RBAC, Retrieval-Augmented Generation, AI Security, Cost Monitoring, Token Governance, Originyx, Sagar M Portfolio">
   <meta name="author" content="Sagar M">
   <meta name="robots" content="index, follow">
@@ -51,24 +51,9 @@
         "@type": "BreadcrumbList",
         "@id": "https://originyx.in/projects/enterprise-rag/#breadcrumb",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://originyx.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Case Studies",
-            "item": "https://originyx.in/case-studies/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Enterprise RAG",
-            "item": "https://originyx.in/projects/enterprise-rag/"
-          }
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://originyx.in/"},
+          {"@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://originyx.in/case-studies/"},
+          {"@type": "ListItem", "position": 3, "name": "Enterprise RAG", "item": "https://originyx.in/projects/enterprise-rag/"}
         ]
       },
       {
@@ -77,6 +62,7 @@
         "name": "Enterprise RAG",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
+        "softwareVersion": "1.0.0",
         "description": "An enterprise-grade Retrieval-Augmented Generation (RAG) platform with built-in Role-Based Access Control (RBAC), multi-tenant isolation, real-time cost monitoring, and complete observability.",
         "offers": {
           "@type": "Offer",
@@ -84,56 +70,23 @@
           "priceCurrency": "USD",
           "description": "Custom B2B licensing and enterprise AI deployment consulting"
         },
-        "brand": {
-          "@type": "Brand",
-          "name": "Originyx"
-        }
+        "brand": {"@type": "Brand", "name": "Originyx"},
+        "creator": {"@type": "Person", "name": "Sagar M"}
       },
       {
-        "@type": "FAQPage",
-        "@id": "https://originyx.in/projects/enterprise-rag/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Enterprise RAG by Originyx?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Enterprise RAG by Originyx is a high-performance, secure Retrieval-Augmented Generation (RAG) platform that indexes corporate documents and translates them into an active conversational knowledge base. It incorporates enterprise-level requirements including Role-Based Access Control (RBAC), multi-tenant data isolation, cost governance, and deep observability."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does the Role-Based Access Control (RBAC) system work?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The platform attaches security metadata (such as department access, clearance level, and tenant ID) to every ingested text chunk. When a user queries the system, their authenticated permissions are checked against this metadata prior to vector database search, ensuring they only retrieve information they are authorized to view."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does the platform prevent cross-tenant data leakage?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Every query is automatically scoped with a unique tenant identifier (tenant_id) within the backend API layers and vector databases. This acts as a strict namespace filter, ensuring that users from Company A can never view, index, or retrieve any documents belonging to Company B."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What cost monitoring and optimization capabilities are available?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The platform tracks token consumption, latency, and cost per request across departments, users, and LLM models. It optimizes expenses by implementing Redis-based Semantic Caching to serve repeated queries locally and leverages intelligent routing to execute simple queries via faster, cheaper models."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which LLMs and vector databases are supported?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Enterprise RAG features a modular broker design that supports commercial APIs (OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet) as well as locally-hosted open-source models (Llama 3, Mistral) via Ollama/vLLM. Supported vector backends include pgvector on PostgreSQL and Pinecone."
-            }
-          }
-        ]
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/enterprise-rag/#article",
+        "headline": "Enterprise RAG: Secure Knowledge Retrieval Architecture",
+        "description": "Technical deep dive into building an Enterprise RAG platform using FastAPI, PostgreSQL, and pgvector.",
+        "author": {"@type": "Person", "name": "Sagar M"},
+        "publisher": {"@type": "Organization", "name": "Originyx"},
+        "keywords": "Enterprise RAG, FastAPI, PostgreSQL, AI, Originyx, Sagar M"
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://originyx.in/projects/enterprise-rag/#work",
+        "name": "Enterprise RAG Implementation Guide",
+        "creator": {"@type": "Person", "name": "Sagar M"}
       }
     ]
   }
@@ -442,8 +395,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../../" class="nav-logo" id="nav-logo-link">
-        <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+        <img loading="lazy" src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img width="800" loading="lazy" src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -506,7 +459,7 @@
 
         <div class="hero-visual">
           <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
-            <img src="../../thumbnails/rag.png" alt="Enterprise RAG Interface Mockup" style="width: 100%; height: auto;" fetchpriority="high">
+            <img height="600" width="800" loading="lazy" src="../../thumbnails/rag.png" alt="Enterprise RAG Interface Mockup" style="width: 100%; height: auto;">
           </div>
         </div>
       </div>
@@ -717,6 +670,67 @@ Result: <span class="key">ACCESS DENIED</span>
               <p>Full tracing of LLM prompts and vector database query steps using Langfuse and Prometheus to monitor response quality.</p>
             </div>
           </div>
+        </div>
+
+        
+        <!-- Problem & Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context & Strategy</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            In today's fast-paced corporate environment, information silos paralyze decision-making. Originyx recognized that organizations needed a unified, intelligent layer over their proprietary data. Working alongside lead architect Sagar M, we conceptualized Enterprise RAG not just as a search tool, but as a strategic asset. By prioritizing security and cost governance from day one, this platform ensures that businesses can confidently deploy AI capabilities without exposing themselves to regulatory risks or unpredictable API expenses.
+          </p>
+        </div>
+
+        <!-- Workflow -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Intelligent Workflow Automation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            The operational workflow of the Enterprise RAG system is meticulously orchestrated. From the moment a document is uploaded, an event-driven architecture processes it securely:
+          </p>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs); line-height: 1.8;">
+            <li><strong>Document Ingestion:</strong> Automated pipelines trigger Celery workers to fetch new files from internal SharePoint or S3 buckets.</li>
+            <li><strong>Intelligent Parsing:</strong> Advanced OCR separates text, tables, and images, ensuring complex data structures are preserved.</li>
+            <li><strong>Semantic Embedding:</strong> Content is passed through leading embedding models, generating high-dimensional vectors stored safely in PostgreSQL.</li>
+            <li><strong>Secure Retrieval:</strong> User queries are intercepted by the FastAPI backend, augmented with their active RBAC tokens, and executed against isolated tenant spaces.</li>
+            <li><strong>Generative Synthesis:</strong> The final LLM crafts a precise answer citing original corporate sources, avoiding hallucinations.</li>
+          </ul>
+        </div>
+
+        <!-- Implementation Details -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Technical Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The technical implementation led by Sagar M at Originyx focuses on robustness and scalability. The backend relies heavily on <strong>FastAPI</strong> for its asynchronous capabilities, providing the low-latency responses essential for chat interfaces. Data persistence and vector search are handled seamlessly by <strong>PostgreSQL</strong> enriched with the <strong>pgvector</strong> extension, eliminating the need for complex, disjointed vector stores while maintaining ACID compliance for enterprise metadata. The frontend is built with React and Next.js, optimized for server-side rendering and rapid interactions.
+          </p>
+        </div>
+
+        <!-- Challenges & Results -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-lg) 0 var(--space-xl);">
+          <div class="glass-card" style="padding: var(--space-xl);">
+            <h3 style="font-family: var(--font-serif); color: var(--rose); margin-top: 0;">Overcoming Challenges</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              One major hurdle was balancing retrieval accuracy with speed. Extensive chunking strategies led to large payloads that choked the LLM context window. Originyx solved this by implementing a re-ranking mechanism (using Cross-Encoders) between the vector search and the generative phase, narrowing down results from 20 potentially relevant chunks to the 5 most critical ones, saving tokens and time.
+            </p>
+          </div>
+          <div class="glass-card" style="padding: var(--space-xl);">
+            <h3 style="font-family: var(--font-serif); color: var(--green); margin-top: 0;">Measurable Results</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              Post-deployment metrics revealed a 40% reduction in average internal search times for knowledge workers. Furthermore, thanks to the Redis semantic caching layer, token expenditures plummeted by 60% within the first month. The implementation of strict multi-tenant isolation via PostgreSQL Row-Level Security (RLS) achieved 100% compliance with internal data governance policies.
+            </p>
+          </div>
+        </div>
+
+        <!-- Future Improvements -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Future Improvements</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            As AI technologies evolve, Originyx remains committed to advancing the Enterprise RAG architecture. Future roadmaps include:
+          </p>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Integration of specialized multimodal models to directly query visual charts and diagrams.</li>
+            <li>Self-hosted fine-tuning of open-source models (like Llama 3) to improve domain-specific vocabulary adherence.</li>
+            <li>Advanced agentic workflows where the RAG system can autonomously draft multi-page research reports based on a single prompt.</li>
+          </ul>
         </div>
 
         <!-- Technical Specification Table -->

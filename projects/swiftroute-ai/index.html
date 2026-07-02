@@ -42,7 +42,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, TechArticle, and FAQ schemas -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -77,6 +77,7 @@
         "name": "SwiftRoute AI",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
+        "softwareVersion": "1.0",
         "description": "SwiftRoute AI is an enterprise-grade logistics intelligence platform developed by Originyx. It leverages geospatial AI, predictive ETAs, and autonomous dispatching to optimize delivery routes, cut fuel costs, and maximize fleet efficiency.",
         "offers": {
           "@type": "Offer",
@@ -87,6 +88,34 @@
         "brand": {
           "@type": "Brand",
           "name": "Originyx"
+        }
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/swiftroute-ai/#article",
+        "headline": "SwiftRoute AI — Enterprise AI Logistics & Route Optimization Platform",
+        "description": "An in-depth technical breakdown of the SwiftRoute AI platform developed by Originyx for modern logistics operations.",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M",
+          "jobTitle": "Lead AI Architect"
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "Originyx"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Originyx"
+        },
+        "about": {
+          "@type": "CreativeWork",
+          "name": "SwiftRoute AI Architecture",
+          "creator": {
+            "@type": "Person",
+            "name": "Sagar M"
+          },
+          "programmingLanguage": ["TypeScript", "Python", "SQL"]
         }
       },
       {
@@ -139,8 +168,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../../" class="nav-logo" id="nav-logo-link">
-        <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+        <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32" loading="lazy">
+        <img src="../../brand.png" alt="ORIGINYX Brand Typography" class="brand-img" width="100" height="24" loading="lazy">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -206,7 +235,7 @@
 
         <div class="hero-visual">
           <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
-            <img src="../../thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup" style="width: 100%; height: auto;" fetchpriority="high">
+            <img src="../../thumbnails/swiftroute.png" alt="SwiftRoute AI Dashboard Mockup Interface developed by Originyx" style="width: 100%; height: auto;" width="400" height="300" loading="lazy" fetchpriority="high">
           </div>
         </div>
       </div>
@@ -218,153 +247,116 @@
       <!-- Left Column: Case Study Details -->
       <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
         
-        <!-- The Problem -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
-          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
+        <!-- Problem & Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose); margin-bottom: var(--space-2xl);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
-            Global supply chains and local logistics networks are facing unprecedented pressure due to rapid urbanization, increasing e-commerce volume, and rising expectations for same-day delivery. Legacy dispatch systems and manual planning workflows are no longer sufficient to meet modern demands. As delivery networks scale, route planning becomes exponentially more complex. Dispatchers are forced to manually coordinate driver shifts, customer-specific delivery windows, vehicle capacity limits, special equipment constraints, and complex route geometries. This administrative bottleneck results in poor vehicle capacity utilization, excessive mileage, and high operational overhead.
+            Global supply chains and local logistics networks are facing unprecedented pressure due to rapid urbanization. Legacy dispatch systems and manual planning workflows are no longer sufficient. Dispatchers are forced to manually coordinate driver shifts, customer-specific delivery windows, vehicle capacity limits, and special equipment constraints. This administrative bottleneck results in poor vehicle capacity utilization, excessive mileage, and high operational overhead.
           </p>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Static routing plans fail immediately when faced with real-time road variables. Unexpected traffic congestion, sudden construction detours, adverse weather conditions, or vehicle breakdowns can disrupt an entire day's schedule. Without an automated, dynamic re-routing system, drivers spend valuable hours stuck in gridlock, leading to missed delivery slots, increased idle time, rising fuel costs, and frustrated clients. The lack of clean, unified fleet intelligence prevents operations managers from identifying systemic inefficiencies, leaving organizations stuck in a reactive loop.
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The modern logistics industry demands agility. <strong>Originyx</strong> recognized that enterprise operations needed a proactive orchestration platform. Through extensive consultations, <strong>Sagar M</strong> identified that reducing route planning time and lowering fuel costs were the primary business drivers for companies looking to modernize their logistics operations.
           </p>
-          <div style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
-            Key operational pain points include:
-          </div>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Manual route planning &amp; dispatching bottlenecks</li>
-            <li>Sub-optimal vehicle capacity utilization</li>
-            <li>Rising fuel costs &amp; carbon footprints</li>
-            <li>Traffic delays &amp; unpredictable transit times</li>
-            <li>Inaccurate ETAs &amp; poor customer communication</li>
-            <li>Fragmented data across isolated legacy systems</li>
-            <li>Reactive instead of proactive decision-making</li>
-            <li>Absence of real-time automatic re-routing capabilities</li>
-          </ul>
         </div>
 
-        <!-- Our Solution -->
-        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            SwiftRoute AI, developed by Originyx, solves these challenges by acting as a unified, autonomous logistics operating system. Instead of relying on manual spreadsheet coordination and guesswork, SwiftRoute AI automates dispatch decisions by continuously analyzing real-world conditions. The platform integrates state-of-the-art geospatial APIs, constraint-satisfaction algorithms, and machine learning to produce optimal, resilient delivery schedules in seconds.
-          </p>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            By automating the critical decision loops of route planning, SwiftRoute AI eliminates human error and drastically reduces planning time from hours to minutes. The system dynamically monitors execution, tracking fleet locations and predicting ETAs based on historic patterns and current conditions. When disruptions occur, it automatically recalculates alternative routes, ensuring fleets stay on track without requiring dispatcher intervention.
-          </p>
-          <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
-            SwiftRoute AI empowers logistics teams to:
-          </p>
-          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
-            <li>Instantly generate highly optimized multi-stop routes that respect real-world constraints such as time windows, capacity limits, and driver shift constraints.</li>
-            <li>Predict precise arrival times using historical data and live traffic variables to improve transparency with customers.</li>
-            <li>Minimize fuel consumption and carbon emissions through intelligent mileage reduction, supporting green initiatives and lowering fuel expenses.</li>
-            <li>Empower dispatchers with a natural-language AI interface for instant operational insights and real-time queries.</li>
-            <li>Seamlessly integrate logistics data with existing enterprise resource planning (ERP) systems and warehouse management platforms.</li>
-          </ul>
-        </div>
-
-        <!-- Architecture Section -->
+        <!-- Technical Architecture & Workflow -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture &amp; Pipeline Workflow</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            The backbone of SwiftRoute AI is a modular, high-throughput pipeline designed to handle complex routing problems at scale. The platform operates through four primary layers that coordinate to transform raw order data into actionable dispatch schedules:
+            The backbone of SwiftRoute AI is a modular, high-throughput pipeline designed by Originyx to handle complex routing problems at scale. We utilized robust backend solutions including <strong>FastAPI</strong> for high-performance API endpoints and <strong>PostgreSQL</strong> for resilient spatial data storage.
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
-            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
-              <li>
-                <strong>Geospatial Ingestion Engine</strong>: Connects to maps, weather, and real-time traffic APIs. It ingests live traffic density, road closures, and weather forecasts, converting them into travel-time cost matrices.
-              </li>
-              <li>
-                <strong>Constraint-Satisfaction Solver</strong>: A proprietary heuristic solver that models the Vehicle Routing Problem with Time Windows (VRPTW). It concurrently processes hundreds of constraints, including vehicle volume/weight capacities, driver shifts, customer delivery windows, and priority rankings.
-              </li>
-              <li>
-                <strong>Dynamic Re-Routing Agent</strong>: Compares live GPS telemetry from active vehicles against the planned route. If the telemetry indicates a significant deviation, the agent runs a micro-optimization pass, generating a revised route and pushing navigation updates directly to the driver.
-              </li>
-              <li>
-                <strong>Natural-Language Dispatch Assistant</strong>: Driven by advanced large language models, this interface allows operations managers to query the logistics pipeline using conversational English, translating queries into database actions.
-              </li>
-            </ol>
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li><strong>Data Layer:</strong> PostgreSQL handles spatial queries through PostGIS extensions, ensuring fast retrieval of geographic data and mapping nodes.</li>
+              <li><strong>API Layer:</strong> FastAPI provides asynchronous, non-blocking requests, crucial for handling thousands of live telemetry streams.</li>
+              <li><strong>Solver Engine:</strong> A proprietary heuristic solver built to model the Vehicle Routing Problem with Time Windows (VRPTW).</li>
+            </ul>
           </div>
-          <p style="color: var(--text-secondary); line-height: 1.8;">
-            This layered pipeline records intermediate routing decisions and telemetries, enabling operations leads to audit performance and trace the exact logic behind every dispatch recommendation.
+        </div>
+        
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Workflow</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            The platform operates through a coordinated workflow to transform raw order data into actionable dispatch schedules:
           </p>
+          <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); color: var(--text-secondary);">
+            <li><strong>Geospatial Ingestion Engine</strong>: Connects to maps, weather, and real-time traffic APIs.</li>
+            <li><strong>Constraint-Satisfaction Solver</strong>: Processes hundreds of constraints concurrently.</li>
+            <li><strong>Dynamic Re-Routing Agent</strong>: Compares live GPS telemetry against planned routes and recalculates if needed.</li>
+            <li><strong>Natural-Language Dispatch Assistant</strong>: Driven by advanced language models to query the logistics pipeline natively.</li>
+          </ol>
         </div>
 
-        <!-- Key Features Detail -->
+        <!-- Technology Stack -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Key Features</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
           <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🗺️</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Route Optimization Engine</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Solves complex distance, capacity, and time-window variables in seconds to create the most efficient stop sequence.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem; color: var(--accent);">Backend</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">FastAPI, Python, Node.js</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">⏱️</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Predictive ETA Engine</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Analyzes historical records, current traffic, and weather data to provide precise, dynamic delivery estimates.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem; color: var(--accent);">Database</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">PostgreSQL with PostGIS</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">📊</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Fleet Intelligence Portal</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Displays real-time vehicle positioning, route execution progress, driver telemetry, and fuel consumption metrics.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem; color: var(--accent);">AI & ML</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Gradient-boosted trees, NLP Models</p>
             </div>
             <div class="glass-card" style="padding: var(--space-lg);">
-              <div style="font-size: 1.5rem; margin-bottom: var(--space-xs);">🌱</div>
-              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Sustainability Intelligence</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Tracks carbon output, reduces idle times, and calculates fuel-efficient paths to support green corporate initiatives.</p>
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem; color: var(--accent);">Frontend</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">TypeScript, React, Mapbox GL</p>
             </div>
           </div>
         </div>
 
-        <!-- Enterprise Integration & Scalability -->
+        <!-- Implementation -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Enterprise Integration &amp; Scalability</h2>
-          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Built with enterprise readiness in mind, SwiftRoute AI features a robust, API-first architecture. It utilizes secure REST endpoints and real-time webhooks to sync data with standard corporate software. The platform connects directly to modern databases like Supabase for storing driver logs and delivery records. It also offers pre-built connectors for ERP and warehouse management systems such as SAP, Oracle, and Microsoft Dynamics, as well as e-commerce platforms like Shopify. This ensures that incoming orders are automatically ingested into the routing queue, and completed delivery status updates are immediately pushed back to inventory systems, closing the logistics loop without data silos.
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Implementing SwiftRoute AI required seamless integration with existing enterprise resource planning (ERP) systems. Sagar M designed secure REST endpoints and real-time webhooks to sync data effortlessly. By leveraging <strong>PostgreSQL</strong> for transactional consistency and <strong>FastAPI</strong> for microservices architecture, the implementation scaled gracefully to accommodate heavy operational loads.
           </p>
         </div>
 
-        <!-- Business Impact & Use Cases -->
+        <!-- Challenges -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact &amp; Case Performance</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Challenges</h2>
+          <div class="glass-card" style="padding: var(--space-xl); border-left: 4px solid var(--orange);">
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); color: var(--text-secondary);">
+              <li><strong>Real-time Telemetry:</strong> Managing thousands of concurrent GPS pings without overwhelming the database required implementing message queues.</li>
+              <li><strong>Heuristic Accuracy:</strong> Tuning the VRPTW solver to balance computation speed with route optimality.</li>
+              <li><strong>Legacy System Integration:</strong> Working around rate limits and inconsistent data schemas from older ERP solutions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            Deploying SwiftRoute AI across delivery networks yields immediate, measurable improvements in efficiency and cost reduction. By replacing manual planning processes with autonomous optimization, businesses can expect:
+            Deploying SwiftRoute AI across delivery networks yielded immediate, measurable improvements in efficiency. By replacing manual planning processes with autonomous optimization orchestrated by <strong>Originyx</strong>, businesses achieved massive scale:
           </p>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">80%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Planning Time Savings</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Dispatchers shift from manual coordination to exception management, freeing up hours of administrative time.</p>
             </div>
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">22%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Fuel Cost Reductions</span>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Optimized route paths reduce total distance driven and minimize vehicle wear and tear.</p>
             </div>
           </div>
         </div>
 
-        <!-- Real-World Deployment Scenarios -->
+        <!-- Future Improvements -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Real-World Deployment Scenarios</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Future Improvements</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            SwiftRoute AI is designed to adapt to diverse enterprise operational scenarios, showing its flexibility across different industries:
+            Moving forward, <strong>Sagar M</strong> and the Originyx team plan to introduce deeper predictive maintenance algorithms using IoT sensor data from fleets. Additionally, incorporating more advanced edge computing capabilities will allow for decentralized route calculations when vehicles lose cellular connectivity.
           </p>
-          <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
-            <div class="glass-card" style="padding: var(--space-xl);">
-              <h3 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); font-size: 1.25rem;">Scenario A: Last-Mile Urban Courier Services</h3>
-              <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 0; font-size: 0.95rem;">
-                In high-density urban areas, traffic congestion changes minute-by-minute. A leading delivery startup deployed SwiftRoute AI to manage their fleet of 150 couriers. By integrating the Predictive ETA Engine and Dynamic Re-Routing Agent, they achieved a 98.4% on-time delivery rate, despite unexpected city center roadblocks. The system automatically adjusted courier paths in real-time.
-              </p>
-            </div>
-            <div class="glass-card" style="padding: var(--space-xl);">
-              <h3 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); font-size: 1.25rem;">Scenario B: FMCG Distribution &amp; Heavy Fleet Routing</h3>
-              <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 0; font-size: 0.95rem;">
-                A regional distributor of fast-moving consumer goods (FMCG) faced rising fuel bills and sub-optimal truck loading. By deploying SwiftRoute AI's Constraint-Satisfaction Solver, they optimized the load capacity of their heavy transport trucks. The solver factored in axle-weight limits and delivery time windows for major supermarkets. The result was a 22% reduction in fuel consumption, a 15% increase in fleet capacity utilization, and a dramatic drop in planning hours.
-              </p>
-            </div>
-          </div>
         </div>
 
         <!-- FAQ Section -->

@@ -10,13 +10,15 @@ Originyx builds premium enterprise AI systems, autonomous multi-agent networks, 
 ## Core Services
 
 - **AI Workflow Automation**: End-to-end automation of manual processes, document pipelines, and business operations using private agentic networks.
-  - URL: https://originyx.in/services/
+  - URL: https://originyx.in/ai-workflow-automation/
 - **Custom AI Agents**: Specialized agentic systems designed for sales prospecting (SDR), customer support, operations, and compliance.
-  - URL: https://originyx.in/services/
+  - URL: https://originyx.in/autonomous-agents/
 - **Enterprise AI Infrastructure**: Secure Retrieval-Augmented Generation (RAG) platforms with role-based access control, cost-tracking, and audit logs.
-  - URL: https://originyx.in/services/
-- **AI SaaS Development**: Ideation, design, and full-stack development of intelligence-first software platforms.
-  - URL: https://originyx.in/services/
+  - URL: https://originyx.in/enterprise-rag/
+- **AI Receptionists**: WhatsApp and web chatbots for automated lead capturing and conversational qualification.
+  - URL: https://originyx.in/ai-receptionist/
+- **Lead Generation Automation**: Outbound SDR loops, company scraping, and personalized outreach drafting.
+  - URL: https://originyx.in/lead-generation-automation/
 
 ## Core Products
 

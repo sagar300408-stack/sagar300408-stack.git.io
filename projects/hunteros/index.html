@@ -7,9 +7,9 @@
   <link rel="manifest" href="../../site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>HunterOS — Autonomous AI SDR & Lead Generation Platform | Originyx</title>
-  <meta name="description" content="HunterOS is an autonomous AI Sales Development Representative (SDR) platform that harvests lead pools, detects pain points, and drafts hyper-personalized B2B cold outreach copies.">
-  <meta name="keywords" content="HunterOS, AI SDR, Sales Automation, Outbound Sourcing, Lead Generation, Sagar M Portfolio">
+  <title>HunterOS | Autonomous AI SDR & Lead Generation Software by Originyx</title>
+  <meta name="description" content="Discover HunterOS, an autonomous AI Sales Development Representative (SDR) by Sagar M at Originyx. Automate B2B lead generation, pain-point detection, and hyper-personalized cold outreach at scale.">
+  <meta name="keywords" content="HunterOS, AI SDR, Sales Automation, Outbound Sourcing, Lead Generation, Sagar M Portfolio, Originyx, B2B Sales AI">
   <meta name="author" content="Sagar M">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://originyx.in/projects/hunteros/">
@@ -76,13 +76,13 @@
         "@id": "https://originyx.in/projects/hunteros/#software",
         "name": "HunterOS",
         "applicationCategory": "BusinessApplication",
+        "softwareVersion": "1.2.0",
         "operatingSystem": "All",
-        "description": "Autonomous AI Sales Development Representative (SDR) platform designed to automate B2B lead generation, pain-point scanning, and outreach customization.",
-        "offers": {
-          "@type": "Offer",
-          "price": "0.00",
-          "priceCurrency": "USD",
-          "description": "Custom B2B licensing and deployment consulting"
+        "description": "HunterOS is an Autonomous AI Sales Development Representative (SDR) platform developed by Sagar M at Originyx, designed to automate B2B lead generation, pain-point scanning, and outreach customization.",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M",
+          "url": "https://originyx.in/about/"
         },
         "brand": {
           "@type": "Brand",
@@ -90,42 +90,35 @@
         }
       },
       {
-        "@type": "FAQPage",
-        "@id": "https://originyx.in/projects/hunteros/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is HunterOS?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "HunterOS is an autonomous AI Sales Development Representative (SDR) designed to run outbound prospecting loops 24/7. It filters lead targets, crawls corporate websites, uncovers friction points, and drafts personalized B2B outreach."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does multi-agent coordination work in HunterOS?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "HunterOS orchestrates three specialized agents: the Prospector fetches targeted lead files, the Researcher scrapes company pages, and the Copywriter synthesizes this intelligence to draft contextual cold outreach copy."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can HunterOS integrate with our existing CRMs?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, HunterOS utilizes webhooks and API models to sync lead logs and outreach copy drafts directly to Supabase, Hubspot, Salesforce, or Google Sheets."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is HunterOS safe from email spam filters?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. HunterOS focuses on relevance-driven outreach instead of mass blasts, using strict spacing throttling, human-in-the-loop review queues, and clean domain verification to maximize inbox delivery rates."
-            }
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/hunteros/#article",
+        "headline": "HunterOS: Autonomous AI SDR & Lead Generation Platform",
+        "description": "Technical case study of HunterOS, detailing its architecture, implementation, and impact on B2B sales.",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Originyx",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://originyx.in/logo.png"
           }
-        ]
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://originyx.in/projects/hunteros/"
+        }
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "HunterOS Platform",
+        "creator": {
+          "@type": "Person",
+          "name": "Sagar M"
+        },
+        "programmingLanguage": ["Python", "FastAPI", "TypeScript"]
       }
     ]
   }
@@ -139,8 +132,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../../" class="nav-logo" id="nav-logo-link">
-        <img src="../../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+        <img src="../../logo.png" alt="ORIGINYX Logo - AI Solutions" class="logo-img" width="32" height="32" loading="lazy">
+        <img src="../../brand.png" alt="Originyx Brand Name" class="brand-img" width="100" height="24" loading="lazy">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -206,7 +199,7 @@
 
         <div class="hero-visual">
           <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
-            <img src="../../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup" style="width: 100%; height: auto;" fetchpriority="high">
+            <img src="../../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup - AI SDR interface developed by Sagar M" width="800" height="600" style="width: 100%; height: auto;" fetchpriority="high" loading="lazy">
           </div>
         </div>
       </div>
@@ -222,18 +215,36 @@
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
           <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">The Problem</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
-            B2B prospecting is heavily manual and inefficient. Sales Development Representatives (SDRs) spend hours finding lists, searching company pages, figuring out organization charts, and drafting emails. Sourcing and personalization do not scale: reps either send high-volume generic email blasts that get flagged as spam, or manually research every account, yielding a low outbound speed.
+            B2B prospecting is heavily manual and inefficient. Sales Development Representatives (SDRs) spend hours finding lists, searching company pages, figuring out organization charts, and drafting emails. Sourcing and personalization do not scale: reps either send high-volume generic email blasts that get flagged as spam, or manually research every account, yielding a low outbound speed. 
           </p>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
-            Additionally, B2B data decays quickly. Contact numbers and email databases bought off list sellers are often inaccurate. Sales pipelines stall because teams cannot efficiently locate qualified prospects or detect corporate paint points at scale.
+            Additionally, B2B data decays quickly. Contact numbers and email databases bought off list sellers are often inaccurate. Sales pipelines stall because teams cannot efficiently locate qualified prospects or detect corporate pain points at scale.
           </p>
         </div>
 
-        <!-- Our Solution -->
+        <!-- Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            At Originyx, led by Sagar M, we recognized that the operational bottleneck in modern SaaS growth wasn't product quality, but distribution. Traditional outreach tools simply send templated messages to scraped lists. The modern buyer, however, demands deep contextual relevance.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            We needed a system that acts as a human SDR—capable of understanding a company's specific current bottlenecks, mapping those to our product offerings, and executing outbound campaigns asynchronously. HunterOS was conceived to bridge this gap, bringing autonomous AI orchestration into the revenue generation cycle.
+          </p>
+        </div>
+
+        <!-- Our Solution & Workflow -->
         <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
-          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution</h2>
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Our Solution & Workflow</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            HunterOS acts as an autonomous sales intelligence companion that runs outbound prospecting loops 24/7. It integrates state-of-the-art web scrapers and reasoning models to mine leads, evaluate corporate directories, detect business challenges, and customize copy.
+            HunterOS acts as an autonomous sales intelligence companion that runs outbound prospecting loops 24/7. Developed by Sagar M at Originyx, it integrates state-of-the-art web scrapers and reasoning models to mine leads, evaluate corporate directories, detect business challenges, and customize copy.
+          </p>
+          <h3 style="font-size: 1.25rem; font-family: var(--font-serif); margin-bottom: var(--space-sm);">The Core Workflow</h3>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            1. <strong>Ingestion:</strong> The system ingests Ideal Customer Profiles (ICP) through a streamlined dashboard.<br>
+            2. <strong>Enrichment:</strong> It triggers concurrent data-gathering using distributed crawlers.<br>
+            3. <strong>Analysis:</strong> Advanced NLP models parse the unstructured web data to find "trigger events" (e.g., recent funding, hiring surges).<br>
+            4. <strong>Execution:</strong> The drafting engine creates variations of the outreach copy, which are queued for review or sent directly via integrated APIs.
           </p>
           <p style="font-weight: 600; color: var(--accent); margin-bottom: var(--space-xs);">
             HunterOS empowers sales teams to:
@@ -247,27 +258,41 @@
           </ul>
         </div>
 
-        <!-- Architecture Section -->
+        <!-- Technical Architecture -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture & Pipeline Workflow</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technical Architecture</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            HunterOS uses a structured multi-agent loop to maintain accuracy and prevent LLM drift. Rather than asking a single model to perform the entire operation, tasks are partitioned across three nodes:
+            HunterOS is built upon a microservices architecture to ensure scalability and fault tolerance. We implemented a robust backend using <strong>FastAPI</strong> and <strong>PostgreSQL</strong>, connected to a scalable messaging queue to handle concurrent agent tasks. The system uses a structured multi-agent loop to maintain accuracy and prevent LLM drift. Rather than asking a single model to perform the entire operation, tasks are partitioned across specialized nodes:
           </p>
           <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
             <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
               <li>
-                <strong>The Lead Prospector Node</strong>: Connects with open B2B databases and directory search scripts to isolate companies matching specific filters (revenue range, team sizes, and industry tags).
+                <strong>The Lead Prospector Node</strong>: Connects with open B2B databases via GraphQL APIs and directory search scripts to isolate companies matching specific filters (revenue range, team sizes, and industry tags). Data is persisted in PostgreSQL with pgvector for semantic search capabilities.
               </li>
               <li>
-                <strong>The Corporate Ingestion Researcher</strong>: Runs headless crawling actions (using Jina Reader/Playwright) to extract text content from target homepages, about pages, and blog feeds, building a local context profile.
+                <strong>The Corporate Ingestion Researcher</strong>: Runs headless crawling actions (using Jina Reader/Playwright) deployed via Docker containers. It extracts text content from target homepages, about pages, and blog feeds, building a local context profile.
               </li>
               <li>
-                <strong>The Personalized Copywriter Node</strong>: Evaluates the extracted text files to identify challenges (e.g. lack of chat support, slow website speed, broken links) and drafts customized pitch emails linking features directly to those gaps.
+                <strong>The Personalized Copywriter Node</strong>: Evaluates the extracted text files utilizing LangChain and OpenAI models to identify challenges (e.g. lack of chat support, slow website speed, broken links). It drafts customized pitch emails linking features directly to those gaps.
               </li>
             </ol>
           </div>
           <p style="color: var(--text-secondary); line-height: 1.8;">
-            This pipeline records intermediate files and logs decision paths, enabling human managers to review prompts and audit copy before scheduling outreach.
+            This pipeline records intermediate files and logs decision paths to AWS S3, enabling human managers to review prompts and audit copy through a React-based frontend before scheduling outreach.
+          </p>
+        </div>
+
+        <!-- Implementation & Challenges -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation & Challenges</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            During the implementation phase at Originyx, Sagar M faced significant hurdles with data ingestion rate limits and context window constraints. Scraping modern JavaScript-heavy web applications often resulted in timeouts or blocked IPs.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>Challenge 1: Anti-Bot Systems.</strong> We integrated a rotating proxy pool and utilized Playwright stealth plugins to bypass rudimentary Cloudflare checks, ensuring reliable data extraction without manual intervention.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>Challenge 2: Hallucinations in Output.</strong> Early iterations of the copywriter node fabricated company facts. We mitigated this by enforcing strict grounding via RAG (Retrieval-Augmented Generation) and requiring citation links for any claims made in the generated draft.
           </p>
         </div>
 
@@ -298,13 +323,13 @@
           </div>
         </div>
 
-        <!-- Business Impact & Use Cases -->
+        <!-- Business Impact, Results & Future Improvements -->
         <div>
-          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact & Case Performance</h2>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Results & Business Impact</h2>
           <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
-            By substituting manual search loops with the HunterOS pipeline, business teams achieve significant operational optimization:
+            By substituting manual search loops with the HunterOS pipeline, business teams working with Originyx achieved significant operational optimization:
           </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-xl);">
             <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
               <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">80%</h3>
               <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">SDR Sourcing Savings</span>
@@ -316,6 +341,11 @@
               <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Contextual references in pitches result in significantly higher conversion rates.</p>
             </div>
           </div>
+          
+          <h3 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: var(--space-md);">Future Improvements</h3>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            The roadmap for HunterOS includes expanding the tech stack to support voice-based AI SDR agents and integrating directly with CRM systems like Salesforce and HubSpot. Additionally, Sagar M plans to open-source select modules of the multi-agent orchestration layer to foster community contributions and enhance the Originyx ecosystem.
+          </p>
         </div>
 
         <!-- FAQ Section -->

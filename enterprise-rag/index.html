@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +9,9 @@
   <link rel="manifest" href="../site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>Secure Enterprise RAG & Knowledge Search Systems | Originyx</title>
-  <meta name="description" content="Build high-accuracy Retrieval-Augmented Generation (RAG) platforms. We design secure internal search engines with document RBAC and LLM cost monitoring.">
-  <meta name="keywords" content="Enterprise RAG, Vector Search, pgvector, Knowledge Management, Secure LLM">
+  <title>Enterprise RAG & Internal AI Search Platforms | Originyx by Sagar M</title>
+  <meta name="description" content="Originyx, led by Sagar M, builds secure Enterprise RAG platforms and AI Workflow Automation for internal search. Using FastAPI, Python, and Next.js, we safely index your data.">
+  <meta name="keywords" content="Enterprise RAG, Vector Search, pgvector, Knowledge Management, Secure LLM, Originyx, Sagar M, FastAPI, Next.js, AI Workflow Automation">
   <meta name="author" content="Sagar M">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://originyx.in/enterprise-rag/">
@@ -63,6 +65,49 @@
     ]
   }
   </script>
+
+  <!-- Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Enterprise RAG Platforms",
+    "provider": {
+      "@type": "Organization",
+      "name": "Originyx",
+      "url": "https://originyx.in/"
+    },
+    "description": "Secure Enterprise RAG platforms and internal AI search engines. We use Python, FastAPI, and PostgreSQL (pgvector) to index corporate data with strict RBAC access controls.",
+    "areaServed": "Worldwide",
+    "url": "https://originyx.in/enterprise-rag/"
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does Enterprise RAG ensure data security?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Originyx uses FastAPI and Python to implement strict RBAC (Role-Based Access Control) alongside pgvector, ensuring internal AI search engines only expose data users are authorized to see."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What technologies are used in your RAG systems?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sagar M architects these systems using PostgreSQL with pgvector, Python backends, and Next.js interfaces for highly secure, observable AI Workflow Automation and knowledge management."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -72,8 +117,8 @@
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../" class="nav-logo" id="nav-logo-link">
-        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24">
+        <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32" loading="lazy">
+        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24" width="auto" loading="lazy">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -101,70 +146,19 @@
   </nav>
 
   <main class="container" style="padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl); position: relative; z-index: 1;">
-    <div class="ambient-glow" style="position: absolute; top: 10%; right: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
-
-    <section style="margin-bottom: var(--space-3xl);">
-      <span class="section-label">Knowledge Infrastructure</span>
-      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
-        High-Accuracy <span class="highlight">Internal Search Platforms</span>
-      </h1>
-      <p class="section-subtitle" style="font-size: 1.25rem;">
-        Sifting through corporate wikis and messy directories wastes valuable staff hours. We build secure internal search tools that resolve queries instantly, citing reference lines with zero cross-tenant leakage.
-      </p>
+    <section class="faq-section" style="margin-top: var(--space-3xl);">
+      <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-lg);">Frequently Asked Questions</h2>
+      <div class="glass-card" style="padding: var(--space-xl); margin-bottom: var(--space-md);">
+        <h2 style="font-size: 1.25rem; margin-bottom: var(--space-xs);">How does Enterprise RAG ensure data security?</h2>
+        <p style="color: var(--text-secondary); line-height: 1.6;">Originyx uses FastAPI and Python to implement strict RBAC (Role-Based Access Control) alongside pgvector, ensuring internal AI search engines only expose data users are authorized to see.</p>
+      </div>
+      <div class="glass-card" style="padding: var(--space-xl); margin-bottom: var(--space-md);">
+        <h2 style="font-size: 1.25rem; margin-bottom: var(--space-xs);">What technologies are used in your RAG systems?</h2>
+        <p style="color: var(--text-secondary); line-height: 1.6;">Sagar M architects these systems using PostgreSQL with pgvector, Python backends, and Next.js interfaces for highly secure, observable AI Workflow Automation and knowledge management.</p>
+      </div>
     </section>
-
-    <!-- Content Layout -->
-    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl);">
-      
-      <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-        
-        <div class="glass-card" style="padding: var(--space-2xl);">
-          <h2 style="margin-top: 0; font-family: var(--font-serif); color: var(--accent); margin-bottom: var(--space-md);">What is Enterprise RAG?</h2>
-          <p style="color: var(--text-secondary); margin-bottom: var(--space-sm); line-height: 1.7;">
-            Retrieval-Augmented Generation (RAG) is the process of retrieving documents from an external collection to ground an LLM's response. This guarantees that answers are built on verified data rather than model weights.
-          </p>
-          <p style="color: var(--text-secondary); margin-bottom: 0; line-height: 1.7;">
-            However, enterprise deployments require strict engineering. We implement advanced chunking strategies, hybrid keyword-vector search, strict metadata filtering for Role-Based Access Control, and query cache systems to keep execution times fast.
-          </p>
-        </div>
-
-        <h2 style="font-family: var(--font-serif); font-weight: 500;">Live Deployments</h2>
-        
-        <!-- Target Product: Enterprise RAG case study -->
-        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-sm); border-left: 4px solid var(--rose);">
-          <h3 style="margin: 0; font-family: var(--font-serif);"><a href="../projects/enterprise-rag/">Enterprise RAG with RBAC & Cost Monitoring</a></h3>
-          <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: var(--space-xs);">
-            Our core knowledge index search tool features strict access-control layers, Langsmith audit logging, token consumption dashboards, and robust Pgvector caching schemas.
-          </p>
-          <a href="../projects/enterprise-rag/" style="font-weight: 600; color: var(--accent-light); font-size: 0.9rem;">View Case Study &rarr;</a>
-        </div>
-
-      </div>
-
-      <!-- Sidebar -->
-      <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
-        <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary);">
-          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-sm);">Discuss RAG Architecture</h3>
-          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md);">
-            Need a secure, private document index built to help your employees search internal SOPs, forms, or technical code?
-          </p>
-          <a href="../contact/" style="width: 100%;"><button class="btn btn-primary" style="width: 100%;">Contact AI Architect</button></a>
-        </div>
-
-        <div class="glass-card" style="padding: var(--space-xl);">
-          <h4 style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">RAG Telemetry</h4>
-          <ul style="display: flex; flex-direction: column; gap: var(--space-sm); font-size: 0.9rem; color: var(--text-secondary);">
-            <li>🔒 <strong>Access Filter</strong>: Supabase row-level security sets</li>
-            <li>🔍 <strong>Citation Indexing</strong>: Source links referenced directly</li>
-            <li>📊 <strong>observability</strong>: Langsmith + Langfuse cost logs</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
