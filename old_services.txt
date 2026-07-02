@@ -7,9 +7,9 @@
   <link rel="manifest" href="../site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>AI Workflow Automation & Agent Services | Originyx</title>
-  <meta name="description" content="Explore custom AI engineering services by Originyx. We build autonomous AI agents, automated workflows, and enterprise RAG systems using Python and FastAPI. Reduce manual tasks and scale your operations.">
-  <meta name="keywords" content="AI Workflow Automation, Autonomous AI Agents, Enterprise RAG, AI Lead Generation, AI Receptionist, Python AI Developer">
+  <title>AI Consulting & Engineering Services | Originyx</title>
+  <meta name="description" content="Explore our premium AI services. We design and deploy autonomous AI workflows, multi-agent networks, secure enterprise RAG search engines, and scalable AI SaaS.">
+  <meta name="keywords" content="AI Services, AI Consulting, Workflow Automation, AI Agents, Enterprise RAG, Software Development">
   <meta name="author" content="Sagar M">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://originyx.in/services/">
@@ -63,32 +63,6 @@
     ]
   }
   </script>
-
-  <!-- Structured Data: Service -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "AI Workflow Automation & Enterprise AI Agents",
-    "provider": {
-      "@type": "Organization",
-      "name": "Originyx",
-      "url": "https://originyx.in/"
-    },
-    "description": "Custom AI engineering services including autonomous agents, workflow automation, and enterprise RAG systems built on Python and FastAPI.",
-    "areaServed": "Worldwide",
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Originyx AI Services",
-      "itemListElement": [
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Workflow Automation"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Autonomous Agents"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Enterprise RAG Infrastructure"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI Receptionist"}}
-      ]
-    }
-  }
-  </script>
 </head>
 <body>
 
@@ -99,7 +73,7 @@
     <div class="container">
       <a href="../" class="nav-logo" id="nav-logo-link">
         <img src="../logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-        <img src="../brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+        <img src="../brand.png" alt="ORIGINYX" class="brand-img" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
@@ -126,19 +100,22 @@
     </div>
   </nav>
 
-  <!-- ============ MAIN CONTENT ============ -->
-  <main class="container" style="padding-top: var(--space-4xl);">
-    <header style="text-align: center; margin-bottom: var(--space-2xl);">
-      <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase;">Engineering & Consulting</span>
-      <h1 class="gradient-text" style="font-size: 3.5rem; margin-top: var(--space-sm); margin-bottom: var(--space-md);">Intelligent Architectures.</h1>
-      <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
-        We design and build autonomous workflows, custom AI agents, and enterprise search platforms tailored to replace repetitive operational overhead.
+  <main class="container" style="padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl); position: relative; z-index: 1;">
+    <div class="ambient-glow" style="position: absolute; top: 15%; right: 5%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
+
+    <section class="services-hero" style="margin-bottom: var(--space-3xl);">
+      <span class="section-label">Engineering Capabilities</span>
+      <h1 class="section-title" style="margin-top: var(--space-sm); font-size: clamp(2.5rem, 5vw, 3.5rem);">
+        Premium <span class="highlight">AI Architectures</span> Tailored for Operations
+      </h1>
+      <p class="section-subtitle" style="font-size: 1.25rem;">
+        Originyx designs, validates, and deploys production-grade AI infrastructure. We integrate state-of-the-art LLMs, multi-agent frameworks, and secure vector indexing to automate high-friction workflows.
       </p>
-    </header>
+    </section>
 
     <!-- Services Grid -->
-    <div style="display: flex; flex-direction: column; gap: var(--space-2xl); margin-bottom: var(--space-3xl);">
-
+    <div class="services-detail-grid" style="display: grid; grid-template-columns: 1fr; gap: var(--space-2xl); margin-bottom: var(--space-4xl);">
+      
       <!-- Service 1 -->
       <div class="glass-card" style="padding: var(--space-2xl); display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-2xl); align-items: center; border-left: 4px solid var(--accent);">
         <div>
@@ -254,7 +231,7 @@
         <div class="glass-card" style="padding: var(--space-xl);">
           <div style="font-size: 1.8rem; margin-bottom: var(--space-sm);">⚙️</div>
           <h3 style="margin-bottom: var(--space-xs); font-size: 1.2rem;">3. Sprint Build</h3>
-          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We build out the backend loops, autonomous agents, database tables, RLS policy files, and responsive interfaces in fast sprints using Python, FastAPI, Next.js, and PostgreSQL.</p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">We build out the backend loops, agents, database tables, RLS policy files, and responsive interfaces in fast sprints.</p>
         </div>
         <div class="glass-card" style="padding: var(--space-xl);">
           <div style="font-size: 1.8rem; margin-bottom: var(--space-sm);">🚀</div>
