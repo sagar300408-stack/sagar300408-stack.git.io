@@ -9,9 +9,16 @@
     configured: false,
     session: null,
     user: null,
+    initPromise: null,
 
     // Initialize Supabase configuration
     async init() {
+      if (this.initPromise) return this.initPromise;
+      this.initPromise = this._initialize();
+      return this.initPromise;
+    },
+
+    async _initialize() {
       try {
         const response = await fetch('/api/config');
         if (!response.ok) {
@@ -47,6 +54,7 @@
           this.user = currentSession ? currentSession.user : null;
           this.dispatchStateChange(event);
         });
+        this.dispatchStateChange('INITIAL');
 
       } catch (err) {
         console.error('Authentication Initialization Error:', err);
@@ -55,9 +63,27 @@
       }
     },
 
-    // Check if user is logged in
+    // Cached state is for rendering only. Protected actions must use getCurrentSession().
     isAuthenticated() {
       return this.configured && !!this.user;
+    },
+
+    // Revalidate with Supabase on every protected action.
+    async getCurrentSession() {
+      await this.init();
+      if (!this.configured || !this.client) return null;
+
+      const { data: { session }, error } = await this.client.auth.getSession();
+      if (error) {
+        this.session = null;
+        this.user = null;
+        this.dispatchStateChange('SESSION_CHECK_FAILED');
+        throw error;
+      }
+
+      this.session = session;
+      this.user = session ? session.user : null;
+      return session;
     },
 
     // Dispatch a custom event so other components can react
@@ -154,12 +180,14 @@
 
     // Sign Out
     async signOut() {
+      await this.init();
       if (!this.configured) return;
       const { error } = await this.client.auth.signOut();
-      if (error) console.error('Error signing out:', error.message);
+      if (error) throw error;
       
       this.session = null;
       this.user = null;
+      localStorage.removeItem('originyx_pending_action');
       this.dispatchStateChange('SIGNED_OUT');
     }
   };

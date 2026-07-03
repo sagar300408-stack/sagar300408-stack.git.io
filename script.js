@@ -442,6 +442,59 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBackdrop = document.getElementById('modal-backdrop');
   const modalContainers = document.querySelectorAll('.modal-container');
   const modalCloseBtns = document.querySelectorAll('.modal-close');
+  let pendingActionCallback = null;
+
+  function storePendingAction(action, callback) {
+    pendingActionCallback = callback || null;
+    localStorage.setItem('originyx_pending_action', JSON.stringify(action));
+  }
+
+  function clearPendingAction() {
+    pendingActionCallback = null;
+    localStorage.removeItem('originyx_pending_action');
+  }
+
+  async function requireAuthentication(action, callback) {
+    try {
+      const session = await window.originyxAuth?.getCurrentSession();
+      if (session) return true;
+
+      storePendingAction(action, callback);
+      if (window.originyxAuth?.configured) openModal('auth-modal');
+      else openSetupError();
+      return false;
+    } catch (error) {
+      console.error('Unable to validate the current session:', error);
+      clearPendingAction();
+      openModal('auth-modal');
+      showAuthError('Your session could not be verified. Please sign in again.');
+      return false;
+    }
+  }
+
+  async function resumePendingAction() {
+    const pendingActionStr = localStorage.getItem('originyx_pending_action');
+    if (!pendingActionStr) return;
+
+    let action;
+    try {
+      action = JSON.parse(pendingActionStr);
+    } catch (error) {
+      clearPendingAction();
+      return;
+    }
+
+    const callback = pendingActionCallback;
+    clearPendingAction();
+
+    if (callback) {
+      callback();
+    } else if (action.kind === 'form' && action.formId) {
+      document.getElementById(action.formId)?.requestSubmit();
+    } else if (action.modalId) {
+      openModal(action.modalId, action.projectName, action.leadSource);
+    }
+  }
 
   // Helper: prefill name+email from authenticated user into a modal
   function prefillUserFields(modal) {
@@ -622,7 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     modalContainers.forEach(c => {
       c.classList.remove('active');
-      setTimeout(() => { c.style.display = 'none'; }, 300);
+      c.style.display = 'none';
     });
     document.body.classList.remove('loading');
   }
@@ -700,17 +753,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Intercept data-modal-target buttons for Protected Actions
-  document.body.addEventListener('click', (e) => {
+  document.body.addEventListener('click', async (e) => {
     const trigger = e.target.closest('[data-modal-target]');
     if (trigger) {
       e.preventDefault();
       const modalId = trigger.getAttribute('data-modal-target');
       const projectName = trigger.getAttribute('data-project-name');
 
-      const isAuthRequired = trigger.getAttribute('data-auth-required') === 'true';
-      const isAuthSupported = window.originyxAuth && window.originyxAuth.configured && document.getElementById('auth-modal');
+      // Modal workflows are protected by default. Use data-auth-required="false"
+      // only for a deliberately public modal.
+      const isAuthRequired = trigger.getAttribute('data-auth-required') !== 'false' && modalId !== 'auth-modal';
 
-      if (isAuthSupported && isAuthRequired) {
+      if (isAuthRequired) {
         // Gather context
         const sourcePage = window.location.pathname;
         const sourceCta = trigger.textContent.trim();
@@ -724,19 +778,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         const leadSource = leadSourceMap[modalId] || 'Lead Form';
 
-        // Intercept action if user is not logged in
-        if (!window.originyxAuth.isAuthenticated()) {
-          if (window.originyxAuth.configured) {
-            localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, modalId, projectName, leadSource }));
-            openModal('auth-modal');
-          } else {
-            openSetupError();
-          }
-        } else {
+        const action = { kind: 'modal', sourcePage, sourceCta, modalId, projectName, leadSource };
+        if (await requireAuthentication(action)) {
           openModal(modalId, projectName, leadSource);
         }
       } else {
-        // Open modal normally if not protected or if auth is not supported
         openModal(modalId, projectName);
       }
     }
@@ -803,8 +849,9 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   // Navbar Sign In
   const navSignInBtn = document.getElementById('nav-sign-in-btn');
   if (navSignInBtn) {
-    navSignInBtn.addEventListener('click', (e) => {
+    navSignInBtn.addEventListener('click', async (e) => {
       e.preventDefault();
+      await window.originyxAuth?.init();
       if (window.originyxAuth.configured) {
         openModal('auth-modal');
       } else {
@@ -962,7 +1009,6 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
           }
         } else {
           await window.originyxAuth.signIn(email, password);
-          closeModal();
         }
       } catch (err) {
         console.error('Auth action error:', err);
@@ -1148,6 +1194,17 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       const btnSpinner = submitBtn.querySelector('.btn-spinner');
       const successState = projectRequestForm.parentNode.querySelector('.modal-success-state') || document.getElementById('request-success-state');
 
+      const action = {
+        kind: 'form',
+        formId: projectRequestForm.id,
+        sourcePage: window.location.pathname,
+        sourceCta: btnText ? btnText.textContent.trim() : 'Project Request',
+        modalId: 'project-request-modal',
+        leadSource: 'Project Request'
+      };
+      if (!await requireAuthentication(action, () => projectRequestForm.requestSubmit())) return;
+      const token = window.originyxAuth.session.access_token;
+
       // Enter loading state
       submitBtn.disabled = true;
       if (btnText) btnText.style.opacity = '0.5';
@@ -1160,21 +1217,6 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       });
       //new element to identify form type on backend for routing (14 - 06 - 2026)
       payload.formType = 'project-consultation'
-
-      const token = window.originyxAuth.session?.access_token;
-      if (!window.originyxAuth.isAuthenticated()) {
-        submitBtn.disabled = false;
-        if (btnText) btnText.style.opacity = '1';
-        if (btnSpinner) btnSpinner.classList.add('hidden');
-        
-        const sourcePage = window.location.pathname;
-        const sourceCta = btnText ? btnText.textContent.trim() : 'Project Request';
-        localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, modalId: 'project-request-modal', projectName: '', leadSource: 'Project Request' }));
-        
-        closeModal();
-        openModal('auth-modal');
-        return;
-      }
 
       try {
         const response = await fetch('/api/submit-request', {
@@ -1242,17 +1284,6 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         navProfileName.textContent = user.user_metadata?.full_name || user.email.split('@')[0];
       }
 
-      // Check for pending protected action
-      const pendingActionStr = localStorage.getItem('originyx_pending_action');
-      if (pendingActionStr) {
-        localStorage.removeItem('originyx_pending_action');
-        try {
-          const pendingAction = JSON.parse(pendingActionStr);
-          openModal(pendingAction.modalId, pendingAction.projectName, pendingAction.leadSource);
-        } catch (e) {
-          console.error('Error executing pending action:', e);
-        }
-      }
     } else {
       if (navSignIn) navSignIn.classList.remove('hidden');
       if (navDropdown) navDropdown.classList.add('hidden');
@@ -1265,7 +1296,13 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     updateAuthStateUI(configured, authenticated, user);
     
     if (event === 'SIGNED_OUT') {
+      clearPendingAction();
       closeModal();
+    }
+
+    if (authenticated && ['SIGNED_IN', 'INITIAL_SESSION', 'INITIAL'].includes(event)) {
+      closeModal();
+      resumePendingAction();
     }
     
     if (event === 'PASSWORD_RECOVERY') {
@@ -1291,22 +1328,15 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       const targetModal = form.closest('.modal-container');
       const successState = targetModal ? targetModal.querySelector('.modal-success-state') : (form.parentNode ? form.parentNode.querySelector('.modal-success-state') : null);
 
-      if (window.originyxAuth && window.originyxAuth.configured) {
-        if (!window.originyxAuth.isAuthenticated()) {
-          const sourcePage = window.location.pathname;
-          let sourceCta = 'Form Submission';
-          if (btnText) sourceCta = btnText.textContent.trim();
-          
-          const modalId = targetModal ? targetModal.id : 'page-form';
-          const leadSource = form.id;
-          
-          localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, modalId, projectName: '', leadSource }));
-          
-          closeModal();
-          openModal('auth-modal');
-          return;
-        }
-      }
+      const action = {
+        kind: 'form',
+        formId: form.id,
+        sourcePage: window.location.pathname,
+        sourceCta: btnText ? btnText.textContent.trim() : 'Form Submission',
+        modalId: targetModal ? targetModal.id : null,
+        leadSource: form.id
+      };
+      if (!await requireAuthentication(action, () => form.requestSubmit())) return;
 
       // Enter loading state
       if (submitBtn) submitBtn.disabled = true;
