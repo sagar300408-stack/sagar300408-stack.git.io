@@ -707,17 +707,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalId = trigger.getAttribute('data-modal-target');
       const projectName = trigger.getAttribute('data-project-name');
 
-      // Check if this modal targets one of our protected forms
-      const protectedModals = [
-        'start-project-modal',
-        'project-interest-modal',
-        'automation-audit-modal',
-        'project-request-modal'
-      ];
-
+      const isAuthRequired = trigger.getAttribute('data-auth-required') === 'true';
       const isAuthSupported = window.originyxAuth && window.originyxAuth.configured && document.getElementById('auth-modal');
 
-      if (isAuthSupported && protectedModals.includes(modalId)) {
+      if (isAuthSupported && isAuthRequired) {
         // Gather context
         const sourcePage = window.location.pathname;
         const sourceCta = trigger.textContent.trim();
