@@ -87,6 +87,63 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
   <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
+  <style>
+    .about-page-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-3xl);
+      margin-bottom: var(--space-4xl);
+    }
+    
+    .about-grid-principles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
+    
+    .table-responsive.comparison-table table {
+      min-width: 600px;
+    }
+
+    .consulting-guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .about-page-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+        margin-bottom: var(--space-2xl);
+      }
+      
+      .about-grid-principles {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+
+      .consulting-guide-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .glass-card {
+        padding: var(--space-lg) !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .glass-card {
+        padding: var(--space-md) !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -156,7 +213,7 @@
       </div>
     </section>
 
-    <div class="about-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+    <div class="about-page-grid">
       
       <!-- Story Content -->
       <div class="about-content" style="display: flex; flex-direction: column; gap: var(--space-xl);">
@@ -164,16 +221,18 @@
         <!-- Retrieval Metadata -->
         <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
           <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Company Retrieval Metadata</h3>
-          <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <tbody>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Entity Name</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Function</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">AI Systems Architecture, Workflow Automation, Software Consulting</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Industries</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Real Estate, Logistics, Corporate B2B, Coaching Centers</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Location</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">India (Global Client Base)</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, FastAPI, Next.js, PostgreSQL (pgvector), Supabase</td></tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+              <tbody>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Entity Name</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Function</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">AI Systems Architecture, Workflow Automation, Software Consulting</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Industries</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Real Estate, Logistics, Corporate B2B, Coaching Centers</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Location</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">India (Global Client Base)</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Core Stack</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, FastAPI, Next.js, PostgreSQL (pgvector), Supabase</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- Definition Block -->
@@ -215,7 +274,7 @@
         </div>
 
         <h2 style="font-family: var(--font-serif); font-weight: 500; margin-top: var(--space-md);">Our Engineering Principles</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+        <div class="about-grid-principles">
           <div class="glass-card" style="padding: var(--space-lg);">
             <h3 style="font-size: 1.15rem; margin-bottom: var(--space-xs);">1. Validation & Grounding</h3>
             <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">AI outputs must be verified against predefined JSON schemas before consumption. We implement RAG grounding rules to prevent model hallucinations.</p>
@@ -237,22 +296,24 @@
         <!-- Comparison Section -->
         <div class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent); margin-top: var(--space-lg);">
           <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Originyx vs Traditional Software Agencies</h3>
-          <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-              <tr style="border-bottom: 2px solid var(--border);"><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Metric</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Traditional Agency</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Originyx AI Engineering</th></tr>
-            </thead>
-            <tbody>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Focus</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Standard Web/App Development</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Autonomous Workflow Systems & AI Agents</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Output Goal</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">A digital product for humans to use</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">A system that replaces human manual labor</td></tr>
-              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">CRUD logic, basic APIs</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">LLMs, Vector Databases, Semantic Routing</td></tr>
-            </tbody>
-          </table>
+          <div class="table-responsive comparison-table">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border);"><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Metric</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Traditional Agency</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Originyx AI Engineering</th></tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Focus</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Standard Web/App Development</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Autonomous Workflow Systems & AI Agents</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Output Goal</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">A digital product for humans to use</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">A system that replaces human manual labor</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">CRUD logic, basic APIs</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">LLMs, Vector Databases, Semantic Routing</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- Decision Guide -->
         <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
           <h3 style="font-family: var(--font-serif); margin: 0; font-size: 1.25rem;">Consulting Suitability Guide</h3>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+          <div class="consulting-guide-grid">
             <div style="border-left: 3px solid var(--green); padding-left: var(--space-sm);">
               <h4 style="color: var(--green); font-size: 0.95rem; margin-top: 0; margin-bottom: var(--space-xs);">Work with us if:</h4>
               <ul style="padding-left: var(--space-md); font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 4px;">
