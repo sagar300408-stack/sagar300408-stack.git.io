@@ -1162,11 +1162,16 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       payload.formType = 'project-consultation'
 
       const token = window.originyxAuth.session?.access_token;
-      if (!token) {
-        alert('Session expired. Please log in again.');
+      if (!window.originyxAuth.isAuthenticated()) {
         submitBtn.disabled = false;
         if (btnText) btnText.style.opacity = '1';
         if (btnSpinner) btnSpinner.classList.add('hidden');
+        
+        const sourcePage = window.location.pathname;
+        const sourceCta = btnText ? btnText.textContent.trim() : 'Project Request';
+        localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, modalId: 'project-request-modal', projectName: '', leadSource: 'Project Request' }));
+        
+        closeModal();
         openModal('auth-modal');
         return;
       }
@@ -1258,6 +1263,11 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   window.addEventListener('originyx-auth-state-change', (e) => {
     const { configured, authenticated, user, event } = e.detail;
     updateAuthStateUI(configured, authenticated, user);
+    
+    if (event === 'SIGNED_OUT') {
+      closeModal();
+    }
+    
     if (event === 'PASSWORD_RECOVERY') {
       openUpdatePasswordFlow();
     }
@@ -1280,6 +1290,23 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
       const btnSpinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
       const targetModal = form.closest('.modal-container');
       const successState = targetModal ? targetModal.querySelector('.modal-success-state') : (form.parentNode ? form.parentNode.querySelector('.modal-success-state') : null);
+
+      if (window.originyxAuth && window.originyxAuth.configured) {
+        if (!window.originyxAuth.isAuthenticated()) {
+          const sourcePage = window.location.pathname;
+          let sourceCta = 'Form Submission';
+          if (btnText) sourceCta = btnText.textContent.trim();
+          
+          const modalId = targetModal ? targetModal.id : 'page-form';
+          const leadSource = form.id;
+          
+          localStorage.setItem('originyx_pending_action', JSON.stringify({ sourcePage, sourceCta, modalId, projectName: '', leadSource }));
+          
+          closeModal();
+          openModal('auth-modal');
+          return;
+        }
+      }
 
       // Enter loading state
       if (submitBtn) submitBtn.disabled = true;
