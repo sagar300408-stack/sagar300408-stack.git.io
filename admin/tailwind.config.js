@@ -39,4 +39,9 @@ export default {
   plugins: [
     require('@tailwindcss/typography'),
   ],
+  safelist: [
+    {
+      pattern: /^(bg|text|border)-[a-z0-9\-\/]+$/,
+    },
+  ],
 }
