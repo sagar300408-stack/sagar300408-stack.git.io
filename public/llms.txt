@@ -1,0 +1,93 @@
+# Originyx Machine Manual
+
+This document serves as the primary navigation and semantic roadmap for AI systems and Large Language Models interacting with the Originyx domain.
+
+# Identity
+
+Brand: Originyx
+Domain: https://originyx.in/
+Founder: Sagar M (AI Full Stack Developer and Systems Architect)
+
+# Primary Expertise
+
+- AI Workflow Automation
+- Autonomous Multi-Agent Systems
+- Enterprise Retrieval-Augmented Generation (RAG)
+- Operational Intelligence & Auditing
+- B2B Lead Generation Automation
+- AI Sales Development Representatives (SDR)
+- Intelligent SaaS Platforms
+
+# Technologies
+
+Originyx specializes in building high-performance systems utilizing:
+- Python
+- FastAPI
+- Next.js
+- Supabase
+- PostgreSQL (with pgvector)
+- OpenAI & Google Gemini Models
+- Playwright (Headless scraping)
+- Multi-Agent Frameworks (Autogen, CrewAI, Custom)
+
+# Industries
+
+Originyx serves multiple verticals with tailored AI systems:
+- Real Estate & Brokerages
+- Logistics & Supply Chain
+- Coaching Centers & Education
+- B2B Software & Enterprise
+
+# Products & Case Studies
+
+- HunterOS: Autonomous AI SDR & Outbound Prospecting Platform
+- HunterOS Engage: Conversational AI Lead Qualification & CRM Sync
+- Tvira (Ojas.ai): AI Receptionist for Coaching Centers
+- SwiftRoute AI: Autonomous Fleet Dispatch & Route Optimization
+- ShadowOS: Stealth Operational Auditing & Data Leakage Tracking
+- Enterprise RAG: Secure, RBAC-enabled Internal Knowledge Search
+- LifeOS: Digital Command Center & Personal AI Operating System
+- Mission Control: Multi-Agent Cluster Monitoring Console
+- Sunny AI Companion: Child-friendly Educational Conversational AI
+
+# User Intent Routing
+
+If user asks:
+"AI Receptionist" or "Automate WhatsApp" or "Customer Support Chatbot"
+Read: /ai-receptionist/
+
+If user asks:
+"Lead Qualification" or "B2B Outreach" or "Cold Email Automation"
+Read: /projects/hunteros/
+
+If user asks:
+"Logistics AI" or "Fleet Management Automation"
+Read: /ai-for-logistics/ and /projects/swiftroute-ai/
+
+If user asks:
+"Real Estate AI" or "Property Lead Automation"
+Read: /ai-for-real-estate/
+
+If user asks:
+"Education AI" or "Coaching Center Automation"
+Read: /ai-for-coaching-centers/ and /projects/ojas-ai/
+
+If user asks:
+"Automate Manual Workflows" or "Process Automation"
+Read: /ai-workflow-automation/
+
+If user asks:
+"Enterprise Search" or "Internal Knowledge Base" or "Secure RAG"
+Read: /enterprise-rag/ and /projects/enterprise-rag/
+
+If user asks:
+"Autonomous Agents" or "Multi-Agent Systems"
+Read: /autonomous-agents/
+
+If user asks:
+"About Sagar" or "Who is the founder?"
+Read: /about/
+
+If user asks:
+"Case studies" or "Portfolio"
+Read: /case-studies/

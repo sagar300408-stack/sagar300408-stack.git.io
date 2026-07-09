@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Originyx Insights | AI & Business Operations</title>
+    <meta name="description" content="Practical insights on AI, automation, and business operations for modern organizations.">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/components/ox-navbar.js" defer></script>
+    <script src="/components/ox-footer.js" defer></script>
+    
+    <style>
+        .insights-hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .insights-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .insights-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-w: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            background: var(--bg-card);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 25px rgba(36, 66, 53, 0.15);
+        }
+        
+        .search-container i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .filter-chips {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .chip {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .chip:hover {
+            background: var(--bg-secondary);
+            border-color: var(--text-muted);
+        }
+        
+        .chip.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Grid */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .insight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+        
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent-color);
+        }
+        
+        .insight-card .image-wrapper {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+        
+        .insight-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .insight-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .insight-card .content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .insight-card .meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+        
+        .insight-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .insight-card .footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+        
+        .read-more {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .read-more i {
+            transition: transform 0.2s ease;
+        }
+        
+        .insight-card:hover .read-more i {
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+    <ox-navbar></ox-navbar>
+
+    <header class="insights-hero">
+        <h1>Originyx Insights</h1>
+        <p>Practical insights on AI, automation, and business operations for modern organizations.</p>
+        
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search insights...">
+            
+            <!-- Global Search Results UI Placeholder -->
+            <div id="searchResults" class="absolute w-full bg-white border border-border rounded-lg shadow-xl mt-2 hidden text-left z-50 overflow-hidden">
+                <!-- Search items injected here -->
+            </div>
+        </div>
+        
+        <div class="filter-chips">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="ai-automation">AI Automation</button>
+            <button class="chip" data-filter="real-estate">Real Estate</button>
+            <button class="chip" data-filter="engineering">Engineering</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="insights-grid" id="insightsGrid">
+            <!-- JS injection -->
+        </section>
+    </main>
+
+    <ox-footer></ox-footer>
+
+    <script src="../script.js"></script>
+    <script src="insights.js"></script>
+</body>
+</html>

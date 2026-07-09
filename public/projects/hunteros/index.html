@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="../../site.webmanifest">
+
+  <!-- SEO Meta Tags -->
+  <title>HunterOS | Autonomous AI SDR & Lead Generation Software by Originyx</title>
+  <meta name="description" content="Discover HunterOS, an autonomous AI Sales Development Representative (SDR) by Sagar M at Originyx. Automate B2B lead generation, pain-point detection, and hyper-personalized cold outreach at scale.">
+  <meta name="keywords" content="HunterOS, AI SDR, Sales Automation, Outbound Sourcing, Lead Generation, Sagar M Portfolio, Originyx, B2B Sales AI">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.in/projects/hunteros/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HunterOS — Autonomous AI SDR & Lead Generation Platform | Originyx">
+  <meta property="og:description" content="Autonomously mine leads, detect pain points, and draft outreach copies 24/7 with specialized AI agents.">
+  <meta property="og:url" content="https://originyx.in/projects/hunteros/">
+  <meta property="og:image" content="https://originyx.in/thumbnails/hunteros-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HunterOS — Autonomous AI SDR | Originyx">
+  <meta name="twitter:description" content="Scale your outbound sales pipeline autonomously with private multi-agent coordination pipelines.">
+  <meta name="twitter:image" content="https://originyx.in/thumbnails/hunteros-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.in/projects/hunteros/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.in/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "HunterOS",
+            "item": "https://originyx.in/projects/hunteros/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.in/projects/hunteros/#software",
+        "name": "HunterOS",
+        "applicationCategory": "BusinessApplication",
+        "softwareVersion": "1.2.0",
+        "operatingSystem": "All",
+        "description": "HunterOS is an Autonomous AI Sales Development Representative (SDR) platform developed by Sagar M at Originyx, designed to automate B2B lead generation, pain-point scanning, and outreach customization.",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M",
+          "url": "https://originyx.in/about/"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        }
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/hunteros/#article",
+        "headline": "HunterOS: Autonomous AI SDR & Lead Generation Platform",
+        "description": "Technical case study of HunterOS, detailing its architecture, implementation, and impact on B2B sales.",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Originyx",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://originyx.in/logo.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://originyx.in/projects/hunteros/"
+        }
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "HunterOS Platform",
+        "creator": {
+          "@type": "Person",
+          "name": "Sagar M"
+        },
+        "programmingLanguage": ["Python", "FastAPI", "TypeScript"]
+      }
+    ]
+  }
+  </script>
+  <link rel="preload" href="../../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
+  <script src="/components/ox-navbar.js" defer></script>
+  <script src="/components/ox-footer.js" defer></script>
+</head>
+<body>
+
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <ox-navbar></ox-navbar>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
+
+    <!-- ============ PROJECT HERO ============ -->
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
+
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
+        <div class="hero-content">
+          <span class="section-label">Active Development</span>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            HunterOS
+          </h1>
+          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+            Autonomous AI SDR Platform for Lead Prospecting & Personalized Outreach 🤖✉
+          </p>
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            HunterOS is an autonomous AI Sales Development Representative designed to automate the entire outbound B2B lead generation loop. Operating as a private agentic network, it identifies target companies, scrapes public directories, extracts deep organizational pain points, and drafts hyper-personalized, context-driven outreach copy.
+          </p>
+
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Active Development</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>Python / Multi-Agent / Scraping</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Audience: <strong>B2B Teams & Agencies</strong></div>
+          </div>
+
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
+            <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="HunterOS" id="btn-trigger-audit">
+              Get This Project Audit
+            </button>
+            <a href="https://github.com/sagar300408-stack/HunterOS" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-trigger-github">
+              GitHub
+            </a>
+          </div>
+
+          <!-- AI Summary Block -->
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md); max-width: 650px;">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              HunterOS is an autonomous AI sales development platform that researches companies, qualifies leads, personalizes outreach, and automates follow-up workflows for B2B businesses. It replaces manual SDR sourcing loops by extracting corporate pain points and drafting highly contextual outbound emails.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img decoding="async" src="../../thumbnails/hunteros.png" alt="HunterOS Dashboard Mockup - AI SDR interface developed by Sagar M" width="800" height="600" style="width: 100%; height: auto;" fetchpriority="high" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAIN CONTENT LAYOUT ============ -->
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Left Column: Case Study Details -->
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+        
+        <!-- Retrieval Metadata -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Retrieval Metadata</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Business Function</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Outbound Sales Prospecting & Lead Enrichment</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">B2B SaaS, Professional Agencies, Corporate Services</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Ideal Customer</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Head of Sales, B2B Founders, SDR Leads</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Company Size</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">10–500 employees</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">AWS Private Cloud, Docker Containers, PostgreSQL</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Technologies</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, FastAPI, Autogen, LangChain, Next.js</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Typical Integrations</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Hunter.io API, Apollo.io API, SendGrid, LinkedIn Scrapers</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Complexity</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">High</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Use Cases</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Lead prospecting, company pain-point scanning, cold email drafting</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Definition Block -->
+        <div class="glass-card" style="padding: var(--space-xl); border-left: 4px solid var(--accent); margin-bottom: var(--space-sm);">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase;">Definition</strong>
+          <p style="margin: var(--space-xs) 0 0 0; color: var(--text-secondary); line-height: 1.7; font-size: 1rem;">
+            <strong>HunterOS</strong> is an autonomous AI Sales Development Representative (SDR) platform engineered by Sagar M at Originyx that coordinates specialized agent networks to scrape public company directories, identify buyer pain points, draft customized outreach copy, and manage outbound email queues automatically.
+          </p>
+        </div>
+
+        <!-- Business Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            B2B outbound prospecting is traditionally slow and inefficient. Sales Development Representatives (SDRs) spend over 70% of their working hours compiling lists, researching target accounts on LinkedIn, and drafting personalized messages. High-volume generic outreach blasts are heavily penalized by email filters and yield response rates under 1%.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Furthermore, prospect databases purchased from list brokers suffer from high data decay rates, leading to bounced emails and damaged sender reputations. Organizations lack a reliable, scalable mechanism to detect real-time corporate pain points and trigger contextually relevant outbound pitches.
+          </p>
+        </div>
+
+        <!-- Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            In the modern B2B SaaS and professional services sectors, buyer engagement requires extreme relevance. Traditional mail-merge templates are no longer effective. Companies need a way to monitor market signals—such as team expansion, stack transitions, or PR announcements—and align their outbound messaging with these events instantly.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Originyx engineered HunterOS to solve this challenge. By translating manual research workflows into structured, autonomous multi-agent loops, we enable sales teams to run high-relevance outbound campaigns at scale.
+          </p>
+        </div>
+
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            HunterOS was built by **Originyx** under the technical leadership of founder **Sagar M**. It is an autonomous AI Sales Development Representative (SDR) that prospects, researches, and personalizes outreach 24/7. Operating as a private multi-agent network, the system automates list building, website crawling, pain-point analysis, and email drafting.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The solution utilizes an internal lead ingestion dashboard, headless browser scrapers, and natural language reasoning engines to craft bespoke pitches that map product features directly to the target company's detected integration gaps.
+          </p>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Traditional SDR vs HunterOS AI SDR</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border);"><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Metric</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Manual SDR Sourcing</th><th style="padding: 8px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">HunterOS Pipeline</th></tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Daily Leads Handled</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">30 to 50 companies (manual lookup)</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">1,000+ companies scanned and audited</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Personalization Depth</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">First name & company fields only</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Individual pain-point & tech-gap mapping</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-secondary); font-size: 0.85rem;">Outbound Latency</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">15–20 minutes research per email</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;">Immediate, scheduled async execution queue</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Decision Guide -->
+        <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin: 0; font-size: 1.25rem;">HunterOS Suitability Guide</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+            <div style="border-left: 3px solid var(--green); padding-left: var(--space-sm);">
+              <h4 style="color: var(--green); font-size: 0.95rem; margin-top: 0; margin-bottom: var(--space-xs);">Choose this solution if:</h4>
+              <ul style="padding-left: var(--space-md); font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 4px;">
+                <li>You offer high-ticket B2B services or software requiring outbound sales.</li>
+                <li>Your sales team spends hours finding contacts and writing custom emails.</li>
+                <li>You want to automate lead prospecting with context-rich personalization.</li>
+              </ul>
+            </div>
+            <div style="border-left: 3px solid var(--amber); padding-left: var(--space-sm);">
+              <h4 style="color: var(--amber); font-size: 0.95rem; margin-top: 0; margin-bottom: var(--space-xs);">Do NOT choose this solution if:</h4>
+              <ul style="padding-left: var(--space-md); font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 4px;">
+                <li>You target B2C consumers (e.g. retail buyers, personal service clients).</li>
+                <li>You do not have a defined B2B target market or niche list of operations.</li>
+                <li>Your sales model relies on cold calling or direct door-to-door sales.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            HunterOS is engineered upon a decoupled microservices architecture designed for high availability and process isolation. Sagar M designed the core multi-agent orchestration pipeline to execute tasks sequentially through dedicated, typed workers:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ol style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li>
+                <strong>Lead Prospector Node</strong>: Connects to business directories and search engines via GraphQL and REST APIs. Sourced lead targets are stored in a relational PostgreSQL database utilizing pgvector for semantic profile matching.
+              </li>
+              <li>
+                <strong>Corporate Ingestion Researcher</strong>: Deploys headless Playwright containers to crawl target homepages, blog feeds, and public press releases. The unstructured HTML text is parsed and cleaned using Pydantic schemas.
+              </li>
+              <li>
+                <strong>Personalized Copywriter Node</strong>: Integrates LangChain with advanced LLMs to identify specific software integration gaps and compile a custom outreach draft.
+              </li>
+            </ol>
+          </div>
+          <p style="color: var(--text-secondary); line-height: 1.8;">
+            Intermediate runs and log telemetry are recorded to S3 storage, enabling complete observability and manual prompt tuning via a React-based frontend dashboard.
+          </p>
+        </div>
+
+        <!-- Technology Stack -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Sagar M selected a robust, industry-standard stack to ensure secure data operations and high concurrency:
+          </p>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Python & FastAPI</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Drives the multi-agent execution pipeline and high-throughput background queues.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">PostgreSQL & pgvector</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Handles structured CRM records and performs semantic search over prospect profiles.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">Next.js & TypeScript</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Powers the secure administrative control dashboard for outreach review.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-xs); font-size: 1.15rem;">LangChain & Autogen</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">Orchestrates multi-agent conversation flows, memory management, and tool call routing.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The deployment of HunterOS faced two major engineering hurdles solved by Sagar M during development:
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>1. Anti-Scraping Mitigations:</strong> Many high-value B2B homepages employ Cloudflare anti-bot systems. We integrated rotating proxy networks and utilized Playwright stealth plugins to guarantee reliable HTML extraction.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>2. Context Hallucination:</strong> Early iterations drafted emails referencing fictional products. We resolved this by forcing strict Retrieval-Augmented Generation (RAG) constraints, grounding the LLM's outputs strictly in source data.
+          </p>
+        </div>
+
+        <!-- Business Impact -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Deploying HunterOS within outbound sales teams has generated highly measurable operational ROI:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">80%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Sourcing Savings</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">SDRs spend time qualifying active replies rather than manual lead list building.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">3.2x</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Response Rate Increase</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Contextual pitches tailored to specific detected business gaps outperform template emails.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The forward engineering plan for HunterOS focuses on expanding channels and system features:
+          </p>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Integrating outbound voice-based qualifying agent calls via Twilio.</li>
+            <li>Enforcing strict two-way CRM sync hooks (Salesforce, HubSpot, Zoho).</li>
+            <li>Open-sourcing select scraping modules of the ingestion pipeline.</li>
+          </ul>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../lead-generation-automation/" class="about-skill-tag" style="text-decoration:none;">Lead Generation Automation</a>
+              <a href="../../autonomous-agents/" class="about-skill-tag" style="text-decoration:none;">Autonomous Agent Orchestration</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../hunteros-engage/" class="about-skill-tag" style="text-decoration:none;">HunterOS Engage</a>
+              <a href="../shadowos/" class="about-skill-tag" style="text-decoration:none;">ShadowOS</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">Enterprise India</a>
+              <a href="../../ai-for-real-estate/" class="about-skill-tag" style="text-decoration:none;">Real Estate Brokerages</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">What makes HunterOS different from other email scraping software?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Generic scraping applications only harvest contact rows and insert them into basic templates. HunterOS reads company copy, detects actual operational pain points, and structures custom copy tailored to those challenges.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does the agent pipeline prevent model hallucination?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                All data inputs are parsed against strict schemas (like Pydantic targets) at every stage. The Copywriter node is strictly constrained by source metadata and cannot reference features or facts not present in company documents.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Is human verification supported?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. HunterOS records drafts in a local database dashboard. Outbound emails are only queued and sent after review and approval by your team members.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Autonomous B2B Lead Qualification</li>
+            <li>Cold Outreach Automation & Copy Personalization</li>
+            <li>Detecting organizational bottlenecks from public PR and blogs</li>
+            <li>Enriching CRM databases with deep contextual pain points</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Businesses with highly regulated enterprise sales cycles requiring manual legal review for every outbound communication may not benefit from fully autonomous outreach. Similarly, B2C companies where sales volume depends on mass marketing rather than hyper-personalized 1-to-1 account-based marketing should rely on standard ad platforms rather than an autonomous SDR.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Tech Stack Panel -->
+      <div class="project-sidebar">
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">B2B Sales & Agencies</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Automate outbound prospecting and lead qualification</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">SaaS companies scaling their outbound engine</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Cloud / AWS</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, Next.js, PostgreSQL</span>
+            </div>
+          </div>
+
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              HunterOS leverages modern Artificial Intelligence, multi-agent frameworks, and serverless databases to run lead-sourcing loops securely.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Language</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Frameworks</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Autogen</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Playwright</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Pydantic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <ox-footer></ox-footer>
+
+              <!-- ============ MODALS SYSTEM ============ -->
+  <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    
+    <!-- Modal 1: Start a Project -->
+    <div class="modal-container glass-card" id="start-project-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Start a Project</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-start-project">
+        <input type="hidden" name="formType" value="start-project">
+        
+        <div class="form-group">
+          <label for="start-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="start-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
+          <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-company">Company Name</label>
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
+          <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Strategy Call Requested!</h3>
+        <p>Your request has been received. Sagar will reach out to you within 24 hours to schedule a deep-dive call.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 2: Get Free AI Automation Audit -->
+    <div class="modal-container glass-card" id="automation-audit-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Free Automation Audit</h3>
+        <p>Expose hidden inefficiencies and map manual processes to digital agent targets.</p>
+      </div>
+      <form class="modal-form" id="form-automation-audit">
+        <input type="hidden" name="formType" value="automation-audit">
+
+        <div class="form-group">
+          <label for="audit-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="audit-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="audit-company">Company</label>
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
+          </div>
+          
+          <div class="form-group">
+            <label for="audit-website">Website</label>
+            <input type="url" id="audit-website" name="website" placeholder="https://company.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
+          <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Get Free AI Automation Audit</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Audit Request Submitted!</h3>
+        <p>Thank you for submitting your process bottlenecks. Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 3: Try This For My Business -->
+    <div class="modal-container glass-card" id="project-interest-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Deploy Custom Solution</h3>
+        <p>Request a custom system based on this architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-interest">
+        <input type="hidden" name="formType" value="project-interest">
+        <input type="hidden" id="interest-project-name" name="projectName" value="">
+
+        <div class="form-group">
+          <label for="interest-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="interest-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="interest-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-company">Company Name</label>
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-business">Tell us about your business <span class="required">*</span></label>
+          <textarea id="interest-business" name="businessInfo" required placeholder="What industry are you in? What is your current workflow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-outcome">What outcome are you looking for? <span class="required">*</span></label>
+          <textarea id="interest-outcome" name="outcome" required placeholder="e.g. Save 15 hours/week, automate company outreach leads..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Request Similar Solution</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Solution Request Logged!</h3>
+        <p>Your interest in this specific system has been documented. Sagar will reach out shortly to discuss adapting this architecture for your custom business requirements.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 4: Authentication Modal -->
+    <div class="modal-container glass-card" id="auth-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text" id="auth-modal-title">Sign In</h3>
+        <p id="auth-modal-subtitle">Log in or create an account to start your project.</p>
+      </div>
+
+      <!-- Setup Error State (shown if Supabase keys are missing) -->
+      <div class="auth-setup-error hidden" id="auth-setup-error">
+        <div class="error-icon">⚠️</div>
+        <h4>Configuration Incomplete</h4>
+        <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
+      </div>
+
+      <!-- Inline Error/Success Message Banner -->
+      <div class="auth-error-message hidden" id="auth-error-message" style="display: none; color: var(--rose); background: rgba(163, 42, 63, 0.05); border: 1px solid rgba(163, 42, 63, 0.2); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); margin-bottom: var(--space-md); font-size: 0.9rem; text-align: center;"></div>
+
+      <!-- Main Auth Container -->
+      <div id="auth-main-container">
+        <!-- Social Login Buttons -->
+        <div class="social-login-buttons">
+          <button class="btn social-btn google-btn" id="btn-login-google">
+            <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.79 5.79 0 0 1 8.2 12.725a5.79 5.79 0 0 1 5.79-5.79c2.485 0 4.542 1.54 5.38 3.737l3.657-2.84C20.67 3.518 16.71 1 12.24 1 6.03 1 1 6.03 1 12.24s5.03 11.24 11.24 11.24c6.07 0 11.135-4.4 11.135-11.24 0-.712-.082-1.396-.24-1.955H12.24z"/></svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="btn social-btn microsoft-btn" id="btn-login-microsoft">
+            <svg class="social-icon" viewBox="0 0 23 23" width="18" height="18"><path fill="#00a1f1" d="M12 0h11v11H12z"/><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 12h11v11H12z"/><path fill="#ffba08" d="M0 12h11v11H0z"/></svg>
+            <span>Continue with Microsoft</span>
+          </button>
+        </div>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <!-- Auth Form Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="tab-login" data-mode="login">Sign In</button>
+          <button class="auth-tab-btn" id="tab-signup" data-mode="signup">Create Account</button>
+        </div>
+
+        <!-- Email & Password Form -->
+        <form class="modal-form" id="form-auth-email">
+          <div class="form-group" id="group-fullname" style="display: none;">
+            <label for="auth-fullname">Full Name <span class="required">*</span></label>
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Enter Your Name">
+          </div>
+          <div class="form-group">
+            <label for="auth-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+              <label for="auth-password" style="margin-bottom: 0;">Password <span class="required">*</span></label>
+              <a href="#" id="auth-forgot-password-link" style="font-size: 0.8rem; color: var(--accent-light); text-decoration: underline;">Forgot Password?</a>
+            </div>
+            <div style="position: relative;">
+              <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="group-confirm-password" style="display: none;">
+            <label for="auth-confirm-password">Confirm Password <span class="required">*</span></label>
+            <div style="position: relative;">
+              <input type="password" id="auth-confirm-password" name="confirmPassword" placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="group-compliance" style="display: none; align-items: flex-start; margin-bottom: var(--space-md); gap: 10px;">
+            <input type="checkbox" id="auth-compliance" name="compliance" style="margin-top: 4px;">
+            <label for="auth-compliance" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.4;">
+              I agree to the <a href="/privacy-policy/" target="_blank" style="color: var(--accent-light); text-decoration: underline;">Privacy Policy</a> and <a href="/terms-and-conditions/" target="_blank" style="color: var(--accent-light); text-decoration: underline;">Terms &amp; Conditions</a>.
+            </label>
+          </div>
+          <div class="form-group" id="auth-password-guidance" style="display: none; font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must be 8-128 characters, including an uppercase letter, a lowercase letter, and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Forgot Password Container -->
+      <div id="auth-forgot-password-container" style="display: none;">
+        <form class="modal-form" id="form-forgot-password">
+          <div class="form-group">
+            <label for="forgot-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
+            <span class="btn-text">Send Reset Link</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+        <div style="text-align: center; margin-top: var(--space-md);">
+          <a href="#" id="link-back-to-signin" style="font-size: 0.9rem; color: var(--accent-light); text-decoration: underline;">Back to Sign In</a>
+        </div>
+      </div>
+
+      <!-- Update Password Container (Recovery Flow) -->
+      <div id="auth-update-password-container" style="display: none;">
+        <form class="modal-form" id="form-update-password">
+          <div class="form-group">
+            <label for="update-password">New Password <span class="required">*</span></label>
+            <input type="password" id="update-password" name="newPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="update-confirm-password">Confirm New Password <span class="required">*</span></label>
+            <input type="password" id="update-confirm-password" name="confirmNewPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-update-password-guidance" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-update-submit">
+            <span class="btn-text">Update Password</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 5: Project Request Modal -->
+    <div class="modal-container glass-card" id="project-request-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Submit Project Request</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-request">
+        <input type="hidden" id="req-source-page" name="sourcePage" value="/">
+        <input type="hidden" id="req-source-cta" name="sourceCta" value="Start a Project">
+        <input type="hidden" id="req-product-interest" name="productInterest" value="Originyx">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="req-name" name="name" required placeholder="Enter Your Name">
+          </div>
+          <div class="form-group">
+            <label for="req-business">Business Name <span class="required">*</span></label>
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>
+            <input type="tel" id="req-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-industry">Industry <span class="required">*</span></label>
+            <input type="text" id="req-industry" name="industry" required placeholder="Logistics, Finance, Healthcare...">
+          </div>
+          <div class="form-group">
+            <label for="req-type">Project Type <span class="required">*</span></label>
+            <select id="req-type" name="projectType" required>
+              <option value="" disabled selected>Select project type...</option>
+              <option value="AI Agent">AI Agent</option>
+              <option value="AI Automation">AI Automation</option>
+              <option value="SaaS Platform">SaaS Platform</option>
+              <option value="Internal Business Tool">Internal Business Tool</option>
+              <option value="Enterprise AI System">Enterprise AI System</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="req-workflow">Current Workflow <span class="required">*</span></label>
+          <textarea id="req-workflow" name="workflowDescription" required placeholder="Describe the manual steps and processes currently being used..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-challenges">Challenges <span class="required">*</span></label>
+          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-outcome">Desired Outcome <span class="required">*</span></label>
+          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-notes">Additional Notes <span class="optional">(Optional)</span></label>
+          <textarea id="req-notes" name="notes" placeholder="Any other details..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Project Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden" id="request-success-state">
+        <div class="success-checkmark">✓</div>
+        <h3>Project Request Submitted!</h3>
+        <p>Your request has been successfully recorded. Sagar will review your current workflow description, challenges, and desired outcomes and follow up with you within 24 hours.</p>
+        <button class="btn btn-primary modal-success-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../../auth.js"></script>
+  <script defer src="../../script.js"></script>
+</body>
+</html>

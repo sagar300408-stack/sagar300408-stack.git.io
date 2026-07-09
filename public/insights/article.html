@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Insight... | Originyx</title>
+    <!-- Dynamic SEO meta tags will be injected here -->
+    <meta id="meta-description" name="description" content="Originyx Insight">
+    <meta id="meta-og-title" property="og:title" content="Originyx Insight">
+    <meta id="meta-og-description" property="og:description" content="Originyx Insight">
+    <meta id="meta-og-image" property="og:image" content="">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/components/ox-navbar.js" defer></script>
+    <script src="/components/ox-footer.js" defer></script>
+    
+    <style>
+        .article-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: var(--bg-primary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .article-category {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .article-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+        
+        .article-excerpt {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .article-meta .author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .article-cover {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .article-cover img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            aspect-ratio: 21/9;
+            object-fit: cover;
+            background: var(--bg-secondary);
+        }
+
+        .article-body {
+            max-width: 720px;
+            margin: 0 auto 6rem;
+            padding: 0 2rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        /* TipTap Prose Overrides */
+        .article-body h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+        }
+        
+        .article-body h3 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .article-body img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .article-body ul, .article-body ol {
+            margin: 0 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 8rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .loading-skeleton {
+            animation: loading 1.5s infinite;
+            background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+            background-size: 200% 100%;
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <ox-navbar></ox-navbar>
+
+    <main id="article-container">
+        <!-- Skeleton Loading -->
+        <header class="article-header">
+            <div class="loading-skeleton" style="height: 20px; width: 100px; margin: 0 auto 1rem;"></div>
+            <div class="loading-skeleton" style="height: 60px; width: 80%; margin: 0 auto 1.5rem;"></div>
+            <div class="loading-skeleton" style="height: 20px; width: 60%; margin: 0 auto 2rem;"></div>
+            <div class="article-meta" style="justify-content: center;">
+                <div class="loading-skeleton" style="height: 20px; width: 200px;"></div>
+            </div>
+        </header>
+        
+        <div class="article-cover">
+            <div class="loading-skeleton" style="width: 100%; height: 400px; border-radius: 16px;"></div>
+        </div>
+        
+        <div class="article-body">
+            <div class="loading-skeleton" style="height: 20px; width: 100%; margin-bottom: 1rem;"></div>
+            <div class="loading-skeleton" style="height: 20px; width: 90%; margin-bottom: 1rem;"></div>
+            <div class="loading-skeleton" style="height: 20px; width: 95%; margin-bottom: 2rem;"></div>
+            <div class="loading-skeleton" style="height: 20px; width: 100%; margin-bottom: 1rem;"></div>
+            <div class="loading-skeleton" style="height: 20px; width: 85%; margin-bottom: 1rem;"></div>
+        </div>
+    </main>
+
+    <ox-footer></ox-footer>
+
+    <script src="../script.js"></script>
+    <script src="article.js"></script>
+</body>
+</html>

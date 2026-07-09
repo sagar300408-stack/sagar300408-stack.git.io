@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="../../site.webmanifest">
+
+  <!-- SEO Meta Tags -->
+  <title>Enterprise RAG Platform: Secure AI Knowledge Retrieval | Originyx</title>
+  <meta name="description" content="Enterprise RAG by Originyx and Sagar M is a secure AI knowledge retrieval engine featuring Role-Based Access Control, multi-tenant isolation, real-time cost monitoring, and FastAPI / PostgreSQL integrations.">
+  <meta name="keywords" content="Enterprise RAG, RBAC, Retrieval-Augmented Generation, AI Security, Cost Monitoring, Token Governance, Originyx, Sagar M Portfolio">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.in/projects/enterprise-rag/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Enterprise RAG — Secure Knowledge Retrieval & Cost Governance | Originyx">
+  <meta property="og:description" content="Deploy secure, compliant, and cost-governed AI retrieval-augmented generation systems across your enterprise.">
+  <meta property="og:url" content="https://originyx.in/projects/enterprise-rag/">
+  <meta property="og:image" content="https://originyx.in/thumbnails/rag-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enterprise RAG with RBAC & Cost Monitoring | Originyx">
+  <meta name="twitter:description" content="Secure AI knowledge engine with Role-Based Access Control, multi-tenancy, cost monitoring, and complete observability.">
+  <meta name="twitter:image" content="https://originyx.in/thumbnails/rag-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.in/projects/enterprise-rag/#breadcrumb",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://originyx.in/"},
+          {"@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://originyx.in/case-studies/"},
+          {"@type": "ListItem", "position": 3, "name": "Enterprise RAG", "item": "https://originyx.in/projects/enterprise-rag/"}
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.in/projects/enterprise-rag/#software",
+        "name": "Enterprise RAG",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "softwareVersion": "1.0.0",
+        "description": "An enterprise-grade Retrieval-Augmented Generation (RAG) platform with built-in Role-Based Access Control (RBAC), multi-tenant isolation, real-time cost monitoring, and complete observability.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom B2B licensing and enterprise AI deployment consulting"
+        },
+        "brand": {"@type": "Brand", "name": "Originyx"},
+        "creator": {"@type": "Person", "name": "Sagar M"}
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/enterprise-rag/#article",
+        "headline": "Enterprise RAG: Secure Knowledge Retrieval Architecture",
+        "description": "Technical deep dive into building an Enterprise RAG platform using FastAPI, PostgreSQL, and pgvector.",
+        "author": {"@type": "Person", "name": "Sagar M"},
+        "publisher": {"@type": "Organization", "name": "Originyx"},
+        "keywords": "Enterprise RAG, FastAPI, PostgreSQL, AI, Originyx, Sagar M"
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://originyx.in/projects/enterprise-rag/#work",
+        "name": "Enterprise RAG Implementation Guide",
+        "creator": {"@type": "Person", "name": "Sagar M"}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Custom styles for Enterprise RAG components */
+    .arch-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      margin: var(--space-lg) 0 var(--space-xl);
+      padding: var(--space-xl);
+      background: rgba(36, 66, 53, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      font-family: var(--font-mono);
+    }
+
+    .arch-flow-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding: 0.25rem 0;
+    }
+
+    .arch-flow-item.highlight-node {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .arch-arrow {
+      color: var(--accent-light);
+      font-size: 0.8rem;
+      padding-left: 0.5rem;
+    }
+
+    .code-block {
+      background: rgba(36, 66, 53, 0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: var(--space-md) 0 var(--space-xl);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.7;
+    }
+
+    .code-block .key { color: var(--accent); }
+    .code-block .val { color: var(--green); }
+
+    .rbac-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0 var(--space-xl);
+    }
+
+    @media (max-width: 576px) {
+      .rbac-compare { grid-template-columns: 1fr; }
+    }
+
+    .rbac-box {
+      padding: var(--space-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .rbac-box.bad { border-left: 4px solid var(--rose); background: rgba(200, 80, 80, 0.03); }
+    .rbac-box.good { border-left: 4px solid var(--green); background: rgba(36, 120, 80, 0.03); }
+
+    .rbac-box h4 {
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .rbac-box.bad h4 { color: var(--rose); }
+    .rbac-box.good h4 { color: var(--green); }
+
+    .flow-mini {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 2;
+    }
+
+    .features-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+      margin: var(--space-xl) 0 var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      .features-detail-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-detail-card {
+      padding: var(--space-xl);
+      height: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .feature-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(36, 66, 53, 0.05);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .cost-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      background: rgba(36, 66, 53, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin: var(--space-md) 0 var(--space-xl);
+      height: 120px;
+    }
+
+    .cost-bar-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      flex: 1;
+    }
+
+    .cost-bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cost-bar:hover { opacity: 0.7; }
+    .cost-bar.m1 { height: 20px; background: var(--green); }
+    .cost-bar.m2 { height: 60px; background: #e8a020; }
+    .cost-bar.m3 { height: 100px; background: var(--rose); }
+
+    .cost-bar-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .dashboard-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+      margin: var(--space-md) 0 var(--space-xl);
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-metrics { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .metric-pill {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0 var(--space-2xl);
+      font-size: 0.9rem;
+    }
+
+    .tech-table th {
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tech-table td {
+      padding: var(--space-sm) var(--space-md);
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(36, 66, 53, 0.06);
+    }
+
+    .tech-table td:first-child { color: var(--accent); font-weight: 500; }
+    .tech-table tr:last-child td { border-bottom: none; }
+
+    .rule-box {
+      background: rgba(36, 66, 53, 0.04);
+      border: 1px solid var(--accent-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin: var(--space-md) 0 var(--space-xl);
+      line-height: 2;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin: var(--space-lg) 0 var(--space-xl);
+    }
+
+    @media (max-width: 768px) {
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+
+    .pillar-card {
+      text-align: center;
+      padding: var(--space-xl) var(--space-lg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      transition: all 0.3s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    .pillar-icon { font-size: 2rem; margin-bottom: var(--space-sm); }
+    .pillar-label { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+
+    .quote-box {
+      text-align: center;
+      padding: var(--space-3xl) var(--space-2xl);
+      background: linear-gradient(135deg, rgba(36, 66, 53, 0.03), rgba(76, 88, 81, 0.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      margin: var(--space-4xl) 0 var(--space-2xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-box::after {
+      content: '🔒';
+      position: absolute;
+      right: -2%;
+      bottom: -5%;
+      font-size: 8rem;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .quote-box blockquote {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--accent);
+      margin-bottom: var(--space-md);
+      font-style: italic;
+    }
+
+    .quote-box cite {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-style: normal;
+    }
+  </style>
+  <link rel="preload" href="../../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
+  <script src="/components/ox-navbar.js" defer></script>
+  <script src="/components/ox-footer.js" defer></script>
+</head>
+<body>
+
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <ox-navbar></ox-navbar>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
+
+    <!-- ============ PROJECT HERO ============ -->
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
+
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
+        <div class="hero-content">
+          <span class="section-label">Production Ready</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              Enterprise RAG by Originyx is a secure AI knowledge retrieval engine designed for corporate data. It provides zero-trust document queries, Role-Based Access Control (RBAC), multi-tenant isolation, and automated semantic caching to prevent data leaks and runaway API costs.
+            </p>
+          </div>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            Enterprise RAG
+          </h1>
+          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+            Secure Knowledge Retrieval, Multi-Tenant Isolation &amp; Cost Governance 🔒🏢
+          </p>
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            Enterprise RAG by Originyx is the gold-standard secure AI knowledge retrieval engine designed for modern corporate data architectures. It enables organizations to query internal files safely without exposing sensitive data, violating industry compliance regulations, or incurring runaway API costs.
+          </p>
+
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Production Ready</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>FastAPI / Next.js / PostgreSQL</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Category: <strong>Enterprise AI Infrastructure</strong></div>
+          </div>
+
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
+            <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Enterprise RAG with RBAC & Cost Monitoring" id="btn-trigger-audit">
+              Get This Project Audit
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img decoding="async" height="600" width="800" loading="lazy" src="../../thumbnails/rag.png" alt="Enterprise RAG Interface Mockup" style="width: 100%; height: auto;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAIN CONTENT LAYOUT ============ -->
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Left Column: Case Study Details -->
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+        
+        <!-- Quick Facts / Retrieval Metadata -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Retrieval Metadata</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Enterprise AI Infrastructure</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Cross-Industry (B2B)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python, TypeScript</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Advanced RAG with RBAC</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Security</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Zero-Trust Metadata Filtering, Multi-Tenant</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL (pgvector)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Private VPC / On-Prem</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Production Ready</td></tr>
+            </tbody>
+          </table>
+             <!-- Business Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Enterprise knowledge is highly fragmented. Over 80% of corporate data exists in disconnected formats such as PDFs, Word files, spreadsheets, emails, and internal wikis, making search highly inefficient. Traditional search platforms fail because they rely on keyword matching, missing the semantic context of inquiries.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Additionally, employees copy-pasting proprietary materials into public AI tools represents a massive security hazard. Without enterprise-grade security wrappers, corporate IP and personal data are ingested into public models.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Finally, flat RAG architectures treat all documents equally. A junior employee could query a flat RAG chatbot and accidentally retrieve executive compensation details or board minutes due to semantic similarity. AI platforms must respect existing Role-Based Access Control (RBAC) at search time.
+          </p>
+        </div>
+
+        <!-- Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            In today's fast-paced corporate environment, information silos paralyze decision-making. Originyx recognized that organizations needed a unified, intelligent layer over their proprietary data. Working alongside lead architect Sagar M, we conceptualized Enterprise RAG not just as a search tool, but as a strategic asset. By prioritizing security and cost governance from day one, this platform ensures that businesses can confidently deploy AI capabilities without exposing themselves to regulatory risks or unpredictable API expenses.
+          </p>
+        </div>
+
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Enterprise RAG was built by **Originyx** under the technical direction of **Sagar M**. It is a secure knowledge retrieval engine designed for private cloud deployments (VPC) that bridges the gap between raw LLM capabilities and secure business intelligence.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The platform indexes internal corporate repositories, processes documents through OCR pipelines, and exposes a secure search dashboard that integrates SAML/OAuth2 identities to restrict queries dynamically based on user clearance levels.
+          </p>
+        </div>
+
+        <!-- Architecture -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Sagar M architected a decoupled multi-layer RAG architecture prioritizing security filtering at the database level:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li><strong>OCR & Ingestion Node:</strong> Uses layout-aware OCR (Tesseract/LayoutLM) and recursive semantic chunking to parse text from PDFs, images, and tables.</li>
+              <li><strong>Secure Embeddings Store:</strong> Ingests high-dimensional vector embeddings into PostgreSQL with pgvector, tagging each row with tenant IDs and clearance metadata.</li>
+              <li><strong>Identity-Aware Broker:</strong> Intercepts queries via FastAPI, validates OAuth2 tokens, and injects Row-Level Security (RLS) constraints directly into the SQL search queries.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
+          <table class="tech-table">
+            <thead>
+              <tr><th>Layer</th><th>Technology Specification</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Frontend App</td><td>Next.js with custom CSS and dashboard layouts</td></tr>
+              <tr><td>Backend API</td><td>FastAPI running asynchronously on Python</td></tr>
+              <tr><td>Identity Provider</td><td>Keycloak / Auth0 / SAML Integration</td></tr>
+              <tr><td>Worker Queue</td><td>Celery and Redis for ingestion and processing</td></tr>
+              <tr><td>Vector Database</td><td>pgvector on PostgreSQL / Pinecone Enterprise</td></tr>
+              <tr><td>Models Supported</td><td>OpenAI (GPT-4o), Anthropic (Claude 3.5), Llama 3 via vLLM</td></tr>
+              <tr><td>Observability</td><td>Langfuse tracing / OpenTelemetry integration</td></tr>
+              <tr><td>Metrics Collection</td><td>Prometheus and Grafana dashboard suites</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            The technical implementation of Enterprise RAG by Originyx, led by Sagar M, overcame two primary system bottlenecks:
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>1. Context Window Bloat:</strong> Large semantic chunk payloads often choked LLM token limits and increased latency. Sagar M solved this by implementing a Cross-Encoder re-ranking layer that filtered top-20 database matches down to the 5 most contextually relevant chunks before prompting.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>2. Cross-Tenant Leakage:</strong> Enforcing strict multi-tenant isolation required mapping saml tokens directly to database search parameters. We configured PostgreSQL Row-Level Security (RLS) policies to filter rows dynamically during query execution.
+          </p>
+        </div>
+
+        <!-- Business Impact -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">40%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Search Time Reduction</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Knowledge workers locate internal documentation faster than manual keyword lookups.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">60%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Token Cost Reduction</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Redis-based semantic cache intercepts repetitive prompts, serving answers locally.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>Integrating visual multi-modal parsing to search charts, tables, and images.</li>
+            <li>Self-hosted fine-tuning pipelines for open-source Llama 3 models in isolated VPCs.</li>
+            <li>Autonomous multi-agent research flows that build multi-page reports.</li>
+          </ul>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../enterprise-rag/" class="about-skill-tag" style="text-decoration:none;">Enterprise RAG Platform</a>
+              <a href="../../ai-workflow-automation/" class="about-skill-tag" style="text-decoration:none;">AI Workflow Automation</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../shadowos/" class="about-skill-tag" style="text-decoration:none;">ShadowOS</a>
+              <a href="../mission-control/" class="about-skill-tag" style="text-decoration:none;">Mission Control</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">AI Automation India</a>
+              <a href="../../ai-for-real-estate/" class="about-skill-tag" style="text-decoration:none;">Real Estate AI</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does Enterprise RAG guarantee data sovereignty?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Our platform is designed for private VPC deployments (AWS, GCP, Azure) or on-premise environments. Your data is stored locally within your secure infrastructure and is never sent to public models to train commercial LLMs.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">How does the RBAC system sync with our existing identity providers?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Enterprise RAG connects directly with enterprise identity platforms via OAuth2 and SAML. When a user authenticates, their roles are translated into security tokens. These tokens are used by the backend to filter vector database queries in real-time.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Can the platform process scanned files and images?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. The ingestion pipeline includes layout-aware OCR models (like LayoutLM) that parse text, tables, and images in scanned PDFs and forms, ensuring that document structure and context are preserved.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif); color: var(--accent);">Does semantic caching respect document security boundaries?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes. Every item in the semantic cache is tagged with a permission hash. The cache will only serve a result if the current user's roles and tenant identifier match the permissions of the cached answer, maintaining strict access control.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <blockquote>"Enterprise RAG by Originyx bridges the gap between raw LLM capabilities and secure, cost-controlled business intelligence."</blockquote>
+          <cite>Enterprise RAG with RBAC &amp; Cost Monitoring</cite>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Tech Stack Panel -->
+      <div class="project-sidebar">
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Enterprise AI Operations</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Secure, isolated corporate knowledge retrieval</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Organizations with strict data sovereignty and compliance requirements</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Private VPC / On-Prem</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, TypeScript, PostgreSQL (pgvector), Redis</span>
+            </div>
+          </div>
+
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              Enterprise RAG leverages production-grade technologies to run secure, cost-controlled, and highly observable knowledge indexing loops.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Languages</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">TypeScript</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Backend &amp; API</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">FastAPI</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Redis / Celery</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OAuth2 / Keycloak</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Vector &amp; Data</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">PostgreSQL (pgvector)</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Pinecone</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">vLLM / HuggingFace</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Observability</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Langfuse</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OpenTelemetry</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Prometheus / Grafana</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <ox-footer></ox-footer>
+
+              <!-- ============ MODALS SYSTEM ============ -->
+  <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    
+    <!-- Modal 1: Start a Project -->
+    <div class="modal-container glass-card" id="start-project-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Start a Project</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-start-project">
+        <input type="hidden" name="formType" value="start-project">
+        
+        <div class="form-group">
+          <label for="start-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="start-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
+          <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-company">Company Name</label>
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
+          <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Strategy Call Requested!</h3>
+        <p>Your request has been received. Sagar will reach out to you within 24 hours to schedule a deep-dive call.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 2: Get Free AI Automation Audit -->
+    <div class="modal-container glass-card" id="automation-audit-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Free Automation Audit</h3>
+        <p>Expose hidden inefficiencies and map manual processes to digital agent targets.</p>
+      </div>
+      <form class="modal-form" id="form-automation-audit">
+        <input type="hidden" name="formType" value="automation-audit">
+
+        <div class="form-group">
+          <label for="audit-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="audit-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="audit-company">Company</label>
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
+          </div>
+          
+          <div class="form-group">
+            <label for="audit-website">Website</label>
+            <input type="url" id="audit-website" name="website" placeholder="https://company.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
+          <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Get Free AI Automation Audit</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Audit Request Submitted!</h3>
+        <p>Thank you for submitting your process bottlenecks. Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 3: Try This For My Business -->
+    <div class="modal-container glass-card" id="project-interest-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Deploy Custom Solution</h3>
+        <p>Request a custom system based on this architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-interest">
+        <input type="hidden" name="formType" value="project-interest">
+        <input type="hidden" id="interest-project-name" name="projectName" value="">
+
+        <div class="form-group">
+          <label for="interest-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="interest-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="interest-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-company">Company Name</label>
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-business">Tell us about your business <span class="required">*</span></label>
+          <textarea id="interest-business" name="businessInfo" required placeholder="What industry are you in? What is your current workflow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-outcome">What outcome are you looking for? <span class="required">*</span></label>
+          <textarea id="interest-outcome" name="outcome" required placeholder="e.g. Save 15 hours/week, automate company outreach leads..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Request Similar Solution</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Solution Request Logged!</h3>
+        <p>Your interest in this specific system has been documented. Sagar will reach out shortly to discuss adapting this architecture for your custom business requirements.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 4: Authentication Modal -->
+    <div class="modal-container glass-card" id="auth-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text" id="auth-modal-title">Sign In</h3>
+        <p id="auth-modal-subtitle">Log in or create an account to start your project.</p>
+      </div>
+
+      <!-- Setup Error State (shown if Supabase keys are missing) -->
+      <div class="auth-setup-error hidden" id="auth-setup-error">
+        <div class="error-icon">⚠️</div>
+        <h4>Configuration Incomplete</h4>
+        <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
+      </div>
+
+      <!-- Inline Error/Success Message Banner -->
+      <div class="auth-error-message hidden" id="auth-error-message" style="display: none; color: var(--rose); background: rgba(163, 42, 63, 0.05); border: 1px solid rgba(163, 42, 63, 0.2); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); margin-bottom: var(--space-md); font-size: 0.9rem; text-align: center;"></div>
+
+      <!-- Main Auth Container -->
+      <div id="auth-main-container">
+        <!-- Social Login Buttons -->
+        <div class="social-login-buttons">
+          <button class="btn social-btn google-btn" id="btn-login-google">
+            <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.79 5.79 0 0 1 8.2 12.725a5.79 5.79 0 0 1 5.79-5.79c2.485 0 4.542 1.54 5.38 3.737l3.657-2.84C20.67 3.518 16.71 1 12.24 1 6.03 1 1 6.03 1 12.24s5.03 11.24 11.24 11.24c6.07 0 11.135-4.4 11.135-11.24 0-.712-.082-1.396-.24-1.955H12.24z"/></svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="btn social-btn microsoft-btn" id="btn-login-microsoft">
+            <svg class="social-icon" viewBox="0 0 23 23" width="18" height="18"><path fill="#00a1f1" d="M12 0h11v11H12z"/><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 12h11v11H12z"/><path fill="#ffba08" d="M0 12h11v11H0z"/></svg>
+            <span>Continue with Microsoft</span>
+          </button>
+        </div>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <!-- Auth Form Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="tab-login" data-mode="login">Sign In</button>
+          <button class="auth-tab-btn" id="tab-signup" data-mode="signup">Create Account</button>
+        </div>
+
+        <!-- Email & Password Form -->
+        <form class="modal-form" id="form-auth-email">
+          <div class="form-group" id="group-fullname" style="display: none;">
+            <label for="auth-fullname">Full Name <span class="required">*</span></label>
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Enter Your Name">
+          </div>
+          <div class="form-group">
+            <label for="auth-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+              <label for="auth-password" style="margin-bottom: 0;">Password <span class="required">*</span></label>
+              <a href="#" id="auth-forgot-password-link" style="font-size: 0.8rem; color: var(--accent-light); text-decoration: underline;">Forgot Password?</a>
+            </div>
+            <div style="position: relative;">
+              <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="group-confirm-password" style="display: none;">
+            <label for="auth-confirm-password">Confirm Password <span class="required">*</span></label>
+            <div style="position: relative;">
+              <input type="password" id="auth-confirm-password" name="confirmPassword" placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="group-compliance" style="display: none; align-items: flex-start; margin-bottom: var(--space-md); gap: 10px;">
+            <input type="checkbox" id="auth-compliance" name="compliance" style="margin-top: 4px;">
+            <label for="auth-compliance" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.4;">
+              I agree to the <a href="/privacy-policy/" target="_blank" style="color: var(--accent-light); text-decoration: underline;">Privacy Policy</a> and <a href="/terms-and-conditions/" target="_blank" style="color: var(--accent-light); text-decoration: underline;">Terms &amp; Conditions</a>.
+            </label>
+          </div>
+          <div class="form-group" id="auth-password-guidance" style="display: none; font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must be 8-128 characters, including an uppercase letter, a lowercase letter, and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Forgot Password Container -->
+      <div id="auth-forgot-password-container" style="display: none;">
+        <form class="modal-form" id="form-forgot-password">
+          <div class="form-group">
+            <label for="forgot-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
+            <span class="btn-text">Send Reset Link</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+        <div style="text-align: center; margin-top: var(--space-md);">
+          <a href="#" id="link-back-to-signin" style="font-size: 0.9rem; color: var(--accent-light); text-decoration: underline;">Back to Sign In</a>
+        </div>
+      </div>
+
+      <!-- Update Password Container (Recovery Flow) -->
+      <div id="auth-update-password-container" style="display: none;">
+        <form class="modal-form" id="form-update-password">
+          <div class="form-group">
+            <label for="update-password">New Password <span class="required">*</span></label>
+            <input type="password" id="update-password" name="newPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="update-confirm-password">Confirm New Password <span class="required">*</span></label>
+            <input type="password" id="update-confirm-password" name="confirmNewPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-update-password-guidance" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-update-submit">
+            <span class="btn-text">Update Password</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 5: Project Request Modal -->
+    <div class="modal-container glass-card" id="project-request-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Submit Project Request</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-request">
+        <input type="hidden" id="req-source-page" name="sourcePage" value="/">
+        <input type="hidden" id="req-source-cta" name="sourceCta" value="Start a Project">
+        <input type="hidden" id="req-product-interest" name="productInterest" value="Originyx">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="req-name" name="name" required placeholder="Enter Your Name">
+          </div>
+          <div class="form-group">
+            <label for="req-business">Business Name <span class="required">*</span></label>
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>
+            <input type="tel" id="req-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-industry">Industry <span class="required">*</span></label>
+            <input type="text" id="req-industry" name="industry" required placeholder="Logistics, Finance, Healthcare...">
+          </div>
+          <div class="form-group">
+            <label for="req-type">Project Type <span class="required">*</span></label>
+            <select id="req-type" name="projectType" required>
+              <option value="" disabled selected>Select project type...</option>
+              <option value="AI Agent">AI Agent</option>
+              <option value="AI Automation">AI Automation</option>
+              <option value="SaaS Platform">SaaS Platform</option>
+              <option value="Internal Business Tool">Internal Business Tool</option>
+              <option value="Enterprise AI System">Enterprise AI System</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="req-workflow">Current Workflow <span class="required">*</span></label>
+          <textarea id="req-workflow" name="workflowDescription" required placeholder="Describe the manual steps and processes currently being used..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-challenges">Challenges <span class="required">*</span></label>
+          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-outcome">Desired Outcome <span class="required">*</span></label>
+          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-notes">Additional Notes <span class="optional">(Optional)</span></label>
+          <textarea id="req-notes" name="notes" placeholder="Any other details..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Project Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden" id="request-success-state">
+        <div class="success-checkmark">✓</div>
+        <h3>Project Request Submitted!</h3>
+        <p>Your request has been successfully recorded. Sagar will review your current workflow description, challenges, and desired outcomes and follow up with you within 24 hours.</p>
+        <button class="btn btn-primary modal-success-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../../auth.js"></script>
+  <script defer src="../../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="../../site.webmanifest">
+
+  <!-- SEO Meta Tags -->
+  <title>AI Virtual Receptionist for Coaching Centres | Tvira Receptionist by Originyx</title>
+  <meta name="description" content="Discover how Tvira Receptionist by Originyx acts as a 24/7 AI virtual receptionist for coaching centres. Automate student inquiries, capture leads, and streamline admissions using FastAPI, PostgreSQL, and conversational AI.">
+  <meta name="keywords" content="Tvira Receptionist, Ojas.ai, AI Receptionist, Conversational AI, Coaching Centre Automation, Lead Generation, Education Assistant, RAG, Originyx">
+  <meta name="author" content="Sagar M">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://originyx.in/projects/ojas-ai/">
+
+  <!-- Search Console Verification Support -->
+  <meta name="google-site-verification" content="GSC_VERIFICATION_TOKEN_HERE">
+  <meta name="msvalidate.01" content="BING_VERIFICATION_TOKEN_HERE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Virtual Receptionist for Coaching Centres | Tvira Receptionist by Originyx">
+  <meta property="og:description" content="Automate student inquiries, capture leads, and streamline admissions using FastAPI, PostgreSQL, and conversational AI with Tvira Receptionist by Originyx.">
+  <meta property="og:url" content="https://originyx.in/projects/ojas-ai/">
+  <meta property="og:image" content="../../thumbnails/tvira-og.png">
+  <meta property="og:site_name" content="Originyx">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Virtual Receptionist for Coaching Centres | Tvira Receptionist">
+  <meta name="twitter:description" content="Automate student inquiries, capture leads, and streamline admissions using FastAPI, PostgreSQL, and conversational AI with Tvira Receptionist by Originyx.">
+  <meta name="twitter:image" content="../../thumbnails/tvira-og.png">
+
+  <!-- Favicon / Core stylesheet -->
+  <link rel="icon" href="../../logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="../../logo.png">
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: Breadcrumb, SoftwareApplication, and FAQ schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://originyx.in/projects/ojas-ai/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://originyx.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "https://originyx.in/case-studies/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Tvira Receptionist (Ojas.ai)",
+            "item": "https://originyx.in/projects/ojas-ai/"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://originyx.in/projects/ojas-ai/#software",
+        "name": "Tvira Receptionist (Ojas.ai)",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "softwareVersion": "1.2.0",
+        "description": "Tvira Receptionist (Ojas.ai) is an autonomous AI-powered virtual receptionist and front-desk assistant by Originyx, engineered specifically for coaching centres, academies, and educational institutes to handle student inquiries, capture qualified leads, and manage admissions 24/7 using FastAPI and PostgreSQL.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD",
+          "description": "Custom licensing and integration solutions for educational institutions"
+        },
+        "brand": {
+          "@type": "Brand",
+          "name": "Originyx"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "Sagar M",
+          "url": "https://originyx.in/about/"
+        }
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://originyx.in/projects/ojas-ai/#article",
+        "headline": "Tvira Receptionist: AI Virtual Receptionist for Education & Coaching",
+        "author": {
+          "@type": "Person",
+          "name": "Sagar M"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Originyx"
+        },
+        "programmingLanguage": ["Python", "JavaScript"],
+        "about": ["Artificial Intelligence", "Conversational AI", "FastAPI", "PostgreSQL", "Retrieval-Augmented Generation", "RAG"]
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://originyx.in/projects/ojas-ai/#work",
+        "name": "Tvira Receptionist Architecture and Implementation Case Study",
+        "creator": {
+          "@type": "Person",
+          "name": "Sagar M"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://originyx.in/projects/ojas-ai/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Tvira Receptionist (Ojas.ai)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tvira Receptionist (Ojas.ai) is a production-grade AI receptionist system developed by Originyx for educational institutions. It acts as an automated front desk, resolving student queries, collecting contact information, scheduling trial sessions, and assisting parents around the clock."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Tvira Receptionist ensure response accuracy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The platform uses Retrieval-Augmented Generation (RAG) tied to verified institutional data sources (such as brochures, schedules, and fee guidelines). This prevents the AI from fabricating information and ensures compliance with institutional policies."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which channels can Tvira Receptionist be deployed on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tvira Receptionist (Ojas.ai) supports multi-channel integrations, including web widgets for the institute's main website, secure student portals, WhatsApp Business API accounts, and custom mobile apps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are captured leads stored and handled?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Captured leads are automatically structured and forwarded to student relationship databases, PostgreSQL databases, CRMs like Salesforce or Hubspot, or webhooks feeding custom administration panels, allowing instant follow-up by the team."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preload" href="../../styles.css" as="style">
+
+  <!-- Preload & Preconnect Optimizations -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://rwsmafafptupucthrjwx.supabase.co">
+  <link rel="preconnect" href="https://rwsmafafptupucthrjwx.supabase.co" crossorigin>
+  <script src="/components/ox-navbar.js" defer></script>
+  <script src="/components/ox-footer.js" defer></script>
+</head>
+<body>
+
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <ox-navbar></ox-navbar>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container" style="position: relative; z-index: 1; padding-top: calc(var(--nav-height) + var(--space-xl)); padding-bottom: var(--space-4xl);">
+    <div class="ambient-glow" style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(36,66,53,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0;" aria-hidden="true"></div>
+
+    <!-- ============ PROJECT HERO ============ -->
+    <section class="project-header-section" style="margin-bottom: var(--space-3xl);">
+      <a href="../../case-studies/" class="back-btn">&larr; Back to Case Studies</a>
+
+      <div class="project-hero-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-3xl); align-items: center;">
+        <div class="hero-content">
+          <span class="section-label">Active Prototype</span>
+          <div id="ai-summary-block" style="background: rgba(43, 219, 129, 0.05); border: 1px solid rgba(43, 219, 129, 0.2); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+            <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase;">AI Summary</strong>
+            <p style="margin: var(--space-xs) 0 0 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+              Tvira Receptionist (Ojas.ai) is an autonomous AI agent for educational institutes that handles front-desk inquiries, schedules consultations, and captures leads 24/7. It uses RAG to answer questions based on institute brochures and syncs leads directly to the CRM via WhatsApp and webchat.
+            </p>
+          </div>
+          <h1 class="hero-title" style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: clamp(2.5rem, 5vw, 3.5rem); font-family: var(--font-serif);">
+            Tvira Receptionist
+          </h1>
+          <p class="hero-description" style="font-size: 1.25rem; font-weight: 500; color: var(--accent-light); margin-bottom: var(--space-md);">
+            Autonomous AI Virtual Receptionist for Coaching Centres & Educational Institutes 🎓🤖
+          </p>
+          <p class="hero-description" style="margin-bottom: var(--space-lg); color: var(--text-secondary);">
+            Tvira Receptionist (Ojas.ai) is a production-grade AI-powered virtual receptionist and conversational assistant designed specifically for coaching centres, tuition academies, test-preparation institutes, and educational organizations. Operating as an intelligent front-desk companion, it addresses a critical bottleneck in the student enrollment cycle by answering inquiry calls, managing WhatsApp and website chats, scheduling academic consultations, and capturing leads 24 hours a day, 7 days a week. Built by the engineering team at Originyx, this autonomous agent ensures that no prospective student or parent is left waiting, maximizing enrollment conversions and alleviating the operational strain on administrative staff during peak admission cycles.
+          </p>
+
+          <div class="project-meta-box" style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Status: <strong>Active Prototype</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Tech: <strong>Python / RAG / Conversational AI</strong></div>
+            <div class="meta-tag" style="padding: var(--space-xs) var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 0.85rem; background: var(--bg-secondary);">Domain: <strong>EdTech / Lead Capture</strong></div>
+          </div>
+
+          <div class="hero-buttons" style="display: flex; gap: var(--space-md);">
+            <button class="btn btn-primary" data-modal-target="automation-audit-modal" data-project-name="Tvira Receptionist (Ojas.ai)" id="btn-trigger-audit">
+              Get This Project Audit
+            </button>
+            <a href="https://github.com/sagar300408-stack/AI-Receptionist-for-Coaching-Centers" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-trigger-github">
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-wrapper" style="max-width: 400px; box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--border);">
+            <img decoding="async" src="../../thumbnails/ojasai.png" alt="Tvira Receptionist Interface Mockup by Originyx" style="width: 100%; height: auto;" width="800" height="600" loading="lazy" fetchpriority="high">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MAIN CONTENT LAYOUT ============ -->
+    <section class="project-main-grid" style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+      
+      <!-- Left Column: Case Study Details -->
+      <div class="project-body" style="display: flex; flex-direction: column; gap: var(--space-2xl);">
+        
+        <!-- Quick Facts / Retrieval Metadata -->
+        <div id="quick-facts-block" class="glass-card" style="padding: var(--space-xl); border-top: 4px solid var(--accent);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.25rem;">Retrieval Metadata</h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tbody>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Category</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Conversational AI & Lead Capture</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Industry</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">EdTech / Education</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Built By</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Originyx</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Founder</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Sagar M</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Primary Language</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Python</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Framework</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">FastAPI, LangChain</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Architecture</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">RAG (Retrieval-Augmented Generation)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Database</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">PostgreSQL, ChromaDB</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Deployment</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Cloud (AWS EC2)</td></tr>
+              <tr><td style="padding: 8px; border-bottom: 1px solid var(--border); font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">Status</td><td style="padding: 8px; border-bottom: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">Active Prototype</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Business Problem -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Business Problem</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Educational institutes and coaching centres face severe administrative friction during admission seasons. Front-desk personnel are frequently overwhelmed by repetitive queries regarding course structures, tuition fees, batch schedules, faculty qualifications, and registration deadlines. Consequently, staff members struggle to divide their time between answering initial inquiries and managing current students, leading to long response delays.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Furthermore, parent and student inquiries do not respect normal office hours. A significant portion of online queries and messages arrive late in the evening or during weekends when offices are closed. Without immediate engagement, prospective candidates quickly pivot to competing institutes. Missed calls, fragmented WhatsApp chats, and delayed email replies result in a high lead drop-off rate, costing centres thousands of dollars in lost tuition revenue. Additionally, human agents often deliver inconsistent details about discounts, slots, and schedules, introducing compliance risks.
+          </p>
+        </div>
+
+        <!-- Business Context -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--accent);">
+          <h2 style="margin-top: 0; color: var(--accent); font-family: var(--font-serif);">Business Context</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            In the highly competitive EdTech and physical coaching space, immediate lead response time directly correlates to conversion rates. Parents evaluating tutoring academies for their children are highly likely to enroll with the first institute that provides clear, accurate pricing and batch availability details.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Sagar M and the team at Originyx realized that traditional IVR systems and basic decision-tree chatbots were falling short, lacking the semantic understanding to parse nuanced questions like, "Do you have a weekend crash course for JEE Mains that starts next month?" The objective was clear: architect an AI virtual receptionist capable of handling complex natural language inquiries 24/7.
+          </p>
+        </div>
+
+        <!-- Solution -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Solution</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            Tvira Receptionist (Ojas.ai) was built by **Originyx** under the technical leadership of founder **Sagar M** as an autonomous conversational agent for coaching centers and training institutes. Operating 24/7 on WhatsApp and web chat, the system answers syllabus, fee, and timing queries with approved brochure data.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The solution employs an advanced lead-capture flow that collects student contact records, academic goals, and preferred slots, routing qualified records directly to the admissions team's CRM while scheduling follow-up consultation calls.
+          </p>
+        </div>
+
+        <!-- Architecture -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Architecture</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            Tvira Receptionist leverages a cutting-edge Retrieval-Augmented Generation (RAG) pipeline built to ensure zero hallucinations. Designed with a microservices approach by Originyx, the core logic is powered by FastAPI, ensuring high-throughput and low-latency responses:
+          </p>
+          <div class="glass-card" style="padding: var(--space-xl); background: var(--bg-secondary); margin-bottom: var(--space-md);">
+            <ul style="padding-left: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
+              <li>
+                <strong>Ingestion & Vectorization Module</strong>: Scans unstructured institute documents (brochures, timetables). These are chunked, vectorized using OpenAI embeddings, and stored in a vector database (ChromaDB) for rapid semantic search.
+              </li>
+              <li>
+                <strong>LLM Orchestration Layer</strong>: LangChain is used to string together the conversational memory buffer and the retrieval chain. When a query is received via the FastAPI endpoint, the chain fetches the top-K relevant document chunks to construct the context window.
+              </li>
+              <li>
+                <strong>Guardrails & Prompt Injection Defense</strong>: Strict system prompts prevent the AI from answering non-academic questions. If a user asks about general world knowledge or competitor pricing, the bot gracefully declines and redirects to institute offerings.
+              </li>
+              <li>
+                <strong>Data Persistence Layer</strong>: A robust PostgreSQL database handles conversation logging, user session tracking, and lead storage. SQLAlchemy ORM is used for secure and efficient database transactions.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Technology Stack</h2>
+          <div class="features-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-lg);">
+            <div class="glass-card" style="padding: var(--space-md);">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent);">Backend</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">Python, FastAPI, Uvicorn, Webhooks</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md);">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent);">AI & Data</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">LangChain, OpenAI API, ChromaDB (Vector Store)</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md);">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent);">Database</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">PostgreSQL, SQLAlchemy ORM, Alembic</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-md);">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent);">Infrastructure</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 0;">Docker, AWS EC2, Nginx Reverse Proxy</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Implementation -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--rose);">
+          <h2 style="margin-top: 0; color: var(--rose); font-family: var(--font-serif);">Implementation</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            During the implementation phase at Originyx, Sagar M prioritized modularity. By abstracting the LLM provider interface, the system can seamlessly switch between OpenAI, Anthropic, or local open-source models depending on the client's data privacy requirements.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-sm);">
+            <strong>Challenge 1: Context Window Exceeded:</strong> Multi-day conversation logs exceeded LLM context boundaries. Sagar M resolved this by implementing an intelligent semantic summary loop that condenses older chat segments while retaining critical customer attributes.
+          </p>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            <strong>Challenge 2: Multi-page Table Ingestion:</strong> Institute brochures contain complex PDF tuition schedules that lose formatting when parsed. We wrote custom OCR parsing scripts to map tabular pricing arrays cleanly into ChromaDB.
+          </p>
+        </div>
+
+        <!-- Business Impact -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Business Impact</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-md);">
+            By deploying Tvira Receptionist within academic workflows, educational groups and coaching centers achieved substantial operational improvements. Originyx measured the following impact metrics across our pilot deployments:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">45%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Enrollment Conversion Boost</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Instant answers to late-night and weekend visitors capture leads before they bounce to competitors.</p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-xl); text-align: center;">
+              <h3 style="font-size: 2.2rem; color: var(--accent); margin-bottom: 2px;">70%</h3>
+              <span style="font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-secondary);">Reception Workload Reduction</span>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: var(--space-sm);">Staff members are freed from answering repetitive queries, allowing focus on deep in-person counseling.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Roadmap -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--green);">
+          <h2 style="margin-top: 0; color: var(--green); font-family: var(--font-serif);">Future Roadmap</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            The roadmap for Tvira Receptionist includes implementing voice AI capabilities for real-time inbound call handling, integrating natively with prominent EdTech LMS platforms, and introducing predictive analytics dashboards. These dashboards will analyze historical inquiry data stored in PostgreSQL to forecast admission trends and automatically suggest new course offerings to institute administrators.
+          </p>
+        </div>
+
+        <!-- Related Entities -->
+        <div class="glass-card" style="padding: var(--space-xl); margin-top: var(--space-md); margin-bottom: var(--space-md);">
+          <h3 style="font-family: var(--font-serif); margin-bottom: var(--space-md); font-size: 1.15rem;">Semantic Relationships</h3>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Services:</span>
+              <a href="../../ai-receptionist/" class="about-skill-tag" style="text-decoration:none;">AI Receptionist Service</a>
+              <a href="../../lead-generation-automation/" class="about-skill-tag" style="text-decoration:none;">Lead Generation Automation</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Projects:</span>
+              <a href="../sunny-ai-companion/" class="about-skill-tag" style="text-decoration:none;">Sunny AI Companion</a>
+              <a href="../lifeos/" class="about-skill-tag" style="text-decoration:none;">LifeOS</a>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); width: 120px;">Related Industries:</span>
+              <a href="../../ai-for-coaching-centers/" class="about-skill-tag" style="text-decoration:none;">Coaching Centers</a>
+              <a href="../../ai-automation-india/" class="about-skill-tag" style="text-decoration:none;">AI Automation India</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases & Limitations -->
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--cyan); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--cyan); font-family: var(--font-serif);">Common Use Cases</h2>
+          <ul style="padding-left: var(--space-lg); list-style-type: disc; color: var(--text-secondary); display: flex; flex-direction: column; gap: var(--space-xs);">
+            <li>After-hours lead capture and inquiry handling on WhatsApp</li>
+            <li>Automating course and fee structure dissemination from PDFs</li>
+            <li>Booking appointments and trial classes directly into the CRM</li>
+            <li>Providing multilingual front-desk support in regional languages</li>
+          </ul>
+        </div>
+        
+        <div class="glass-card" style="padding: var(--space-2xl); border-left: 4px solid var(--amber); margin-top: var(--space-md);">
+          <h2 style="margin-top: 0; color: var(--amber); font-family: var(--font-serif);">When this solution is NOT ideal</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">
+            Organizations that require complex emotional counseling (e.g., student mental health services or highly sensitive career advice) should not use fully autonomous agents for first-touch communication, as empathetic human interaction is critical in those scenarios.
+          </p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div>
+          <h2 style="font-family: var(--font-serif); margin-bottom: var(--space-md);">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does Tvira Receptionist avoid making up incorrect information?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Unlike generic chatbots that guess answers, Tvira Receptionist (Ojas.ai) is strictly constrained by a Retrieval-Augmented Generation (RAG) framework. It can only generate answers using the verified source documents uploaded to its knowledge base. If an inquiry falls outside the scope of these documents, the system politely flags that it cannot answer and offers to route the request to a human admissions counselor.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Is student data stored securely?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, data security and compliance are built into the core architecture of Tvira Receptionist. All parent and student contact records, chat histories, and personal identifiers are encrypted in transit and at rest. The system conforms to modern data privacy standards and supports integrations with private, secure database clusters including isolated PostgreSQL instances.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How long does it take to deploy Tvira Receptionist for a coaching centre?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                A standard deployment takes between one to two weeks. This timeline includes uploading and parsing the institute's brochures, training the RAG model on custom policies, configuring WhatsApp and web chat interfaces, and testing the CRM webhooks to ensure flawless lead routing.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">Can the receptionist handle multiple languages?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Yes, Tvira Receptionist is natively multilingual. It can detect the language used by the parent or student (such as English, Hindi, Spanish, or regional dialects) and converse fluently, ensuring that language barriers do not hinder the enrollment process.
+              </p>
+            </div>
+            <div class="glass-card" style="padding: var(--space-lg);">
+              <h4 style="margin-bottom: var(--space-xs); font-family: var(--font-serif);">How does the system transition conversations to human staff?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+                Whenever a prospect asks a highly specific question not covered in the knowledge base, requests human assistance, or completes the lead-qualification loop, Tvira Receptionist immediately triggers a notification. The complete chat transcript is compiled and sent to the admissions desk via email, SMS, or CRM alert, allowing a team member to take over smoothly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Tech Stack Panel -->
+      <div class="project-sidebar">
+        <div class="tech-stack-panel" style="position: sticky; top: calc(var(--nav-height) + var(--space-md));">
+          
+          <!-- Knowledge Panel -->
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">EdTech & Coaching Centers</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Business Goal</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Automate lead capture and student inquiries 24/7</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Ideal Customer</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Institutes overwhelmed by repetitive admission calls</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Deployment</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Cloud</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Built With</span>
+              <span style="font-size: 0.9rem; color: var(--text-secondary);">Python, FastAPI, LangChain, ChromaDB, PostgreSQL, WhatsApp API</span>
+            </div>
+          </div>
+
+          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);">
+            <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Project Tech Stack</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0;">
+              Tvira Receptionist (Ojas.ai) leverages modern Artificial Intelligence, RAG architectures, and multi-channel messaging APIs to deliver lightning-fast responses to academic queries.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Language</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">Python</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-xs);">
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Frameworks & API</span>
+              <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">FastAPI</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">LangChain</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">ChromaDB</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">OpenAI API</span>
+                <span class="tech-stack-badge" style="padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.75rem; background: var(--bg-secondary);">WhatsApp API</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <ox-footer></ox-footer>
+
+              <!-- ============ MODALS SYSTEM ============ -->
+  <div class="modal-wrapper" id="modal-wrapper" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    
+    <!-- Modal 1: Start a Project -->
+    <div class="modal-container glass-card" id="start-project-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Start a Project</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-start-project">
+        <input type="hidden" name="formType" value="start-project">
+        
+        <div class="form-group">
+          <label for="start-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="start-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="start-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-phone">Phone Number (with Country Code) <span class="required">*</span></label>
+          <input type="tel" id="start-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-company">Company Name</label>
+          <input type="text" id="start-company" name="company" placeholder="Your Company">
+        </div>
+        
+        <div class="form-group">
+          <label for="start-discussion">What would you like to discuss? <span class="required">*</span></label>
+          <textarea id="start-discussion" name="discussion" required placeholder="Description of your bottlenecks or workflow objectives..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Strategy Call Requested!</h3>
+        <p>Your request has been received. Sagar will reach out to you within 24 hours to schedule a deep-dive call.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 2: Get Free AI Automation Audit -->
+    <div class="modal-container glass-card" id="automation-audit-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Free Automation Audit</h3>
+        <p>Expose hidden inefficiencies and map manual processes to digital agent targets.</p>
+      </div>
+      <form class="modal-form" id="form-automation-audit">
+        <input type="hidden" name="formType" value="automation-audit">
+
+        <div class="form-group">
+          <label for="audit-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="audit-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="audit-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="audit-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="audit-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="audit-company">Company</label>
+            <input type="text" id="audit-company" name="company" placeholder="Your Company">
+          </div>
+          
+          <div class="form-group">
+            <label for="audit-website">Website</label>
+            <input type="url" id="audit-website" name="website" placeholder="https://company.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="audit-process">What process consumes the most time? <span class="required">*</span></label>
+          <textarea id="audit-process" name="processTime" required placeholder="Describe the repetitive manual process you want to automate."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Get Free AI Automation Audit</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Audit Request Submitted!</h3>
+        <p>Thank you for submitting your process bottlenecks. Sagar will perform a workflow analysis and send your custom AI Automation blueprint via email.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 3: Try This For My Business -->
+    <div class="modal-container glass-card" id="project-interest-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Deploy Custom Solution</h3>
+        <p>Request a custom system based on this architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-interest">
+        <input type="hidden" name="formType" value="project-interest">
+        <input type="hidden" id="interest-project-name" name="projectName" value="">
+
+        <div class="form-group">
+          <label for="interest-name">Full Name <span class="required">*</span></label>
+          <input type="text" id="interest-name" name="name" required placeholder="Enter Your Name">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-email">Email Address <span class="required">*</span></label>
+          <input type="email" id="interest-email" name="email" required placeholder="name@company.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-phone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="interest-phone" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        
+        <div class="form-group">
+          <label for="interest-company">Company Name</label>
+          <input type="text" id="interest-company" name="company" placeholder="Your Company">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-business">Tell us about your business <span class="required">*</span></label>
+          <textarea id="interest-business" name="businessInfo" required placeholder="What industry are you in? What is your current workflow?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-outcome">What outcome are you looking for? <span class="required">*</span></label>
+          <textarea id="interest-outcome" name="outcome" required placeholder="e.g. Save 15 hours/week, automate company outreach leads..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Request Similar Solution</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden">
+        <div class="success-checkmark">✓</div>
+        <h3>Solution Request Logged!</h3>
+        <p>Your interest in this specific system has been documented. Sagar will reach out shortly to discuss adapting this architecture for your custom business requirements.</p>
+        <button class="btn btn-primary modal-success-close">Close Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Modal 4: Authentication Modal -->
+    <div class="modal-container glass-card" id="auth-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text" id="auth-modal-title">Sign In</h3>
+        <p id="auth-modal-subtitle">Log in or create an account to start your project.</p>
+      </div>
+
+      <!-- Setup Error State (shown if Supabase keys are missing) -->
+      <div class="auth-setup-error hidden" id="auth-setup-error">
+        <div class="error-icon">⚠️</div>
+        <h4>Configuration Incomplete</h4>
+        <p>This platform's authentication is not configured yet. Please configure the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> environment variables to activate this action.</p>
+      </div>
+
+      <!-- Inline Error/Success Message Banner -->
+      <div class="auth-error-message hidden" id="auth-error-message" style="display: none; color: var(--rose); background: rgba(163, 42, 63, 0.05); border: 1px solid rgba(163, 42, 63, 0.2); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm); margin-bottom: var(--space-md); font-size: 0.9rem; text-align: center;"></div>
+
+      <!-- Main Auth Container -->
+      <div id="auth-main-container">
+        <!-- Social Login Buttons -->
+        <div class="social-login-buttons">
+          <button class="btn social-btn google-btn" id="btn-login-google">
+            <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.79 5.79 0 0 1 8.2 12.725a5.79 5.79 0 0 1 5.79-5.79c2.485 0 4.542 1.54 5.38 3.737l3.657-2.84C20.67 3.518 16.71 1 12.24 1 6.03 1 1 6.03 1 12.24s5.03 11.24 11.24 11.24c6.07 0 11.135-4.4 11.135-11.24 0-.712-.082-1.396-.24-1.955H12.24z"/></svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="btn social-btn microsoft-btn" id="btn-login-microsoft">
+            <svg class="social-icon" viewBox="0 0 23 23" width="18" height="18"><path fill="#00a1f1" d="M12 0h11v11H12z"/><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 12h11v11H12z"/><path fill="#ffba08" d="M0 12h11v11H0z"/></svg>
+            <span>Continue with Microsoft</span>
+          </button>
+        </div>
+
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+
+        <!-- Auth Form Tabs -->
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="tab-login" data-mode="login">Sign In</button>
+          <button class="auth-tab-btn" id="tab-signup" data-mode="signup">Create Account</button>
+        </div>
+
+        <!-- Email & Password Form -->
+        <form class="modal-form" id="form-auth-email">
+          <div class="form-group" id="group-fullname" style="display: none;">
+            <label for="auth-fullname">Full Name <span class="required">*</span></label>
+            <input type="text" id="auth-fullname" name="fullname" placeholder="Enter Your Name">
+          </div>
+          <div class="form-group">
+            <label for="auth-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="auth-email" name="email" required placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs);">
+              <label for="auth-password" style="margin-bottom: 0;">Password <span class="required">*</span></label>
+              <a href="#" id="auth-forgot-password-link" style="font-size: 0.8rem; color: var(--accent-light); text-decoration: underline;">Forgot Password?</a>
+            </div>
+            <div style="position: relative;">
+              <input type="password" id="auth-password" name="password" required placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="group-confirm-password" style="display: none;">
+            <label for="auth-confirm-password">Confirm Password <span class="required">*</span></label>
+            <div style="position: relative;">
+              <input type="password" id="auth-confirm-password" name="confirmPassword" placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="group-compliance" style="display: none; align-items: flex-start; margin-bottom: var(--space-md); gap: 10px;">
+            <input type="checkbox" id="auth-compliance" name="compliance" style="margin-top: 4px;">
+            <label for="auth-compliance" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0; line-height: 1.4;">
+              I agree to the <a href="/privacy-policy/" target="_blank" style="color: var(--accent-light); text-decoration: underline;">Privacy Policy</a> and <a href="/terms-and-conditions/" target="_blank" style="color: var(--accent-light); text-decoration: underline;">Terms &amp; Conditions</a>.
+            </label>
+          </div>
+          <div class="form-group" id="auth-password-guidance" style="display: none; font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must be 8-128 characters, including an uppercase letter, a lowercase letter, and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-auth-submit">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Forgot Password Container -->
+      <div id="auth-forgot-password-container" style="display: none;">
+        <form class="modal-form" id="form-forgot-password">
+          <div class="form-group">
+            <label for="forgot-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="forgot-email" name="email" required placeholder="name@company.com">
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-forgot-submit">
+            <span class="btn-text">Send Reset Link</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+        <div style="text-align: center; margin-top: var(--space-md);">
+          <a href="#" id="link-back-to-signin" style="font-size: 0.9rem; color: var(--accent-light); text-decoration: underline;">Back to Sign In</a>
+        </div>
+      </div>
+
+      <!-- Update Password Container (Recovery Flow) -->
+      <div id="auth-update-password-container" style="display: none;">
+        <form class="modal-form" id="form-update-password">
+          <div class="form-group">
+            <label for="update-password">New Password <span class="required">*</span></label>
+            <input type="password" id="update-password" name="newPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group">
+            <label for="update-confirm-password">Confirm New Password <span class="required">*</span></label>
+            <input type="password" id="update-confirm-password" name="confirmNewPassword" required placeholder="••••••••" minlength="8">
+          </div>
+          <div class="form-group" id="auth-update-password-guidance" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must contain at least 8 characters, including an uppercase letter and a number.
+          </div>
+          
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-update-submit">
+            <span class="btn-text">Update Password</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 5: Project Request Modal -->
+    <div class="modal-container glass-card" id="project-request-modal">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <h3 class="gradient-text">Submit Project Request</h3>
+        <p>Let's map out your autonomous AI architecture.</p>
+      </div>
+      <form class="modal-form" id="form-project-request">
+        <input type="hidden" id="req-source-page" name="sourcePage" value="/">
+        <input type="hidden" id="req-source-cta" name="sourceCta" value="Start a Project">
+        <input type="hidden" id="req-product-interest" name="productInterest" value="Originyx">
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="req-name" name="name" required placeholder="Enter Your Name">
+          </div>
+          <div class="form-group">
+            <label for="req-business">Business Name <span class="required">*</span></label>
+            <input type="text" id="req-business" name="businessName" required placeholder="Your Company">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="req-email" name="email" required placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <label for="req-phone">Phone Number <span class="optional">(Optional)</span></label>
+            <input type="tel" id="req-phone" name="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="req-industry">Industry <span class="required">*</span></label>
+            <input type="text" id="req-industry" name="industry" required placeholder="Logistics, Finance, Healthcare...">
+          </div>
+          <div class="form-group">
+            <label for="req-type">Project Type <span class="required">*</span></label>
+            <select id="req-type" name="projectType" required>
+              <option value="" disabled selected>Select project type...</option>
+              <option value="AI Agent">AI Agent</option>
+              <option value="AI Automation">AI Automation</option>
+              <option value="SaaS Platform">SaaS Platform</option>
+              <option value="Internal Business Tool">Internal Business Tool</option>
+              <option value="Enterprise AI System">Enterprise AI System</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="req-workflow">Current Workflow <span class="required">*</span></label>
+          <textarea id="req-workflow" name="workflowDescription" required placeholder="Describe the manual steps and processes currently being used..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-challenges">Challenges <span class="required">*</span></label>
+          <textarea id="req-challenges" name="challenges" required placeholder="What are the main bottlenecks, errors, or time wastes in the current workflow..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-outcome">Desired Outcome <span class="required">*</span></label>
+          <textarea id="req-outcome" name="desiredOutcome" required placeholder="Describe what successful automation looks like..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="req-notes">Additional Notes <span class="optional">(Optional)</span></label>
+          <textarea id="req-notes" name="notes" placeholder="Any other details..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit-btn">
+          <span class="btn-text">Submit Project Request</span>
+          <span class="btn-spinner hidden"></span>
+        </button>
+      </form>
+      <div class="modal-success-state hidden" id="request-success-state">
+        <div class="success-checkmark">✓</div>
+        <h3>Project Request Submitted!</h3>
+        <p>Your request has been successfully recorded. Sagar will review your current workflow description, challenges, and desired outcomes and follow up with you within 24 hours.</p>
+        <button class="btn btn-primary modal-success-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="../../auth.js"></script>
+  <script defer src="../../script.js"></script>
+</body>
+</html>

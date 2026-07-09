@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reset Password | Originyx</title>
+  <meta name="description" content="Set a new password for your Originyx account.">
+  <meta name="robots" content="noindex,nofollow">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <style>
+    .reset-container {
+      max-width: 450px;
+      margin: 120px auto 60px;
+      padding: var(--space-lg);
+      text-align: center;
+    }
+    .reset-container h1 {
+      margin-bottom: var(--space-xs);
+      font-size: 2rem;
+    }
+    .reset-container p {
+      color: var(--text-muted);
+      margin-bottom: var(--space-lg);
+    }
+    .reset-state { display: none; }
+    .reset-state.active { display: block; }
+    .reset-btn { margin-top: var(--space-md); }
+  </style>
+  <script src="/components/ox-navbar.js" defer></script>
+  <script src="/components/ox-footer.js" defer></script>
+</head>
+<body>
+  
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        ORIGINYX
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="reset-container glass-card">
+      
+      <!-- Loading State -->
+      <div id="state-loading" class="reset-state active">
+        <h1 class="gradient-text">Verifying Link</h1>
+        <p>Please wait while we securely verify your reset link...</p>
+        <div class="loader" style="margin: 20px auto; display: block; border-color: var(--accent-light) transparent transparent transparent;"></div>
+      </div>
+
+      <!-- Invalid/Expired Token State -->
+      <div id="state-error" class="reset-state">
+        <h1 class="gradient-text">Link Expired</h1>
+        <p>This password reset link is no longer valid. Request a new password reset email.</p>
+        <button class="btn btn-primary reset-btn" onclick="window.location.href='/'">Request New Reset Link</button>
+      </div>
+
+      <!-- Update Password Form State -->
+      <div id="state-form" class="reset-state">
+        <h1 class="gradient-text">Set New Password</h1>
+        <p>Enter your new password below.</p>
+        
+        <form class="modal-form" id="form-update-password" style="text-align: left;">
+          <div class="form-group">
+            <label for="update-password">New Password <span class="required">*</span></label>
+            <div style="position: relative;">
+              <input type="password" id="update-password" name="newPassword" required placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="update-confirm-password">Confirm New Password <span class="required">*</span></label>
+            <div style="position: relative;">
+              <input type="password" id="update-confirm-password" name="confirmNewPassword" required placeholder="••••••••" minlength="8" maxlength="128">
+              <button type="button" class="btn-toggle-password" aria-label="Toggle password visibility" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem;">👁 Show</button>
+            </div>
+          </div>
+          <div class="form-group" id="auth-update-password-guidance" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-sm);">
+            Password must be 8-128 characters, including an uppercase letter, a lowercase letter, and a number.
+          </div>
+          
+          <div id="update-error-message" style="display: none; color: #ff6b6b; font-size: 0.85rem; margin-bottom: var(--space-sm); padding: 10px; background: rgba(255, 107, 107, 0.1); border-radius: 4px; border: 1px solid rgba(255, 107, 107, 0.2);"></div>
+
+          <button type="submit" class="btn btn-primary form-submit-btn" id="btn-update-submit" style="width: 100%;">
+            <span class="btn-text">Update Password</span>
+            <span class="btn-spinner hidden" style="width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; display: inline-block; animation: spin 1s linear infinite;"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success State -->
+      <div id="state-success" class="reset-state">
+        <h1 style="color: #4ade80;">✓ Password updated successfully.</h1>
+        <p>Your account is secure and you can now log in.</p>
+        <button class="btn btn-primary reset-btn" onclick="window.location.href='/'">Return to Sign In</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Load Auth Logic -->
+  <script src="/auth.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const stateLoading = document.getElementById('state-loading');
+      const stateError = document.getElementById('state-error');
+      const stateForm = document.getElementById('state-form');
+      const stateSuccess = document.getElementById('state-success');
+      const updateForm = document.getElementById('form-update-password');
+      const errorDiv = document.getElementById('update-error-message');
+      const submitBtn = document.getElementById('btn-update-submit');
+
+      function switchState(stateEl) {
+        document.querySelectorAll('.reset-state').forEach(el => el.classList.remove('active'));
+        stateEl.classList.add('active');
+      }
+
+      function showError(msg) {
+        errorDiv.textContent = msg;
+        errorDiv.style.display = 'block';
+      }
+
+      function validatePasswordStrength(password) {
+        if (password.length < 8) return false;
+        if (password.length > 128) return false;
+        if (!/[A-Z]/.test(password)) return false;
+        if (!/[a-z]/.test(password)) return false;
+        if (!/[0-9]/.test(password)) return false;
+        return true;
+      }
+
+      // 1. Token Validation
+      // Supabase parses hash fragment internally. We check for errors in hash or missing tokens.
+      const hash = window.location.hash;
+      if (hash.includes('error=') || hash.includes('error_code=')) {
+        // Expired or invalid link
+        switchState(stateError);
+      } else {
+        // Wait for Supabase to emit the onAuthStateChange event
+        let tokenVerified = false;
+        
+        window.addEventListener('originyx-auth-state-change', (e) => {
+          if (e.detail.event === 'PASSWORD_RECOVERY') {
+            tokenVerified = true;
+            switchState(stateForm);
+          }
+        });
+
+        // Fallback: If 3 seconds pass and no PASSWORD_RECOVERY event fired, assume invalid or missing token
+        setTimeout(() => {
+          if (!tokenVerified && stateLoading.classList.contains('active')) {
+            switchState(stateError);
+          }
+        }, 3000);
+      }
+
+      // 2. Form Submission
+      if (updateForm) {
+        updateForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          if (submitBtn.disabled) return;
+          
+          const newPassword = document.getElementById('update-password').value;
+          const confirmNewPassword = document.getElementById('update-confirm-password').value;
+          
+          errorDiv.style.display = 'none';
+
+          if (newPassword !== confirmNewPassword) {
+            showError('Passwords do not match.');
+            return;
+          }
+
+          if (!validatePasswordStrength(newPassword)) {
+            showError('Password must be 8-128 characters, including an uppercase letter, a lowercase letter, and a number.');
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.querySelector('.btn-text').style.opacity = '0.5';
+          submitBtn.querySelector('.btn-spinner').classList.remove('hidden');
+
+          try {
+            await window.originyxAuth.updatePassword(newPassword);
+            switchState(stateSuccess);
+          } catch (err) {
+            showError(err.message || 'Failed to update password.');
+            submitBtn.disabled = false;
+            submitBtn.querySelector('.btn-text').style.opacity = '1';
+            submitBtn.querySelector('.btn-spinner').classList.add('hidden');
+          }
+        });
+      }
+
+      // 3. Password Visibility Toggle
+      const togglePasswordBtns = document.querySelectorAll('.btn-toggle-password');
+      togglePasswordBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const form = btn.closest('form');
+          if (form) {
+            const inputs = form.querySelectorAll('input[type="password"], input[type="text"].auth-pw-revealed');
+            const btns = form.querySelectorAll('.btn-toggle-password');
+            let currentlyHidden = false;
+            if (inputs.length > 0 && inputs[0].type === 'password') {
+              currentlyHidden = true;
+            }
+            inputs.forEach(input => {
+              if (currentlyHidden) {
+                input.type = 'text';
+                input.classList.add('auth-pw-revealed');
+              } else {
+                input.type = 'password';
+                input.classList.remove('auth-pw-revealed');
+              }
+            });
+            btns.forEach(b => {
+              b.textContent = currentlyHidden ? '👁 Hide' : '👁 Show';
+            });
+          }
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>
