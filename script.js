@@ -1256,6 +1256,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     const navSignIn = document.getElementById('nav-sign-in-btn');
     const navDropdown = document.getElementById('nav-profile-dropdown');
     const navProfileName = document.getElementById('nav-profile-name');
+    const navAdmin = document.getElementById('dropdown-admin');
     const authSetupError = document.getElementById('auth-setup-error');
     const authMainContainer = document.getElementById('auth-main-container');
     const authModalTitle = document.getElementById('auth-modal-title');
@@ -1283,10 +1284,15 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         // Prefer full name, fallback to email prefix
         navProfileName.textContent = user.user_metadata?.full_name || user.email.split('@')[0];
       }
+      if (navAdmin) {
+        navAdmin.style.display = 'block';
+      }
+
 
     } else {
       if (navSignIn) navSignIn.classList.remove('hidden');
       if (navDropdown) navDropdown.classList.add('hidden');
+      if (navAdmin) navAdmin.style.display = 'none';
     }
   }
 

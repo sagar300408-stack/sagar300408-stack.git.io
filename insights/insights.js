@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = data.map(node => {
             const date = new Date(node.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             return `
-            <div class="insight-card" onclick="window.location.href='/insights/${node.slug}'">
+            <div class="insight-card" onclick="window.location.href='/insights/article.html?slug=${node.slug}'">
                 <div class="image-wrapper">
                     <img src="${node.cover_image || 'https://placehold.co/800x450/f5f5f2/4a4a4a?text=Originyx'}" alt="${node.title}" loading="lazy">
                 </div>
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     searchResults.innerHTML = `<div style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">No results found for "${query}"</div>`;
                 } else {
                     searchResults.innerHTML = results.map(res => `
-                        <a href="/insights/${res.slug}" style="display: block; padding: 1rem; border-bottom: 1px solid var(--border-color); text-decoration: none; color: inherit; transition: background 0.2s;">
+                        <a href="/insights/article.html?slug=${res.slug}" style="display: block; padding: 1rem; border-bottom: 1px solid var(--border-color); text-decoration: none; color: inherit; transition: background 0.2s;">
                             <div style="font-size: 0.8rem; color: var(--accent-color); font-weight: 600; margin-bottom: 0.25rem; text-transform: uppercase;">${res.type?.slug || 'Insight'}</div>
                             <div style="font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem;">${res.title}</div>
                             <div style="font-size: 0.85rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${res.excerpt || ''}</div>
