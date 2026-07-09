@@ -4,6 +4,9 @@
 
 @layer base {
   body {
-    @apply bg-bg-primary text-text-primary font-sans antialiased;
+    background-color: #fbfbfa;
+    color: #1c1c1c;
+    font-family: Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
