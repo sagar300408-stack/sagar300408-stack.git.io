@@ -55,9 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderGrid(data) {
         if (!data || data.length === 0) {
             grid.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-secondary);">
-                    <h3>No insights found</h3>
-                    <p>Try selecting a different category.</p>
+                <div style="grid-column: 1/-1; text-align: center; padding: 6rem 2rem; color: var(--text-secondary); background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color);">
+                    <i class="fa-solid fa-pen-nib" style="font-size: 3rem; color: var(--border-color); margin-bottom: 1.5rem;"></i>
+                    <h3 style="font-family: 'Outfit', sans-serif; font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem;">No insights published yet</h3>
+                    <p style="font-size: 1.1rem;">Check back soon for new articles, or select a different category.</p>
                 </div>
             `;
             return;

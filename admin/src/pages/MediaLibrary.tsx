@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Folder, FileImage, Upload, Search, MoreVertical, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { Folder, Upload, Search, MoreVertical, Plus } from 'lucide-react';
 
 export default function MediaLibrary() {
   const [folders] = useState([

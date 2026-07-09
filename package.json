@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Premium AI Developer & Founder Consulting Platform",
   "main": "api/send.js",
+  "scripts": {
+    "build": "cd admin && npm install && npm run build"
+  },
   "dependencies": {
     "resend": "^3.2.0"
   },

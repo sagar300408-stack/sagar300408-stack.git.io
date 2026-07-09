@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Settings as SettingsIcon, Globe, Palette, Mail, Shield, Zap, BarChart } from 'lucide-react';
 
 export default function Settings() {
