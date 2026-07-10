@@ -38,7 +38,6 @@ export default async function handler(req, res) {
         .from('cms_nodes')
         .select(`
           *,
-          author:author_id(email),
           type:type_id(slug, name)
         `)
         .eq('slug', slug)
@@ -56,7 +55,6 @@ export default async function handler(req, res) {
       .from('cms_nodes')
       .select(`
         id, title, slug, excerpt, cover_image, reading_time_minutes, created_at,
-        author:author_id(email),
         type:type_id!inner(slug, name)
       `)
       .eq('status', 'Published')
