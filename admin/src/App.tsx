@@ -5,33 +5,80 @@ import Settings from './pages/Settings';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Unauthorized from './pages/Unauthorized';
+import SetupWizard from './pages/SetupWizard';
 import SidebarLayout from './components/Layout/SidebarLayout';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { ToastProvider } from './components/Layout/ToastProvider';
 import './App.css';
 
-function Protected({ children, requireRole }: { children: any, requireRole?: boolean }) {
-  const { user, role, loading } = useAuth();
+/**
+ * Full-screen loading spinner shown while the bootstrap check runs.
+ */
+function GlobalLoader() {
+  return (
+    <div className="h-screen w-full flex flex-col items-center justify-center bg-bg-primary gap-4">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent" />
+      <p className="text-text-muted text-sm">Loading…</p>
+    </div>
+  );
+}
+
+/**
+ * Protected route wrapper.
+ *
+ * Flow after loading completes:
+ *   not authenticated         → /login
+ *   authenticated, not init   → /setup    (Setup Wizard)
+ *   authenticated, no role    → /unauthorized
+ *   authenticated, has role   → render children
+ */
+function Protected({ children }: { children: React.ReactNode }) {
+  const { user, role, loading, isInitialized } = useAuth();
   const location = useLocation();
 
-  if (loading) {
-    return (
-      <div className="h-screen w-full flex items-center justify-center bg-bg-primary">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
-      </div>
-    );
-  }
+  if (loading) return <GlobalLoader />;
 
+  // Step 1: Must be authenticated
   if (!user) {
-    // Preserve the intended destination (could be used later)
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (requireRole && role !== 'owner' && role !== 'admin') {
+  // Step 2: CMS must be initialized
+  if (!isInitialized) {
+    return <Navigate to="/setup" replace />;
+  }
+
+  // Step 3: Must have an authorized role
+  if (role !== 'owner' && role !== 'admin') {
     return <Navigate to="/unauthorized" replace />;
   }
 
-  return children;
+  return <>{children}</>;
+}
+
+/**
+ * Setup route guard — only accessible when:
+ *   - User is authenticated
+ *   - CMS is NOT initialized
+ * If already initialized → redirect to dashboard.
+ */
+function SetupGuard({ children }: { children: React.ReactNode }) {
+  const { user, loading, isInitialized } = useAuth();
+  const location = useLocation();
+
+  if (loading) return <GlobalLoader />;
+
+  // Must be signed in to run setup
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Already initialized? Go to dashboard
+  if (isInitialized) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return <>{children}</>;
 }
 
 export default function App() {
@@ -40,41 +87,74 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter basename="/admin">
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            {/* Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
-            
-            {/* Dashboard routes wrapped in SidebarLayout */}
-            <Route path="/dashboard" element={
-              <Protected requireRole={true}>
-                <SidebarLayout><Dashboard /></SidebarLayout>
-              </Protected>
-            } />
-            <Route path="/media" element={
-              <Protected requireRole={true}>
-                <SidebarLayout><MediaLibrary /></SidebarLayout>
-              </Protected>
-            } />
-            <Route path="/settings" element={
-              <Protected requireRole={true}>
-                <SidebarLayout><Settings /></SidebarLayout>
-              </Protected>
-            } />
-            
-            {/* Full-screen Editor Route (No Sidebar) */}
-            <Route path="/editor/new" element={
-              <Protected requireRole={true}>
-                <EditorPage />
-              </Protected>
-            } />
-            <Route path="/editor/:id" element={
-              <Protected requireRole={true}>
-                <EditorPage />
-              </Protected>
-            } />
+
+            {/* First-run setup — only before initialization */}
+            <Route
+              path="/setup"
+              element={
+                <SetupGuard>
+                  <SetupWizard />
+                </SetupGuard>
+              }
+            />
+
+            {/* Protected app routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <Protected>
+                  <SidebarLayout>
+                    <Dashboard />
+                  </SidebarLayout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/media"
+              element={
+                <Protected>
+                  <SidebarLayout>
+                    <MediaLibrary />
+                  </SidebarLayout>
+                </Protected>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <Protected>
+                  <SidebarLayout>
+                    <Settings />
+                  </SidebarLayout>
+                </Protected>
+              }
+            />
+
+            {/* Full-screen editor (no sidebar) */}
+            <Route
+              path="/editor/new"
+              element={
+                <Protected>
+                  <EditorPage />
+                </Protected>
+              }
+            />
+            <Route
+              path="/editor/:id"
+              element={
+                <Protected>
+                  <EditorPage />
+                </Protected>
+              }
+            />
             <Route path="/editor" element={<Navigate to="/dashboard" replace />} />
-            
-            <Route path="*" element={<div className="p-8 text-center">404 - Not Found</div>} />
+
+            {/* Default redirect */}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
