@@ -2,7 +2,7 @@ class OxNavbar extends HTMLElement {
   connectedCallback() {
     // Basic active state detection based on path
     const path = window.location.pathname;
-    const isHome = path === '/' || path === '/index.html';
+    const isHome = path === '/' || path === '/index.html' || path === '/home' || path === '/home/';
     const isServices = path.includes('/services');
     const isCaseStudies = path.includes('/case-studies');
     const isInsights = path.includes('/insights');
@@ -12,7 +12,7 @@ class OxNavbar extends HTMLElement {
     this.innerHTML = `
       <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
-          <a href="/index.html" class="nav-logo" id="nav-logo-link">
+          <a href="/home" class="nav-logo" id="nav-logo-link">
             <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
             <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
           </a>

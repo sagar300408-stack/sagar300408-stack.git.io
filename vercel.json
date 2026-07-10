@@ -3,6 +3,10 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/home",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin(.*)",
       "destination": "/admin/index.html"
     },
