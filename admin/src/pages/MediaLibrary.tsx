@@ -1,26 +1,81 @@
-import { useState } from 'react';
-import { Folder, Upload, Search, MoreVertical, Plus } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Folder, Upload, Search, MoreVertical, Plus, Image as ImageIcon, Copy, Trash2 } from 'lucide-react';
+import { getOCEClient } from '../lib/sdk';
 
 export default function MediaLibrary() {
-  const [folders] = useState([
-    { id: '1', name: 'Blog Assets', count: 24 },
-    { id: '2', name: 'Logos & Branding', count: 8 },
-    { id: '3', name: 'Team Photos', count: 12 },
-  ]);
+  const [files, setFiles] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const sdk = getOCEClient();
 
-  const [files] = useState([
-    { id: '1', name: 'hero-bg.png', url: 'https://placehold.co/600x400/png', size: '2.4 MB', date: '2 hours ago' },
-    { id: '2', name: 'avatar-sagar.jpg', url: 'https://placehold.co/400x400/png', size: '450 KB', date: '1 day ago' },
-    { id: '3', name: 'dashboard-preview.png', url: 'https://placehold.co/800x600/png', size: '1.2 MB', date: '3 days ago' },
-    { id: '4', name: 'originyx-logo.svg', url: 'https://placehold.co/200x50/png', size: '24 KB', date: '1 week ago' },
-  ]);
+  useEffect(() => {
+    loadFiles();
+  }, []);
+
+  const loadFiles = async () => {
+    try {
+      setLoading(true);
+      const data = await sdk.listMedia('general');
+      const mapped = data?.map((file: any) => ({
+        id: file.id,
+        name: file.name,
+        // Hacky way to get public URL based on list metadata without calling getPublicUrl for each item
+        url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/oce_media/general/${file.name}`,
+        size: (file.metadata?.size / 1024).toFixed(1) + ' KB',
+        date: new Date(file.created_at).toLocaleDateString()
+      })).filter(f => f.name !== '.emptyFolderPlaceholder') || [];
+      
+      setFiles(mapped);
+    } catch (e) {
+      console.error('Failed to load media', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      try {
+        setUploading(true);
+        await sdk.uploadMedia(file, 'general');
+        await loadFiles();
+      } catch (err) {
+        console.error('Upload failed', err);
+        alert('Upload failed. Ensure oce_media bucket exists and is public.');
+      } finally {
+        setUploading(false);
+      }
+    }
+  };
+
+  const handleDelete = async (name: string) => {
+    if (confirm('Are you sure you want to delete this asset?')) {
+      try {
+        await sdk.deleteMedia(`general/${name}`);
+        await loadFiles();
+      } catch (err) {
+        console.error('Delete failed', err);
+      }
+    }
+  };
+
+  const handleCopyUrl = (url: string) => {
+    navigator.clipboard.writeText(url);
+    alert('URL copied to clipboard!');
+  };
 
   return (
-    <div className="max-w-6xl mx-auto py-8 px-4 h-screen flex flex-col">
+    <div className="max-w-7xl mx-auto py-8 px-6 h-screen flex flex-col">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-serif font-medium text-text-primary mb-2">Media Library</h1>
-          <p className="text-text-secondary">Manage and organize your visual assets.</p>
+          <p className="text-text-secondary">Manage and organize your visual assets across Supabase Storage.</p>
         </div>
         
         <div className="flex items-center gap-3">
@@ -29,79 +84,72 @@ export default function MediaLibrary() {
             <input 
               type="text" 
               placeholder="Search media..." 
-              className="pl-9 pr-4 py-2 border border-border rounded-md focus:outline-none focus:border-accent text-sm w-64"
+              className="pl-9 pr-4 py-2 bg-surface border border-border rounded-md focus:outline-none focus:border-accent text-sm w-64"
             />
           </div>
-          <button className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-md hover:bg-accent-light transition-colors text-sm font-medium shadow-sm">
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            onChange={handleFileChange} 
+            className="hidden" 
+            accept="image/*"
+          />
+          <button 
+            onClick={handleUploadClick}
+            disabled={uploading}
+            className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-md hover:bg-accent-light transition-colors text-sm font-medium shadow-sm disabled:opacity-50"
+          >
             <Upload size={16} />
-            Upload
+            {uploading ? 'Uploading...' : 'Upload'}
           </button>
         </div>
       </div>
 
       <div className="flex gap-8 flex-1 min-h-0">
-        {/* Sidebar / Folders */}
-        <aside className="w-64 flex-shrink-0 flex flex-col">
-          <div className="flex items-center justify-between mb-4 px-2">
-            <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wider">Folders</h2>
-            <button className="text-text-secondary hover:text-accent">
-              <Plus size={16} />
-            </button>
-          </div>
-          
-          <nav className="flex-1 overflow-y-auto">
-            <button className="w-full flex items-center justify-between px-3 py-2 rounded-md bg-accent/10 text-accent-dark font-medium text-sm mb-1">
-              <div className="flex items-center gap-2">
-                <Folder size={16} />
-                All Media
-              </div>
-              <span className="text-xs bg-surface px-2 py-0.5 rounded-full border border-border">142</span>
-            </button>
-            
-            {folders.map(folder => (
-              <button key={folder.id} className="w-full flex items-center justify-between px-3 py-2 rounded-md text-text-secondary hover:bg-surface-hover hover:text-text-primary font-medium text-sm transition-colors mb-1">
-                <div className="flex items-center gap-2">
-                  <Folder size={16} />
-                  {folder.name}
-                </div>
-                <span className="text-xs text-text-muted">{folder.count}</span>
-              </button>
-            ))}
-          </nav>
-        </aside>
-
         {/* Main Grid */}
         <main className="flex-1 bg-surface border border-border rounded-lg p-6 overflow-y-auto shadow-sm">
           {/* Drag & Drop Zone */}
-          <div className="border-2 border-dashed border-border rounded-lg p-8 flex flex-col items-center justify-center text-center mb-8 hover:border-accent hover:bg-accent/5 transition-colors cursor-pointer">
-            <div className="bg-surface-hover p-3 rounded-full mb-3">
-              <Upload size={24} className="text-text-secondary" />
+          <div 
+            onClick={handleUploadClick}
+            className="border-2 border-dashed border-border rounded-lg p-8 flex flex-col items-center justify-center text-center mb-8 hover:border-accent hover:bg-accent/5 transition-colors cursor-pointer group"
+          >
+            <div className="bg-bg-primary p-4 rounded-full mb-3 group-hover:scale-110 transition-transform shadow-sm border border-border">
+              <Upload size={24} className="text-accent" />
             </div>
             <h3 className="text-text-primary font-medium mb-1">Click to upload or drag and drop</h3>
             <p className="text-text-muted text-sm">SVG, PNG, JPG or GIF (max. 10MB)</p>
           </div>
           
-          <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4 border-b border-border pb-2">Recent Uploads</h2>
+          <h2 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4 border-b border-border pb-2">All Assets</h2>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {files.map(file => (
-              <div key={file.id} className="group relative border border-border rounded-lg overflow-hidden bg-bg-secondary hover:border-accent transition-colors">
-                <div className="aspect-square bg-bg-tertiary flex items-center justify-center relative overflow-hidden">
-                  <img src={file.url} alt={file.name} className="object-cover w-full h-full" />
-                </div>
-                <div className="p-3">
-                  <div className="flex items-start justify-between">
-                    <div className="truncate pr-2">
-                      <p className="text-sm font-medium text-text-primary truncate">{file.name}</p>
-                      <p className="text-xs text-text-muted">{file.size} • {file.date}</p>
+            {loading ? (
+              <div className="col-span-full py-12 text-center text-text-muted">Loading assets...</div>
+            ) : files.length === 0 ? (
+              <div className="col-span-full py-12 text-center text-text-muted">No files found.</div>
+            ) : (
+              files.map(file => (
+                <div key={file.id} className="group relative border border-border rounded-lg overflow-hidden bg-bg-primary hover:border-accent transition-colors shadow-sm">
+                  <div className="aspect-square bg-bg-secondary flex items-center justify-center relative overflow-hidden group-hover:opacity-90 transition-opacity">
+                    <img src={file.url} alt={file.name} className="object-cover w-full h-full" />
+                    
+                    {/* Hover Overlay Actions */}
+                    <div className="absolute inset-0 bg-bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 backdrop-blur-sm">
+                      <button onClick={() => handleCopyUrl(file.url)} className="flex items-center gap-2 text-sm font-medium text-white bg-accent px-3 py-1.5 rounded-md hover:bg-accent-light">
+                        <Copy size={14} /> Copy URL
+                      </button>
+                      <button onClick={() => handleDelete(file.name)} className="flex items-center gap-2 text-sm font-medium text-red bg-red/10 border border-red/20 px-3 py-1.5 rounded-md hover:bg-red/20">
+                        <Trash2 size={14} /> Delete
+                      </button>
                     </div>
-                    <button className="text-text-muted hover:text-text-primary mt-0.5">
-                      <MoreVertical size={14} />
-                    </button>
+                  </div>
+                  <div className="p-3 bg-surface border-t border-border">
+                    <p className="text-sm font-medium text-text-primary truncate" title={file.name}>{file.name}</p>
+                    <p className="text-xs text-text-muted mt-0.5">{file.size} • {file.date}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </main>
       </div>

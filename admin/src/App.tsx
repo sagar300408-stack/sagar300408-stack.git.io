@@ -36,8 +36,9 @@ export default function App() {
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
-            <Route path="/editor" element={<Protected><EditorPage /></Protected>} />
-            <Route path="/insights" element={<Protected><EditorPage /></Protected>} />
+            <Route path="/editor/new" element={<Protected><EditorPage /></Protected>} />
+            <Route path="/editor/:id" element={<Protected><EditorPage /></Protected>} />
+            <Route path="/editor" element={<Navigate to="/dashboard" replace />} />
             <Route path="/media" element={<Protected><MediaLibrary /></Protected>} />
             <Route path="/settings" element={<Protected><Settings /></Protected>} />
             <Route path="*" element={<div className="p-8">Not Found</div>} />
