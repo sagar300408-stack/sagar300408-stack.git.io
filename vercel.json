@@ -11,6 +11,13 @@
       "destination": "/api/$1"
     }
   ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/insights",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

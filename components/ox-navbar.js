@@ -12,13 +12,13 @@ class OxNavbar extends HTMLElement {
     this.innerHTML = `
       <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
-          <a href="/" class="nav-logo" id="nav-logo-link">
+          <a href="/index.html" class="nav-logo" id="nav-logo-link">
             <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
             <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
           </a>
 
           <div class="nav-links" id="nav-links">
-            <a href="/" class="${isHome ? 'active' : ''}">Home</a>
+            <a href="/index.html" class="${isHome ? 'active' : ''}">Home</a>
             <a href="/services/" class="${isServices ? 'active' : ''}">Services</a>
             <a href="/case-studies/" class="${isCaseStudies ? 'active' : ''}">Case Studies</a>
             <a href="/insights/" class="${isInsights ? 'active' : ''}">Insights</a>
@@ -31,7 +31,6 @@ class OxNavbar extends HTMLElement {
                 <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
               </button>
               <div class="dropdown-menu">
-                <a href="/admin/" class="dropdown-item" id="dropdown-admin" style="display: none; text-decoration: none; color: inherit;">Admin Dashboard</a>
                 <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
                 <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
               </div>
