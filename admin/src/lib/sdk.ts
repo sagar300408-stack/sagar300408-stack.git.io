@@ -69,14 +69,26 @@ export class OCEClient {
   // --- Base Metadata (post-initialization) ---
 
   async getBaseMetadata() {
+    // Collect Auth context before querying
+    const { data: { session }, error: sessionError } = await this.supabase.auth.getSession();
+    const { data: { user }, error: userError } = await this.supabase.auth.getUser();
+    
+    console.log('[getBaseMetadata] === DIAGNOSTICS START ===');
+    console.log('[getBaseMetadata] Current session:', session);
+    console.log('[getBaseMetadata] Current user:', user);
+    console.log('[getBaseMetadata] Session error:', sessionError);
+    console.log('[getBaseMetadata] User error:', userError);
+    
     // Step 1: Fetch the first organization
+    console.log('[getBaseMetadata] Executing query: supabase.from("organizations").select("id, name, slug").limit(1).maybeSingle()');
     const { data: orgData, error: orgError } = await this.supabase
       .from('organizations')
       .select('id, name, slug')
       .limit(1)
       .maybeSingle(); // maybeSingle() returns null (not an error) when no rows exist
 
-    console.log('[getBaseMetadata] Organization query result:', orgData, 'Error:', orgError);
+    console.log('[getBaseMetadata] Organization query result:', orgData);
+    console.log('[getBaseMetadata] Organization query error:', orgError);
 
     if (orgError) {
       console.error('[getBaseMetadata] Organization lookup threw a DB error:', orgError);
@@ -84,8 +96,9 @@ export class OCEClient {
     }
 
     if (!orgData || !orgData.id) {
-      console.error('[getBaseMetadata] Organization lookup returned no rows. Table may be empty.');
-      throw new Error('SETUP_ERROR: Organization lookup failed — no organizations exist in the database. Run the Setup Wizard first.');
+      console.error('[getBaseMetadata] Organization lookup returned no rows. Table may be empty OR RLS is blocking the read.');
+      console.error('[getBaseMetadata] Auth UID is:', user?.id);
+      throw new Error('SETUP_ERROR: Organization lookup failed — no organizations exist in the database, OR you do not have permission to view them (RLS policy check failed).');
     }
 
     // Step 2: Fetch the "insights" content type
