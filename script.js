@@ -849,9 +849,14 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   // Navbar Sign In
   const navSignInBtn = document.getElementById('nav-sign-in-btn');
   if (navSignInBtn) {
-    navSignInBtn.addEventListener('click', (e) => {
+    navSignInBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      window.location.href = '/admin/login';
+      await window.originyxAuth?.init();
+      if (window.originyxAuth.configured) {
+        openModal('auth-modal');
+      } else {
+        openSetupError();
+      }
     });
   }
 

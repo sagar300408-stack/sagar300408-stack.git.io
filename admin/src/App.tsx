@@ -23,10 +23,6 @@ function GlobalLoader() {
   );
 }
 
-function adminRedirectParam(location: ReturnType<typeof useLocation>) {
-  return encodeURIComponent(`/admin${location.pathname}${location.search}${location.hash}`);
-}
-
 /**
  * Protected route wrapper.
  *
@@ -44,7 +40,7 @@ function Protected({ children }: { children: React.ReactNode }) {
 
   // Step 1: Must be authenticated
   if (!user) {
-    return <Navigate to={`/login?redirect=${adminRedirectParam(location)}`} replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   // Step 2: CMS must be initialized
@@ -74,7 +70,7 @@ function SetupGuard({ children }: { children: React.ReactNode }) {
 
   // Must be signed in to run setup
   if (!user) {
-    return <Navigate to={`/login?redirect=${adminRedirectParam(location)}`} replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   // Already initialized? Go to dashboard
