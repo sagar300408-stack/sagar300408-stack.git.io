@@ -16,11 +16,12 @@ const res = {
   },
   json: function(data) {
     this.data = data;
-    console.log('Response:', this.statusCode, this.data);
-    return this;
+    console.log('Response:', this.statusCode, JSON.stringify(this.data));
+    process.exit(0);
   },
   end: function() {
     console.log('Response Ended');
+    process.exit(0);
   }
 };
 
@@ -29,6 +30,7 @@ async function test() {
     await handler(req, res);
   } catch (err) {
     console.error('Uncaught Exception:', err);
+    process.exit(1);
   }
 }
 
