@@ -52,13 +52,18 @@ export default function EditorPage() {
 
   useEffect(() => {
     async function init() {
+      console.log('[EditorPage] Initializing. nodeId =', nodeId ?? '(new)');
       try {
+        console.log('[EditorPage] Calling getBaseMetadata()...');
         const base = await sdk.getBaseMetadata();
+        console.log('[EditorPage] getBaseMetadata() returned:', base);
         setBaseIds(base);
         
         if (nodeId) {
           // Load existing node
+          console.log('[EditorPage] Loading existing node:', nodeId);
           const node = await sdk.getNodeById(nodeId);
+          console.log('[EditorPage] Node loaded:', node);
           setTitle(node.title || '');
           setContent(node.content || {});
           setStatus(node.status || 'Draft');
@@ -73,15 +78,20 @@ export default function EditorPage() {
           
           loadRevisions(nodeId);
         } else {
-          // New Insight initialization (Deferred Insertion)
+          // New Insight — deferred insertion on first save
           const templateId = location.state?.template || 'blank';
+          console.log('[EditorPage] New insight, template =', templateId);
           if (templateId === 'ai') setTitle('AI Insights for Q3');
           else if (templateId === 'case-study') setTitle('Customer Success: Acme Corp');
           else setTitle('');
         }
       } catch (e: any) {
+        console.error('[EditorPage] init() failed:', e);
+        // Pass the specific error message through (org failure vs content type failure)
         if (e.message?.includes('SETUP_ERROR')) {
-          setSetupError(e.message);
+          setSetupError(e.message.replace('SETUP_ERROR: ', ''));
+        } else {
+          setSetupError(`Unexpected error loading editor: ${e.message}`);
         }
       }
     }
@@ -219,16 +229,69 @@ export default function EditorPage() {
   };
 
   if (setupError) {
+    // Determine which specific check failed for a targeted message
+    const isOrgError     = setupError.toLowerCase().includes('organization');
+    const isTypeError    = setupError.toLowerCase().includes('insights content type') || setupError.toLowerCase().includes('slug');
+    const isUnexpected   = !isOrgError && !isTypeError;
+
     return (
       <div className="flex-1 flex items-center justify-center p-8 bg-bg-primary">
-        <div className="bg-amber/10 border border-amber/30 text-amber p-6 rounded-lg max-w-lg text-center">
-          <Settings size={32} className="mx-auto mb-4" />
-          <h2 className="text-xl font-bold mb-2">Setup Required</h2>
-          <p className="text-sm opacity-90">{setupError}</p>
+        <div className="bg-surface border border-border rounded-xl shadow-sm max-w-lg w-full p-8">
+          <div className="flex items-start gap-4 mb-6">
+            <div className="w-10 h-10 rounded-full bg-red/10 text-red flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Settings size={20} />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-text-primary mb-1">
+                {isOrgError  ? 'Organization Lookup Failed' :
+                 isTypeError ? 'Insights Content Type Lookup Failed' :
+                               'Editor Initialization Error'}
+              </h2>
+              <p className="text-sm text-text-secondary leading-relaxed">{setupError}</p>
+            </div>
+          </div>
+
+          <div className="bg-bg-primary border border-border rounded-lg p-4 mb-6 space-y-2 text-xs font-mono text-text-muted">
+            <p className="font-semibold text-text-secondary mb-2 text-xs uppercase tracking-wider">Diagnostic checks</p>
+            <div className={`flex items-center gap-2 ${isOrgError ? 'text-red' : 'text-green-400'}`}>
+              <span>{isOrgError ? '✕' : '✓'}</span>
+              <span>organizations table has at least one row</span>
+            </div>
+            <div className={`flex items-center gap-2 ${isTypeError ? 'text-red' : isOrgError ? 'text-text-muted' : 'text-green-400'}`}>
+              <span>{isTypeError ? '✕' : isOrgError ? '–' : '✓'}</span>
+              <span>cms_content_types has slug = &quot;insights&quot;</span>
+            </div>
+            {isUnexpected && (
+              <div className="flex items-center gap-2 text-amber">
+                <span>⚠</span>
+                <span>Unexpected error — check browser console</span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={() => window.location.reload()}
+              className="flex-1 bg-accent text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-accent-light transition-colors"
+            >
+              Retry
+            </button>
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="flex-1 bg-bg-primary border border-border text-text-primary px-4 py-2 rounded-md text-sm font-medium hover:bg-surface-hover transition-colors"
+            >
+              Back to Dashboard
+            </button>
+          </div>
+
+          <p className="mt-4 text-xs text-text-muted text-center">
+            Open browser DevTools → Console to see the full diagnostic log.
+          </p>
         </div>
       </div>
     );
   }
+
 
   return (
     <div className="h-screen flex flex-col bg-bg-primary overflow-hidden relative">

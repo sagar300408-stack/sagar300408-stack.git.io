@@ -69,23 +69,46 @@ export class OCEClient {
   // --- Base Metadata (post-initialization) ---
 
   async getBaseMetadata() {
+    // Step 1: Fetch the first organization
     const { data: orgData, error: orgError } = await this.supabase
       .from('organizations')
-      .select('id')
+      .select('id, name, slug')
       .limit(1)
-      .single();
+      .maybeSingle(); // maybeSingle() returns null (not an error) when no rows exist
 
-    const { data: typeData, error: typeError } = await this.supabase
-      .from('cms_content_types')
-      .select('id')
-      .eq('slug', 'insights')
-      .limit(1)
-      .single();
+    console.log('[getBaseMetadata] Organization query result:', orgData, 'Error:', orgError);
 
-    if (orgError || !orgData?.id || typeError || !typeData?.id) {
-      throw new Error('SETUP_ERROR: Organization or Insight type not found. Run the setup wizard first.');
+    if (orgError) {
+      console.error('[getBaseMetadata] Organization lookup threw a DB error:', orgError);
+      throw new Error(`SETUP_ERROR: Organization lookup failed — ${orgError.message}`);
     }
 
+    if (!orgData || !orgData.id) {
+      console.error('[getBaseMetadata] Organization lookup returned no rows. Table may be empty.');
+      throw new Error('SETUP_ERROR: Organization lookup failed — no organizations exist in the database. Run the Setup Wizard first.');
+    }
+
+    // Step 2: Fetch the "insights" content type
+    const { data: typeData, error: typeError } = await this.supabase
+      .from('cms_content_types')
+      .select('id, name, slug')
+      .eq('slug', 'insights') // exact slug match — must be lowercase
+      .limit(1)
+      .maybeSingle();
+
+    console.log('[getBaseMetadata] Content type (insights) query result:', typeData, 'Error:', typeError);
+
+    if (typeError) {
+      console.error('[getBaseMetadata] Content type lookup threw a DB error:', typeError);
+      throw new Error(`SETUP_ERROR: Insights content type lookup failed — ${typeError.message}`);
+    }
+
+    if (!typeData || !typeData.id) {
+      console.error('[getBaseMetadata] No row found in cms_content_types where slug = "insights".');
+      throw new Error('SETUP_ERROR: Insights content type lookup failed — no content type with slug "insights" found. Run the Setup Wizard to seed it.');
+    }
+
+    console.log('[getBaseMetadata] ✓ Success — orgId:', orgData.id, 'typeId:', typeData.id);
     return { orgId: orgData.id, typeId: typeData.id };
   }
 
