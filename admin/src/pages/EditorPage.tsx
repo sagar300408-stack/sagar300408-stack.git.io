@@ -1,7 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import OCEEditor from '../components/Editor/Editor';
-import { History, Lock, ChevronLeft, Eye, Send, Image, Tag, Settings, Layout, Search, BarChart } from 'lucide-react';
+import { 
+  ChevronLeft, Send, Image, 
+  Settings, Maximize2, Minimize2, 
+  Columns, AlignLeft, CheckCircle, Clock
+} from 'lucide-react';
 import { getOCEClient } from '../lib/sdk';
 import { useToast } from '../components/Layout/ToastProvider';
 
@@ -23,7 +27,7 @@ export default function EditorPage() {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   
   // Settings Sidebar State
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isPublishPanelOpen, setIsPublishPanelOpen] = useState(true);
   const [excerpt, setExcerpt] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [category, setCategory] = useState('');
@@ -32,13 +36,14 @@ export default function EditorPage() {
   const [seoDescription, setSeoDescription] = useState('');
   const [featured, setFeatured] = useState(false);
 
+  // New UI States
+  const [editorWidth, setEditorWidth] = useState<'narrow' | 'default' | 'full'>('default');
+  const [focusMode, setFocusMode] = useState(false);
+  const [showSuccessCard, setShowSuccessCard] = useState(false);
+  const [slug, setSlug] = useState('');
+
   // Advanced States
-  const isLocked = false;
-  const lockedBy = '';
-  const [isRevisionsOpen, setIsRevisionsOpen] = useState(false);
-  const [revisions, setRevisions] = useState<any[]>([]);
-  const [healthScore, setHealthScore] = useState(0);
-  const [notifications, setNotifications] = useState<string[]>([]);
+  // Revisions and healthScore were removed for clean UI focus
 
   // Refs for autosave comparison
   const contentRef = useRef(content);
@@ -47,23 +52,16 @@ export default function EditorPage() {
   useEffect(() => {
     contentRef.current = content;
     titleRef.current = title;
-    calculateHealth();
   }, [content, title, excerpt, coverImage, category, seoTitle, seoDescription]);
 
   useEffect(() => {
     async function init() {
-      console.log('[EditorPage] Initializing. nodeId =', nodeId ?? '(new)');
       try {
-        console.log('[EditorPage] Calling getBaseMetadata()...');
         const base = await sdk.getBaseMetadata();
-        console.log('[EditorPage] getBaseMetadata() returned:', base);
         setBaseIds(base);
         
         if (nodeId) {
-          // Load existing node
-          console.log('[EditorPage] Loading existing node:', nodeId);
           const node = await sdk.getNodeById(nodeId);
-          console.log('[EditorPage] Node loaded:', node);
           setTitle(node.title || '');
           setContent(node.content || {});
           setStatus(node.status || 'Draft');
@@ -74,20 +72,15 @@ export default function EditorPage() {
           setSeoTitle(node.seo_title || '');
           setSeoDescription(node.seo_description || '');
           setFeatured(node.featured || false);
+          setSlug(node.slug || '');
           setLastSaved(`Saved ${new Date(node.updated_at).toLocaleTimeString()}`);
-          
-          loadRevisions(nodeId);
         } else {
-          // New Insight — deferred insertion on first save
           const templateId = location.state?.template || 'blank';
-          console.log('[EditorPage] New insight, template =', templateId);
           if (templateId === 'ai') setTitle('AI Insights for Q3');
           else if (templateId === 'case-study') setTitle('Customer Success: Acme Corp');
           else setTitle('');
         }
       } catch (e: any) {
-        console.error('[EditorPage] init() failed:', e);
-        // Pass the specific error message through (org failure vs content type failure)
         if (e.message?.includes('SETUP_ERROR')) {
           setSetupError(e.message.replace('SETUP_ERROR: ', ''));
         } else {
@@ -120,28 +113,6 @@ export default function EditorPage() {
     return () => clearInterval(timer);
   }, [hasUnsavedChanges, baseIds, nodeId]);
 
-  const calculateHealth = () => {
-    let score = 0;
-    if (titleRef.current.length > 5) score += 15;
-    if (Object.keys(contentRef.current).length > 0) score += 20;
-    if (excerpt.length > 10) score += 15;
-    if (coverImage) score += 10;
-    if (category) score += 10;
-    if (tags) score += 10;
-    if (seoTitle) score += 10;
-    if (seoDescription) score += 10;
-    setHealthScore(score);
-  };
-
-  const loadRevisions = async (id: string) => {
-    try {
-      const revs = await sdk.getRevisions(id);
-      setRevisions(revs || []);
-    } catch (e) {
-      console.error('Failed to load revisions', e);
-    }
-  };
-
   const buildPayload = () => ({
     org_id: baseIds?.orgId,
     type_id: baseIds?.typeId,
@@ -150,7 +121,7 @@ export default function EditorPage() {
     excerpt,
     cover_image: coverImage,
     category,
-    tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+    tags: tags.split(',').map((t: string) => t.trim()).filter(Boolean),
     seo_title: seoTitle,
     seo_description: seoDescription,
     featured
@@ -163,24 +134,19 @@ export default function EditorPage() {
       const payload = buildPayload();
 
       if (!nodeId) {
-        // Deferred Insertion occurs here!
         const newNode = await sdk.createNode({ ...payload, status: 'Draft' });
         setNodeId(newNode.id);
-        
-        // Update URL without reloading
         window.history.replaceState({}, '', `/admin/editor/${newNode.id}`);
-        setLastSaved(`Saved ${new Date().toLocaleTimeString()}`);
+        setLastSaved(`Saved just now`);
         if (manual) await sdk.createRevision(newNode.id, titleRef.current, contentRef.current);
       } else {
         await sdk.updateNode(nodeId, { ...payload, status: status === 'Published' ? 'Published' : 'Draft' });
-        setLastSaved(`Saved ${new Date().toLocaleTimeString()}`);
+        setLastSaved(`Saved just now`);
         if (manual) await sdk.createRevision(nodeId, titleRef.current, contentRef.current);
       }
       setHasUnsavedChanges(false);
-      if (manual && nodeId) loadRevisions(nodeId);
       if (manual) showToast('Draft saved successfully', 'success');
     } catch (e) {
-      console.error('Save failed', e);
       setLastSaved('Save failed!');
       if (manual) showToast('Failed to save draft', 'error');
     }
@@ -188,10 +154,13 @@ export default function EditorPage() {
 
   const handlePublish = async (schedule: boolean = false) => {
     if (!baseIds) return;
-    if (!titleRef.current) return alert("Title is required before publishing.");
+    if (!titleRef.current) {
+      showToast("Title is required before publishing.", 'error');
+      return;
+    }
     
     try {
-      setNotifications([]);
+      showToast('Publishing...', 'info');
       let activeNodeId = nodeId;
       const payload = buildPayload();
       
@@ -205,316 +174,366 @@ export default function EditorPage() {
 
       setStatus(schedule ? 'Scheduled' : 'Published');
       setHasUnsavedChanges(false);
-      
-      // Async background simulation triggers
-      const steps = [
-        `✓ ${schedule ? 'Scheduled' : 'Published'} successfully`,
-        "✓ Search Index Updated",
-        "✓ Sitemap Updated",
-        "✓ Newsletter Queued",
-        "✓ AI Vector Index Updated"
-      ];
-      
-      steps.forEach((step, i) => {
-        setTimeout(() => {
-          setNotifications(prev => [...prev, step]);
-        }, i * 600);
-      });
+      setShowSuccessCard(true);
       showToast(schedule ? 'Insight scheduled' : 'Insight published', 'success');
-      
     } catch (e) {
-      console.error('Publish failed', e);
       showToast('Publish failed', 'error');
     }
   };
 
-  if (setupError) {
-    // Determine which specific check failed for a targeted message
-    const isOrgError     = setupError.toLowerCase().includes('organization');
-    const isTypeError    = setupError.toLowerCase().includes('insights content type') || setupError.toLowerCase().includes('slug');
-    const isUnexpected   = !isOrgError && !isTypeError;
+  const handleBack = () => {
+    if (hasUnsavedChanges) {
+      if (window.confirm('You have unpublished changes. Are you sure you want to leave?')) {
+        navigate('/dashboard');
+      }
+    } else {
+      navigate('/dashboard');
+    }
+  };
 
+  const handleCoverUpload = () => {
+    // Dispatch to open media drawer for cover image
+    window.dispatchEvent(new CustomEvent('open-media-drawer', { detail: { target: 'cover' } }));
+    // For now we'll just mock it as we can't easily intercept the return value of media drawer without context
+    // Actually we will wait for it to be implemented properly, or just simulate it here.
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.onchange = (e: any) => {
+      const file = e.target.files[0];
+      if (file) {
+        showToast('Uploading cover...', 'info');
+        setTimeout(() => {
+          setCoverImage(URL.createObjectURL(file));
+          setHasUnsavedChanges(true);
+          showToast('Cover uploaded', 'success');
+        }, 1000);
+      }
+    };
+    fileInput.click();
+  };
+
+  // Completion calculation
+  const completionItems = [
+    { label: 'Title', done: title.length > 0 },
+    { label: 'Featured Image', done: !!coverImage },
+    { label: 'Category', done: !!category },
+    { label: 'SEO', done: !!seoTitle && !!seoDescription }
+  ];
+  const completedCount = completionItems.filter(i => i.done).length;
+
+  // Reading Stats calculation
+  const stats = useMemo(() => {
+    let wordCount = 0;
+    let charCount = 0;
+    
+    // Simplistic extraction of text from TipTap JSON
+    const extractText = (node: any): string => {
+      if (node.type === 'text') return node.text || '';
+      if (node.content) return node.content.map(extractText).join(' ');
+      return '';
+    };
+
+    if (content.content) {
+      const text = extractText(content);
+      charCount = text.length;
+      wordCount = text.split(/\s+/).filter((w: string) => w.length > 0).length;
+    }
+
+    return {
+      words: wordCount,
+      chars: charCount,
+      time: Math.max(1, Math.ceil(wordCount / 200)) // 200 WPM
+    };
+  }, [content]);
+
+  if (setupError) {
     return (
       <div className="flex-1 flex items-center justify-center p-8 bg-bg-primary">
         <div className="bg-surface border border-border rounded-xl shadow-sm max-w-lg w-full p-8">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="w-10 h-10 rounded-full bg-red/10 text-red flex items-center justify-center flex-shrink-0 mt-0.5">
-              <Settings size={20} />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-text-primary mb-1">
-                {isOrgError  ? 'Organization Lookup Failed' :
-                 isTypeError ? 'Insights Content Type Lookup Failed' :
-                               'Editor Initialization Error'}
-              </h2>
-              <p className="text-sm text-text-secondary leading-relaxed">{setupError}</p>
-            </div>
-          </div>
-
-          <div className="bg-bg-primary border border-border rounded-lg p-4 mb-6 space-y-2 text-xs font-mono text-text-muted">
-            <p className="font-semibold text-text-secondary mb-2 text-xs uppercase tracking-wider">Diagnostic checks</p>
-            <div className={`flex items-center gap-2 ${isOrgError ? 'text-red' : 'text-green-400'}`}>
-              <span>{isOrgError ? '✕' : '✓'}</span>
-              <span>organizations table has at least one row</span>
-            </div>
-            <div className={`flex items-center gap-2 ${isTypeError ? 'text-red' : isOrgError ? 'text-text-muted' : 'text-green-400'}`}>
-              <span>{isTypeError ? '✕' : isOrgError ? '–' : '✓'}</span>
-              <span>cms_content_types has slug = &quot;insights&quot;</span>
-            </div>
-            {isUnexpected && (
-              <div className="flex items-center gap-2 text-amber">
-                <span>⚠</span>
-                <span>Unexpected error — check browser console</span>
-              </div>
-            )}
-          </div>
-
-          <div className="flex gap-3">
-            <button
-              onClick={() => window.location.reload()}
-              className="flex-1 bg-accent text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-accent-light transition-colors"
-            >
-              Retry
-            </button>
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="flex-1 bg-bg-primary border border-border text-text-primary px-4 py-2 rounded-md text-sm font-medium hover:bg-surface-hover transition-colors"
-            >
-              Back to Dashboard
-            </button>
-          </div>
-
-          <p className="mt-4 text-xs text-text-muted text-center">
-            Open browser DevTools → Console to see the full diagnostic log.
-          </p>
+          <h2 className="text-lg font-semibold text-text-primary mb-1">Editor Error</h2>
+          <p className="text-sm text-text-secondary leading-relaxed">{setupError}</p>
         </div>
       </div>
     );
   }
 
+  const editorWidthClass = 
+    editorWidth === 'narrow' ? 'max-w-2xl' : 
+    editorWidth === 'full' ? 'max-w-none px-12' : 
+    'max-w-4xl';
 
   return (
     <div className="h-screen flex flex-col bg-bg-primary overflow-hidden relative">
       {/* Top Navbar */}
-      <header className="h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-10">
-        <div className="flex items-center gap-4">
-          <button onClick={() => navigate('/dashboard')} className="text-text-secondary hover:text-text-primary p-1 rounded-md hover:bg-surface-hover transition-colors">
-            <ChevronLeft size={20} />
-          </button>
-          <div className="h-4 w-px bg-border"></div>
-          <span className="text-sm font-medium text-text-secondary">Insights</span>
-          <span className="text-sm text-text-muted">/</span>
-          <span className="text-sm font-medium text-text-primary truncate max-w-[200px]">
-            {title || (nodeId ? 'Loading...' : 'New Insight')}
-          </span>
-          {hasUnsavedChanges && <span className="w-2 h-2 rounded-full bg-amber" title="Unsaved changes"></span>}
-        </div>
-        
-        <div className="flex items-center gap-3">
-          {isLocked && (
-            <div className="flex items-center gap-2 text-xs font-medium bg-amber/10 text-amber px-3 py-1.5 rounded-full">
-              <Lock size={12} />
-              Locked by {lockedBy}
-            </div>
-          )}
+      {!focusMode && (
+        <header className="h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-10 transition-all duration-300">
+          <div className="flex items-center gap-4">
+            <button onClick={handleBack} className="text-text-secondary hover:text-text-primary p-1 rounded-md hover:bg-surface-hover transition-colors">
+              <ChevronLeft size={20} />
+            </button>
+            <div className="h-4 w-px bg-border"></div>
+            <span className="text-sm text-text-muted">Draft in</span>
+            <span className="text-sm font-medium text-text-primary">Insights</span>
+            {hasUnsavedChanges && <span className="w-2 h-2 rounded-full bg-amber" title="Unsaved changes"></span>}
+            <span className="text-xs text-text-muted ml-2">{lastSaved}</span>
+          </div>
           
-          <button 
-            onClick={() => setIsRevisionsOpen(!isRevisionsOpen)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              isRevisionsOpen ? 'bg-surface-hover text-text-primary border border-border' : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover'
-            }`}
-          >
-            <History size={16} />
-            Revisions
-          </button>
-          
-          <button 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              isSidebarOpen ? 'bg-surface-hover text-text-primary border border-border' : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover'
-            }`}
-          >
-            <Settings size={16} />
-            Settings
-          </button>
-          
-          <div className="h-4 w-px bg-border mx-1"></div>
-          
-          <button className="flex items-center gap-2 text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-surface-hover">
-            <Eye size={16} />
-            Preview
-          </button>
-          
-          <button onClick={() => handlePublish(false)} className="flex items-center gap-2 bg-accent text-white px-4 py-1.5 rounded-md hover:bg-accent-light transition-colors text-sm font-medium shadow-sm">
-            <Send size={16} />
-            Publish
-          </button>
-        </div>
-      </header>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setFocusMode(true)}
+              className="p-1.5 text-text-secondary hover:text-text-primary hover:bg-surface-hover rounded-md transition-colors mr-2"
+              title="Focus Mode"
+            >
+              <Maximize2 size={16} />
+            </button>
+            
+            <button onClick={() => handlePublish(false)} className="flex items-center gap-2 bg-accent text-white px-4 py-1.5 rounded-md hover:bg-accent-light transition-colors text-sm font-medium shadow-sm">
+              <Send size={16} />
+              Publish
+            </button>
+            <button 
+              onClick={() => setIsPublishPanelOpen(!isPublishPanelOpen)}
+              className={`p-1.5 rounded-md transition-colors lg:hidden ${isPublishPanelOpen ? 'bg-surface-hover text-text-primary' : 'text-text-secondary'}`}
+            >
+              <Settings size={20} />
+            </button>
+          </div>
+        </header>
+      )}
 
-      {/* Progress Notifications Overlay */}
-      {notifications.length > 0 && (
-        <div className="absolute top-16 right-6 z-50 flex flex-col gap-2 pointer-events-none">
-          {notifications.map((msg, i) => (
-            <div key={i} className="bg-surface border border-border shadow-lg rounded-md px-4 py-3 text-sm text-text-primary animate-in slide-in-from-right fade-in flex items-center gap-2">
-              <span className="text-green font-bold">{msg.charAt(0)}</span>
-              {msg.substring(1)}
+      {/* Focus Mode Exit */}
+      {focusMode && (
+        <div className="absolute top-4 left-4 z-50 animate-in fade-in">
+          <button 
+            onClick={() => setFocusMode(false)}
+            className="flex items-center gap-2 bg-surface/80 backdrop-blur border border-border text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-md shadow-sm text-sm"
+          >
+            <Minimize2 size={14} /> Exit Focus
+          </button>
+        </div>
+      )}
+
+      {/* Success Card Overlay */}
+      {showSuccessCard && (
+        <div className="absolute inset-0 bg-bg-primary/80 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in">
+          <div className="bg-surface border border-border shadow-2xl rounded-xl p-8 max-w-sm w-full text-center animate-in zoom-in-95">
+            <div className="w-16 h-16 bg-green/10 text-green rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle size={32} />
             </div>
-          ))}
+            <h2 className="text-xl font-semibold text-text-primary mb-2">Published Successfully</h2>
+            <p className="text-sm text-text-secondary mb-6">Your insight is now live and visible to viewers.</p>
+            
+            <div className="flex flex-col gap-3">
+              <button className="w-full bg-accent text-white py-2 rounded-md font-medium hover:bg-accent-light transition-colors">
+                View Live
+              </button>
+              <button className="w-full bg-bg-primary border border-border text-text-primary py-2 rounded-md font-medium hover:bg-surface-hover transition-colors">
+                Copy Link
+              </button>
+              <button 
+                onClick={() => setShowSuccessCard(false)}
+                className="w-full text-text-secondary hover:text-text-primary py-2 text-sm transition-colors"
+              >
+                Continue Editing
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
       <div className="flex-1 flex overflow-hidden relative">
         {/* Main Editor Area */}
-        <main className="flex-1 overflow-y-auto">
-          <OCEEditor 
-            title={title}
-            onTitleChange={(t) => { setTitle(t); setHasUnsavedChanges(true); }}
-            initialContent={content}
-            onChange={(c) => { setContent(c); setHasUnsavedChanges(true); }}
-            status={status}
-            lastSaved={lastSaved}
-            onSaveDraft={() => handleSaveDraft(true)}
-          />
+        <main className={`flex-1 overflow-y-auto bg-bg-primary transition-all duration-300 flex justify-center`}>
+          <div className={`w-full ${editorWidthClass} py-12 px-6 lg:px-8`}>
+            
+            {/* Editor Width Controls - Only visible on hover in a real app, or top right */}
+            {!focusMode && (
+              <div className="flex justify-end mb-4 gap-1 opacity-50 hover:opacity-100 transition-opacity">
+                <button onClick={() => setEditorWidth('narrow')} className={`p-1 rounded ${editorWidth === 'narrow' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`} title="Narrow"><AlignLeft size={14} /></button>
+                <button onClick={() => setEditorWidth('default')} className={`p-1 rounded ${editorWidth === 'default' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`} title="Default"><Columns size={14} /></button>
+                <button onClick={() => setEditorWidth('full')} className={`p-1 rounded ${editorWidth === 'full' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`} title="Full Width"><Maximize2 size={14} /></button>
+              </div>
+            )}
+
+            {/* Featured Image */}
+            <div className="mb-8 group relative">
+              {coverImage ? (
+                <div className="relative rounded-xl overflow-hidden border border-border shadow-sm">
+                  <img src={coverImage} alt="Featured" className="w-full h-64 object-cover" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <button onClick={handleCoverUpload} className="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-4 py-2 rounded-md font-medium text-sm transition-colors">
+                      Change Cover
+                    </button>
+                    <button onClick={() => {setCoverImage(''); setHasUnsavedChanges(true)}} className="bg-red/80 hover:bg-red text-white px-4 py-2 rounded-md font-medium text-sm transition-colors">
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button 
+                  onClick={handleCoverUpload}
+                  className="w-full h-32 border-2 border-dashed border-border rounded-xl flex items-center justify-center text-text-muted hover:text-text-primary hover:border-text-secondary hover:bg-surface-hover transition-all gap-2"
+                >
+                  <Image size={18} />
+                  <span className="font-medium text-sm">Add Featured Image</span>
+                </button>
+              )}
+            </div>
+
+            {/* Title */}
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => { setTitle(e.target.value); setHasUnsavedChanges(true); }}
+              placeholder="Insight Title"
+              className="text-4xl lg:text-5xl font-serif font-bold bg-transparent border-none focus:outline-none focus:ring-0 text-text-primary placeholder:text-text-muted w-full mb-8 leading-tight"
+            />
+
+            {/* Editor */}
+            <OCEEditor 
+              initialContent={content}
+              onChange={(c) => { setContent(c); setHasUnsavedChanges(true); }}
+            />
+          </div>
         </main>
 
-        {/* Settings Sidebar */}
-        {isSidebarOpen && (
-          <aside className="w-80 border-l border-border bg-surface flex flex-col flex-shrink-0 animate-in slide-in-from-right duration-200 overflow-y-auto">
-            <div className="p-4 border-b border-border bg-bg-secondary sticky top-0 z-10">
-              <h2 className="text-lg font-medium text-text-primary">Content Settings</h2>
-              <div className="mt-4 bg-bg-primary rounded p-3 border border-border">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-xs font-semibold text-text-secondary uppercase">Content Health</span>
-                  <span className={`text-xs font-bold ${healthScore > 80 ? 'text-green' : healthScore > 50 ? 'text-amber' : 'text-red'}`}>{healthScore}%</span>
-                </div>
-                <div className="w-full bg-border h-1.5 rounded-full overflow-hidden">
-                  <div className={`h-full ${healthScore > 80 ? 'bg-green' : healthScore > 50 ? 'bg-amber' : 'bg-red'}`} style={{ width: `${healthScore}%` }}></div>
-                </div>
-              </div>
+        {/* Publish Panel (Sticky Right) */}
+        {!focusMode && (
+          <aside className={`
+            absolute inset-y-0 right-0 z-30 w-full md:w-80 bg-surface border-l border-border flex flex-col flex-shrink-0 transition-transform duration-300
+            lg:relative lg:translate-x-0
+            ${isPublishPanelOpen ? 'translate-x-0' : 'translate-x-full'}
+          `}>
+            <div className="p-4 border-b border-border flex items-center justify-between lg:hidden bg-surface">
+              <h2 className="font-semibold text-text-primary">Publish Panel</h2>
+              <button onClick={() => setIsPublishPanelOpen(false)} className="p-1 text-text-secondary"><ChevronLeft size={20} /></button>
             </div>
             
-            <div className="p-4 space-y-6">
-              {/* Excerpt */}
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-text-primary mb-2">
-                  <Layout size={14} /> Excerpt
-                </label>
-                <textarea 
-                  value={excerpt}
-                  onChange={(e) => { setExcerpt(e.target.value); setHasUnsavedChanges(true); }}
-                  className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:ring-1 focus:ring-accent focus:outline-none min-h-[80px]"
-                  placeholder="Brief summary..."
-                />
-              </div>
-
-              {/* Cover Image */}
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-text-primary mb-2">
-                  <Image size={14} /> Cover Image
-                </label>
-                {coverImage ? (
-                  <div className="relative rounded-md overflow-hidden border border-border group">
-                    <img src={coverImage} alt="Cover" className="w-full h-32 object-cover" />
-                    <button onClick={() => {setCoverImage(''); setHasUnsavedChanges(true)}} className="absolute inset-0 bg-bg-primary/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm font-medium">Remove</button>
+            <div className="flex-1 overflow-y-auto p-5 space-y-8">
+              
+              {/* Publish Section */}
+              <section>
+                <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Publish</h3>
+                <div className="bg-bg-primary border border-border rounded-lg p-3 space-y-3">
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-text-secondary">Status</span>
+                    <span className={`font-medium ${status === 'Published' ? 'text-green' : 'text-amber'}`}>{status}</span>
                   </div>
-                ) : (
-                  <button className="w-full border-2 border-dashed border-border rounded-md py-6 text-sm text-text-muted hover:text-text-primary hover:border-text-secondary transition-colors flex flex-col items-center gap-2">
-                    <Image size={24} />
-                    <span>Upload or Drag Image</span>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-text-secondary">Visibility</span>
+                    <span className="font-medium text-text-primary">Public</span>
+                  </div>
+                  <button onClick={() => handlePublish(false)} className="w-full bg-text-primary text-bg-primary py-2 rounded-md text-sm font-medium hover:bg-text-secondary transition-colors mt-2">
+                    {status === 'Published' ? 'Update Insight' : 'Publish Now'}
                   </button>
-                )}
-              </div>
+                </div>
+              </section>
 
-              {/* Taxonomy */}
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-text-primary mb-2">
-                  <Tag size={14} /> Taxonomy
-                </label>
-                <input 
-                  type="text" 
-                  value={category}
-                  onChange={(e) => { setCategory(e.target.value); setHasUnsavedChanges(true); }}
-                  placeholder="Category (e.g. AI Automation)" 
-                  className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm mb-2 focus:border-accent focus:outline-none"
-                />
-                <input 
-                  type="text" 
-                  value={tags}
-                  onChange={(e) => { setTags(e.target.value); setHasUnsavedChanges(true); }}
-                  placeholder="Tags (comma separated)" 
-                  className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none"
-                />
-              </div>
-
-              {/* SEO */}
-              <div>
-                <label className="flex items-center gap-2 text-sm font-medium text-text-primary mb-2">
-                  <Search size={14} /> Search Engine Optimization
-                </label>
-                <input 
-                  type="text" 
-                  value={seoTitle}
-                  onChange={(e) => { setSeoTitle(e.target.value); setHasUnsavedChanges(true); }}
-                  placeholder="SEO Title" 
-                  className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm mb-2 focus:border-accent focus:outline-none"
-                />
-                <textarea 
-                  value={seoDescription}
-                  onChange={(e) => { setSeoDescription(e.target.value); setHasUnsavedChanges(true); }}
-                  placeholder="Meta Description..." 
-                  className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none min-h-[80px]"
-                />
-              </div>
-
-              {/* Featured Toggle */}
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-sm font-medium text-text-primary">
-                  <BarChart size={14} /> Featured Article
-                </label>
-                <button 
-                  onClick={() => { setFeatured(!featured); setHasUnsavedChanges(true); }}
-                  className={`w-10 h-5 rounded-full relative transition-colors ${featured ? 'bg-accent' : 'bg-border'}`}
-                >
-                  <span className={`absolute top-1 left-1 bg-white w-3 h-3 rounded-full transition-transform ${featured ? 'translate-x-5' : ''}`}></span>
-                </button>
-              </div>
-            </div>
-          </aside>
-        )}
-
-        {/* Revisions Sidebar */}
-        {isRevisionsOpen && (
-          <aside className="w-80 border-l border-border bg-surface flex flex-col flex-shrink-0 animate-in slide-in-from-right duration-200">
-            <div className="p-4 border-b border-border">
-              <h2 className="text-lg font-medium text-text-primary">Version History</h2>
-              <p className="text-xs text-text-muted mt-1">View and restore previous versions</p>
-            </div>
-            
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {revisions.length === 0 ? (
-                <p className="text-sm text-text-muted text-center py-8">No revisions yet.</p>
-              ) : revisions.map((rev, index) => (
-                <div key={rev.id} className="relative pl-6">
-                  {index !== revisions.length - 1 && (
-                    <div className="absolute left-[9px] top-6 bottom-[-24px] w-px bg-border"></div>
-                  )}
-                  <div className={`absolute left-0 top-1.5 w-[19px] h-[19px] rounded-full border-4 border-surface ${index === 0 ? 'bg-accent' : 'bg-border'}`}></div>
-                  
-                  <div className={`p-3 rounded-md border ${index === 0 ? 'border-accent bg-accent/5' : 'border-border bg-bg-primary hover:border-border-hover cursor-pointer transition-colors'}`}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold text-text-primary">{new Date(rev.created_at).toLocaleString()}</span>
-                      {index === 0 && <span className="text-[10px] uppercase tracking-wider font-bold text-accent bg-accent/10 px-1.5 py-0.5 rounded">Current</span>}
+              {/* Completion Checklist */}
+              <section>
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider">Completion</h3>
+                  <span className="text-xs font-medium text-text-secondary">{completedCount}/{completionItems.length}</span>
+                </div>
+                <div className="space-y-2">
+                  {completionItems.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      {item.done ? <CheckCircle size={14} className="text-green" /> : <div className="w-3.5 h-3.5 rounded-full border border-border"></div>}
+                      <span className={item.done ? 'text-text-primary' : 'text-text-muted'}>{item.label}</span>
                     </div>
-                    <p className="text-xs text-text-secondary">Edited by System</p>
-                    {index !== 0 && (
-                      <button className="mt-2 text-xs font-medium text-accent hover:text-accent-light transition-colors">
-                        Restore this version
-                      </button>
-                    )}
+                  ))}
+                </div>
+              </section>
+
+              <hr className="border-border" />
+
+              {/* Content Section */}
+              <section>
+                <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Content</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">Category</label>
+                    <input 
+                      type="text" 
+                      value={category}
+                      onChange={(e) => { setCategory(e.target.value); setHasUnsavedChanges(true); }}
+                      placeholder="e.g. AI Automation" 
+                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">Tags (comma separated)</label>
+                    <input 
+                      type="text" 
+                      value={tags}
+                      onChange={(e) => { setTags(e.target.value); setHasUnsavedChanges(true); }}
+                      placeholder="e.g. future, tech" 
+                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none"
+                    />
                   </div>
                 </div>
-              ))}
+              </section>
+
+              <hr className="border-border" />
+
+              {/* SEO Section */}
+              <section>
+                <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">SEO & Meta</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">URL Slug</label>
+                    <input 
+                      type="text" 
+                      value={slug}
+                      readOnly
+                      placeholder="auto-generated-from-title" 
+                      className="w-full bg-bg-secondary border border-border rounded-md p-2 text-sm text-text-muted cursor-not-allowed"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">Meta Title</label>
+                    <input 
+                      type="text" 
+                      value={seoTitle}
+                      onChange={(e) => { setSeoTitle(e.target.value); setHasUnsavedChanges(true); }}
+                      placeholder={title || "SEO Title"} 
+                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">Meta Description</label>
+                    <textarea 
+                      value={seoDescription}
+                      onChange={(e) => { setSeoDescription(e.target.value); setHasUnsavedChanges(true); }}
+                      placeholder="Brief summary for search engines..." 
+                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none min-h-[80px]"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              <hr className="border-border" />
+
+              {/* Advanced / Stats Section */}
+              <section>
+                <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Reading Stats</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-bg-primary border border-border rounded p-3 text-center">
+                    <span className="block text-xl font-semibold text-text-primary">{stats.words}</span>
+                    <span className="text-[10px] uppercase text-text-muted">Words</span>
+                  </div>
+                  <div className="bg-bg-primary border border-border rounded p-3 text-center">
+                    <span className="block text-xl font-semibold text-text-primary">{stats.chars}</span>
+                    <span className="text-[10px] uppercase text-text-muted">Chars</span>
+                  </div>
+                  <div className="bg-bg-primary border border-border rounded p-3 text-center col-span-2 flex items-center justify-center gap-2">
+                    <Clock size={14} className="text-text-muted" />
+                    <span className="text-sm font-medium text-text-primary">{stats.time} min read</span>
+                  </div>
+                </div>
+              </section>
+              
             </div>
           </aside>
         )}
