@@ -326,6 +326,10 @@ export class OCEClient {
           .select()
           .single();
 
+        if (taxError) {
+          console.warn(`[syncTaxonomies] Failed to upsert taxonomy ${tax.name}:`, taxError);
+        }
+
         if (taxData) {
           // 2. Create the relationship
           await this.supabase.from('cms_node_taxonomies').insert({
