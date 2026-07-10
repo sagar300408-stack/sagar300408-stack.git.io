@@ -18,7 +18,7 @@ class OxNavbar extends HTMLElement {
           </a>
 
           <div class="nav-links" id="nav-links">
-            <a href="/index.html" class="${isHome ? 'active' : ''}">Home</a>
+            <a href="/home" class="${isHome ? 'active' : ''}">Home</a>
             <a href="/services/" class="${isServices ? 'active' : ''}">Services</a>
             <a href="/case-studies/" class="${isCaseStudies ? 'active' : ''}">Case Studies</a>
             <a href="/insights/" class="${isInsights ? 'active' : ''}">Insights</a>
