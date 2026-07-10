@@ -150,46 +150,106 @@ export class OCEClient {
   async getNodeById(id: string) {
     const { data, error } = await this.supabase
       .from('cms_nodes')
-      .select('*, cms_content_types(slug, schema)')
+      .select(`
+        *,
+        cms_content_types(slug, schema),
+        cms_node_taxonomies(
+          cms_taxonomies(type, name)
+        )
+      `)
       .eq('id', id)
       .single();
 
     if (error) throw error;
+
+    // Map taxonomies back to flat category/tags for the editor
+    if (data && data.cms_node_taxonomies) {
+      const taxes = data.cms_node_taxonomies.map((t: any) => t.cms_taxonomies).filter(Boolean);
+      data.category = taxes.find((t: any) => t.type === 'category')?.name || '';
+      data.tags = taxes.filter((t: any) => t.type === 'tag').map((t: any) => t.name) || [];
+      delete data.cms_node_taxonomies;
+    }
+
     return data;
   }
 
   async getNodeBySlug(slug: string) {
     const { data, error } = await this.supabase
       .from('cms_nodes')
-      .select('*, cms_content_types(slug, schema)')
+      .select(`
+        *,
+        cms_content_types(slug, schema),
+        cms_node_taxonomies(
+          cms_taxonomies(type, name)
+        )
+      `)
       .eq('slug', slug)
       .single();
 
     if (error) throw error;
+
+    if (data && data.cms_node_taxonomies) {
+      const taxes = data.cms_node_taxonomies.map((t: any) => t.cms_taxonomies).filter(Boolean);
+      data.category = taxes.find((t: any) => t.type === 'category')?.name || '';
+      data.tags = taxes.filter((t: any) => t.type === 'tag').map((t: any) => t.name) || [];
+      delete data.cms_node_taxonomies;
+    }
+
     return data;
   }
 
   async createNode(payload: any) {
+    // 1. Separate generic metadata from node fields
+    const { category, tags, featured, ...nodePayload } = payload;
+    
+    // 2. Ensure a slug exists
+    if (!nodePayload.slug && nodePayload.title) {
+      nodePayload.slug = nodePayload.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    }
+    
+    // We can store generic unstructured metadata (like 'featured') in the JSONB content field if we want,
+    // but for now we just omit it from the top-level insert.
+
     const { data, error } = await this.supabase
       .from('cms_nodes')
-      .insert(payload)
+      .insert(nodePayload)
       .select()
       .single();
 
     if (error) throw error;
+    
+    // 3. Sync taxonomies
+    if (payload.org_id && data.id && (category || (tags && tags.length > 0))) {
+      await this.syncTaxonomies(payload.org_id, data.id, category, tags);
+    }
+
     await this.logActivity('CREATE_NODE', 'cms_nodes', data.id, { title: payload.title });
     return data;
   }
 
   async updateNode(id: string, payload: any) {
+    // 1. Separate generic metadata from node fields
+    const { category, tags, featured, ...nodePayload } = payload;
+    
+    // 2. Ensure a slug exists if title is updating
+    if (nodePayload.title && !nodePayload.slug) {
+      nodePayload.slug = nodePayload.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    }
+
     const { data, error } = await this.supabase
       .from('cms_nodes')
-      .update({ ...payload, updated_at: new Date().toISOString() })
+      .update({ ...nodePayload, updated_at: new Date().toISOString() })
       .eq('id', id)
       .select()
       .single();
 
     if (error) throw error;
+    
+    // 3. Sync taxonomies
+    if (payload.org_id && data.id && (category !== undefined || tags !== undefined)) {
+      await this.syncTaxonomies(payload.org_id, data.id, category, tags);
+    }
+
     await this.logActivity('UPDATE_NODE', 'cms_nodes', id, { status: payload.status });
     return data;
   }
@@ -239,6 +299,44 @@ export class OCEClient {
       .order('name');
     if (error) throw error;
     return data;
+  }
+
+  private async syncTaxonomies(orgId: string, nodeId: string, category: string | undefined, tags: string[] | undefined) {
+    try {
+      // Clear existing mappings
+      await this.supabase.from('cms_node_taxonomies').delete().eq('node_id', nodeId);
+
+      const toSync: Array<{ type: string, name: string }> = [];
+      if (category && category.trim()) {
+        toSync.push({ type: 'category', name: category.trim() });
+      }
+      if (tags && Array.isArray(tags)) {
+        tags.forEach(t => {
+          if (t.trim()) toSync.push({ type: 'tag', name: t.trim() });
+        });
+      }
+
+      for (const tax of toSync) {
+        const slug = tax.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        
+        // 1. Ensure the taxonomy exists
+        const { data: taxData, error: taxError } = await this.supabase
+          .from('cms_taxonomies')
+          .upsert({ org_id: orgId, type: tax.type, name: tax.name, slug }, { onConflict: 'org_id,type,slug' })
+          .select()
+          .single();
+
+        if (taxData) {
+          // 2. Create the relationship
+          await this.supabase.from('cms_node_taxonomies').insert({
+            node_id: nodeId,
+            taxonomy_id: taxData.id
+          });
+        }
+      }
+    } catch (e) {
+      console.error('[syncTaxonomies] Failed to sync taxonomies', e);
+    }
   }
 
   // --- Media Library ---
