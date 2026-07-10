@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Folder, Upload, Search, MoreVertical, Plus, Image as ImageIcon, Copy, Trash2 } from 'lucide-react';
+import { Upload, Search, Copy, Trash2 } from 'lucide-react';
 import { getOCEClient } from '../lib/sdk';
 
 export default function MediaLibrary() {

@@ -5,7 +5,7 @@ import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import Toolbar from './Toolbar';
-import { Sparkles, Save, Clock, ChevronDown, Check } from 'lucide-react';
+import { Sparkles, Save, Clock, ChevronDown } from 'lucide-react';
 
 interface OCEEditorProps {
   initialContent?: any;
@@ -54,7 +54,7 @@ export default function OCEEditor({
       attributes: {
         class: 'prose prose-slate max-w-none min-h-[500px] focus:outline-none py-6 px-8 text-text-primary',
       },
-      handleKeyDown: (view, event) => {
+      handleKeyDown: (_, event) => {
         if (event.key === '/') {
           // Open slash command palette (simplified mockup)
           console.log('Slash command palette triggered');

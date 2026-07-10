@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getOCEClient } from '../lib/sdk'
-import { FileText, Plus, Search, MoreVertical, Archive, Trash2, Edit, Copy, ChevronDown, CheckSquare, Square } from 'lucide-react'
+import { FileText, Plus, Archive, Edit, Copy, CheckSquare, Square } from 'lucide-react'
 
 export default function Dashboard() {
   const [nodes, setNodes] = useState<any[]>([])

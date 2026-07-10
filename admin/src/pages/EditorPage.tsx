@@ -31,8 +31,8 @@ export default function EditorPage() {
   const [featured, setFeatured] = useState(false);
 
   // Advanced States
-  const [isLocked, setIsLocked] = useState(false);
-  const [lockedBy, setLockedBy] = useState('');
+  const isLocked = false;
+  const lockedBy = '';
   const [isRevisionsOpen, setIsRevisionsOpen] = useState(false);
   const [revisions, setRevisions] = useState<any[]>([]);
   const [healthScore, setHealthScore] = useState(0);

@@ -134,7 +134,7 @@ export class OCEClient {
   
   async uploadMedia(file: File, folder: string = 'general') {
     const filePath = `${folder}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\-]/g, '')}`;
-    const { data, error } = await this.supabase.storage
+    const { error } = await this.supabase.storage
       .from('oce_media')
       .upload(filePath, file);
       
