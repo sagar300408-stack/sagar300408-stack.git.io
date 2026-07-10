@@ -3,12 +3,14 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import OCEEditor from '../components/Editor/Editor';
 import { History, Lock, ChevronLeft, Eye, Send, Image, Tag, Settings, Layout, Search, BarChart } from 'lucide-react';
 import { getOCEClient } from '../lib/sdk';
+import { useToast } from '../components/Layout/ToastProvider';
 
 export default function EditorPage() {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const sdk = getOCEClient();
+  const { showToast } = useToast();
 
   const [nodeId, setNodeId] = useState<string | null>(id || null);
   const [baseIds, setBaseIds] = useState<{orgId: string, typeId: string} | null>(null);
@@ -166,9 +168,11 @@ export default function EditorPage() {
       }
       setHasUnsavedChanges(false);
       if (manual && nodeId) loadRevisions(nodeId);
+      if (manual) showToast('Draft saved successfully', 'success');
     } catch (e) {
       console.error('Save failed', e);
       setLastSaved('Save failed!');
+      if (manual) showToast('Failed to save draft', 'error');
     }
   };
 
@@ -206,9 +210,11 @@ export default function EditorPage() {
           setNotifications(prev => [...prev, step]);
         }, i * 600);
       });
+      showToast(schedule ? 'Insight scheduled' : 'Insight published', 'success');
       
     } catch (e) {
       console.error('Publish failed', e);
+      showToast('Publish failed', 'error');
     }
   };
 

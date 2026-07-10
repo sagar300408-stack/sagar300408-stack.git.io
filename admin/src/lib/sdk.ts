@@ -15,28 +15,23 @@ export class OCEClient {
   // --- Base Setup ---
   async getBaseMetadata() {
     // Fetch default org and 'insights' content type
-    const { data: orgData, error: orgError } = await this.supabase
-      .from('organizations')
-      .select('id')
-      .eq('slug', 'originyx')
-      .single();
-
-    if (orgError || !orgData) {
-      throw new Error('SETUP_ERROR: Organization "originyx" not found. Please run the database seed script.');
+    const { data: orgData, error: orgError } = await this.supabase.from('organizations').select('id').limit(1).single();
+    const { data: typeData, error: typeError } = await this.supabase.from('cms_content_types').select('id').eq('slug', 'insights').limit(1).single();
+    
+    if (orgError || !orgData?.id || typeError || !typeData?.id) {
+      throw new Error('SETUP_ERROR: Organization or Insight type not found. Please run database seed.');
     }
-
-    const { data: typeData, error: typeError } = await this.supabase
-      .from('cms_content_types')
-      .select('id')
-      .eq('slug', 'insights')
-      .eq('org_id', orgData.id)
-      .single();
-
-    if (typeError || !typeData) {
-      throw new Error('SETUP_ERROR: Content Type "insights" not found. Please run the database seed script.');
-    }
-
+    
     return { orgId: orgData.id, typeId: typeData.id };
+  }
+
+  async signIn(email: string, pass: string) {
+    const { data, error } = await this.supabase.auth.signInWithPassword({
+      email,
+      password: pass
+    });
+    if (error) throw error;
+    return data;
   }
 
   // --- Content Engine ---
@@ -91,6 +86,7 @@ export class OCEClient {
       .single();
       
     if (error) throw error;
+    await this.logActivity('CREATE_NODE', 'cms_nodes', data.id, { title: payload.title });
     return data;
   }
   
@@ -103,7 +99,19 @@ export class OCEClient {
       .single();
       
     if (error) throw error;
+    
+    await this.logActivity('UPDATE_NODE', 'cms_nodes', id, { status: payload.status });
     return data;
+  }
+  
+  async deleteNode(id: string) {
+    const { error } = await this.supabase
+      .from('cms_nodes')
+      .delete()
+      .eq('id', id);
+      
+    if (error) throw error;
+    await this.logActivity('DELETE_NODE', 'cms_nodes', id);
   }
 
   // --- Revisions ---
@@ -170,6 +178,25 @@ export class OCEClient {
       
     if (error) throw error;
     return data;
+  }
+
+  // --- Audit Logging ---
+  async logActivity(action: string, entityType: string, entityId?: string, details?: any) {
+    // Only log if the table exists and user is authenticated (best effort logging)
+    try {
+      const { data: { user } } = await this.supabase.auth.getUser();
+      if (!user) return;
+      
+      await this.supabase.from('cms_activity_log').insert({
+        user_id: user.id,
+        action,
+        entity_type: entityType,
+        entity_id: entityId,
+        details
+      });
+    } catch (e) {
+      console.warn('Failed to log activity', e);
+    }
   }
 }
 
