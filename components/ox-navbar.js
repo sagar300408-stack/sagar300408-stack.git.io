@@ -25,7 +25,7 @@ class OxNavbar extends HTMLElement {
             <a href="/about/" class="${isAbout ? 'active' : ''}">About</a>
             <a href="/contact/" class="${isContact ? 'active' : ''}">Contact</a>
             
-            <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
+            <a class="nav-cta" id="nav-sign-in-btn" href="/admin/login">Sign In</a>
             <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
               <button class="nav-profile-trigger" id="nav-profile-trigger">
                 <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>

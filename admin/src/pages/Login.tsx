@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getOCEClient } from '../lib/sdk';
 import { useAuth } from '../lib/AuthContext';
 
@@ -9,14 +9,19 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user, role } = useAuth();
+  const redirect = searchParams.get('redirect');
+  const redirectPath = redirect?.startsWith('/admin')
+    ? redirect.slice('/admin'.length) || '/'
+    : '/dashboard';
   
-  // If already logged in and authorized, redirect to dashboard
+  // If already logged in and authorized, redirect to the requested admin page.
   useEffect(() => {
     if (user && (role === 'owner' || role === 'admin')) {
-      navigate('/dashboard');
+      navigate(redirectPath, { replace: true });
     }
-  }, [user, role, navigate]);
+  }, [user, role, navigate, redirectPath]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
