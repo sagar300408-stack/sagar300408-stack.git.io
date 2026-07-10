@@ -3,9 +3,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import { BubbleMenu } from '@tiptap/react/menus';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
-import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
-import Underline from '@tiptap/extension-underline';
 import Highlight from '@tiptap/extension-highlight';
 import { SlashCommands } from './SlashCommands';
 import suggestion from './suggestion';
@@ -24,14 +22,30 @@ const SUPPORTED_NODES = new Set([
 ]);
 
 const cleanContent = (json: any): any => {
-  if (!json || typeof json !== 'object') return json;
+  if (!json) return json;
+  if (typeof json === 'string') return json;
+  if (typeof json !== 'object') return json;
   
+  if (Object.keys(json).length === 0) return json;
+
   const cleaned = { ...json };
 
-  if (cleaned.type && !SUPPORTED_NODES.has(cleaned.type)) {
-    if (cleaned.content) {
-      cleaned.type = 'paragraph';
+  if (cleaned.type) {
+    if (!SUPPORTED_NODES.has(cleaned.type)) {
+      console.warn(`[CMS] Unsupported node type found: "${cleaned.type}". Migrating to paragraph.`);
+      if (cleaned.content) {
+        cleaned.type = 'paragraph';
+      } else {
+        return null;
+      }
+    }
+  } else {
+    if (cleaned.text) {
+      cleaned.type = 'text';
+    } else if (cleaned.content) {
+      cleaned.type = 'doc';
     } else {
+      console.warn(`[CMS] Invalid node missing type property:`, json);
       return null;
     }
   }
@@ -76,9 +90,15 @@ export default function OCEEditor({
       StarterKit.configure({
         heading: {
           levels: [1, 2, 3]
-        }
+        },
+        link: {
+          openOnClick: false,
+          HTMLAttributes: {
+            class: 'text-blue hover:underline cursor-pointer',
+          }
+        },
+        underline: {}
       }),
-      Underline,
       Highlight.configure({
         HTMLAttributes: {
           class: 'bg-accent/20 text-accent-dark px-1 rounded',
@@ -87,12 +107,6 @@ export default function OCEEditor({
       Image.configure({
         HTMLAttributes: {
           class: 'rounded-md max-w-full my-4 border border-border shadow-sm transition-all',
-        },
-      }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'text-blue hover:underline cursor-pointer',
         },
       }),
       Placeholder.configure({
@@ -139,6 +153,21 @@ export default function OCEEditor({
                 const tr = view.state.tr.setNodeMarkup(foundPos, null, { src: url });
                 view.dispatch(tr);
               }
+            }).catch(() => {
+              const { state } = view;
+              let foundPos: number | null = null;
+              let nodeSize = 0;
+              state.doc.descendants((node, pos) => {
+                if (node.type.name === 'image' && node.attrs.src === blobUrl) {
+                  foundPos = pos;
+                  nodeSize = node.nodeSize;
+                  return false;
+                }
+              });
+              if (foundPos !== null) {
+                const tr = view.state.tr.delete(foundPos, foundPos + nodeSize);
+                view.dispatch(tr);
+              }
             });
             return true;
           }
@@ -170,6 +199,21 @@ export default function OCEEditor({
                   
                   if (foundPos !== null) {
                     const tr = view.state.tr.setNodeMarkup(foundPos, null, { src: url });
+                    view.dispatch(tr);
+                  }
+                }).catch(() => {
+                  const { state } = view;
+                  let foundPos: number | null = null;
+                  let nodeSize = 0;
+                  state.doc.descendants((node, pos) => {
+                    if (node.type.name === 'image' && node.attrs.src === blobUrl) {
+                      foundPos = pos;
+                      nodeSize = node.nodeSize;
+                      return false;
+                    }
+                  });
+                  if (foundPos !== null) {
+                    const tr = view.state.tr.delete(foundPos, foundPos + nodeSize);
                     view.dispatch(tr);
                   }
                 });
