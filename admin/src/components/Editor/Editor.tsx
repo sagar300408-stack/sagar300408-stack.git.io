@@ -15,6 +15,33 @@ import {
 } from 'lucide-react';
 import { useToast } from '../Layout/ToastProvider';
 import MediaDrawer from './MediaDrawer';
+import { getOCEClient } from '../../lib/sdk';
+
+const SUPPORTED_NODES = new Set([
+  'doc', 'paragraph', 'text', 'heading', 'bulletList', 
+  'orderedList', 'listItem', 'blockquote', 'horizontalRule', 
+  'codeBlock', 'image', 'hardBreak'
+]);
+
+const cleanContent = (json: any): any => {
+  if (!json || typeof json !== 'object') return json;
+  
+  const cleaned = { ...json };
+
+  if (cleaned.type && !SUPPORTED_NODES.has(cleaned.type)) {
+    if (cleaned.content) {
+      cleaned.type = 'paragraph';
+    } else {
+      return null;
+    }
+  }
+
+  if (Array.isArray(cleaned.content)) {
+    cleaned.content = cleaned.content.map(cleanContent).filter(Boolean);
+  }
+  
+  return cleaned;
+};
 
 interface OCEEditorProps {
   initialContent?: any;
@@ -28,14 +55,20 @@ export default function OCEEditor({
   const { showToast } = useToast();
   const [isMediaDrawerOpen, setIsMediaDrawerOpen] = useState(false);
 
+  const sdk = getOCEClient();
+
   const handleImageUpload = async (file: File) => {
     showToast('Uploading image...', 'info');
-    return new Promise<string>((resolve) => {
-      setTimeout(() => {
-        showToast('Image uploaded successfully', 'success');
-        resolve(URL.createObjectURL(file));
-      }, 1500);
-    });
+    try {
+      await sdk.uploadMedia(file, 'general');
+      const url = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/oce_media/general/${file.name}`;
+      showToast('Image uploaded successfully', 'success');
+      return url;
+    } catch (err) {
+      console.error('Image upload failed', err);
+      showToast('Image upload failed', 'error');
+      throw err;
+    }
   };
 
   const editor = useEditor({
@@ -75,7 +108,7 @@ export default function OCEEditor({
         }
       }),
     ],
-    content: initialContent,
+    content: cleanContent(initialContent),
     editorProps: {
       attributes: {
         class: 'prose prose-slate max-w-none min-h-[500px] focus:outline-none text-text-primary',
@@ -87,10 +120,25 @@ export default function OCEEditor({
             event.preventDefault();
             const coordinates = view.posAtCoords({ left: event.clientX, top: event.clientY });
             
+            const blobUrl = URL.createObjectURL(file);
+            const node = view.state.schema.nodes.image.create({ src: blobUrl });
+            const transaction = view.state.tr.insert(coordinates?.pos || 0, node);
+            view.dispatch(transaction);
+
             handleImageUpload(file).then((url) => {
-              const node = view.state.schema.nodes.image.create({ src: url });
-              const transaction = view.state.tr.insert(coordinates?.pos || 0, node);
-              view.dispatch(transaction);
+              const { state } = view;
+              let foundPos: number | null = null;
+              state.doc.descendants((node, pos) => {
+                if (node.type.name === 'image' && node.attrs.src === blobUrl) {
+                  foundPos = pos;
+                  return false;
+                }
+              });
+              
+              if (foundPos !== null) {
+                const tr = view.state.tr.setNodeMarkup(foundPos, null, { src: url });
+                view.dispatch(tr);
+              }
             });
             return true;
           }
@@ -105,10 +153,25 @@ export default function OCEEditor({
               const file = item.getAsFile();
               if (file) {
                 event.preventDefault();
+                const blobUrl = URL.createObjectURL(file);
+                const node = view.state.schema.nodes.image.create({ src: blobUrl });
+                const transaction = view.state.tr.replaceSelectionWith(node);
+                view.dispatch(transaction);
+
                 handleImageUpload(file).then((url) => {
-                  const node = view.state.schema.nodes.image.create({ src: url });
-                  const transaction = view.state.tr.replaceSelectionWith(node);
-                  view.dispatch(transaction);
+                  const { state } = view;
+                  let foundPos: number | null = null;
+                  state.doc.descendants((node, pos) => {
+                    if (node.type.name === 'image' && node.attrs.src === blobUrl) {
+                      foundPos = pos;
+                      return false;
+                    }
+                  });
+                  
+                  if (foundPos !== null) {
+                    const tr = view.state.tr.setNodeMarkup(foundPos, null, { src: url });
+                    view.dispatch(tr);
+                  }
                 });
                 return true;
               }
