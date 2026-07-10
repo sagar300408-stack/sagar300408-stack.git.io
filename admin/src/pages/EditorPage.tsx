@@ -127,8 +127,21 @@ export default function EditorPage() {
     featured
   });
 
+  const hasBlobUrls = (contentObj: any): boolean => {
+    if (!contentObj || typeof contentObj !== 'object') return false;
+    if (contentObj.type === 'image' && contentObj.attrs?.src?.startsWith('blob:')) return true;
+    if (Array.isArray(contentObj.content)) {
+      return contentObj.content.some(hasBlobUrls);
+    }
+    return false;
+  };
+
   const handleSaveDraft = async (manual = true) => {
     if (!baseIds) return;
+    if (hasBlobUrls(contentRef.current)) {
+      showToast('Please wait for image uploads to finish before saving.', 'error');
+      return;
+    }
     try {
       setLastSaved('Saving...');
       const payload = buildPayload();
@@ -156,6 +169,11 @@ export default function EditorPage() {
     if (!baseIds) return;
     if (!titleRef.current) {
       showToast("Title is required before publishing.", 'error');
+      return;
+    }
+    
+    if (hasBlobUrls(contentRef.current)) {
+      showToast('Please wait for image uploads to finish before publishing.', 'error');
       return;
     }
     
