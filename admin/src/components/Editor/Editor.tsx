@@ -31,7 +31,10 @@ const cleanContent = (json: any): any => {
   const cleaned = { ...json };
 
   if (cleaned.type) {
-    if (!SUPPORTED_NODES.has(cleaned.type)) {
+    if (cleaned.type === 'image' && cleaned.attrs?.src?.startsWith('blob:')) {
+      console.warn(`[CMS] Blob URL detected in inline image. Replacing with placeholder.`);
+      cleaned.attrs.src = 'https://placehold.co/600x400?text=Image+Upload+Failed';
+    } else if (!SUPPORTED_NODES.has(cleaned.type)) {
       console.warn(`[CMS] Unsupported node type found: "${cleaned.type}". Migrating to paragraph.`);
       if (cleaned.content) {
         cleaned.type = 'paragraph';
@@ -74,8 +77,7 @@ export default function OCEEditor({
   const handleImageUpload = async (file: File) => {
     showToast('Uploading image...', 'info');
     try {
-      await sdk.uploadMedia(file, 'general');
-      const url = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/oce_media/general/${file.name}`;
+      const url = await sdk.uploadMedia(file, 'general');
       showToast('Image uploaded successfully', 'success');
       return url;
     } catch (err) {

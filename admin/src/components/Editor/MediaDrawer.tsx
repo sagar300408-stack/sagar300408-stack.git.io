@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, Search, Upload, CheckCircle, Folder } from 'lucide-react';
+import { getOCEClient } from '../../lib/sdk';
 
 interface MediaDrawerProps {
   isOpen: boolean;
@@ -18,39 +19,39 @@ export default function MediaDrawer({ isOpen, onClose, onSelectImage }: MediaDra
     'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&q=80&w=400',
   ];
 
+  const sdk = getOCEClient();
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      simulateUpload(file);
+      performUpload(file);
     }
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      simulateUpload(e.dataTransfer.files[0]);
+      performUpload(e.dataTransfer.files[0]);
     }
   };
 
-  const simulateUpload = (file: File) => {
+  const performUpload = async (file: File) => {
     setIsUploading(true);
-    setUploadProgress(0);
-    
-    const interval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsUploading(false);
-            const url = URL.createObjectURL(file);
-            onSelectImage(url);
-            onClose();
-          }, 500);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
+    setUploadProgress(30); // Optimistic progress
+    try {
+      const url = await sdk.uploadMedia(file, 'general');
+      setUploadProgress(100);
+      setTimeout(() => {
+        setIsUploading(false);
+        onSelectImage(url);
+        onClose();
+      }, 300);
+    } catch (e) {
+      console.error('Upload failed', e);
+      setIsUploading(false);
+      setUploadProgress(0);
+      alert('Upload failed. Please try again.');
+    }
   };
 
   return (

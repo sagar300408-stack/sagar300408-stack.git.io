@@ -66,7 +66,12 @@ export default function EditorPage() {
           setContent(node.content || {});
           setStatus(node.status || 'Draft');
           setExcerpt(node.excerpt || '');
-          setCoverImage(node.cover_image || '');
+          let cover = node.cover_image || '';
+          if (cover.startsWith('blob:')) {
+            console.warn(`[CMS] Blob URL detected in cover image. Removing broken image.`);
+            cover = ''; // Blank out the broken cover image
+          }
+          setCoverImage(cover);
           setCategory(node.category || '');
           setTags(node.tags ? node.tags.join(', ') : '');
           setSeoTitle(node.seo_title || '');
@@ -138,7 +143,7 @@ export default function EditorPage() {
 
   const handleSaveDraft = async (manual = true) => {
     if (!baseIds) return;
-    if (hasBlobUrls(contentRef.current)) {
+    if (hasBlobUrls(contentRef.current) || coverImage?.startsWith('blob:')) {
       showToast('Please wait for image uploads to finish before saving.', 'error');
       return;
     }
@@ -172,7 +177,7 @@ export default function EditorPage() {
       return;
     }
     
-    if (hasBlobUrls(contentRef.current)) {
+    if (hasBlobUrls(contentRef.current) || coverImage?.startsWith('blob:')) {
       showToast('Please wait for image uploads to finish before publishing.', 'error');
       return;
     }
@@ -210,10 +215,7 @@ export default function EditorPage() {
   };
 
   const handleCoverUpload = () => {
-    // Dispatch to open media drawer for cover image
     window.dispatchEvent(new CustomEvent('open-media-drawer', { detail: { target: 'cover' } }));
-    // For now we'll just mock it as we can't easily intercept the return value of media drawer without context
-    // Actually we will wait for it to be implemented properly, or just simulate it here.
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.accept = 'image/*';
@@ -221,11 +223,18 @@ export default function EditorPage() {
       const file = e.target.files[0];
       if (file) {
         showToast('Uploading cover...', 'info');
-        setTimeout(() => {
-          setCoverImage(URL.createObjectURL(file));
-          setHasUnsavedChanges(true);
+        const tempBlobUrl = URL.createObjectURL(file);
+        setCoverImage(tempBlobUrl);
+        setHasUnsavedChanges(true);
+        
+        sdk.uploadMedia(file, 'general').then(url => {
+          setCoverImage(url);
           showToast('Cover uploaded', 'success');
-        }, 1000);
+        }).catch(err => {
+          console.error('Cover upload failed', err);
+          setCoverImage('');
+          showToast('Cover upload failed', 'error');
+        });
       }
     };
     fileInput.click();
