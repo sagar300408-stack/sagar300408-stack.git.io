@@ -22,7 +22,7 @@ export default function EditorPage() {
   const [setupError, setSetupError] = useState<string | null>(null);
   
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState<any>({});
+  const [content, setContent] = useState<any>({ type: 'doc', content: [{ type: 'paragraph' }] });
   const [status, setStatus] = useState('Draft');
   const [lastSaved, setLastSaved] = useState('Not saved yet');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -64,7 +64,7 @@ export default function EditorPage() {
         if (nodeId) {
           const node = await sdk.getNodeById(nodeId);
           setTitle(node.title || '');
-          setContent(node.content || {});
+          setContent(node.content && Object.keys(node.content).length > 0 ? node.content : { type: 'doc', content: [{ type: 'paragraph' }] });
           setStatus(node.status || 'Draft');
           setExcerpt(node.excerpt || '');
           let cover = node.cover_image || '';
@@ -130,19 +130,35 @@ export default function EditorPage() {
     return () => clearInterval(timer);
   }, [hasUnsavedChanges, baseIds, nodeId]);
 
-  const buildPayload = () => ({
-    org_id: baseIds?.orgId,
-    type_id: baseIds?.typeId,
-    title: titleRef.current,
-    content: contentRef.current,
-    excerpt,
-    cover_image: coverImage,
-    category,
-    tags: tags.split(',').map((t: string) => t.trim()).filter(Boolean),
-    seo_title: seoTitle,
-    seo_description: seoDescription,
-    featured
-  });
+  const extractText = (node: any): string => {
+    if (!node) return '';
+    if (node.type === 'text') return node.text || '';
+    if (Array.isArray(node.content)) {
+      return node.content.map(extractText).join(' ');
+    }
+    return '';
+  };
+
+  const buildPayload = () => {
+    const text = extractText(contentRef.current);
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
+    const reading_time_minutes = Math.max(1, Math.ceil(words / 200));
+
+    return {
+      org_id: baseIds?.orgId,
+      type_id: baseIds?.typeId,
+      title: titleRef.current,
+      content: contentRef.current,
+      excerpt,
+      cover_image: coverImage,
+      category,
+      tags: tags.split(',').map((t: string) => t.trim()).filter(Boolean),
+      seo_title: seoTitle,
+      seo_description: seoDescription,
+      featured,
+      reading_time_minutes
+    };
+  };
 
   const hasBlobUrls = (contentObj: any): boolean => {
     if (!contentObj || typeof contentObj !== 'object') return false;
@@ -155,6 +171,14 @@ export default function EditorPage() {
 
   const handleSaveDraft = async (manual = true) => {
     if (!baseIds) return;
+    
+    console.log('[CMS] Save Draft: Raw Content Ref:', JSON.stringify(contentRef.current, null, 2));
+    if (!contentRef.current || contentRef.current.type !== 'doc') {
+      if (manual) showToast('Editor content is invalid. Cannot save.', 'error');
+      console.error('[CMS] Save aborted due to malformed editor content.');
+      return;
+    }
+
     if (hasBlobUrls(contentRef.current) || coverImage?.startsWith('blob:')) {
       if (manual) showToast('Please wait for image uploads to finish before saving.', 'error');
       return;
@@ -189,6 +213,13 @@ export default function EditorPage() {
     if (!baseIds) return;
     if (!titleRef.current) {
       showToast("Title is required before publishing.", 'error');
+      return;
+    }
+    
+    console.log('[CMS] Publish: Raw Content Ref:', JSON.stringify(contentRef.current, null, 2));
+    if (!contentRef.current || contentRef.current.type !== 'doc') {
+      showToast('Editor content is invalid. Cannot publish.', 'error');
+      console.error('[CMS] Publish aborted due to malformed editor content.');
       return;
     }
     

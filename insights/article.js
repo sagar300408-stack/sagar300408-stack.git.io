@@ -28,22 +28,59 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderArticle(article) {
         const date = new Date(article.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         
-        // Simple TipTap JSON to HTML converter (for basic nodes)
-        function generateHTML(json) {
-            if (!json || !json.content) return '';
-            let html = '';
-            for (const node of json.content) {
-                if (node.type === 'paragraph') {
-                    html += `<p>${node.content ? node.content.map(n => n.text).join('') : ''}</p>`;
-                } else if (node.type === 'heading') {
-                    const level = node.attrs?.level || 2;
-                    html += `<h${level}>${node.content ? node.content.map(n => n.text).join('') : ''}</h${level}>`;
-                }
-            }
-            return html;
+        // TipTap JSON to HTML converter
+        function renderMarks(text, marks) {
+            if (!marks || marks.length === 0) return text;
+            let result = text;
+            marks.forEach(mark => {
+                if (mark.type === 'bold') result = `<strong>${result}</strong>`;
+                else if (mark.type === 'italic') result = `<em>${result}</em>`;
+                else if (mark.type === 'strike') result = `<del>${result}</del>`;
+                else if (mark.type === 'code') result = `<code>${result}</code>`;
+                else if (mark.type === 'underline') result = `<u>${result}</u>`;
+                else if (mark.type === 'link') result = `<a href="${mark.attrs?.href || '#'}" target="${mark.attrs?.target || '_blank'}">${result}</a>`;
+                else if (mark.type === 'highlight') result = `<mark>${result}</mark>`;
+            });
+            return result;
         }
 
-        const bodyHTML = article.content?.type === 'doc' ? generateHTML(article.content) : '<p>Content parsing error.</p>';
+        function generateHTML(json) {
+            if (typeof json === 'string') return json;
+            if (!json || typeof json !== 'object') return '';
+            
+            if (json.type === 'doc' && json.content) {
+                return json.content.map(node => generateHTML(node)).join('');
+            }
+            
+            if (json.type === 'text') {
+                return renderMarks(json.text || '', json.marks);
+            }
+            
+            const childrenHTML = json.content ? json.content.map(node => generateHTML(node)).join('') : '';
+
+            switch (json.type) {
+                case 'paragraph': return `<p>${childrenHTML}</p>`;
+                case 'heading': return `<h${json.attrs?.level || 2}>${childrenHTML}</h${json.attrs?.level || 2}>`;
+                case 'bulletList': return `<ul>${childrenHTML}</ul>`;
+                case 'orderedList': return `<ol>${childrenHTML}</ol>`;
+                case 'listItem': return `<li>${childrenHTML}</li>`;
+                case 'blockquote': return `<blockquote>${childrenHTML}</blockquote>`;
+                case 'horizontalRule': return `<hr>`;
+                case 'codeBlock': return `<pre><code>${childrenHTML}</code></pre>`;
+                case 'image': return `<img src="${json.attrs?.src || ''}" alt="${json.attrs?.alt || ''}" title="${json.attrs?.title || ''}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 1.5rem 0;">`;
+                case 'hardBreak': return `<br>`;
+                default: return childrenHTML;
+            }
+        }
+
+        let bodyHTML = '';
+        if (typeof article.content === 'string') {
+            bodyHTML = article.content;
+        } else if (article.content && typeof article.content === 'object' && article.content.type === 'doc') {
+            bodyHTML = generateHTML(article.content);
+        } else {
+            bodyHTML = '<p><em>No content available.</em></p>';
+        }
         const coverImg = article.cover_image || 'https://placehold.co/1200x600/f5f5f2/4a4a4a?text=Originyx';
 
         container.innerHTML = `
