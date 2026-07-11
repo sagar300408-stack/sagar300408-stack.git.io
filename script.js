@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Event delegation for mobile navigation (works with dynamically injected components)
-  document.body.addEventListener('click', (e) => {
+  document.addEventListener('click', (e) => {
     // 1. Mobile Menu Toggle
     const toggleBtn = e.target.closest('#nav-toggle');
     if (toggleBtn) {
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------- Back to Top ---------- */
-  document.body.addEventListener('click', (e) => {
+  document.addEventListener('click', (e) => {
     const backToTopBtn = e.target.closest('#back-to-top');
     if (backToTopBtn) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
