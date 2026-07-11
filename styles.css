@@ -1424,10 +1424,25 @@ button {
   .about-profile-frame {
     width: 220px;
     height: 220px;
+    max-width: calc(100vw - (var(--space-md) * 2));
+    max-height: calc(100vw - (var(--space-md) * 2));
+  }
+
+  .about-text,
+  .about-focus,
+  .about-skills-grid,
+  .about-skill-tag {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .about-skills-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-skill-tag {
+    overflow-wrap: anywhere;
   }
 
   .contact-link-card {
@@ -1457,6 +1472,10 @@ button {
 
   .hero-stats {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .about-skills-grid {
+    grid-template-columns: 1fr;
   }
 }
 
