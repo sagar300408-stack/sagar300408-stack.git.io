@@ -13,208 +13,431 @@
     <script src="/components/ox-footer.js" defer></script>
     
     <style>
-        .insights-hero {
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .insights-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-        
-        .insights-hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-w: 600px;
-            margin: 0 auto 3rem;
-            line-height: 1.6;
+        /* ================================================
+           INSIGHTS PAGE — PREMIUM GLASSMORPHISM REDESIGN
+           Apple Liquid Glass Aesthetic
+           ================================================ */
+
+        /* ---------- CSS variable aliases for this page ---------- */
+        :root {
+            --accent-color:      #244235;
+            --accent-glow-lg:    rgba(36, 66, 53, 0.25);
+            --glass-bg:          rgba(255, 255, 255, 0.12);
+            --glass-bg-hover:    rgba(255, 255, 255, 0.18);
+            --glass-border:      rgba(255, 255, 255, 0.22);
+            --glass-border-hov:  rgba(255, 255, 255, 0.40);
+            --glass-shadow:      0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.10);
+            --glass-shadow-hov:  0 20px 60px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.14);
+            --text-on-glass:     #ffffff;
+            --text-on-glass-sub: rgba(255, 255, 255, 0.80);
+            --text-on-glass-mut: rgba(255, 255, 255, 0.55);
         }
 
+        /* ---------- Full-Page Background ---------- */
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            background-image: url('/insight_hero.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Dark overlay for readability without hiding the image */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                160deg,
+                rgba(8, 18, 13, 0.62) 0%,
+                rgba(10, 24, 18, 0.55) 40%,
+                rgba(5, 14, 10, 0.70) 100%
+            );
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Lift all real content above the overlay */
+        ox-navbar, .insights-hero, main, ox-footer, .modal-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------- Hero Section ---------- */
+        .insights-hero {
+            padding: 8.5rem 2rem 5rem;
+            text-align: center;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .insights-hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 700;
+            color: var(--text-on-glass);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .insights-hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-on-glass-sub);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ---------- Glass Search Bar ---------- */
         .search-container {
-            max-width: 600px;
+            max-width: 580px;
             margin: 0 auto;
             position: relative;
         }
-        
+
         .search-container input {
             width: 100%;
-            padding: 1.25rem 1.5rem 1.25rem 3.5rem;
-            font-size: 1.1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
-            background: var(--bg-card);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .search-container input:focus {
+            padding: 1.1rem 1.6rem 1.1rem 3.4rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-on-glass);
+            caret-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--glass-border);
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            transition: all 0.30s cubic-bezier(0.16, 1, 0.3, 1);
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 4px 25px rgba(36, 66, 53, 0.15);
-        }
-        
-        .search-container i {
-            position: absolute;
-            left: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.2rem;
         }
 
+        .search-container input::placeholder {
+            color: var(--text-on-glass-mut);
+        }
+
+        .search-container input:focus {
+            border-color: var(--glass-border-hov);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: var(--glass-shadow-hov), 0 0 0 3px rgba(255, 255, 255, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        .search-container > i {
+            position: absolute;
+            left: 1.3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-on-glass-sub);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        /* Search results dropdown — glass style */
+        #searchResults {
+            position: absolute;
+            left: 0; right: 0;
+            top: calc(100% + 8px);
+            background: rgba(12, 28, 22, 0.85);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 18px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.30);
+            overflow: hidden;
+            z-index: 50;
+            text-align: left;
+        }
+
+        #searchResults a {
+            color: var(--text-on-glass) !important;
+            transition: background 0.18s;
+        }
+
+        #searchResults a:hover {
+            background: rgba(255,255,255,0.07) !important;
+        }
+
+        #searchResults > div {
+            color: var(--text-on-glass-mut);
+        }
+
+        /* ---------- Glass Filter Chips ---------- */
         .filter-chips {
             display: flex;
             justify-content: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
             margin-top: 2rem;
             flex-wrap: wrap;
         }
-        
+
         .chip {
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            padding: 0.45rem 1.2rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: var(--text-on-glass-sub);
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .chip:hover {
-            background: var(--bg-secondary);
-            border-color: var(--text-muted);
-        }
-        
-        .chip.active {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
         }
 
-        /* Loading Skeleton */
-        .skeleton {
-            background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: 4px;
+        .chip:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.32);
+            color: var(--text-on-glass);
+            transform: translateY(-1px);
         }
-        
-        @keyframes loading {
-            0% { background-position: 200% 0; }
+
+        .chip.active {
+            background: var(--accent-color);
+            border-color: rgba(36, 66, 53, 0.6);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(36, 66, 53, 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+        }
+
+        /* ---------- Loading Skeleton ---------- */
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(255,255,255,0.06) 25%,
+                rgba(255,255,255,0.12) 50%,
+                rgba(255,255,255,0.06) 75%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.6s infinite;
+            border-radius: 6px;
+        }
+
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
 
-        /* Grid */
+        /* ---------- Insights Grid ---------- */
         .insights-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 4rem auto;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            max-width: 1220px;
+            margin: 3.5rem auto 5rem;
             padding: 0 2rem;
         }
 
+        @media (max-width: 1024px) {
+            .insights-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .insights-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+                padding: 0 1rem;
+            }
+        }
+
+        /* ---------- Glass Insight Cards ---------- */
         .insight-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px) saturate(160%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
             overflow: hidden;
-            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+
+            /* Layered shadow for depth */
+            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.18);
+
+            /* Gradient highlight on top edge — Liquid Glass effect */
+            position: relative;
+
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.25s ease,
+                        background 0.25s ease;
         }
-        
-        .insight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-            border-color: var(--accent-color);
+
+        /* Top edge highlight bead */
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50), transparent);
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
         }
-        
+
+        /* Subtle inner surface gradient */
+        .insight-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.08) 0%,
+                transparent 60%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Desktop hover — lift & glow */
+        @media (hover: hover) {
+            .insight-card:hover {
+                transform: translateY(-6px) scale(1.015);
+                background: var(--glass-bg-hover);
+                border-color: var(--glass-border-hov);
+                box-shadow: var(--glass-shadow-hov), inset 0 1px 0 rgba(255,255,255,0.28);
+            }
+
+            .insight-card:hover img {
+                transform: scale(1.06);
+            }
+
+            .insight-card:hover .read-more i {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Card content layers above ::after */
+        .insight-card .image-wrapper,
+        .insight-card .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------- Card Image ---------- */
         .insight-card .image-wrapper {
-            aspect-ratio: 16/9;
+            aspect-ratio: 16 / 9;
             overflow: hidden;
-            background: var(--bg-secondary);
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.10);
+            border-radius: 24px 24px 0 0;
         }
-        
+
         .insight-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
         }
-        
-        .insight-card:hover img {
-            transform: scale(1.05);
-        }
-        
+
+        /* ---------- Card Content ---------- */
         .insight-card .content {
-            padding: 1.5rem;
+            padding: 1.4rem 1.5rem 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
-        
+
         .insight-card .meta {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-on-glass-mut);
+            margin-bottom: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.01em;
+        }
+
+        .insight-card .meta .category {
+            color: rgba(120, 220, 160, 0.90);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.72rem;
         }
 
         .insight-card h3 {
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-on-glass);
+            margin-bottom: 0.65rem;
+            line-height: 1.45;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.25);
         }
-        
+
         .insight-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
+            color: var(--text-on-glass-sub);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        
+
+        /* ---------- Card Footer ---------- */
         .insight-card .footer {
             margin-top: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.10);
+            padding-top: 0.9rem;
         }
-        
+
+        .insight-card .footer > span:first-child {
+            font-size: 0.8rem;
+            color: var(--text-on-glass-mut);
+            font-family: 'Inter', sans-serif;
+        }
+
         .read-more {
-            color: var(--accent-color);
+            color: rgba(130, 230, 170, 0.90);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.01em;
         }
-        
+
         .read-more i {
-            transition: transform 0.2s ease;
+            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 0.8rem;
         }
-        
-        .insight-card:hover .read-more i {
-            transform: translateX(4px);
+
+        /* ---------- Empty / Error States ---------- */
+        .insights-grid [style*="grid-column"] {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 20px;
+            color: var(--text-on-glass-sub) !important;
+        }
+
+        /* Mobile: disable hover effects */
+        @media (hover: none) {
+            .insight-card:hover {
+                transform: none;
+                box-shadow: var(--glass-shadow);
+            }
         }
     </style>
 </head>
