@@ -37,7 +37,7 @@ class OxNavbar extends HTMLElement {
             </div>
           </div>
 
-          <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+          <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu">
             <span></span><span></span><span></span>
           </button>
         </div>
@@ -49,6 +49,33 @@ class OxNavbar extends HTMLElement {
   }
 
   bindEvents() {
+    const navToggle = this.querySelector('#nav-toggle');
+    const navLinks = this.querySelector('#nav-links');
+
+    const closeMobileNav = () => {
+      navToggle?.classList.remove('active');
+      navLinks?.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    navToggle?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const isOpen = navLinks?.classList.contains('open');
+      if (isOpen) {
+        closeMobileNav();
+      } else {
+        navToggle.classList.add('active');
+        navLinks?.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    navLinks?.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) {
+        closeMobileNav();
+      }
+    });
+
     // If originyxAuth is already loaded, we dispatch an event to force it to re-bind the UI
     if (window.originyxAuth && window.originyxAuth.configured) {
       window.originyxAuth.dispatchStateChange();
