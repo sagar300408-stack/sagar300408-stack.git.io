@@ -14,141 +14,177 @@
     
     <style>
         /* ================================================
-           INSIGHTS PAGE — PREMIUM GLASSMORPHISM REDESIGN
-           Apple Liquid Glass Aesthetic
+           INSIGHTS PAGE — PREMIUM EDITORIAL REDESIGN
+           Apple Human Interface Aesthetic
            ================================================ */
 
-        /* ---------- CSS variable aliases for this page ---------- */
         :root {
-            --accent-color:      #244235;
-            --accent-glow-lg:    rgba(36, 66, 53, 0.25);
-            --glass-bg:          rgba(255, 255, 255, 0.12);
-            --glass-bg-hover:    rgba(255, 255, 255, 0.18);
-            --glass-border:      rgba(255, 255, 255, 0.22);
-            --glass-border-hov:  rgba(255, 255, 255, 0.40);
-            --glass-shadow:      0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.10);
-            --glass-shadow-hov:  0 20px 60px rgba(0, 0, 0, 0.25), 0 4px 16px rgba(0, 0, 0, 0.14);
-            --text-on-glass:     #ffffff;
-            --text-on-glass-sub: rgba(255, 255, 255, 0.80);
-            --text-on-glass-mut: rgba(255, 255, 255, 0.55);
+            --accent-color: #244235;
         }
 
-        /* ---------- Full-Page Background ---------- */
         html, body {
-            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #F8F9FB; /* Light neutral surface for the rest of the page */
         }
 
-        body {
-            background-image: url('/insight_hero.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            position: relative;
+        /* ---------- Navigation Bar Overrides ---------- */
+        ox-navbar .navbar {
+            background: rgba(255, 255, 255, 0.70) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
+            transition: all 0.3s ease;
         }
 
-        /* Dark overlay for readability without hiding the image */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(
-                160deg,
-                rgba(8, 18, 13, 0.62) 0%,
-                rgba(10, 24, 18, 0.55) 40%,
-                rgba(5, 14, 10, 0.70) 100%
-            );
-            z-index: 0;
-            pointer-events: none;
+        ox-navbar .navbar .nav-links a,
+        ox-navbar .navbar .nav-profile-trigger {
+            color: #111827 !important;
+            font-weight: 500 !important;
         }
 
-        /* Lift all real content above the overlay */
-        ox-navbar, .insights-hero, main, ox-footer, .modal-wrapper {
-            position: relative;
-            z-index: 1;
+        ox-navbar .navbar .nav-links a:hover {
+            color: var(--accent-color) !important;
+        }
+
+        ox-navbar .navbar .nav-logo {
+            filter: brightness(0) !important; /* Ensure logo is dark */
+        }
+
+        ox-navbar .navbar .nav-toggle span {
+            background-color: #111827 !important; /* Mobile menu icon */
         }
 
         /* ---------- Hero Section ---------- */
         .insights-hero {
-            padding: 8.5rem 2rem 5rem;
-            text-align: center;
-            background: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            width: 100%;
+            min-height: 800px; /* ~750-900px defined height */
+            max-height: 900px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 2rem 60px; /* 100px accounts for navbar visually */
+            
+            /* Background locked to hero only */
+            background-image: url('/insight_hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        /* Dark overlay for text readability */
+        .insights-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                160deg,
+                rgba(8, 18, 13, 0.65) 0%,
+                rgba(10, 24, 18, 0.55) 40%,
+                rgba(5, 14, 10, 0.75) 100%
+            );
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Smooth fade transition to light background */
+        .insights-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, transparent, #F8F9FB);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Lift hero content above overlays */
+        .insights-hero > * {
+            position: relative;
+            z-index: 2;
+            width: 100%;
         }
 
         .insights-hero h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-size: clamp(2.6rem, 5vw, 4.2rem);
             font-weight: 700;
-            color: var(--text-on-glass);
-            margin-bottom: 1rem;
+            color: #ffffff;
+            margin-bottom: 24px; /* Title -> Subtitle: 24px */
             letter-spacing: -0.03em;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         .insights-hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-on-glass-sub);
-            max-width: 560px;
-            margin: 0 auto 2.5rem;
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto 40px; /* Subtitle -> Search: 40px */
             line-height: 1.7;
-            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         /* ---------- Glass Search Bar ---------- */
         .search-container {
             max-width: 580px;
-            margin: 0 auto;
-            position: relative;
+            margin: 0 auto 32px; /* Search -> Filters: 32px */
         }
 
         .search-container input {
             width: 100%;
-            padding: 1.1rem 1.6rem 1.1rem 3.4rem;
-            font-size: 1rem;
+            padding: 1.15rem 1.6rem 1.15rem 3.4rem;
+            font-size: 1.05rem;
             font-family: 'Inter', sans-serif;
-            color: var(--text-on-glass);
-            caret-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid var(--glass-border);
+            color: #ffffff;
+            caret-color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
             border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.10);
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-            transition: all 0.30s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             outline: none;
         }
 
         .search-container input::placeholder {
-            color: var(--text-on-glass-mut);
+            color: rgba(255, 255, 255, 0.65);
         }
 
         .search-container input:focus {
-            border-color: var(--glass-border-hov);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: var(--glass-shadow-hov), 0 0 0 3px rgba(255, 255, 255, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 0 3px rgba(255, 255, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
         }
 
         .search-container > i {
             position: absolute;
-            left: 1.3rem;
+            left: 1.35rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-on-glass-sub);
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.1rem;
             pointer-events: none;
         }
 
-        /* Search results dropdown — glass style */
+        /* Search Results Dropdown */
         #searchResults {
             position: absolute;
             left: 0; right: 0;
-            top: calc(100% + 8px);
+            top: calc(100% + 12px);
             background: rgba(12, 28, 22, 0.85);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid rgba(255,255,255,0.14);
-            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
             box-shadow: 0 16px 48px rgba(0,0,0,0.30);
             overflow: hidden;
             z-index: 50;
@@ -156,83 +192,73 @@
         }
 
         #searchResults a {
-            color: var(--text-on-glass) !important;
-            transition: background 0.18s;
+            color: #ffffff !important;
+            transition: background 0.2s;
         }
-
         #searchResults a:hover {
-            background: rgba(255,255,255,0.07) !important;
+            background: rgba(255,255,255,0.08) !important;
         }
-
         #searchResults > div {
-            color: var(--text-on-glass-mut);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         /* ---------- Glass Filter Chips ---------- */
         .filter-chips {
             display: flex;
             justify-content: center;
-            gap: 0.6rem;
-            margin-top: 2rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
         }
 
         .chip {
-            padding: 0.45rem 1.2rem;
+            padding: 0.5rem 1.25rem;
             border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.10);
-            backdrop-filter: blur(16px) saturate(140%);
-            -webkit-backdrop-filter: blur(16px) saturate(140%);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            color: var(--text-on-glass-sub);
-            font-size: 0.875rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.9rem;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
         }
 
         .chip:hover {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.32);
-            color: var(--text-on-glass);
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.45);
+            color: #ffffff;
             transform: translateY(-1px);
         }
 
         .chip.active {
             background: var(--accent-color);
-            border-color: rgba(36, 66, 53, 0.6);
-            color: #fff;
-            box-shadow: 0 4px 16px rgba(36, 66, 53, 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+            border-color: rgba(36, 66, 53, 0.8);
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(36, 66, 53, 0.5), inset 0 1px 1px rgba(255,255,255,0.25);
         }
 
-        /* ---------- Loading Skeleton ---------- */
-        .skeleton {
-            background: linear-gradient(
-                90deg,
-                rgba(255,255,255,0.06) 25%,
-                rgba(255,255,255,0.12) 50%,
-                rgba(255,255,255,0.06) 75%
-            );
-            background-size: 200% 100%;
-            animation: shimmer 1.6s infinite;
-            border-radius: 6px;
+        /* ---------- Article Section ---------- */
+        main {
+            background-color: #F8F9FB; /* Separate surface for articles */
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* ---------- Insights Grid ---------- */
         .insights-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.75rem;
+            gap: 2rem;
             max-width: 1220px;
-            margin: 3.5rem auto 5rem;
-            padding: 0 2rem;
+            margin: 0 auto;
+            padding: 80px 2rem 120px; /* Filters -> Articles: ~80-120px */
+            
+            /* CSS Variables for dynamically injected HTML components */
+            --text-on-glass: #111827;       
+            --text-on-glass-sub: #4b5563;   
+            --text-on-glass-mut: #6b7280;   
         }
 
         @media (max-width: 1024px) {
@@ -244,110 +270,77 @@
         @media (max-width: 640px) {
             .insights-grid {
                 grid-template-columns: 1fr;
-                gap: 1.25rem;
-                padding: 0 1rem;
+                gap: 1.5rem;
+                padding: 60px 1rem 80px;
             }
         }
 
-        /* ---------- Glass Insight Cards ---------- */
+        /* ---------- Light Liquid Glass Article Cards ---------- */
         .insight-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px) saturate(160%);
-            -webkit-backdrop-filter: blur(24px) saturate(160%);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.70);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 1);
             border-radius: 24px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             cursor: pointer;
-
-            /* Layered shadow for depth */
-            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.18);
-
-            /* Gradient highlight on top edge — Liquid Glass effect */
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             position: relative;
-
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.25s ease,
-                        background 0.25s ease;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        background 0.3s ease;
         }
 
-        /* Top edge highlight bead */
+        /* Top edge highlight */
         .insight-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 10%; right: 10%;
+            top: 0; left: 5%; right: 5%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.50), transparent);
-            border-radius: 50%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
             z-index: 1;
             pointer-events: none;
         }
 
-        /* Subtle inner surface gradient */
-        .insight-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,0.08) 0%,
-                transparent 60%
-            );
-            border-radius: inherit;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Desktop hover — lift & glow */
+        /* Hover interaction (Desktop) */
         @media (hover: hover) {
             .insight-card:hover {
-                transform: translateY(-6px) scale(1.015);
-                background: var(--glass-bg-hover);
-                border-color: var(--glass-border-hov);
-                box-shadow: var(--glass-shadow-hov), inset 0 1px 0 rgba(255,255,255,0.28);
+                transform: translateY(-6px) scale(1.01);
+                background: rgba(255, 255, 255, 0.90);
+                box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
             }
-
             .insight-card:hover img {
-                transform: scale(1.06);
+                transform: scale(1.05);
             }
-
             .insight-card:hover .read-more i {
-                transform: translateX(5px);
+                transform: translateX(4px);
             }
         }
 
-        /* Card content layers above ::after */
-        .insight-card .image-wrapper,
-        .insight-card .content {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ---------- Card Image ---------- */
         .insight-card .image-wrapper {
             aspect-ratio: 16 / 9;
             overflow: hidden;
-            background: rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.10);
-            border-radius: 24px 24px 0 0;
+            background: rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .insight-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             display: block;
         }
 
-        /* ---------- Card Content ---------- */
         .insight-card .content {
-            padding: 1.4rem 1.5rem 1.5rem;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            position: relative;
+            z-index: 2;
         }
 
         .insight-card .meta {
@@ -356,87 +349,102 @@
             gap: 0.75rem;
             font-size: 0.8rem;
             color: var(--text-on-glass-mut);
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.75rem;
             font-family: 'Inter', sans-serif;
-            letter-spacing: 0.01em;
+            font-weight: 500;
         }
 
         .insight-card .meta .category {
-            color: rgba(120, 220, 160, 0.90);
+            color: var(--accent-color);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
         }
 
         .insight-card h3 {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-on-glass);
-            margin-bottom: 0.65rem;
-            line-height: 1.45;
-            text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
         }
 
         .insight-card p {
             color: var(--text-on-glass-sub);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        /* ---------- Card Footer ---------- */
         .insight-card .footer {
             margin-top: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-top: 1px solid rgba(255,255,255,0.10);
-            padding-top: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding-top: 1rem;
         }
 
         .insight-card .footer > span:first-child {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-on-glass-mut);
             font-family: 'Inter', sans-serif;
         }
 
         .read-more {
-            color: rgba(130, 230, 170, 0.90);
+            color: var(--accent-color);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
             font-family: 'Inter', sans-serif;
-            letter-spacing: 0.01em;
         }
 
         .read-more i {
-            transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             font-size: 0.8rem;
         }
 
-        /* ---------- Empty / Error States ---------- */
-        .insights-grid [style*="grid-column"] {
-            background: rgba(255,255,255,0.07);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.14);
-            border-radius: 20px;
-            color: var(--text-on-glass-sub) !important;
+        /* ---------- Skeleton Loaders & Empty State ---------- */
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(0,0,0,0.04) 25%,
+                rgba(0,0,0,0.08) 50%,
+                rgba(0,0,0,0.04) 75%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 6px;
+        }
+        
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        /* Mobile: disable hover effects */
+        /* Force empty state blocks to match light background */
+        .insights-grid > div[style*="grid-column"] {
+            background: rgba(255,255,255,0.70) !important;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,1) !important;
+            border-radius: 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.04);
+        }
+
+        /* Mobile overrides */
         @media (hover: none) {
             .insight-card:hover {
                 transform: none;
-                box-shadow: var(--glass-shadow);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             }
         }
     </style>
