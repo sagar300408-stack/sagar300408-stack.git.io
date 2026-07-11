@@ -2,9 +2,10 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import OCEEditor from '../components/Editor/Editor';
 import { 
-  ChevronLeft, Send, Image, 
+  ChevronLeft, Send, Image, Save,
   Settings, Maximize2, Minimize2, 
-  Columns, AlignLeft, CheckCircle, Clock
+  Columns, AlignLeft, CheckCircle, Clock,
+  ExternalLink, Link as LinkIcon, Edit3
 } from 'lucide-react';
 import { getOCEClient } from '../lib/sdk';
 import { useToast } from '../components/Layout/ToastProvider';
@@ -25,6 +26,8 @@ export default function EditorPage() {
   const [status, setStatus] = useState('Draft');
   const [lastSaved, setLastSaved] = useState('Not saved yet');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
   
   // Settings Sidebar State
   const [isPublishPanelOpen, setIsPublishPanelOpen] = useState(true);
@@ -36,16 +39,14 @@ export default function EditorPage() {
   const [seoDescription, setSeoDescription] = useState('');
   const [featured, setFeatured] = useState(false);
 
-  // New UI States
+  // UI States
   const [editorWidth, setEditorWidth] = useState<'narrow' | 'default' | 'full'>('default');
   const [focusMode, setFocusMode] = useState(false);
   const [showSuccessCard, setShowSuccessCard] = useState(false);
   const [slug, setSlug] = useState('');
+  const [publishedNodeId, setPublishedNodeId] = useState<string | null>(null);
 
-  // Advanced States
-  // Revisions and healthScore were removed for clean UI focus
-
-  // Refs for autosave comparison
+  // Refs for autosave
   const contentRef = useRef(content);
   const titleRef = useRef(title);
 
@@ -68,8 +69,8 @@ export default function EditorPage() {
           setExcerpt(node.excerpt || '');
           let cover = node.cover_image || '';
           if (cover.startsWith('blob:')) {
-            console.warn(`[CMS] Blob URL detected in cover image. Removing broken image.`);
-            cover = ''; // Blank out the broken cover image
+            console.warn(`[CMS] Blob URL detected in cover image. Clearing.`);
+            cover = '';
           }
           setCoverImage(cover);
           setCategory(node.category || '');
@@ -79,11 +80,22 @@ export default function EditorPage() {
           setFeatured(node.featured || false);
           setSlug(node.slug || '');
           setLastSaved(`Saved ${new Date(node.updated_at).toLocaleTimeString()}`);
+          if (node.status === 'Published') setPublishedNodeId(nodeId);
         } else {
           const templateId = location.state?.template || 'blank';
-          if (templateId === 'ai') setTitle('AI Insights for Q3');
-          else if (templateId === 'case-study') setTitle('Customer Success: Acme Corp');
-          else setTitle('');
+          if (templateId === 'ai') {
+            setTitle('AI Insights for Your Business');
+          } else if (templateId === 'case-study') {
+            setTitle('Customer Success Story');
+          } else if (templateId === 'founder') {
+            setTitle('A Note from the Founder');
+          } else if (templateId === 'update') {
+            setTitle('Product Update');
+          } else if (templateId === 'research') {
+            setTitle('Research Report');
+          } else {
+            setTitle('');
+          }
         }
       } catch (e: any) {
         if (e.message?.includes('SETUP_ERROR')) {
@@ -144,10 +156,11 @@ export default function EditorPage() {
   const handleSaveDraft = async (manual = true) => {
     if (!baseIds) return;
     if (hasBlobUrls(contentRef.current) || coverImage?.startsWith('blob:')) {
-      showToast('Please wait for image uploads to finish before saving.', 'error');
+      if (manual) showToast('Please wait for image uploads to finish before saving.', 'error');
       return;
     }
     try {
+      if (manual) setIsSaving(true);
       setLastSaved('Saving...');
       const payload = buildPayload();
 
@@ -167,6 +180,8 @@ export default function EditorPage() {
     } catch (e) {
       setLastSaved('Save failed!');
       if (manual) showToast('Failed to save draft', 'error');
+    } finally {
+      if (manual) setIsSaving(false);
     }
   };
 
@@ -183,6 +198,7 @@ export default function EditorPage() {
     }
     
     try {
+      setIsPublishing(true);
       showToast('Publishing...', 'info');
       let activeNodeId = nodeId;
       const payload = buildPayload();
@@ -197,16 +213,21 @@ export default function EditorPage() {
 
       setStatus(schedule ? 'Scheduled' : 'Published');
       setHasUnsavedChanges(false);
+      setPublishedNodeId(activeNodeId);
       setShowSuccessCard(true);
+      // Log activity (non-blocking)
+      try { await sdk.logActivity('PUBLISH', 'insight', activeNodeId || undefined); } catch {}
       showToast(schedule ? 'Insight scheduled' : 'Insight published', 'success');
     } catch (e) {
       showToast('Publish failed', 'error');
+    } finally {
+      setIsPublishing(false);
     }
   };
 
   const handleBack = () => {
     if (hasUnsavedChanges) {
-      if (window.confirm('You have unpublished changes. Are you sure you want to leave?')) {
+      if (window.confirm('You have unsaved changes. Are you sure you want to leave?')) {
         navigate('/dashboard');
       }
     } else {
@@ -215,7 +236,6 @@ export default function EditorPage() {
   };
 
   const handleCoverUpload = () => {
-    window.dispatchEvent(new CustomEvent('open-media-drawer', { detail: { target: 'cover' } }));
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.accept = 'image/*';
@@ -228,10 +248,12 @@ export default function EditorPage() {
         setHasUnsavedChanges(true);
         
         sdk.uploadMedia(file, 'general').then(url => {
+          URL.revokeObjectURL(tempBlobUrl);
           setCoverImage(url);
-          showToast('Cover uploaded', 'success');
+          showToast('Cover image uploaded', 'success');
         }).catch(err => {
           console.error('Cover upload failed', err);
+          URL.revokeObjectURL(tempBlobUrl);
           setCoverImage('');
           showToast('Cover upload failed', 'error');
         });
@@ -240,37 +262,55 @@ export default function EditorPage() {
     fileInput.click();
   };
 
+  const handleViewLive = () => {
+    const id = publishedNodeId || nodeId;
+    if (id) {
+      window.open(`/insights/article.html?id=${id}`, '_blank');
+    }
+  };
+
+  const handleCopyLink = () => {
+    const id = publishedNodeId || nodeId;
+    if (id) {
+      const url = `${window.location.origin}/insights/article.html?id=${id}`;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Link copied to clipboard', 'success');
+      }).catch(() => {
+        showToast('Failed to copy link', 'error');
+      });
+    }
+  };
+
   // Completion calculation
   const completionItems = [
     { label: 'Title', done: title.length > 0 },
-    { label: 'Featured Image', done: !!coverImage },
+    { label: 'Featured Image', done: !!coverImage && !coverImage.startsWith('blob:') },
     { label: 'Category', done: !!category },
     { label: 'SEO', done: !!seoTitle && !!seoDescription }
   ];
   const completedCount = completionItems.filter(i => i.done).length;
+  const completionPercent = Math.round((completedCount / completionItems.length) * 100);
 
   // Reading Stats calculation
   const stats = useMemo(() => {
-    let wordCount = 0;
-    let charCount = 0;
-    
-    // Simplistic extraction of text from TipTap JSON
     const extractText = (node: any): string => {
       if (node.type === 'text') return node.text || '';
       if (node.content) return node.content.map(extractText).join(' ');
       return '';
     };
 
+    let wordCount = 0;
+    let charCount = 0;
     if (content.content) {
       const text = extractText(content);
-      charCount = text.length;
+      charCount = text.replace(/\s/g, '').length;
       wordCount = text.split(/\s+/).filter((w: string) => w.length > 0).length;
     }
 
     return {
       words: wordCount,
       chars: charCount,
-      time: Math.max(1, Math.ceil(wordCount / 200)) // 200 WPM
+      time: Math.max(1, Math.ceil(wordCount / 200))
     };
   }, [content]);
 
@@ -278,8 +318,14 @@ export default function EditorPage() {
     return (
       <div className="flex-1 flex items-center justify-center p-8 bg-bg-primary">
         <div className="bg-surface border border-border rounded-xl shadow-sm max-w-lg w-full p-8">
-          <h2 className="text-lg font-semibold text-text-primary mb-1">Editor Error</h2>
-          <p className="text-sm text-text-secondary leading-relaxed">{setupError}</p>
+          <h2 className="text-lg font-semibold text-text-primary mb-1">Editor Setup Error</h2>
+          <p className="text-sm text-text-secondary leading-relaxed mb-4">{setupError}</p>
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="text-sm text-accent hover:underline"
+          >
+            ← Return to Dashboard
+          </button>
         </div>
       </div>
     );
@@ -294,74 +340,107 @@ export default function EditorPage() {
     <div className="h-screen flex flex-col bg-bg-primary overflow-hidden relative">
       {/* Top Navbar */}
       {!focusMode && (
-        <header className="h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-10 transition-all duration-300">
-          <div className="flex items-center gap-4">
-            <button onClick={handleBack} className="text-text-secondary hover:text-text-primary p-1 rounded-md hover:bg-surface-hover transition-colors">
+        <header className="h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-10">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleBack}
+              className="text-text-secondary hover:text-text-primary p-1.5 rounded-md hover:bg-surface-hover transition-colors"
+              title="Back to Dashboard"
+            >
               <ChevronLeft size={20} />
             </button>
-            <div className="h-4 w-px bg-border"></div>
-            <span className="text-sm text-text-muted">Draft in</span>
-            <span className="text-sm font-medium text-text-primary">Insights</span>
-            {hasUnsavedChanges && <span className="w-2 h-2 rounded-full bg-amber" title="Unsaved changes"></span>}
-            <span className="text-xs text-text-muted ml-2">{lastSaved}</span>
+            <div className="h-4 w-px bg-border" />
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-text-muted">Draft in</span>
+              <span className="font-medium text-text-primary">Insights</span>
+            </div>
+            <div className="flex items-center gap-2 ml-2">
+              {hasUnsavedChanges && <span className="w-2 h-2 rounded-full bg-amber flex-shrink-0" title="Unsaved changes" />}
+              <span className="text-xs text-text-muted">{lastSaved}</span>
+            </div>
           </div>
           
           <div className="flex items-center gap-2">
             <button 
               onClick={() => setFocusMode(true)}
-              className="p-1.5 text-text-secondary hover:text-text-primary hover:bg-surface-hover rounded-md transition-colors mr-2"
+              className="p-1.5 text-text-secondary hover:text-text-primary hover:bg-surface-hover rounded-md transition-colors"
               title="Focus Mode"
             >
               <Maximize2 size={16} />
             </button>
             
-            <button onClick={() => handlePublish(false)} className="flex items-center gap-2 bg-accent text-white px-4 py-1.5 rounded-md hover:bg-accent-light transition-colors text-sm font-medium shadow-sm">
-              <Send size={16} />
-              Publish
+            <button
+              onClick={() => handleSaveDraft(true)}
+              disabled={isSaving || !hasUnsavedChanges}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              title="Save Draft"
+            >
+              <Save size={15} />
+              {isSaving ? 'Saving...' : 'Save'}
             </button>
+
+            <button
+              onClick={() => handlePublish(false)}
+              disabled={isPublishing}
+              className="flex items-center gap-1.5 bg-accent text-white px-4 py-1.5 rounded-md hover:bg-accent-light transition-colors text-sm font-medium shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <Send size={15} />
+              {isPublishing ? 'Publishing...' : (status === 'Published' ? 'Update' : 'Publish')}
+            </button>
+
             <button 
               onClick={() => setIsPublishPanelOpen(!isPublishPanelOpen)}
-              className={`p-1.5 rounded-md transition-colors lg:hidden ${isPublishPanelOpen ? 'bg-surface-hover text-text-primary' : 'text-text-secondary'}`}
+              className={`p-1.5 rounded-md transition-colors lg:hidden ${isPublishPanelOpen ? 'bg-surface-hover text-text-primary' : 'text-text-secondary hover:bg-surface-hover'}`}
+              title="Settings Panel"
             >
-              <Settings size={20} />
+              <Settings size={18} />
             </button>
           </div>
         </header>
       )}
 
-      {/* Focus Mode Exit */}
+      {/* Focus Mode Exit Bar */}
       {focusMode && (
-        <div className="absolute top-4 left-4 z-50 animate-in fade-in">
+        <div className="absolute top-4 left-4 z-50">
           <button 
             onClick={() => setFocusMode(false)}
-            className="flex items-center gap-2 bg-surface/80 backdrop-blur border border-border text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-md shadow-sm text-sm"
+            className="flex items-center gap-2 bg-surface/80 backdrop-blur border border-border text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-md shadow-sm text-sm transition-colors"
           >
-            <Minimize2 size={14} /> Exit Focus
+            <Minimize2 size={14} /> Exit Focus Mode
           </button>
         </div>
       )}
 
       {/* Success Card Overlay */}
       {showSuccessCard && (
-        <div className="absolute inset-0 bg-bg-primary/80 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in">
-          <div className="bg-surface border border-border shadow-2xl rounded-xl p-8 max-w-sm w-full text-center animate-in zoom-in-95">
+        <div className="absolute inset-0 bg-bg-primary/80 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-surface border border-border shadow-2xl rounded-xl p-8 max-w-sm w-full text-center">
             <div className="w-16 h-16 bg-green/10 text-green rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckCircle size={32} />
             </div>
             <h2 className="text-xl font-semibold text-text-primary mb-2">Published Successfully</h2>
-            <p className="text-sm text-text-secondary mb-6">Your insight is now live and visible to viewers.</p>
+            <p className="text-sm text-text-secondary mb-6">Your insight is now live and visible to readers.</p>
             
             <div className="flex flex-col gap-3">
-              <button className="w-full bg-accent text-white py-2 rounded-md font-medium hover:bg-accent-light transition-colors">
+              <button
+                onClick={() => { setShowSuccessCard(false); handleViewLive(); }}
+                className="w-full bg-accent text-white py-2 rounded-md font-medium hover:bg-accent-light transition-colors flex items-center justify-center gap-2"
+              >
+                <ExternalLink size={16} />
                 View Live
               </button>
-              <button className="w-full bg-bg-primary border border-border text-text-primary py-2 rounded-md font-medium hover:bg-surface-hover transition-colors">
+              <button
+                onClick={() => { setShowSuccessCard(false); handleCopyLink(); }}
+                className="w-full bg-bg-primary border border-border text-text-primary py-2 rounded-md font-medium hover:bg-surface-hover transition-colors flex items-center justify-center gap-2"
+              >
+                <LinkIcon size={16} />
                 Copy Link
               </button>
               <button 
                 onClick={() => setShowSuccessCard(false)}
-                className="w-full text-text-secondary hover:text-text-primary py-2 text-sm transition-colors"
+                className="w-full text-text-secondary hover:text-text-primary py-2 text-sm transition-colors flex items-center justify-center gap-2"
               >
+                <Edit3 size={14} />
                 Continue Editing
               </button>
             </div>
@@ -371,30 +450,64 @@ export default function EditorPage() {
 
       <div className="flex-1 flex overflow-hidden relative">
         {/* Main Editor Area */}
-        <main className={`flex-1 overflow-y-auto bg-bg-primary transition-all duration-300 flex justify-center`}>
+        <main className="flex-1 overflow-y-auto bg-bg-primary flex justify-center">
           <div className={`w-full ${editorWidthClass} py-12 px-6 lg:px-8`}>
             
-            {/* Editor Width Controls - Only visible on hover in a real app, or top right */}
+            {/* Editor Width Controls */}
             {!focusMode && (
-              <div className="flex justify-end mb-4 gap-1 opacity-50 hover:opacity-100 transition-opacity">
-                <button onClick={() => setEditorWidth('narrow')} className={`p-1 rounded ${editorWidth === 'narrow' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`} title="Narrow"><AlignLeft size={14} /></button>
-                <button onClick={() => setEditorWidth('default')} className={`p-1 rounded ${editorWidth === 'default' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`} title="Default"><Columns size={14} /></button>
-                <button onClick={() => setEditorWidth('full')} className={`p-1 rounded ${editorWidth === 'full' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`} title="Full Width"><Maximize2 size={14} /></button>
+              <div className="flex justify-end mb-4 gap-1 opacity-40 hover:opacity-100 transition-opacity">
+                <button
+                  onClick={() => setEditorWidth('narrow')}
+                  className={`p-1.5 rounded ${editorWidth === 'narrow' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`}
+                  title="Narrow"
+                >
+                  <AlignLeft size={14} />
+                </button>
+                <button
+                  onClick={() => setEditorWidth('default')}
+                  className={`p-1.5 rounded ${editorWidth === 'default' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`}
+                  title="Default"
+                >
+                  <Columns size={14} />
+                </button>
+                <button
+                  onClick={() => setEditorWidth('full')}
+                  className={`p-1.5 rounded ${editorWidth === 'full' ? 'bg-border text-text-primary' : 'text-text-muted hover:bg-surface'}`}
+                  title="Full Width"
+                >
+                  <Maximize2 size={14} />
+                </button>
               </div>
             )}
 
             {/* Featured Image */}
             <div className="mb-8 group relative">
-              {coverImage ? (
+              {coverImage && !coverImage.startsWith('blob:') ? (
                 <div className="relative rounded-xl overflow-hidden border border-border shadow-sm">
                   <img src={coverImage} alt="Featured" className="w-full h-64 object-cover" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                    <button onClick={handleCoverUpload} className="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-4 py-2 rounded-md font-medium text-sm transition-colors">
+                    <button
+                      onClick={handleCoverUpload}
+                      className="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-4 py-2 rounded-md font-medium text-sm transition-colors"
+                    >
                       Change Cover
                     </button>
-                    <button onClick={() => {setCoverImage(''); setHasUnsavedChanges(true)}} className="bg-red/80 hover:bg-red text-white px-4 py-2 rounded-md font-medium text-sm transition-colors">
+                    <button
+                      onClick={() => { setCoverImage(''); setHasUnsavedChanges(true); }}
+                      className="bg-red-600/80 hover:bg-red-600 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors"
+                    >
                       Remove
                     </button>
+                  </div>
+                </div>
+              ) : coverImage?.startsWith('blob:') ? (
+                <div className="relative rounded-xl overflow-hidden border border-border shadow-sm">
+                  <img src={coverImage} alt="Uploading..." className="w-full h-64 object-cover opacity-60" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="flex items-center gap-2 bg-surface/90 px-4 py-2 rounded-full text-sm text-text-secondary">
+                      <div className="w-4 h-4 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+                      Uploading...
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -417,7 +530,7 @@ export default function EditorPage() {
               className="text-4xl lg:text-5xl font-serif font-bold bg-transparent border-none focus:outline-none focus:ring-0 text-text-primary placeholder:text-text-muted w-full mb-8 leading-tight"
             />
 
-            {/* Editor */}
+            {/* TipTap Editor */}
             <OCEEditor 
               initialContent={content}
               onChange={(c) => { setContent(c); setHasUnsavedChanges(true); }}
@@ -425,7 +538,7 @@ export default function EditorPage() {
           </div>
         </main>
 
-        {/* Publish Panel (Sticky Right) */}
+        {/* Publish Panel */}
         {!focusMode && (
           <aside className={`
             absolute inset-y-0 right-0 z-30 w-full md:w-80 bg-surface border-l border-border flex flex-col flex-shrink-0 transition-transform duration-300
@@ -434,10 +547,15 @@ export default function EditorPage() {
           `}>
             <div className="p-4 border-b border-border flex items-center justify-between lg:hidden bg-surface">
               <h2 className="font-semibold text-text-primary">Publish Panel</h2>
-              <button onClick={() => setIsPublishPanelOpen(false)} className="p-1 text-text-secondary"><ChevronLeft size={20} /></button>
+              <button
+                onClick={() => setIsPublishPanelOpen(false)}
+                className="p-1 text-text-secondary hover:text-text-primary"
+              >
+                <ChevronLeft size={20} />
+              </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-5 space-y-8">
+            <div className="flex-1 overflow-y-auto p-5 space-y-7">
               
               {/* Publish Section */}
               <section>
@@ -445,14 +563,38 @@ export default function EditorPage() {
                 <div className="bg-bg-primary border border-border rounded-lg p-3 space-y-3">
                   <div className="flex justify-between items-center text-sm">
                     <span className="text-text-secondary">Status</span>
-                    <span className={`font-medium ${status === 'Published' ? 'text-green' : 'text-amber'}`}>{status}</span>
+                    <span className={`font-medium px-2 py-0.5 rounded text-xs ${
+                      status === 'Published' ? 'bg-green/10 text-green' :
+                      status === 'Scheduled' ? 'bg-blue/10 text-blue' :
+                      'bg-amber/10 text-amber'
+                    }`}>{status}</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
                     <span className="text-text-secondary">Visibility</span>
                     <span className="font-medium text-text-primary">Public</span>
                   </div>
-                  <button onClick={() => handlePublish(false)} className="w-full bg-text-primary text-bg-primary py-2 rounded-md text-sm font-medium hover:bg-text-secondary transition-colors mt-2">
-                    {status === 'Published' ? 'Update Insight' : 'Publish Now'}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-text-secondary">Featured</span>
+                    <button
+                      onClick={() => { setFeatured(!featured); setHasUnsavedChanges(true); }}
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${featured ? 'bg-accent' : 'bg-border'}`}
+                    >
+                      <span className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${featured ? 'translate-x-4' : 'translate-x-1'}`} />
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => handlePublish(false)}
+                    disabled={isPublishing}
+                    className="w-full bg-text-primary text-bg-primary py-2 rounded-md text-sm font-medium hover:bg-text-secondary transition-colors mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {isPublishing ? 'Publishing...' : (status === 'Published' ? 'Update Insight' : 'Publish Now')}
+                  </button>
+                  <button
+                    onClick={() => handleSaveDraft(true)}
+                    disabled={isSaving || !hasUnsavedChanges}
+                    className="w-full border border-border text-text-secondary py-2 rounded-md text-sm font-medium hover:bg-surface-hover hover:text-text-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    {isSaving ? 'Saving...' : 'Save Draft'}
                   </button>
                 </div>
               </section>
@@ -463,10 +605,19 @@ export default function EditorPage() {
                   <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider">Completion</h3>
                   <span className="text-xs font-medium text-text-secondary">{completedCount}/{completionItems.length}</span>
                 </div>
+                <div className="w-full bg-border rounded-full h-1.5 mb-3">
+                  <div
+                    className="bg-accent h-1.5 rounded-full transition-all duration-500"
+                    style={{ width: `${completionPercent}%` }}
+                  />
+                </div>
                 <div className="space-y-2">
                   {completionItems.map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm">
-                      {item.done ? <CheckCircle size={14} className="text-green" /> : <div className="w-3.5 h-3.5 rounded-full border border-border"></div>}
+                      {item.done
+                        ? <CheckCircle size={14} className="text-green flex-shrink-0" />
+                        : <div className="w-3.5 h-3.5 rounded-full border border-border flex-shrink-0" />
+                      }
                       <span className={item.done ? 'text-text-primary' : 'text-text-muted'}>{item.label}</span>
                     </div>
                   ))}
@@ -480,6 +631,15 @@ export default function EditorPage() {
                 <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Content</h3>
                 <div className="space-y-4">
                   <div>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">Excerpt</label>
+                    <textarea
+                      value={excerpt}
+                      onChange={(e) => { setExcerpt(e.target.value); setHasUnsavedChanges(true); }}
+                      placeholder="Short description for card previews..."
+                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none min-h-[64px] resize-none"
+                    />
+                  </div>
+                  <div>
                     <label className="block text-xs font-medium text-text-secondary mb-1">Category</label>
                     <input 
                       type="text" 
@@ -490,12 +650,12 @@ export default function EditorPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-text-secondary mb-1">Tags (comma separated)</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">Tags <span className="text-text-muted font-normal">(comma separated)</span></label>
                     <input 
                       type="text" 
                       value={tags}
                       onChange={(e) => { setTags(e.target.value); setHasUnsavedChanges(true); }}
-                      placeholder="e.g. future, tech" 
+                      placeholder="e.g. ai, automation, future" 
                       className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none"
                     />
                   </div>
@@ -516,10 +676,13 @@ export default function EditorPage() {
                       readOnly
                       placeholder="auto-generated-from-title" 
                       className="w-full bg-bg-secondary border border-border rounded-md p-2 text-sm text-text-muted cursor-not-allowed"
+                      title="Slug is auto-generated on publish"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-text-secondary mb-1">Meta Title</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">
+                      Meta Title <span className={`ml-1 font-normal ${seoTitle.length > 60 ? 'text-red-500' : 'text-text-muted'}`}>({seoTitle.length}/60)</span>
+                    </label>
                     <input 
                       type="text" 
                       value={seoTitle}
@@ -529,12 +692,14 @@ export default function EditorPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-text-secondary mb-1">Meta Description</label>
+                    <label className="block text-xs font-medium text-text-secondary mb-1">
+                      Meta Description <span className={`ml-1 font-normal ${seoDescription.length > 160 ? 'text-red-500' : 'text-text-muted'}`}>({seoDescription.length}/160)</span>
+                    </label>
                     <textarea 
                       value={seoDescription}
                       onChange={(e) => { setSeoDescription(e.target.value); setHasUnsavedChanges(true); }}
                       placeholder="Brief summary for search engines..." 
-                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none min-h-[80px]"
+                      className="w-full bg-bg-primary border border-border rounded-md p-2 text-sm focus:border-accent focus:outline-none min-h-[80px] resize-none"
                     />
                   </div>
                 </div>
@@ -542,7 +707,7 @@ export default function EditorPage() {
 
               <hr className="border-border" />
 
-              {/* Advanced / Stats Section */}
+              {/* Reading Stats */}
               <section>
                 <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Reading Stats</h3>
                 <div className="grid grid-cols-2 gap-3">
