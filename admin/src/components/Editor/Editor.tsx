@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import { useToast } from '../Layout/ToastProvider';
 import MediaDrawer from './MediaDrawer';
+import LinkExtension from '@tiptap/extension-link';
+import UnderlineExtension from '@tiptap/extension-underline';
 import { getOCEClient } from '../../lib/sdk';
 
 const SUPPORTED_NODES = new Set([
@@ -21,28 +23,46 @@ const SUPPORTED_NODES = new Set([
   'codeBlock', 'image', 'hardBreak'
 ]);
 
-const cleanContent = (json: any): any => {
-  if (!json) return json;
+const SUPPORTED_MARKS = new Set([
+  'bold', 'italic', 'strike', 'code', 'link', 'underline', 'highlight'
+]);
+
+const cleanContent = (json: any, isRoot = true): any => {
+  if (isRoot) {
+    console.log('[CMS] Raw Editor JSON:', JSON.stringify(json, null, 2));
+    
+    // Quick pass to extract all types
+    const extractTypes = (node: any, types: Set<string>, marks: Set<string>) => {
+      if (!node || typeof node !== 'object') return;
+      if (node.type) types.add(node.type);
+      if (node.marks && Array.isArray(node.marks)) {
+        node.marks.forEach((m: any) => { if (m.type) marks.add(m.type); });
+      }
+      if (node.content && Array.isArray(node.content)) {
+        node.content.forEach((child: any) => extractTypes(child, types, marks));
+      }
+    };
+    
+    const presentNodes = new Set<string>();
+    const presentMarks = new Set<string>();
+    extractTypes(json, presentNodes, presentMarks);
+    
+    console.log('[CMS] Nodes present in payload:', Array.from(presentNodes));
+    console.log('[CMS] Marks present in payload:', Array.from(presentMarks));
+  }
+
+  if (!json) return isRoot ? { type: 'doc', content: [{ type: 'paragraph' }] } : null;
   if (typeof json === 'string') return json;
   if (typeof json !== 'object') return json;
   
-  if (Object.keys(json).length === 0) return json;
+  if (Object.keys(json).length === 0) {
+    return isRoot ? { type: 'doc', content: [{ type: 'paragraph' }] } : null;
+  }
 
   const cleaned = { ...json };
 
-  if (cleaned.type) {
-    if (cleaned.type === 'image' && cleaned.attrs?.src?.startsWith('blob:')) {
-      console.warn(`[CMS] Blob URL detected in saved image. Replacing with placeholder.`);
-      cleaned.attrs = { ...cleaned.attrs, src: 'https://placehold.co/600x400?text=Image+Unavailable' };
-    } else if (!SUPPORTED_NODES.has(cleaned.type)) {
-      console.warn(`[CMS] Unsupported node type found: "${cleaned.type}". Migrating to paragraph.`);
-      if (cleaned.content) {
-        cleaned.type = 'paragraph';
-      } else {
-        return null;
-      }
-    }
-  } else {
+  // Repair missing type
+  if (!cleaned.type) {
     if (cleaned.text) {
       cleaned.type = 'text';
     } else if (cleaned.content) {
@@ -53,8 +73,32 @@ const cleanContent = (json: any): any => {
     }
   }
 
+  // Handle unsupported nodes
+  if (cleaned.type === 'image' && cleaned.attrs?.src?.startsWith('blob:')) {
+    console.warn(`[CMS] Blob URL detected in saved image. Replacing with placeholder.`);
+    cleaned.attrs = { ...cleaned.attrs, src: 'https://placehold.co/600x400?text=Image+Unavailable' };
+  } else if (!SUPPORTED_NODES.has(cleaned.type)) {
+    console.warn(`[CMS] Unsupported node type found: "${cleaned.type}". Migrating to paragraph.`);
+    if (cleaned.content) {
+      cleaned.type = 'paragraph';
+    } else {
+      return null;
+    }
+  }
+
+  // Handle unsupported marks
+  if (cleaned.marks && Array.isArray(cleaned.marks)) {
+    cleaned.marks = cleaned.marks.filter((mark: any) => {
+      if (mark && mark.type && SUPPORTED_MARKS.has(mark.type)) {
+        return true;
+      }
+      console.warn(`[CMS] Unsupported or invalid mark type found:`, mark);
+      return false;
+    });
+  }
+
   if (Array.isArray(cleaned.content)) {
-    cleaned.content = cleaned.content.map(cleanContent).filter(Boolean);
+    cleaned.content = cleaned.content.map((child: any) => cleanContent(child, false)).filter(Boolean);
   }
   
   return cleaned;
@@ -124,15 +168,15 @@ export default function OCEEditor({
       StarterKit.configure({
         heading: {
           levels: [1, 2, 3]
-        },
-        link: {
-          openOnClick: false,
-          HTMLAttributes: {
-            class: 'text-blue-600 hover:underline cursor-pointer',
-          }
-        },
-        underline: {}
+        }
       }),
+      LinkExtension.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: 'text-blue-600 hover:underline cursor-pointer',
+        }
+      }),
+      UnderlineExtension,
       Highlight.configure({
         HTMLAttributes: {
           class: 'bg-yellow-100 text-yellow-900 px-0.5 rounded',
