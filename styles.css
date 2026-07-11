@@ -2436,6 +2436,17 @@ button {
     box-sizing: border-box;
   }
 
+  .section,
+  .glass-card,
+  .glass-card > *,
+  .container > *,
+  main,
+  section {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   /* 2. Fix inline grid layouts across all subpages */
   /* This specifically targets the hardcoded grids in services, about, case-studies */
   div[style*="grid-template-columns: 1.2fr 0.8fr"],
@@ -2450,6 +2461,12 @@ button {
   div[style*="gap: var(--space-4xl)"] { gap: var(--space-2xl) !important; }
   div[style*="gap: var(--space-3xl)"] { gap: var(--space-xl) !important; }
   div[style*="gap: var(--space-2xl)"] { gap: var(--space-lg) !important; }
+
+  [style*="display: grid"] > *,
+  [style*="display:grid"] > * {
+    min-width: 0;
+    max-width: 100%;
+  }
 
   /* Reduce hardcoded padding on cards */
   .glass-card[style*="padding: var(--space-2xl)"],
@@ -2504,7 +2521,7 @@ button {
 
   /* 5. Pricing Cards / Service Grid */
   /* Ensure auto-fit grids don't overflow screen width */
-  div[style*="grid-template-columns: repeat(auto-fit"] {
+  [style*="grid-template-columns: repeat(auto-fit"] {
     grid-template-columns: 1fr !important;
   }
 
@@ -2514,12 +2531,32 @@ button {
     overflow-wrap: break-word;
   }
 
+  .glass-card p,
+  .glass-card li,
+  .glass-card a,
+  .glass-card span,
+  .section-subtitle,
+  .contact-link-card,
+  .dropdown-item {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
   /* Tables responsiveness */
   table {
     display: block;
     width: 100%;
+    max-width: 100%;
     overflow-x: auto;
-    white-space: nowrap;
+    table-layout: fixed;
+    white-space: normal;
+  }
+
+  th,
+  td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 }
 
