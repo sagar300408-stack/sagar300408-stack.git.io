@@ -107,6 +107,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="article-body">
                 ${bodyHTML}
             </div>
+
+            <!-- START CTA MODULE -->
+            <div class="article-cta" style="text-align: center; margin: 4rem auto 6rem; padding: 3rem 2rem; background: var(--bg-card, #f8f9fa); border-radius: 16px; border: 1px solid var(--border-color, #eaeaea); max-width: 720px; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+                <h3 class="gradient-text" style="font-size: 2rem; margin-bottom: 1rem; font-family: 'Outfit', sans-serif; font-weight: 600;">Ready to transform your workflow?</h3>
+                <p style="color: var(--text-secondary, #666); margin-bottom: 2rem; font-size: 1.15rem; line-height: 1.6;">Let's map out your autonomous AI architecture and build a custom solution for your business.</p>
+                <button class="btn btn-primary" data-modal-target="start-project-modal" style="padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 50px; cursor: pointer;">
+                    Start a Project
+                </button>
+            </div>
+            <!-- END CTA MODULE -->
         `;
     }
 
