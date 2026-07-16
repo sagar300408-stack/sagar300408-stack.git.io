@@ -1,24 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('insightsGrid');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    const chips = document.querySelectorAll('.chip');
     
     // In production, this should point to your Vercel URL
     const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3000/api/v1' : '/api/v1';
 
-    let currentFilter = 'all';
-
     async function fetchInsights() {
         showSkeletons();
         try {
-            // Build query params
-            const params = new URLSearchParams();
-            if (currentFilter !== 'all') {
-                params.append('type', currentFilter);
-            }
-
-            const response = await fetch(`${API_BASE}/content?${params.toString()}`);
+            const response = await fetch(`${API_BASE}/content`);
             if (!response.ok) throw new Error('Failed to fetch');
             
             const { data } = await response.json();
@@ -58,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="grid-column: 1/-1; text-align: center; padding: 6rem 2rem; background: rgba(255,255,255,0.07); backdrop-filter: blur(20px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.14);">
                     <i class="fa-solid fa-pen-nib" style="font-size: 3rem; color: var(--text-on-glass-mut); margin-bottom: 1.5rem;"></i>
                     <h3 style="font-family: 'Outfit', sans-serif; font-size: 2rem; color: var(--text-on-glass); margin-bottom: 1rem;">No insights published yet</h3>
-                    <p style="font-size: 1.1rem; color: var(--text-on-glass-sub);">Check back soon for new articles, or select a different category.</p>
+                    <p style="font-size: 1.1rem; color: var(--text-on-glass-sub);">Check back soon for new articles.</p>
                 </div>
             `;
             return;
@@ -87,61 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `}).join('');
     }
-
-    // Global Search Functionality
-    let searchTimeout;
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.trim();
-        
-        clearTimeout(searchTimeout);
-        
-        if (query.length < 2) {
-            searchResults.style.display = 'none';
-            return;
-        }
-
-        searchTimeout = setTimeout(async () => {
-            try {
-                const response = await fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}`);
-                if (!response.ok) throw new Error('Search failed');
-                
-                const { results } = await response.json();
-                
-                if (results.length === 0) {
-                    searchResults.innerHTML = `<div style="padding: 1rem; color: var(--text-on-glass-mut); font-size: 0.9rem;">No results found for "${query}"</div>`;
-                } else {
-                    searchResults.innerHTML = results.map(res => `
-                        <a href="/insights/article.html?slug=${res.slug}" style="display: block; padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.14); text-decoration: none; color: inherit; transition: background 0.2s;">
-                            <div style="font-size: 0.8rem; color: rgba(120, 220, 160, 0.90); font-weight: 600; margin-bottom: 0.25rem; text-transform: uppercase;">${res.type?.slug || 'Insight'}</div>
-                            <div style="font-weight: 500; color: var(--text-on-glass); margin-bottom: 0.25rem;">${res.title}</div>
-                            <div style="font-size: 0.85rem; color: var(--text-on-glass-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${res.excerpt || ''}</div>
-                        </a>
-                    `).join('');
-                }
-                
-                searchResults.style.display = 'block';
-            } catch (error) {
-                console.error('Search error:', error);
-            }
-        }, 300); // 300ms debounce
-    });
-
-    // Close search results on outside click
-    document.addEventListener('click', (e) => {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.style.display = 'none';
-        }
-    });
-
-    // Filter Chips
-    chips.forEach(chip => {
-        chip.addEventListener('click', () => {
-            chips.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            currentFilter = chip.dataset.filter;
-            fetchInsights();
-        });
-    });
 
     // Initial load
     fetchInsights();
