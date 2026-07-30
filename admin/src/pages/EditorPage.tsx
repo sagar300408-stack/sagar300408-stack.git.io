@@ -368,7 +368,7 @@ export default function EditorPage() {
     'max-w-4xl';
 
   return (
-    <div className="h-screen flex flex-col bg-bg-primary overflow-hidden relative">
+    <div className="h-screen h-[100dvh] flex flex-col bg-bg-primary overflow-hidden relative">
       {/* Top Navbar */}
       {!focusMode && (
         <header className="h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-10">
@@ -479,7 +479,7 @@ export default function EditorPage() {
         </div>
       )}
 
-      <div className="flex-1 flex overflow-hidden relative">
+      <div className="flex-1 flex overflow-hidden relative min-h-0">
         {/* Main Editor Area */}
         <main className="flex-1 overflow-y-auto bg-bg-primary flex justify-center">
           <div className={`w-full ${editorWidthClass} py-12 px-6 lg:px-8`}>
@@ -586,7 +586,7 @@ export default function EditorPage() {
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-5 space-y-7">
+            <div className="flex-1 overflow-y-auto p-5 space-y-7 min-h-0">
               
               {/* Publish Section */}
               <section>
