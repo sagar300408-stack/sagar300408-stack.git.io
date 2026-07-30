@@ -368,10 +368,10 @@ export default function EditorPage() {
     'max-w-4xl';
 
   return (
-    <div className="h-screen h-[100dvh] flex flex-col bg-bg-primary overflow-hidden relative">
+    <div className="h-screen h-[100dvh] min-h-0 flex flex-col bg-bg-primary overflow-hidden relative">
       {/* Top Navbar */}
       {!focusMode && (
-        <header className="h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-10">
+        <header className="sticky top-0 h-14 border-b border-border bg-surface px-4 flex items-center justify-between flex-shrink-0 z-40">
           <div className="flex items-center gap-3">
             <button
               onClick={handleBack}
@@ -481,7 +481,7 @@ export default function EditorPage() {
 
       <div className="flex-1 flex overflow-hidden relative min-h-0">
         {/* Main Editor Area */}
-        <main className="flex-1 overflow-y-auto bg-bg-primary flex justify-center">
+        <main className="flex-1 min-h-0 overflow-y-auto overscroll-contain scroll-smooth bg-bg-primary flex justify-center">
           <div className={`w-full ${editorWidthClass} py-12 px-6 lg:px-8`}>
             
             {/* Editor Width Controls */}
@@ -572,11 +572,11 @@ export default function EditorPage() {
         {/* Publish Panel */}
         {!focusMode && (
           <aside className={`
-            absolute inset-y-0 right-0 z-30 w-full md:w-80 bg-surface border-l border-border flex flex-col flex-shrink-0 transition-transform duration-300
-            lg:relative lg:translate-x-0
+            absolute inset-y-0 right-0 z-30 w-full md:w-80 min-h-0 overflow-hidden bg-surface border-l border-border flex flex-col flex-shrink-0 transition-transform duration-300
+            lg:relative lg:h-full lg:translate-x-0
             ${isPublishPanelOpen ? 'translate-x-0' : 'translate-x-full'}
           `}>
-            <div className="p-4 border-b border-border flex items-center justify-between lg:hidden bg-surface">
+            <div className="p-4 border-b border-border flex items-center justify-between flex-shrink-0 lg:hidden bg-surface">
               <h2 className="font-semibold text-text-primary">Publish Panel</h2>
               <button
                 onClick={() => setIsPublishPanelOpen(false)}
@@ -586,7 +586,7 @@ export default function EditorPage() {
               </button>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-5 space-y-7 min-h-0">
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain scroll-smooth p-5 pb-10 space-y-7">
               
               {/* Publish Section */}
               <section>
