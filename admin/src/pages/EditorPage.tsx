@@ -571,11 +571,10 @@ export default function EditorPage() {
 
         {/* Publish Panel */}
         {!focusMode && (
-          <aside className={`
-            absolute inset-y-0 right-0 z-30 w-full md:w-80 min-h-0 overflow-hidden bg-surface border-l border-border flex flex-col flex-shrink-0 transition-transform duration-300
-            lg:relative lg:h-full lg:translate-x-0
-            ${isPublishPanelOpen ? 'translate-x-0' : 'translate-x-full'}
-          `}>
+          <aside
+            style={{ position: 'relative', flexShrink: 0, width: '320px', display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--surface, #fff)', borderLeft: '1px solid var(--border, #e3e3df)', transition: 'transform 300ms', transform: isPublishPanelOpen ? 'translateX(0)' : 'translateX(100%)' }}
+            className="z-30"
+          >
             <div className="p-4 border-b border-border flex items-center justify-between flex-shrink-0 lg:hidden bg-surface">
               <h2 className="font-semibold text-text-primary">Publish Panel</h2>
               <button
@@ -586,7 +585,7 @@ export default function EditorPage() {
               </button>
             </div>
             
-            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain scroll-smooth p-5 pb-10 space-y-7">
+            <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', padding: '20px 20px 40px' }} className="space-y-7">
               
               {/* Publish Section */}
               <section>
