@@ -260,7 +260,8 @@ export default function Dashboard() {
             </button>
             {isDropdownOpen && (
               <div 
-                className="absolute top-full mt-2 right-0 w-[calc(100vw-48px)] sm:w-[320px] lg:w-[380px] bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0_12px_30px_rgba(0,0,0,0.12)] p-4 z-50 animate-dropdown"
+                className="absolute top-full mt-2 bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0_12px_30px_rgba(0,0,0,0.12)] p-4 z-50 animate-dropdown"
+                style={{ right: 0, width: 'min(calc(100vw - 48px), 380px)', transformOrigin: 'top right' }}
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
@@ -274,7 +275,7 @@ export default function Dashboard() {
                     <X size={16} />
                   </button>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid gap-2" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
                   {TEMPLATES.map((tpl, idx) => (
                     <button
                       key={tpl.id}
@@ -291,7 +292,7 @@ export default function Dashboard() {
                     >
                       <span className="text-[1.25rem] leading-none mb-1">{tpl.emoji}</span>
                       <span className="text-[13px] font-medium text-gray-900 leading-tight">{tpl.name}</span>
-                      <span className="text-[11px] text-gray-500 leading-snug line-clamp-1">{tpl.desc}</span>
+                      <span className="text-[11px] text-gray-500 leading-snug line-clamp-1" style={{ display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{tpl.desc}</span>
                     </button>
                   ))}
                 </div>
