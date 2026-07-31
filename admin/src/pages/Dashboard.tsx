@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getOCEClient } from '../lib/sdk'
 import { FileText, Plus, Archive, Edit, Copy, CheckSquare, Square, Search, X, Clock, Eye } from 'lucide-react'
@@ -54,12 +54,69 @@ export default function Dashboard() {
   const [nodes, setNodes] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [selected, setSelected] = useState<string[]>([])
-  const [isTemplateModalOpen, setIsTemplateModalOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('')
   const [bulkLoading, setBulkLoading] = useState(false)
+  const [focusedIndex, setFocusedIndex] = useState(-1)
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const { showToast } = useToast()
+
+  // Click outside and keyboard handling
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isDropdownOpen])
+
+  useEffect(() => {
+    if (!isDropdownOpen) {
+      setFocusedIndex(-1)
+      return
+    }
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setIsDropdownOpen(false)
+        return
+      }
+
+      if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+        e.preventDefault()
+      } else {
+        return
+      }
+
+      setFocusedIndex(prev => {
+        let next = prev === -1 ? 0 : prev
+        const cols = 2
+        const total = TEMPLATES.length
+
+        if (e.key === 'ArrowRight') next = prev + 1
+        if (e.key === 'ArrowLeft') next = prev - 1
+        if (e.key === 'ArrowDown') next = prev + cols
+        if (e.key === 'ArrowUp') next = prev - cols
+
+        if (next < 0) next = 0
+        if (next >= total) next = total - 1
+
+        if (e.key === 'Enter' && prev >= 0 && prev < total) {
+           setIsDropdownOpen(false)
+           navigate('/editor/new', { state: { template: TEMPLATES[prev].id } })
+        }
+        return next
+      })
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isDropdownOpen, navigate])
 
   useEffect(() => {
     loadNodes()
@@ -193,13 +250,54 @@ export default function Dashboard() {
             <option value="Scheduled">Scheduled</option>
             <option value="Archived">Archived</option>
           </select>
-          <button
-            onClick={() => setIsTemplateModalOpen(true)}
-            className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-md hover:bg-accent-light transition-colors font-medium shadow-sm text-sm flex-shrink-0"
-          >
-            <Plus size={17} />
-            New Insight
-          </button>
+          <div className="relative flex-shrink-0" ref={dropdownRef}>
+            <button
+              onClick={() => setIsDropdownOpen(prev => !prev)}
+              className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-md hover:bg-accent-light transition-colors font-medium shadow-sm text-sm"
+            >
+              <Plus size={17} />
+              New Insight
+            </button>
+            {isDropdownOpen && (
+              <div 
+                className="absolute top-full mt-2 right-0 w-[calc(100vw-48px)] sm:w-[320px] lg:w-[380px] bg-white border border-[#E5E7EB] rounded-[10px] shadow-[0_12px_30px_rgba(0,0,0,0.12)] p-4 z-50 animate-dropdown"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900">New Insight</h3>
+                    <p className="text-xs text-gray-500 mt-0.5">Choose a template to get started</p>
+                  </div>
+                  <button 
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {TEMPLATES.map((tpl, idx) => (
+                    <button
+                      key={tpl.id}
+                      onClick={() => {
+                        setIsDropdownOpen(false)
+                        navigate('/editor/new', { state: { template: tpl.id } })
+                      }}
+                      onMouseEnter={() => setFocusedIndex(idx)}
+                      className={`text-left p-[14px] rounded-lg border transition-all duration-[180ms] ease-out flex flex-col gap-1 ${
+                        focusedIndex === idx 
+                          ? 'bg-blue-50 border-blue-500' 
+                          : 'border-transparent hover:bg-[#F8FAFC] hover:border-[#D1D5DB]'
+                      }`}
+                    >
+                      <span className="text-[1.25rem] leading-none mb-1">{tpl.emoji}</span>
+                      <span className="text-[13px] font-medium text-gray-900 leading-tight">{tpl.name}</span>
+                      <span className="text-[11px] text-gray-500 leading-snug line-clamp-1">{tpl.desc}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -378,46 +476,16 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Template Modal */}
-      {isTemplateModalOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={(e) => { if (e.target === e.currentTarget) setIsTemplateModalOpen(false); }}
-        >
-          <div className="bg-surface border border-border rounded-xl shadow-2xl max-w-xl w-full p-6">
-            <div className="flex justify-between items-center mb-5">
-              <div>
-                <h2 className="text-xl font-serif font-semibold text-text-primary">New Insight</h2>
-                <p className="text-sm text-text-secondary mt-0.5">Choose a template to get started</p>
-              </div>
-              <button
-                onClick={() => setIsTemplateModalOpen(false)}
-                className="p-1.5 text-text-muted hover:text-text-primary hover:bg-surface-hover rounded-md transition-colors"
-                aria-label="Close modal"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-3">
-              {TEMPLATES.map(tpl => (
-                <button
-                  key={tpl.id}
-                  onClick={() => {
-                    setIsTemplateModalOpen(false)
-                    navigate('/editor/new', { state: { template: tpl.id } })
-                  }}
-                  className="text-left p-4 border border-border rounded-lg hover:border-accent hover:shadow-md transition-all group"
-                >
-                  <span className="text-2xl mb-2 block">{tpl.emoji}</span>
-                  <h3 className="font-medium text-text-primary group-hover:text-accent text-sm mb-1">{tpl.name}</h3>
-                  <p className="text-xs text-text-secondary leading-relaxed">{tpl.desc}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      <style>{`
+        @keyframes slideDownFade {
+          0% { opacity: 0; transform: translateY(8px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-dropdown {
+          animation: slideDownFade 180ms ease-out forwards;
+        }
+      `}</style>
     </div>
   )
 }
+
