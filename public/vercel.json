@@ -3,6 +3,21 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/assets/(.*)",
+      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "destination": "/app/assets/$1"
+    },
+    {
+      "source": "/(.*\\.(svg|png|ico|webmanifest))",
+      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "destination": "/app/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "destination": "/app/index.html"
+    },
+    {
       "source": "/home",
       "destination": "/index.html"
     },
@@ -18,6 +33,12 @@
   "redirects": [
     {
       "source": "/",
+      "missing": [
+        {
+          "type": "host",
+          "value": "app.originyx.in"
+        }
+      ],
       "destination": "/insights",
       "permanent": false
     }

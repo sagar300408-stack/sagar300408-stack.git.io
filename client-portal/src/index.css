@@ -1,0 +1,16 @@
+/* Import explicit design token classes to ensure styles load even
+   when Tailwind token utilities are missing in production. */
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #fbfbfa;
+    color: #1c1c1c;
+    font-family: Inter, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}

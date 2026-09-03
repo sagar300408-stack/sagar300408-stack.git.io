@@ -43,10 +43,20 @@
 
         // Fetch initial session
         const { data: { session }, error } = await this.client.auth.getSession();
-        if (error) throw error;
         
-        this.session = session;
-        this.user = session ? session.user : null;
+        if (error || !session) {
+          if (this.session || this.user) {
+            this.session = null;
+            this.user = null;
+            this.dispatchStateChange('SIGNED_OUT');
+          } else {
+            this.session = null;
+            this.user = null;
+          }
+        } else {
+          this.session = session;
+          this.user = session ? session.user : null;
+        }
 
         // Listen for session/auth state changes
         this.client.auth.onAuthStateChange((event, currentSession) => {
@@ -54,7 +64,12 @@
           this.user = currentSession ? currentSession.user : null;
           this.dispatchStateChange(event);
         });
-        this.dispatchStateChange('INITIAL');
+        
+        if (!error && session) {
+            this.dispatchStateChange('INITIAL');
+        } else {
+            this.dispatchStateChange(); // Just dispatch configured state
+        }
 
       } catch (err) {
         console.error('Authentication Initialization Error:', err);

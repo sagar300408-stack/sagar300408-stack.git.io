@@ -123,6 +123,25 @@
         gap: var(--space-xl);
         margin-bottom: var(--space-2xl);
       }
+
+      .about-page-grid,
+      .about-page-grid > *,
+      .about-content,
+      .about-sidebar,
+      .about-grid-principles,
+      .about-grid-principles > *,
+      .consulting-guide-grid,
+      .consulting-guide-grid > *,
+      .about-cta,
+      #ai-summary-block,
+      #quick-facts-block,
+      .table-responsive,
+      .table-responsive table {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+      }
       
       .about-grid-principles {
         grid-template-columns: 1fr;
@@ -135,6 +154,35 @@
       
       .glass-card {
         padding: var(--space-lg) !important;
+      }
+
+      .table-responsive {
+        overflow-x: hidden;
+      }
+
+      .table-responsive.comparison-table table {
+        min-width: 0;
+      }
+
+      .table-responsive table {
+        table-layout: fixed;
+      }
+
+      .table-responsive th,
+      .table-responsive td {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: normal;
+      }
+
+      .about-page-grid p,
+      .about-page-grid li,
+      .about-page-grid h2,
+      .about-page-grid h3,
+      .about-page-grid h4,
+      .about-hero,
+      .about-cta {
+        overflow-wrap: anywhere;
       }
     }
     

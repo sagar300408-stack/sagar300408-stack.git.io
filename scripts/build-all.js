@@ -17,7 +17,7 @@ function assemblePublic() {
     mkdirSync(out, { recursive: true })
   } catch (e) {}
 
-  const skip = new Set(['admin', 'node_modules', '.git', 'public', 'scripts', 'api'])
+  const skip = new Set(['admin', 'client-portal', 'node_modules', '.git', 'public', 'scripts', 'api'])
   const names = fs.readdirSync(root)
   for (const name of names) {
     if (skip.has(name)) continue
@@ -45,12 +45,26 @@ function assemblePublic() {
     console.error('Failed to copy admin/dist:', e.message)
     process.exit(1)
   }
+
+  const portalDist = path.join(root, 'client-portal', 'dist')
+  const targetPortal = path.join(out, 'app')
+  try {
+    cpSync(portalDist, targetPortal, { recursive: true })
+    console.log('Copied client-portal/dist -> public/app')
+  } catch (e) {
+    console.error('Failed to copy client-portal/dist:', e.message)
+    process.exit(1)
+  }
 }
 
 async function main() {
   try {
     runCmd('npm --prefix admin install')
     runCmd('npm --prefix admin run build')
+    
+    runCmd('npm --prefix client-portal install')
+    runCmd('npm --prefix client-portal run build')
+    
     assemblePublic()
     console.log('Public assembled successfully')
   } catch (e) {
