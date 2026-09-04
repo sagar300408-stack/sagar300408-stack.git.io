@@ -483,8 +483,8 @@ let instance: OCEClient | null = null;
 export function getOCEClient(): OCEClient {
   if (!instance) {
     instance = new OCEClient({
-      supabaseUrl: import.meta.env.VITE_SUPABASE_URL || '',
-      supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || '',
+      supabaseUrl: import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL || '',
+      supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.SUPABASE_ANON_KEY || '',
     });
   }
   return instance;

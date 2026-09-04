@@ -29,7 +29,7 @@ export default function MediaLibrary() {
     try {
       setLoading(true);
       const data = await sdk.listMedia('general');
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
       const mapped = data?.map((file: any) => ({
         id: file.id || file.name,
         name: file.name,

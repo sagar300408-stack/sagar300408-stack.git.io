@@ -6,4 +6,5 @@ export default defineConfig({
   plugins: [react()],
   base: '/',
   envDir: '../',
+  envPrefix: ['VITE_', 'SUPABASE_URL', 'SUPABASE_ANON_KEY'],
 })

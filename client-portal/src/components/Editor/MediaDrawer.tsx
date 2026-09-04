@@ -30,7 +30,7 @@ export default function MediaDrawer({ isOpen, onClose, onSelectImage }: MediaDra
     try {
       setLoadingMedia(true);
       const data = await sdk.listMedia('general');
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
       const mapped = (data || [])
         .filter((f: any) => f.name && f.name !== '.emptyFolderPlaceholder')
         .map((f: any) => ({
