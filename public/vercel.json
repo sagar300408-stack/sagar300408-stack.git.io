@@ -3,14 +3,19 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
-      "source": "/assets/(.*)",
+      "source": "/assets/:path*",
       "has": [{ "type": "host", "value": "app.originyx.in" }],
-      "destination": "/app/assets/$1"
+      "destination": "/app/assets/:path*"
     },
     {
-      "source": "/(.*\\.(svg|png|ico|webmanifest))",
+      "source": "/favicon.svg",
       "has": [{ "type": "host", "value": "app.originyx.in" }],
-      "destination": "/app/$1"
+      "destination": "/app/favicon.svg"
+    },
+    {
+      "source": "/icons.svg",
+      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "destination": "/app/icons.svg"
     },
     {
       "source": "/(.*)",
