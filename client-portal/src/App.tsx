@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import SidebarLayout from './components/Layout/SidebarLayout';
+import TopNavLayout from './components/Layout/TopNavLayout';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { ToastProvider } from './components/Layout/ToastProvider';
 import './App.css';
@@ -41,9 +41,9 @@ export default function App() {
               path="/dashboard"
               element={
                 <Protected>
-                  <SidebarLayout>
+                  <TopNavLayout>
                     <Dashboard />
-                  </SidebarLayout>
+                  </TopNavLayout>
                 </Protected>
               }
             />
@@ -52,9 +52,9 @@ export default function App() {
               path="/account"
               element={
                 <Protected>
-                  <SidebarLayout>
+                  <TopNavLayout>
                     <Profile />
-                  </SidebarLayout>
+                  </TopNavLayout>
                 </Protected>
               }
             />
