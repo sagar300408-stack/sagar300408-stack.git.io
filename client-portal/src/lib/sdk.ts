@@ -130,24 +130,44 @@ export class OCEClient {
     const { data: { user } } = await this.supabase.auth.getUser();
     if (!user) return null;
 
-    // Check if user has an organization linked
+    // Fetch user role and full organization data
     const { data: roleData } = await this.supabase
       .from('user_roles')
-      .select('org_id, organizations(name)')
+      .select('org_id, organizations(*)')
       .eq('user_id', user.id)
       .limit(1)
       .maybeSingle();
 
+    const org = roleData?.organizations as any || {};
+
     return {
       name: user.user_metadata?.full_name || '',
-      company: (roleData?.organizations as any)?.name || '',
       role: user.user_metadata?.job_title || '',
       email: user.email || '',
-      isComplete: !!(user.user_metadata?.full_name && (roleData?.organizations as any)?.name)
+      org_id: org.id || null,
+      company: org.name || '',
+      website: org.website || '',
+      industry: org.industry || '',
+      company_size: org.company_size || '',
+      business_phone: org.phone || '',
+      business_email: org.email || '',
+      description: org.description || '',
+      products_services: org.products_services || '',
+      target_market: org.target_market || '',
+      business_model: org.business_model || '',
+      growth_stage: org.growth_stage || '',
+      business_goals: org.business_goals || '',
+      address_line1: org.address_line1 || '',
+      address_line2: org.address_line2 || '',
+      city: org.city || '',
+      state: org.state || '',
+      postal_code: org.postal_code || '',
+      country: org.country || '',
+      isComplete: !!(user.user_metadata?.full_name && org.name)
     };
   }
   
-  async updateClientProfile(payload: { name: string; role: string; company: string }) {
+  async updateClientProfile(payload: any) {
     const { data: { user } } = await this.supabase.auth.getUser();
     if (!user) throw new Error('Not authenticated');
 
@@ -161,21 +181,47 @@ export class OCEClient {
     if (authError) throw authError;
 
     // 2. Handle Company (Organization)
-    // For V1: If they don't have a company, we create an organization and link them.
-    // If they do have a company, we just verify they are linked (we do NOT rename the organization, as others might be in it).
     const { data: existingRole } = await this.supabase
       .from('user_roles')
-      .select('org_id, organizations(name)')
+      .select('org_id, organizations(*)')
       .eq('user_id', user.id)
       .limit(1)
       .maybeSingle();
 
-    if (!existingRole && payload.company.trim()) {
-      // Create organization
+    const orgPayload = {
+      name: payload.company?.trim() || '',
+      website: payload.website?.trim() || null,
+      industry: payload.industry?.trim() || null,
+      company_size: payload.company_size?.trim() || null,
+      phone: payload.business_phone?.trim() || null,
+      email: payload.business_email?.trim() || null,
+      description: payload.description?.trim() || null,
+      products_services: payload.products_services?.trim() || null,
+      target_market: payload.target_market?.trim() || null,
+      business_model: payload.business_model?.trim() || null,
+      growth_stage: payload.growth_stage?.trim() || null,
+      business_goals: payload.business_goals?.trim() || null,
+      address_line1: payload.address_line1?.trim() || null,
+      address_line2: payload.address_line2?.trim() || null,
+      city: payload.city?.trim() || null,
+      state: payload.state?.trim() || null,
+      postal_code: payload.postal_code?.trim() || null,
+      country: payload.country?.trim() || null,
+    };
+
+    if (existingRole && existingRole.org_id) {
+      // Update existing organization
+      const { error: orgError } = await this.supabase
+        .from('organizations')
+        .update(orgPayload)
+        .eq('id', existingRole.org_id);
+      if (orgError) throw orgError;
+    } else if (payload.company?.trim()) {
+      // Create new organization
       const slug = payload.company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now();
       const { data: newOrg, error: orgError } = await this.supabase
         .from('organizations')
-        .insert({ name: payload.company.trim(), slug })
+        .insert({ ...orgPayload, slug })
         .select()
         .single();
       
@@ -187,7 +233,7 @@ export class OCEClient {
         .insert({
           user_id: user.id,
           org_id: newOrg.id,
-          role: 'owner' // They own the newly created client workspace
+          role: 'owner'
         });
       
       if (roleError) throw roleError;

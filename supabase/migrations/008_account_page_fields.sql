@@ -1,0 +1,19 @@
+-- Add company profile fields to organizations table
+ALTER TABLE public.organizations
+  ADD COLUMN IF NOT EXISTS website TEXT,
+  ADD COLUMN IF NOT EXISTS industry TEXT,
+  ADD COLUMN IF NOT EXISTS company_size TEXT,
+  ADD COLUMN IF NOT EXISTS phone TEXT,
+  ADD COLUMN IF NOT EXISTS email TEXT,
+  ADD COLUMN IF NOT EXISTS description TEXT,
+  ADD COLUMN IF NOT EXISTS products_services TEXT,
+  ADD COLUMN IF NOT EXISTS target_market TEXT,
+  ADD COLUMN IF NOT EXISTS business_model TEXT,
+  ADD COLUMN IF NOT EXISTS growth_stage TEXT,
+  ADD COLUMN IF NOT EXISTS business_goals TEXT,
+  ADD COLUMN IF NOT EXISTS address_line1 TEXT,
+  ADD COLUMN IF NOT EXISTS address_line2 TEXT,
+  ADD COLUMN IF NOT EXISTS city TEXT,
+  ADD COLUMN IF NOT EXISTS state TEXT,
+  ADD COLUMN IF NOT EXISTS postal_code TEXT,
+  ADD COLUMN IF NOT EXISTS country TEXT;
