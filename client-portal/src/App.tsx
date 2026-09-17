@@ -40,11 +40,9 @@ export default function App() {
             <Route
               path="/dashboard"
               element={
-                <Protected>
-                  <SidebarLayout>
-                    <Dashboard />
-                  </SidebarLayout>
-                </Protected>
+                <SidebarLayout>
+                  <Dashboard />
+                </SidebarLayout>
               }
             />
             

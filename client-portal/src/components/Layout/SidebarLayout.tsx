@@ -174,90 +174,121 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
               Overview
             </NavLink>
             
-            <NavLink
-              to="/account"
-              className={isCurrent('/account') ? 'nav-item active' : 'nav-item'}
-            >
-              <User size={18} color={isCurrent('/account') ? '#244235' : '#787875'} strokeWidth={1.75} />
-              Account
-            </NavLink>
+            {user && (
+              <NavLink
+                to="/account"
+                className={isCurrent('/account') ? 'nav-item active' : 'nav-item'}
+              >
+                <User size={18} color={isCurrent('/account') ? '#244235' : '#787875'} strokeWidth={1.75} />
+                Account
+              </NavLink>
+            )}
           </nav>
 
           {/* Bottom User Area */}
           <div className="sidebar-bottom">
-            {/* User Profile */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: '#f5f5f2',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  color: '#244235',
-                  flexShrink: 0,
-                  border: '1px solid #e8e8e5'
-                }}
-              >
-                {getInitials(user?.email || '')}
-              </div>
-              <div style={{ overflow: 'hidden' }}>
-                <p
-                  style={{
-                    fontSize: '15px',
-                    fontWeight: 600,
-                    color: '#1c1c1c',
-                    margin: 0,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {user?.user_metadata?.full_name || user?.email?.split('@')[0].split('.').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ') || 'User'}
-                </p>
-                <p
-                  style={{
-                    fontSize: '13px',
-                    color: '#787875',
-                    margin: 0,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {user?.email}
-                </p>
-              </div>
-            </div>
+            {user ? (
+              <>
+                {/* User Profile */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      backgroundColor: '#f5f5f2',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      color: '#244235',
+                      flexShrink: 0,
+                      border: '1px solid #e8e8e5'
+                    }}
+                  >
+                    {getInitials(user?.email || '')}
+                  </div>
+                  <div style={{ overflow: 'hidden' }}>
+                    <p
+                      style={{
+                        fontSize: '15px',
+                        fontWeight: 600,
+                        color: '#1c1c1c',
+                        margin: 0,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {user?.user_metadata?.full_name || user?.email?.split('@')[0].split('.').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ') || 'User'}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: '13px',
+                        color: '#787875',
+                        margin: 0,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {user?.email}
+                    </p>
+                  </div>
+                </div>
 
-            {/* Sign Out Button */}
-            <button
-              onClick={handleSignOut}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '10px 14px',
-                backgroundColor: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                color: '#787875',
-                fontSize: '14px',
-                fontWeight: 600,
-                borderRadius: '8px',
-                transition: 'all 0.2s',
-                width: 'fit-content'
-              }}
-              onMouseOver={(e) => { e.currentTarget.style.color = '#1c1c1c'; e.currentTarget.style.backgroundColor = '#f5f5f2'; }}
-              onMouseOut={(e) => { e.currentTarget.style.color = '#787875'; e.currentTarget.style.backgroundColor = 'transparent'; }}
-            >
-              <LogOut size={16} strokeWidth={2} />
-              Sign Out
-            </button>
+                {/* Sign Out Button */}
+                <button
+                  onClick={handleSignOut}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '10px 14px',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#787875',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    borderRadius: '8px',
+                    transition: 'all 0.2s',
+                    width: 'fit-content'
+                  }}
+                  onMouseOver={(e) => { e.currentTarget.style.color = '#1c1c1c'; e.currentTarget.style.backgroundColor = '#f5f5f2'; }}
+                  onMouseOut={(e) => { e.currentTarget.style.color = '#787875'; e.currentTarget.style.backgroundColor = 'transparent'; }}
+                >
+                  <LogOut size={16} strokeWidth={2} />
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <NavLink
+                  to="/login"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%',
+                    padding: '12px',
+                    backgroundColor: '#244235',
+                    color: '#ffffff',
+                    fontSize: '15px',
+                    fontWeight: 500,
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    textAlign: 'center',
+                    transition: 'background-color 0.2s'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a3026'}
+                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#244235'}
+                >
+                  Sign In
+                </NavLink>
+              </div>
+            )}
           </div>
         </aside>
 

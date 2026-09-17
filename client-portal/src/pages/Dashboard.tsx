@@ -1,318 +1,447 @@
+import { useState, useEffect } from 'react';
+import { getOCEClient } from '../lib/sdk';
 import { useAuth } from '../lib/AuthContext';
-import { PackageOpen, Lock, Zap, ShieldCheck } from 'lucide-react';
+import { PackageOpen, CreditCard, ChevronRight, ShieldCheck, User as UserIcon } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const [profile, setProfile] = useState<any>(null);
   
-  // Extract first name for the personalized greeting
-  const firstName = user?.email 
-    ? user.email.split('@')[0].split('.')[0].replace(/^\w/, c => c.toUpperCase())
-    : 'Client';
+  useEffect(() => {
+    if (user) {
+      getOCEClient().getClientProfile().then(data => {
+        if (data) setProfile(data);
+      }).catch(() => {});
+    }
+  }, [user]);
+
+  const userName = user?.user_metadata?.full_name 
+    || user?.email?.split('@')[0].split('.').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ') 
+    || 'User';
 
   return (
-    <div style={{ padding: '0 40px 60px 40px', fontFamily: 'Inter, sans-serif' }}>
-      
-      {/* ─── Hero Section ─── */}
-      <div 
-        style={{ 
-          display: 'flex', 
-          height: '320px', 
-          backgroundColor: '#f5f5f2', 
-          borderRadius: '16px',
-          overflow: 'hidden',
-          marginBottom: '40px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
-        }}
-      >
-        {/* Left: Text Content */}
-        <div 
-          style={{ 
-            flex: '1 1 45%', 
-            padding: '50px', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            justifyContent: 'center',
-            backgroundColor: '#fbfbfa'
-          }}
-        >
-          <p 
-            style={{ 
-              fontFamily: 'JetBrains Mono, monospace', 
-              fontSize: '10px', 
-              fontWeight: 700, 
-              letterSpacing: '0.15em', 
-              color: '#787875', 
-              textTransform: 'uppercase', 
-              marginBottom: '16px' 
-            }}
-          >
-            Client Workspace
-          </p>
-          <h1 
-            style={{ 
-              fontFamily: 'Lora, serif', 
-              fontSize: '3.2rem', 
-              fontWeight: 400, 
-              color: '#1c1c1c', 
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-              marginBottom: '16px' 
-            }}
-          >
-            Welcome back,<br />
-            <span style={{ fontStyle: 'italic', color: '#244235' }}>{firstName}.</span>
-          </h1>
-          <p style={{ fontSize: '15px', color: '#4a4a4a', lineHeight: 1.6, maxWidth: '400px' }}>
-            Your private Originyx workspace. Access the tools, automation endpoints, and resources available to your organization.
-          </p>
-        </div>
+    <>
+      <style>{`
+        .overview-container {
+          padding: 60px 80px;
+          max-width: 1200px;
+          margin: 0 auto;
+          width: 100%;
+          font-family: Calibri, 'Segoe UI', sans-serif;
+        }
 
-        {/* Right: Hero Image & Overlays */}
-        <div 
-          style={{ 
-            flex: '1 1 55%', 
-            position: 'relative',
-            backgroundImage: 'url("/client-dashboard.png")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          {/* Subtle gradient overlay to ensure text is readable but image remains bright */}
-          <div 
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to right, rgba(251,251,250,0.4) 0%, rgba(251,251,250,0) 20%), linear-gradient(to left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%)',
-            }}
-          />
+        /* Hero Section */
+        .hero-banner {
+          position: relative;
+          width: 100%;
+          border-radius: 16px;
+          overflow: hidden;
+          background-color: #1a1a1a;
+          margin-bottom: 48px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+          display: flex;
+          min-height: 280px;
+        }
+        .hero-banner-content {
+          flex: 1;
+          padding: 60px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          position: relative;
+          z-index: 10;
+        }
+        .hero-banner-image {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 60%;
+          background-image: url('/client-dashboard.png');
+          background-size: cover;
+          background-position: right center;
+          mask-image: linear-gradient(to right, transparent, black 40%);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+        }
+        .hero-eyebrow {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          color: rgba(255, 255, 255, 0.7);
+          text-transform: uppercase;
+          margin: 0 0 12px 0;
+        }
+        .hero-title {
+          font-family: 'Lora', serif;
+          font-size: 2.75rem;
+          font-weight: 400;
+          color: #ffffff;
+          line-height: 1.1;
+          margin: 0 0 16px 0;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .hero-desc {
+          font-size: 17px;
+          color: rgba(255, 255, 255, 0.85);
+          max-width: 440px;
+          line-height: 1.5;
+          margin: 0;
+        }
 
-          {/* Left floating text */}
-          <div style={{ position: 'absolute', left: '40px', top: '50px', zIndex: 2 }}>
-            <p
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '8px',
-                fontWeight: 700,
-                letterSpacing: '0.15em',
-                color: 'rgba(255,255,255,0.8)',
-                textTransform: 'uppercase',
-                lineHeight: 1.8,
-              }}
-            >
-              Partnering<br />for a more<br />efficient<br />tomorrow
+        /* Grid Layout */
+        .overview-grid {
+          display: grid;
+          grid-template-columns: 1fr 340px;
+          gap: 40px;
+        }
+
+        /* Cards */
+        .o-card {
+          background-color: #ffffff;
+          border: 1px solid #e8e8e5;
+          border-radius: 12px;
+          padding: 40px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.015);
+          display: flex;
+          flex-direction: column;
+        }
+        .o-card-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+        .o-card-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background-color: #f5f5f2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .o-card-title {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #1c1c1c;
+          margin: 0;
+        }
+
+        /* Explore Products Section */
+        .explore-banner {
+          background: linear-gradient(135deg, #244235 0%, #172a22 100%);
+          border-radius: 12px;
+          padding: 40px;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 40px;
+          margin-bottom: 40px;
+          box-shadow: 0 4px 15px rgba(36, 66, 53, 0.1);
+        }
+        .explore-banner-content h3 {
+          font-family: 'Lora', serif;
+          font-size: 1.75rem;
+          font-weight: 400;
+          margin: 0 0 12px 0;
+        }
+        .explore-banner-content p {
+          font-size: 16px;
+          color: rgba(255,255,255,0.85);
+          margin: 0;
+          max-width: 500px;
+          line-height: 1.5;
+        }
+        .btn-primary-white {
+          background-color: #ffffff;
+          color: #244235;
+          font-family: Calibri, 'Segoe UI', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          padding: 12px 24px;
+          border-radius: 8px;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s;
+          white-space: nowrap;
+          border: none;
+          cursor: pointer;
+        }
+        .btn-primary-white:hover {
+          background-color: #f5f5f2;
+        }
+
+        /* Empty States */
+        .empty-state {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 32px 0 16px 0;
+        }
+        .empty-state-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: #1c1c1c;
+          margin: 0 0 8px 0;
+        }
+        .empty-state-desc {
+          font-size: 15px;
+          color: #787875;
+          margin: 0 0 24px 0;
+          line-height: 1.5;
+          max-width: 400px;
+        }
+        .btn-text {
+          font-family: Calibri, 'Segoe UI', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          color: #244235;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .btn-text:hover {
+          color: #1a3026;
+          text-decoration: underline;
+        }
+
+        /* Account Snapshot */
+        .snapshot-item {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          margin-bottom: 20px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #f5f5f2;
+        }
+        .snapshot-item:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+        .snapshot-label {
+          font-size: 13px;
+          color: #787875;
+        }
+        .snapshot-value {
+          font-size: 15px;
+          font-weight: 500;
+          color: #1c1c1c;
+        }
+
+        @media (max-width: 1100px) {
+          .overview-grid {
+            grid-template-columns: 1fr;
+          }
+          .explore-banner {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .overview-container {
+            padding: 32px 24px;
+          }
+          .hero-banner {
+            min-height: 220px;
+          }
+          .hero-banner-content {
+            padding: 40px;
+          }
+          .hero-title {
+            font-size: 2.25rem;
+          }
+          .hero-banner-image {
+            width: 80%;
+          }
+        }
+      `}</style>
+
+      <div className="overview-container">
+        {/* ─── Hero Banner ─── */}
+        <div className="hero-banner">
+          <div className="hero-banner-image" />
+          <div className="hero-banner-content">
+            <p className="hero-eyebrow">
+              {user ? 'Client Workspace' : 'Originyx Workspace'}
             </p>
-            <div style={{ marginTop: '8px', width: '20px', height: '1.5px', backgroundColor: 'rgba(255,255,255,0.5)' }} />
-          </div>
-
-          {/* Right floating text */}
-          <div style={{ position: 'absolute', right: '40px', top: '50px', textAlign: 'right', zIndex: 2 }}>
-            <h2
-              style={{
-                fontFamily: 'Lora, serif',
-                fontSize: '2rem',
-                fontWeight: 400,
-                lineHeight: 1.15,
-                letterSpacing: '-0.01em',
-                color: '#ffffff',
-                textShadow: '0 2px 10px rgba(0,0,0,0.5)'
-              }}
-            >
-              Smarter<br />Operations<br />Brighter<br />Growth
-            </h2>
-            <div style={{ marginTop: '12px', marginLeft: 'auto', width: '24px', height: '1.5px', backgroundColor: 'rgba(255,255,255,0.5)' }} />
+            <h1 className="hero-title">
+              {user ? `Welcome back, ${userName}.` : 'Welcome to Originyx.'}
+            </h1>
+            <p className="hero-desc">
+              {user 
+                ? 'Your Originyx workspace for discovering products, managing your subscriptions, and accessing the tools available to your organization.'
+                : 'Discover the tools and solutions built by Originyx for growing businesses.'}
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* ─── Empty State Card ─── */}
-      <div 
-        style={{ 
-          backgroundColor: '#ffffff',
-          borderRadius: '16px',
-          border: '1px solid #e8e8e5',
-          padding: '60px 40px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          marginBottom: '40px',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.02)'
-        }}
-      >
-        <div 
-          style={{ 
-            width: '48px', 
-            height: '48px', 
-            borderRadius: '50%', 
-            backgroundColor: '#f5f5f2', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            marginBottom: '24px'
-          }}
-        >
-          <PackageOpen size={20} color="#244235" strokeWidth={1.5} />
-        </div>
-        
-        <h3 
-          style={{ 
-            fontFamily: 'Lora, serif', 
-            fontSize: '1.75rem', 
-            fontWeight: 400, 
-            color: '#1c1c1c', 
-            marginBottom: '12px' 
-          }}
-        >
-          No active resources
-        </h3>
-        
-        <p style={{ fontSize: '14px', color: '#4a4a4a', maxWidth: '380px', lineHeight: 1.6, marginBottom: '40px' }}>
-          There are no applications, workflows, or automation endpoints currently assigned to this workspace.
-        </p>
-
-        {/* Divider with Crosshair icon */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px', width: '100%', maxWidth: '320px' }}>
-          <div style={{ flex: 1, height: '1px', backgroundColor: '#e8e8e5' }} />
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#244235" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="22" y1="12" x2="18" y2="12"></line>
-            <line x1="6" y1="12" x2="2" y2="12"></line>
-            <line x1="12" y1="6" x2="12" y2="2"></line>
-            <line x1="12" y1="22" x2="12" y2="18"></line>
-          </svg>
-          <div style={{ flex: 1, height: '1px', backgroundColor: '#e8e8e5' }} />
+        {/* ─── Explore Products Entry Point ─── */}
+        <div className="explore-banner">
+          <div className="explore-banner-content">
+            <h3>Explore Originyx Products</h3>
+            <p>Discover tools designed to help businesses improve their operations, efficiency, and growth.</p>
+          </div>
+          {/* We use a button with onClick since the catalog route doesn't exist yet */}
+          <button 
+            className="btn-primary-white"
+            onClick={() => alert("Product catalog coming soon.")}
+          >
+            Explore Products <ChevronRight size={18} strokeWidth={2.5} />
+          </button>
         </div>
 
-        <p 
-          style={{ 
-            fontFamily: 'JetBrains Mono, monospace', 
-            fontSize: '9px', 
-            fontWeight: 700, 
-            letterSpacing: '0.15em', 
-            color: '#787875', 
-            textTransform: 'uppercase',
-            marginBottom: '8px'
-          }}
-        >
-          Your workspace is ready
-        </p>
-        <p style={{ fontSize: '12px', color: '#787875', maxWidth: '300px' }}>
-          When Originyx assigns resources to your organization, they will appear here.
-        </p>
-      </div>
+        <div className="overview-grid">
+          {/* Main Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+            
+            {/* ─── My Products ─── */}
+            <div className="o-card">
+              <div className="o-card-header">
+                <div className="o-card-icon">
+                  <PackageOpen size={18} color="#4a4a4a" />
+                </div>
+                <h2 className="o-card-title">My Products</h2>
+              </div>
+              
+              {user ? (
+                <div className="empty-state">
+                  <p className="empty-state-title">Your products will appear here.</p>
+                  <p className="empty-state-desc">
+                    You currently have no purchased or assigned products. Explore Originyx products to find the right tools for your business.
+                  </p>
+                  <button 
+                    className="btn-text" 
+                    onClick={() => alert("Product catalog coming soon.")}
+                  >
+                    Explore Products <ChevronRight size={16} />
+                  </button>
+                </div>
+              ) : (
+                <div className="empty-state">
+                  <p className="empty-state-title">Sign in to view your products.</p>
+                  <p className="empty-state-desc">
+                    Access your purchased applications and resources by signing into your organization's account.
+                  </p>
+                  <NavLink to="/login" className="btn-text">
+                    Sign In <ChevronRight size={16} />
+                  </NavLink>
+                </div>
+              )}
+            </div>
 
-      {/* ─── Bottom Feature Strip ─── */}
-      <div 
-        style={{ 
-          backgroundColor: '#ffffff',
-          borderRadius: '16px',
-          border: '1px solid #e8e8e5',
-          overflow: 'hidden'
-        }}
-      >
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-          {[
-            {
-              Icon: Lock,
-              cat: 'Private',
-              title: 'Client Access',
-              desc: 'Your workspace is private and accessible only to your organization.',
-            },
-            {
-              Icon: Zap,
-              cat: 'Direct',
-              title: 'Originyx Channel',
-              desc: 'Work directly with Originyx to access your solutions and resources.',
-            },
-            {
-              Icon: ShieldCheck,
-              cat: 'Secure',
-              title: 'Workspace Isolation',
-              desc: 'Your data and resources are protected with enterprise-grade security.',
-            },
-          ].map((item, i) => (
-            <div
-              key={item.title}
-              style={{
-                padding: '32px 36px',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '16px',
-                borderLeft: i > 0 ? '1px solid #e8e8e5' : 'none',
-              }}
-            >
+            {/* ─── Subscription Summary ─── */}
+            <div className="o-card">
+              <div className="o-card-header">
+                <div className="o-card-icon">
+                  <CreditCard size={18} color="#4a4a4a" />
+                </div>
+                <h2 className="o-card-title">Subscriptions</h2>
+              </div>
+              
+              {user ? (
+                <div className="empty-state">
+                  <p className="empty-state-title">No active subscriptions.</p>
+                  <p className="empty-state-desc">
+                    Your purchased plans and billing information will appear here once you subscribe to a product.
+                  </p>
+                  <button 
+                    className="btn-text"
+                    onClick={() => alert("Product catalog coming soon.")}
+                  >
+                    Explore Products <ChevronRight size={16} />
+                  </button>
+                </div>
+              ) : (
+                <div className="empty-state">
+                  <p className="empty-state-title">Manage your subscriptions.</p>
+                  <p className="empty-state-desc">
+                    Sign in to view and manage your active plans, billing details, and subscription renewals.
+                  </p>
+                  <NavLink to="/login" className="btn-text">
+                    Sign In <ChevronRight size={16} />
+                  </NavLink>
+                </div>
+              )}
+            </div>
+
+          </div>
+
+          {/* Side Column (Account Snapshot) */}
+          {user && (
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="o-card" style={{ padding: '32px' }}>
+                <div className="o-card-header" style={{ marginBottom: '24px' }}>
+                  <div className="o-card-icon">
+                    <UserIcon size={18} color="#4a4a4a" />
+                  </div>
+                  <h2 className="o-card-title">Account Snapshot</h2>
+                </div>
+                
+                <div>
+                  <div className="snapshot-item">
+                    <span className="snapshot-label">Organization</span>
+                    <span className="snapshot-value">
+                      {profile?.company || 'No organization linked'}
+                    </span>
+                  </div>
+                  <div className="snapshot-item">
+                    <span className="snapshot-label">Your Role</span>
+                    <span className="snapshot-value">
+                      {profile?.role || 'Member'}
+                    </span>
+                  </div>
+                  <div className="snapshot-item">
+                    <span className="snapshot-label">Purchased Products</span>
+                    <span className="snapshot-value">0</span>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid #e8e8e5' }}>
+                  <NavLink to="/account" className="btn-text" style={{ fontSize: '14px' }}>
+                    Manage Account Settings <ChevronRight size={14} />
+                  </NavLink>
+                </div>
+              </div>
+
+              {/* Trust/Support block below snapshot */}
               <div 
                 style={{ 
-                  width: '36px', 
-                  height: '36px', 
-                  borderRadius: '50%', 
+                  marginTop: '24px', 
+                  padding: '24px', 
                   backgroundColor: '#f5f5f2', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  flexShrink: 0
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '12px'
                 }}
               >
-                <item.Icon size={16} color="#4a4a4a" strokeWidth={1.5} />
-              </div>
-              <div>
-                <p
-                  style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '9px',
-                    fontWeight: 700,
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: '#787875',
-                    marginBottom: '4px',
-                  }}
-                >
-                  {item.cat}
-                </p>
-                <h4
-                  style={{
-                    fontFamily: 'Lora, serif',
-                    fontSize: '1.15rem',
-                    fontWeight: 400,
-                    color: '#1c1c1c',
-                    marginBottom: '6px',
-                  }}
-                >
-                  {item.title}
-                </h4>
-                <p style={{ fontSize: '13px', color: '#4a4a4a', lineHeight: 1.5 }}>
-                  {item.desc}
-                </p>
+                <ShieldCheck size={18} color="#787875" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div>
+                  <p style={{ fontSize: '13px', fontWeight: 600, color: '#4a4a4a', margin: '0 0 4px 0' }}>Secure Workspace</p>
+                  <p style={{ fontSize: '13px', color: '#787875', margin: 0, lineHeight: 1.5 }}>
+                    Your organization data and subscriptions are private and encrypted.
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Footer bar */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '16px 36px',
-            borderTop: '1px solid #e8e8e5',
-          }}
-        >
-          <p style={{ fontSize: '12px', color: '#787875' }}>© 2026 Originyx. All rights reserved.</p>
-          <p
-            style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: '#787875',
-            }}
-          >
-            People + Process + Possibilities
-          </p>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
