@@ -1,27 +1,25 @@
 import type { ReactNode } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../../lib/AuthContext';
-import { Home, User, LogOut, ExternalLink } from 'lucide-react';
+import { Home, User, LogOut, ExternalLink, Box, Grid, CreditCard, Receipt } from 'lucide-react';
 
 interface SidebarLayoutProps {
   children: ReactNode;
 }
 
 export default function SidebarLayout({ children }: SidebarLayoutProps) {
-  const { user, signOut } = useAuth();
-  const navigate = useNavigate();
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
-  };
-
+  const isCurrent = (path: string) => location.pathname === path;
+  
   const getInitials = (email: string) => {
     return email ? email.charAt(0).toUpperCase() : 'U';
   };
 
-  const isCurrent = (path: string) => location.pathname === path;
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <>
@@ -33,7 +31,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           background-color: #fbfbfa;
         }
         .layout-sidebar {
-          width: 280px;
+          width: 260px;
           flex-shrink: 0;
           display: flex;
           flex-direction: column;
@@ -45,7 +43,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           z-index: 50;
         }
         .sidebar-logo {
-          padding: 0 32px;
+          padding: 0 24px;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -55,21 +53,21 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         }
         .sidebar-nav {
           flex: 1;
-          padding: 32px 20px;
+          padding: 24px 16px;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 4px;
           overflow-y: auto;
         }
         .nav-item {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 12px 20px;
-          border-radius: 8px;
+          gap: 12px;
+          padding: 10px 12px;
+          border-radius: 6px;
           text-decoration: none;
           color: #4a4a4a;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 500;
           transition: all 0.2s ease;
         }
@@ -82,12 +80,17 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           color: #1c1c1c;
           font-weight: 600;
         }
+        .nav-divider {
+          height: 1px;
+          background-color: #e8e8e5;
+          margin: 12px 12px;
+        }
         .sidebar-bottom {
-          padding: 28px;
+          padding: 20px 24px;
           border-top: 1px solid #e8e8e5;
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 16px;
           background-color: #ffffff;
         }
         .layout-main {
@@ -95,13 +98,14 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           display: flex;
           flex-direction: column;
           min-width: 0;
+          overflow-x: hidden;
         }
         .layout-header {
           height: 72px;
           display: flex;
           align-items: center;
           justify-content: flex-end;
-          padding: 0 60px;
+          padding: 0 40px;
           background-color: #fbfbfa;
           flex-shrink: 0;
           z-index: 40;
@@ -112,10 +116,8 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           gap: 6px;
           font-size: 14px;
           font-weight: 600;
-          color: #787875;
+          color: #4a4a4a;
           text-decoration: none;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
           transition: color 0.2s ease;
         }
         .go-website-link:hover {
@@ -124,7 +126,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         
         /* Responsive adjustments */
         @media (max-width: 1024px) {
-          .layout-header { padding: 0 40px; }
+          .layout-header { padding: 0 24px; }
         }
         
         @media (max-width: 768px) {
@@ -144,6 +146,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
             overflow-x: auto;
             border-bottom: 1px solid #e8e8e5;
           }
+          .nav-divider { display: none; }
           .sidebar-bottom {
             flex-direction: row;
             align-items: center;
@@ -151,7 +154,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
             padding: 16px 24px;
             border-top: none;
           }
-          .layout-header { display: none; /* Hide header on mobile, save space */ }
+          .layout-header { display: none; }
         }
       `}</style>
       
@@ -160,25 +163,40 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         <aside className="layout-sidebar">
           {/* Logo Area */}
           <div className="sidebar-logo">
-            <img src="/logo.png" alt="Logo" style={{ height: '22px', width: 'auto' }} />
-            <img src="/brand.png" alt="Originyx" style={{ height: '16px', width: 'auto' }} />
+            <img src="/logo.png" alt="Logo" style={{ height: '20px', width: 'auto' }} />
+            <img src="/brand.png" alt="Originyx" style={{ height: '14px', width: 'auto' }} />
           </div>
 
           {/* Navigation Links */}
           <nav className="sidebar-nav">
-            <NavLink
-              to="/dashboard"
-              className={isCurrent('/dashboard') ? 'nav-item active' : 'nav-item'}
-            >
+            <NavLink to="/dashboard" className={isCurrent('/dashboard') ? 'nav-item active' : 'nav-item'}>
               <Home size={18} color={isCurrent('/dashboard') ? '#244235' : '#787875'} strokeWidth={1.75} />
               Overview
             </NavLink>
+            <NavLink to="/explore" className={isCurrent('/explore') ? 'nav-item active' : 'nav-item'}>
+              <Box size={18} color={isCurrent('/explore') ? '#244235' : '#787875'} strokeWidth={1.75} />
+              Explore Products
+            </NavLink>
+            <NavLink to="/my-products" className={isCurrent('/my-products') ? 'nav-item active' : 'nav-item'}>
+              <Grid size={18} color={isCurrent('/my-products') ? '#244235' : '#787875'} strokeWidth={1.75} />
+              My Products
+            </NavLink>
+            
+            <div className="nav-divider" />
+            
+            <NavLink to="/subscriptions" className={isCurrent('/subscriptions') ? 'nav-item active' : 'nav-item'}>
+              <CreditCard size={18} color={isCurrent('/subscriptions') ? '#244235' : '#787875'} strokeWidth={1.75} />
+              Subscriptions
+            </NavLink>
+            <NavLink to="/billing" className={isCurrent('/billing') ? 'nav-item active' : 'nav-item'}>
+              <Receipt size={18} color={isCurrent('/billing') ? '#244235' : '#787875'} strokeWidth={1.75} />
+              Billing
+            </NavLink>
+
+            <div className="nav-divider" />
             
             {user && (
-              <NavLink
-                to="/account"
-                className={isCurrent('/account') ? 'nav-item active' : 'nav-item'}
-              >
+              <NavLink to="/account" className={isCurrent('/account') ? 'nav-item active' : 'nav-item'}>
                 <User size={18} color={isCurrent('/account') ? '#244235' : '#787875'} strokeWidth={1.75} />
                 Account
               </NavLink>
@@ -193,18 +211,17 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div
                     style={{
-                      width: '40px',
-                      height: '40px',
+                      width: '36px',
+                      height: '36px',
                       borderRadius: '50%',
                       backgroundColor: '#f5f5f2',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '14px',
+                      fontSize: '13px',
                       fontWeight: 600,
-                      color: '#244235',
+                      color: '#1c1c1c',
                       flexShrink: 0,
-                      border: '1px solid #e8e8e5'
                     }}
                   >
                     {getInitials(user?.email || '')}
@@ -212,7 +229,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                   <div style={{ overflow: 'hidden' }}>
                     <p
                       style={{
-                        fontSize: '15px',
+                        fontSize: '14px',
                         fontWeight: 600,
                         color: '#1c1c1c',
                         margin: 0,
@@ -225,7 +242,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                     </p>
                     <p
                       style={{
-                        fontSize: '13px',
+                        fontSize: '12px',
                         color: '#787875',
                         margin: 0,
                         whiteSpace: 'nowrap',
@@ -238,28 +255,26 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                   </div>
                 </div>
 
-                {/* Sign Out Button */}
                 <button
                   onClick={handleSignOut}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '10px',
-                    padding: '10px 14px',
+                    gap: '8px',
+                    padding: '0',
                     backgroundColor: 'transparent',
                     border: 'none',
                     cursor: 'pointer',
-                    color: '#787875',
+                    color: '#4a4a4a',
                     fontSize: '14px',
-                    fontWeight: 600,
-                    borderRadius: '8px',
+                    fontWeight: 500,
                     transition: 'all 0.2s',
                     width: 'fit-content'
                   }}
-                  onMouseOver={(e) => { e.currentTarget.style.color = '#1c1c1c'; e.currentTarget.style.backgroundColor = '#f5f5f2'; }}
-                  onMouseOut={(e) => { e.currentTarget.style.color = '#787875'; e.currentTarget.style.backgroundColor = 'transparent'; }}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#1c1c1c'}
+                  onMouseOut={(e) => e.currentTarget.style.color = '#4a4a4a'}
                 >
-                  <LogOut size={16} strokeWidth={2} />
+                  <LogOut size={16} strokeWidth={2} style={{ transform: 'rotate(180deg)' }} />
                   Sign Out
                 </button>
               </>
@@ -272,12 +287,12 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '100%',
-                    padding: '12px',
+                    padding: '10px',
                     backgroundColor: '#244235',
                     color: '#ffffff',
-                    fontSize: '15px',
+                    fontSize: '14px',
                     fontWeight: 500,
-                    borderRadius: '8px',
+                    borderRadius: '6px',
                     textDecoration: 'none',
                     textAlign: 'center',
                     transition: 'background-color 0.2s'

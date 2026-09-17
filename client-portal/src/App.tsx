@@ -2,6 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import ExploreProducts from './pages/ExploreProducts';
+import MyProducts from './pages/MyProducts';
+import Subscriptions from './pages/Subscriptions';
+import Billing from './pages/Billing';
 import SidebarLayout from './components/Layout/SidebarLayout';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { ToastProvider } from './components/Layout/ToastProvider';
@@ -46,6 +50,48 @@ export default function App() {
               }
             />
             
+            <Route
+              path="/explore"
+              element={
+                <SidebarLayout>
+                  <ExploreProducts />
+                </SidebarLayout>
+              }
+            />
+            
+            <Route
+              path="/my-products"
+              element={
+                <Protected>
+                  <SidebarLayout>
+                    <MyProducts />
+                  </SidebarLayout>
+                </Protected>
+              }
+            />
+            
+            <Route
+              path="/subscriptions"
+              element={
+                <Protected>
+                  <SidebarLayout>
+                    <Subscriptions />
+                  </SidebarLayout>
+                </Protected>
+              }
+            />
+            
+            <Route
+              path="/billing"
+              element={
+                <Protected>
+                  <SidebarLayout>
+                    <Billing />
+                  </SidebarLayout>
+                </Protected>
+              }
+            />
+
             <Route
               path="/account"
               element={
