@@ -98,9 +98,39 @@ export default function Profile() {
     setSaving(true);
     try {
       await getOCEClient().updateClientProfile(form);
+      
+      // Reload from database to ensure we have the authoritative source of truth
+      const profile = await getOCEClient().getClientProfile();
+      if (profile) {
+        setForm({
+          name: profile.name || '',
+          role: profile.role || '',
+          email: profile.email || '',
+          company: profile.company || '',
+          website: profile.website || '',
+          industry: profile.industry || '',
+          company_size: profile.company_size || '',
+          business_phone: profile.business_phone || '',
+          business_email: profile.business_email || '',
+          description: profile.description || '',
+          products_services: profile.products_services || '',
+          target_market: profile.target_market || '',
+          business_model: profile.business_model || '',
+          growth_stage: profile.growth_stage || '',
+          business_goals: profile.business_goals || '',
+          address_line1: profile.address_line1 || '',
+          address_line2: profile.address_line2 || '',
+          city: profile.city || '',
+          state: profile.state || '',
+          postal_code: profile.postal_code || '',
+          country: profile.country || ''
+        });
+      }
+      
       showToast('Your account information has been saved.', 'success');
     } catch (err: any) {
-      showToast(err.message || 'Update failed', 'error');
+      console.error('Save error:', err);
+      showToast(err.message || 'Failed to save changes. Please try again.', 'error');
     } finally {
       setSaving(false);
     }

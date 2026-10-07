@@ -211,11 +211,20 @@ export class OCEClient {
 
     if (existingRole && existingRole.org_id) {
       // Update existing organization
-      const { error: orgError } = await this.supabase
+      const { data: updatedOrg, error: orgError } = await this.supabase
         .from('organizations')
         .update(orgPayload)
-        .eq('id', existingRole.org_id);
-      if (orgError) throw orgError;
+        .eq('id', existingRole.org_id)
+        .select()
+        .single();
+      
+      if (orgError) {
+        console.error("Failed to update organization:", orgError);
+        throw orgError;
+      }
+      if (!updatedOrg) {
+         throw new Error("Organization update failed (possible RLS violation or record not found).");
+      }
     } else if (payload.company?.trim()) {
       // Create new organization
       const slug = payload.company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now();
