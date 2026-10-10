@@ -266,7 +266,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         {!collapsed ? (
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 flex items-center justify-center flex-shrink-0">
-              <img src="/admin/logo.png" alt="Originyx Logo" className="w-full h-full object-contain" />
+              <img src="/logo.png" alt="Originyx Logo" className="w-full h-full object-contain" />
             </div>
             <div>
               <p className="text-[13px] font-semibold text-gray-900 leading-tight">Originyx</p>
@@ -275,7 +275,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
           </div>
         ) : (
           <div className="w-7 h-7 flex items-center justify-center">
-            <img src="/admin/logo.png" alt="Originyx Logo" className="w-full h-full object-contain" />
+            <img src="/logo.png" alt="Originyx Logo" className="w-full h-full object-contain" />
           </div>
         )}
       </div>

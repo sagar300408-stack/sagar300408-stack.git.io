@@ -67,8 +67,8 @@ export default function Login() {
         <div className="relative z-10 flex flex-col h-full max-w-lg">
           {/* Top Logo */}
           <div className="mb-16 flex items-center gap-3">
-            <img src="/admin/logo.png" alt="Originyx Icon" className="h-10 w-auto object-contain" />
-            <img src="/admin/brand.png" alt="Originyx Brand" className="h-6 w-auto object-contain" />
+            <img src="/logo.png" alt="Originyx Icon" className="h-10 w-auto object-contain" />
+            <img src="/brand.png" alt="Originyx Brand" className="h-6 w-auto object-contain" />
           </div>
 
           {/* Headline section */}
@@ -119,8 +119,8 @@ export default function Login() {
         <div className="w-full max-w-[460px] bg-white rounded-3xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100/50">
           
           <div className="text-center mb-8">
-            <img src="/admin/logo.png" alt="Originyx Icon" className="h-12 mx-auto mb-3 object-contain" />
-            <img src="/admin/brand.png" alt="Originyx Brand" className="h-5 mx-auto mb-6 object-contain" />
+            <img src="/logo.png" alt="Originyx Icon" className="h-12 mx-auto mb-3 object-contain" />
+            <img src="/brand.png" alt="Originyx Brand" className="h-5 mx-auto mb-6 object-contain" />
             <h2 className="text-[22px] font-bold text-gray-900 mb-2">Originyx Content Engine</h2>
             <p className="text-sm text-gray-500">Sign in to your workspace</p>
           </div>
