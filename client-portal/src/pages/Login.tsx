@@ -4,6 +4,10 @@ import { getOCEClient } from '../lib/sdk';
 import { useAuth } from '../lib/AuthContext';
 import { Lock, Zap, ShieldCheck } from 'lucide-react';
 
+const MAIN_SITE_SIGNIN =
+  import.meta.env.VITE_MAIN_SITE_URL ||
+  (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -156,6 +160,34 @@ export default function Login() {
             </div>
           )}
 
+          {/* Primary Originyx Sign In */}
+          <div style={{ marginBottom: '16px' }}>
+            <a
+              href={`${MAIN_SITE_SIGNIN}?next=${encodeURIComponent(window.location.origin + '/dashboard')}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '10px',
+                width: '100%',
+                padding: '12px 16px',
+                backgroundColor: '#244235',
+                borderRadius: '8px',
+                fontSize: '14px',
+                fontWeight: 600,
+                color: '#ffffff',
+                textDecoration: 'none',
+                boxSizing: 'border-box',
+                transition: 'background-color 0.15s ease',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a3026'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#244235'}
+            >
+              <img src="/logo.png" alt="Originyx" style={{ height: '18px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
+              Sign in with Originyx Account
+            </a>
+          </div>
+
           {/* Social Auth Buttons */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
             <button
@@ -223,19 +255,20 @@ export default function Login() {
           {/* OR divider */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
             <div style={{ flex: 1, height: '1px', backgroundColor: '#e8e8e5' }} />
-            <span style={{ fontSize: '11px', color: '#787875', fontWeight: 500 }}>OR</span>
+            <span style={{ fontSize: '11px', color: '#787875', fontWeight: 500 }}>OR DIRECT EMAIL SIGN IN</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: '#e8e8e5' }} />
           </div>
 
           {/* Tab: Sign In / Create Account */}
-          <div style={{ display: 'flex', gap: '24px', borderBottom: '1px solid #e8e8e5', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e8e8e5', marginBottom: '24px' }}>
             <button
+              type="button"
               style={{
                 fontSize: '14px',
                 fontWeight: 600,
                 color: '#1c1c1c',
                 paddingBottom: '12px',
-                borderBottom: '2px solid #244235', // Match the dark green accent
+                borderBottom: '2px solid #244235',
                 marginBottom: '-1px',
                 background: 'none',
                 borderTop: 'none',
@@ -244,27 +277,24 @@ export default function Login() {
                 cursor: 'default',
               }}
             >
-              Sign In
+              Sign In with Password
             </button>
-            <button
+            <a
+              href={`${MAIN_SITE_SIGNIN}?next=${encodeURIComponent(window.location.origin + '/dashboard')}&auth=signup`}
               style={{
-                fontSize: '14px',
+                fontSize: '13px',
                 fontWeight: 600,
-                color: '#787875',
+                color: '#244235',
                 paddingBottom: '12px',
-                borderBottom: '2px solid transparent',
                 marginBottom: '-1px',
-                background: 'none',
-                borderTop: 'none',
-                borderLeft: 'none',
-                borderRight: 'none',
-                cursor: 'not-allowed',
-                opacity: 0.8,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
               }}
-              title="Creation of accounts is managed by administrators."
             >
-              Create Account
-            </button>
+              Create Account →
+            </a>
           </div>
 
           {/* Form */}

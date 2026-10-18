@@ -9,6 +9,7 @@ class OxFooter extends HTMLElement {
             <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
 
             <div class="footer-links">
+              <a href="https://app.originyx.in/dashboard" id="footer-client-portal">Client Portal</a>
               <a href="/privacy-policy/" id="footer-privacy">Privacy Policy</a>
               <a href="/terms-and-conditions/" id="footer-terms">Terms &amp; Conditions</a>
               <a href="/cookie-policy/" id="footer-cookie">Cookie Policy</a>

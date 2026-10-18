@@ -31,6 +31,7 @@ class OxNavbar extends HTMLElement {
                 <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
               </button>
               <div class="dropdown-menu">
+                <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Client Portal</a>
                 <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
                 <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
               </div>

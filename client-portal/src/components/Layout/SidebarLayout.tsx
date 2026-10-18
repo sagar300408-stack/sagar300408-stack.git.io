@@ -3,6 +3,10 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../../lib/AuthContext';
 import { Home, User, LogOut, ExternalLink, Box, Grid, CreditCard, Receipt } from 'lucide-react';
 
+const MAIN_SITE_SIGNIN =
+  import.meta.env.VITE_MAIN_SITE_URL ||
+  (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
+
 interface SidebarLayoutProps {
   children: ReactNode;
 }
@@ -279,29 +283,33 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                 </button>
               </>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <NavLink
-                  to="/login"
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <p style={{ fontSize: '11px', color: '#787875', margin: '0 0 2px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Guest Explorer
+                </p>
+                <a
+                  href={`${MAIN_SITE_SIGNIN}?next=${encodeURIComponent(window.location.origin + '/dashboard')}`}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     width: '100%',
-                    padding: '10px',
+                    padding: '9px 12px',
                     backgroundColor: '#244235',
                     color: '#ffffff',
-                    fontSize: '14px',
-                    fontWeight: 500,
+                    fontSize: '13px',
+                    fontWeight: 600,
                     borderRadius: '6px',
                     textDecoration: 'none',
                     textAlign: 'center',
-                    transition: 'background-color 0.2s'
+                    transition: 'background-color 0.2s',
+                    boxSizing: 'border-box'
                   }}
                   onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a3026'}
                   onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#244235'}
                 >
-                  Sign In
-                </NavLink>
+                  Sign In with Originyx
+                </a>
               </div>
             )}
           </div>

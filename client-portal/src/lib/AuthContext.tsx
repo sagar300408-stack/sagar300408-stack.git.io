@@ -90,6 +90,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function init() {
       try {
+        // If tokens were forwarded in URL hash (e.g. from originyx.in redirect), capture and set session
+        if (window.location.hash && window.location.hash.includes('access_token')) {
+          const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+          const accessToken = hashParams.get('access_token');
+          const refreshToken = hashParams.get('refresh_token');
+          if (accessToken && refreshToken) {
+            await supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken,
+            });
+            // Clean up the URL hash cleanly without a full page reload
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        }
+
         const { data: { session } } = await supabase.auth.getSession();
         const currentUser = session?.user ?? null;
         setUser(currentUser);
@@ -125,6 +140,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    const mainSiteUrl =
+      import.meta.env.VITE_MAIN_SITE_URL ||
+      (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
+    window.location.href = mainSiteUrl;
   };
 
   return (

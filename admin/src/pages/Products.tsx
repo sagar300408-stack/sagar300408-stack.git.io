@@ -66,12 +66,19 @@ export default function Products() {
           <h1 className="text-xl font-semibold text-gray-900">Product Portfolio</h1>
           <p className="text-sm text-gray-400 mt-0.5">Manage your internal and external product catalogue.</p>
         </div>
-        <button
-          className="flex items-center gap-2 px-4 py-2 bg-[#244235] text-white rounded-lg text-sm font-medium hover:bg-[#1a3026] transition-colors"
-          onClick={() => alert("Product creator coming soon.")}
-        >
-          <Plus size={15} /> Add Product
-        </button>
+        <div className="relative group">
+          <button
+            type="button"
+            disabled
+            className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-400 border border-gray-200 rounded-lg text-sm font-medium cursor-not-allowed"
+            aria-disabled="true"
+          >
+            <Plus size={15} /> Add Product
+          </button>
+          <div className="absolute right-0 top-full mt-1.5 hidden group-hover:block z-20 w-64 p-2.5 bg-gray-900 text-white text-xs rounded-lg shadow-lg pointer-events-none">
+            In-portal product creation workflow is coming soon. Products can currently be published via database administration in cc_products.
+          </div>
+        </div>
       </div>
 
       <div className="flex-1 p-6 w-full max-w-5xl mx-auto">
@@ -87,19 +94,27 @@ export default function Products() {
         </div>
 
         {error && (
-          <div className="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4 flex gap-3">
-            <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
-            <p className="text-sm text-amber-800">{error}</p>
+          <div className="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start justify-between gap-3">
+            <div className="flex items-start gap-3">
+              <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+              <p className="text-sm text-amber-800">{error}</p>
+            </div>
+            <button
+              onClick={load}
+              className="text-xs font-semibold text-amber-800 underline hover:text-amber-900 flex-shrink-0"
+            >
+              Retry
+            </button>
           </div>
         )}
 
         {loading ? (
           <div className="flex justify-center py-16"><div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#244235]" /></div>
-        ) : filtered.length === 0 ? (
+        ) : error ? null : filtered.length === 0 ? (
           <div className="bg-white rounded-xl border border-gray-200 py-20 text-center">
             <Package size={32} className="mx-auto text-gray-200 mb-4" />
             <p className="font-medium text-gray-500 text-sm">No products found</p>
-            <p className="text-xs text-gray-400 mt-1">Add your first product to the portfolio.</p>
+            <p className="text-xs text-gray-400 mt-1">No products currently exist in this organization's portfolio.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

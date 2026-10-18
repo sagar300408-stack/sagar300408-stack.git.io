@@ -155,10 +155,17 @@
     async signInWithOAuth(provider) {
       if (!this.configured) throw new Error('Auth system not configured.');
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const nextParam = urlParams.get('next') || sessionStorage.getItem('originyx_auth_return_url');
+      let redirectUrl = window.location.origin;
+      if (nextParam) {
+        redirectUrl = window.location.origin + '?next=' + encodeURIComponent(nextParam);
+      }
+
       const { data, error } = await this.client.auth.signInWithOAuth({
         provider: provider,
         options: {
-          redirectTo: window.location.origin
+          redirectTo: redirectUrl
         }
       });
 

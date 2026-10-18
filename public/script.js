@@ -840,6 +840,22 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     if (profileDropdown) profileDropdown.classList.remove('active');
   });
 
+  // Dropdown Client Portal
+  const dropClientPortal = document.getElementById('dropdown-client-portal');
+  if (dropClientPortal) {
+    dropClientPortal.addEventListener('click', (e) => {
+      if (profileDropdown) profileDropdown.classList.remove('active');
+      const session = window.originyxAuth?.session;
+      if (session?.access_token && session?.refresh_token) {
+        e.preventDefault();
+        const baseHref = dropClientPortal.getAttribute('href') || 'https://app.originyx.in/dashboard';
+        const portalUrl = new URL(baseHref, window.location.origin);
+        portalUrl.hash = `access_token=${encodeURIComponent(session.access_token)}&refresh_token=${encodeURIComponent(session.refresh_token)}&token_type=bearer`;
+        window.open(portalUrl.toString(), '_blank');
+      }
+    });
+  }
+
   // Dropdown Start a Project
   const dropStartProject = document.getElementById('dropdown-start-project');
   if (dropStartProject) {
@@ -1305,6 +1321,71 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     }
   }
 
+  /* ---------- RETURN DESTINATION & NEXT URL HANDLER ---------- */
+  function redirectToReturnDestination(returnUrl) {
+    sessionStorage.removeItem('originyx_auth_return_url');
+    try {
+      const session = window.originyxAuth?.session;
+      const target = new URL(returnUrl, window.location.origin);
+      if (session?.access_token && session?.refresh_token) {
+        target.hash = `access_token=${encodeURIComponent(session.access_token)}&refresh_token=${encodeURIComponent(session.refresh_token)}&token_type=bearer`;
+      }
+      window.location.replace(target.toString());
+    } catch (e) {
+      window.location.href = returnUrl;
+    }
+  }
+
+  function handleUrlAuthParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nextParam = urlParams.get('next');
+    const authAction = urlParams.get('auth');
+
+    if (nextParam) {
+      try {
+        const parsed = new URL(nextParam, window.location.origin);
+        const allowedHosts = [
+          'app.originyx.in',
+          'originyx.in',
+          'admin.originyx.in',
+          'localhost',
+          '127.0.0.1'
+        ];
+        if (allowedHosts.includes(parsed.hostname) || parsed.origin === window.location.origin) {
+          sessionStorage.setItem('originyx_auth_return_url', nextParam);
+        }
+      } catch (err) {
+        console.warn('Invalid next redirect parameter:', nextParam);
+      }
+    }
+
+    const returnUrl = sessionStorage.getItem('originyx_auth_return_url');
+
+    // If user is already authenticated and a returnUrl exists, forward immediately
+    if (window.originyxAuth && window.originyxAuth.isAuthenticated() && returnUrl) {
+      redirectToReturnDestination(returnUrl);
+      return;
+    }
+
+    // If not authenticated and nextParam or authAction is present, open auth modal
+    if (nextParam || authAction) {
+      const authModal = document.getElementById('auth-modal');
+      if (authModal) {
+        openModal('auth-modal');
+        if (authAction === 'signup' && tabSignup) {
+          tabSignup.click();
+        } else if (tabLogin) {
+          tabLogin.click();
+        }
+        
+        const authModalSubtitle = document.getElementById('auth-modal-subtitle');
+        if (authModalSubtitle) {
+          authModalSubtitle.textContent = 'Sign in or register with your Originyx identity to access the Client Portal.';
+        }
+      }
+    }
+  }
+
   // Bind auth state change custom event
   window.addEventListener('originyx-auth-state-change', (e) => {
     const { configured, authenticated, user, event } = e.detail;
@@ -1317,6 +1398,13 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
 
     if (authenticated && ['SIGNED_IN', 'INITIAL_SESSION', 'INITIAL'].includes(event)) {
       closeModal();
+
+      const returnUrl = sessionStorage.getItem('originyx_auth_return_url');
+      if (returnUrl) {
+        redirectToReturnDestination(returnUrl);
+        return;
+      }
+
       resumePendingAction();
     }
     
@@ -1328,6 +1416,10 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
   // Re-dispatch current state on initialization in case scripts raced
   if (window.originyxAuth && window.originyxAuth.configured !== undefined) {
     updateAuthStateUI(window.originyxAuth.configured, window.originyxAuth.isAuthenticated(), window.originyxAuth.user);
+    handleUrlAuthParameters();
+  } else {
+    // If auth is still initializing, check URL parameters after slight tick
+    setTimeout(handleUrlAuthParameters, 100);
   }
 
   /* ---------- ORIGINAL FORMS DISPATCH ---------- */
