@@ -1342,11 +1342,28 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     const authAction = urlParams.get('auth');
 
     if (authAction === 'signout' || authAction === 'logout') {
-      if (window.originyxAuth && window.originyxAuth.isAuthenticated()) {
-        window.originyxAuth.signOut();
-      }
       sessionStorage.removeItem('originyx_auth_return_url');
       window.history.replaceState(null, '', window.location.pathname);
+
+      const performSignOutSync = async () => {
+        try {
+          if (window.originyxAuth) {
+            await window.originyxAuth.init();
+            await window.originyxAuth.signOut();
+          }
+        } catch (err) {
+          console.warn('Signout synchronization error:', err);
+        } finally {
+          const authModal = document.getElementById('auth-modal');
+          if (authModal) {
+            openModal('auth-modal');
+            const tabLoginBtn = document.getElementById('tab-login');
+            if (tabLoginBtn) tabLoginBtn.click();
+          }
+        }
+      };
+
+      performSignOutSync();
       return;
     }
 

@@ -8,6 +8,7 @@ type AuthContextType = {
   user: User | null;
   role: string | null;
   loading: boolean;
+  isLoggingOut: boolean;
   isInitialized: boolean;
   systemStatus: SystemStatus | null;
   signOut: () => Promise<void>;
@@ -18,6 +19,7 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   role: null,
   loading: true,
+  isLoggingOut: false,
   isInitialized: false,
   systemStatus: null,
   signOut: async () => {},
@@ -28,6 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const [systemStatus, setSystemStatus] = useState<SystemStatus | null>(null);
 
@@ -77,6 +80,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(currentUser ?? null);
     await bootstrap(currentUser ?? null);
   }
+
+  // Handle bfcache (Back/Forward Cache restoration) to prevent viewing cached dashboard after logout
+  useEffect(() => {
+    const handlePageShow = async (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (!session) {
+            setUser(null);
+            setRole(null);
+            setLoading(false);
+          } else {
+            setUser(session.user);
+          }
+        } catch {
+          setUser(null);
+          setRole(null);
+          setLoading(false);
+        }
+      }
+    };
+
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, [supabase]);
 
   useEffect(() => {
     async function init() {
@@ -163,19 +191,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signOut = async () => {
+    setIsLoggingOut(true);
     try {
-      await supabase.auth.signOut();
+      await supabase.auth.signOut({ scope: 'local' });
     } catch (e) {
       console.warn('SignOut error:', e);
+    } finally {
+      // Clear all local auth state
+      setUser(null);
+      setRole(null);
+      setLoading(false);
+      sessionStorage.removeItem('cp_return_path');
+      sessionStorage.removeItem('originyx_auth_return_url');
+
+      const mainSiteUrl =
+        import.meta.env.VITE_MAIN_SITE_URL ||
+        (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
+      
+      // Navigate with replace so user cannot click Back button into logged-in dashboard
+      window.location.replace(`${mainSiteUrl}?auth=signout`);
     }
-    const mainSiteUrl =
-      import.meta.env.VITE_MAIN_SITE_URL ||
-      (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
-    window.location.href = `${mainSiteUrl}?auth=signout`;
   };
 
   return (
-    <AuthContext.Provider value={{ user, role, loading, isInitialized, systemStatus, signOut, refreshStatus }}>
+    <AuthContext.Provider value={{ user, role, loading, isLoggingOut, isInitialized, systemStatus, signOut, refreshStatus }}>
       {children}
     </AuthContext.Provider>
   );

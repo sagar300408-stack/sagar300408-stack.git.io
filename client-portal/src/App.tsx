@@ -17,35 +17,44 @@ const MAIN_SITE_SIGNIN =
   import.meta.env.VITE_MAIN_SITE_URL ||
   (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
 
-function GlobalLoader() {
+function GlobalLoader({ message = 'Loading workspace…' }: { message?: string }) {
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-bg-primary gap-4">
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent" />
-      <p className="text-text-muted text-sm">Loading workspace…</p>
+      <p className="text-text-muted text-sm">{message}</p>
     </div>
   );
 }
 
 /**
- * Redirects unauthenticated users to the main Originyx sign-in page.
- * Encodes the intended destination as a `next` query parameter so
- * originyx.in can redirect back after successful authentication.
+ * Route guard that requires a valid authenticated Supabase session.
+ * If unauthenticated, safely redirects to the Originyx sign-in modal
+ * with the intended return destination encoded.
  */
 function Protected({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { user, loading, isLoggingOut } = useAuth();
   const location = useLocation();
 
-  if (loading) return <GlobalLoader />;
+  useEffect(() => {
+    // Only redirect when initialization is complete, not logging out, and no user session exists
+    if (!loading && !isLoggingOut && !user) {
+      const intended = encodeURIComponent(
+        window.location.origin + location.pathname + location.search
+      );
+      window.location.replace(`${MAIN_SITE_SIGNIN}?next=${intended}`);
+    }
+  }, [user, loading, isLoggingOut, location]);
+
+  if (loading) {
+    return <GlobalLoader message="Loading workspace…" />;
+  }
+
+  if (isLoggingOut) {
+    return <GlobalLoader message="Signing out…" />;
+  }
 
   if (!user) {
-    // Build the intended destination so originyx.in can redirect back
-    const intended = encodeURIComponent(
-      window.location.origin + location.pathname + location.search
-    );
-    // Redirect to the main Originyx site sign-in with the return URL
-    window.location.replace(`${MAIN_SITE_SIGNIN}?next=${intended}`);
-    // Render nothing while the redirect is in flight
-    return <GlobalLoader />;
+    return <GlobalLoader message="Redirecting to sign in…" />;
   }
 
   return <>{children}</>;
@@ -70,7 +79,7 @@ function AuthCallback() {
     }
   }, [user, loading, navigate]);
 
-  return <GlobalLoader />;
+  return <GlobalLoader message="Authenticating…" />;
 }
 
 export default function App() {
