@@ -8,14 +8,9 @@
       "destination": "/app/assets/:path*"
     },
     {
-      "source": "/favicon.svg",
+      "source": "/:file(.*\\.(?:png|svg|ico|jpg|jpeg|webp|woff|woff2|ttf|json|css|js|map))",
       "has": [{ "type": "host", "value": "app.originyx.in" }],
-      "destination": "/app/favicon.svg"
-    },
-    {
-      "source": "/icons.svg",
-      "has": [{ "type": "host", "value": "app.originyx.in" }],
-      "destination": "/app/icons.svg"
+      "destination": "/app/:file"
     },
     {
       "source": "/(.*)",

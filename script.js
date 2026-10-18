@@ -1341,6 +1341,15 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     const nextParam = urlParams.get('next');
     const authAction = urlParams.get('auth');
 
+    if (authAction === 'signout' || authAction === 'logout') {
+      if (window.originyxAuth && window.originyxAuth.isAuthenticated()) {
+        window.originyxAuth.signOut();
+      }
+      sessionStorage.removeItem('originyx_auth_return_url');
+      window.history.replaceState(null, '', window.location.pathname);
+      return;
+    }
+
     if (nextParam) {
       try {
         const parsed = new URL(nextParam, window.location.origin);

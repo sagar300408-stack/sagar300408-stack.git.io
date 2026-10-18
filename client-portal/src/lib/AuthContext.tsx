@@ -38,37 +38,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    * Full bootstrap sequence:
    * 1. Call get_system_status() RPC — single round trip.
    * 2. If initialized, attempt to fetch the user's role.
-   * 3. If not initialized, set isInitialized=false so routing sends to /setup.
+   * 3. If not initialized, set isInitialized=false.
    */
   async function bootstrap(currentUser: User | null) {
     try {
-      // Single RPC call — replaces direct organization queries
       const status = await sdk.getSystemStatus();
       setSystemStatus(status);
       setIsInitialized(status.initialized);
 
-      if (!status.initialized) {
-        // CMS not set up yet. No role lookup needed.
+      if (!status.initialized || !currentUser) {
         setRole(null);
         return;
       }
 
-      if (!currentUser) {
-        setRole(null);
-        return;
-      }
-
-      // CMS is initialized — fetch this user's role
       const { data } = await supabase
         .from('user_roles')
         .select('role')
         .eq('user_id', currentUser.id)
         .limit(1)
-        .single();
+        .maybeSingle();
 
       setRole(data?.role ?? null);
     } catch (e) {
-      console.error('Bootstrap check failed', e);
+      console.warn('Bootstrap check note:', e);
       setRole(null);
       setIsInitialized(false);
     } finally {
@@ -77,8 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   /**
-   * Re-runs the bootstrap sequence. Called after Setup Wizard completes
-   * so the context updates without a full page reload.
+   * Re-runs the bootstrap sequence.
    */
   async function refreshStatus() {
     setLoading(true);
@@ -90,27 +81,60 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function init() {
       try {
-        // If tokens were forwarded in URL hash (e.g. from originyx.in redirect), capture and set session
+        // 1. If tokens were forwarded in URL hash (e.g. from cross-origin handoff), capture and establish session
         if (window.location.hash && window.location.hash.includes('access_token')) {
-          const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-          const accessToken = hashParams.get('access_token');
-          const refreshToken = hashParams.get('refresh_token');
-          if (accessToken && refreshToken) {
-            await supabase.auth.setSession({
-              access_token: accessToken,
-              refresh_token: refreshToken,
-            });
-            // Clean up the URL hash cleanly without a full page reload
+          try {
+            const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+            const accessToken = hashParams.get('access_token');
+            const refreshToken = hashParams.get('refresh_token');
+            if (accessToken && refreshToken) {
+              const { error: setSessionErr } = await supabase.auth.setSession({
+                access_token: accessToken,
+                refresh_token: refreshToken,
+              });
+              if (setSessionErr) {
+                console.error('Failed to establish session from handoff tokens:', setSessionErr.message);
+              }
+            }
+          } catch (err) {
+            console.error('Error parsing auth tokens from URL hash:', err);
+          } finally {
+            // Clean up the URL hash cleanly without a full page reload to protect sensitive tokens
             window.history.replaceState(null, '', window.location.pathname + window.location.search);
           }
         }
 
-        const { data: { session } } = await supabase.auth.getSession();
+        // 2. If authorization code is present in query parameters (e.g. PKCE OAuth or magic link callback)
+        if (window.location.search && window.location.search.includes('code=')) {
+          try {
+            const searchParams = new URLSearchParams(window.location.search);
+            const code = searchParams.get('code');
+            if (code) {
+              const { error: codeErr } = await supabase.auth.exchangeCodeForSession(code);
+              if (codeErr) {
+                console.error('Failed to exchange authorization code for session:', codeErr.message);
+              }
+              searchParams.delete('code');
+              searchParams.delete('state');
+              const cleanSearch = searchParams.toString() ? `?${searchParams.toString()}` : '';
+              window.history.replaceState(null, '', window.location.pathname + cleanSearch + window.location.hash);
+            }
+          } catch (err) {
+            console.error('Error processing authorization code:', err);
+          }
+        }
+
+        // 3. Retrieve and validate the active session
+        const { data: { session }, error: sessionErr } = await supabase.auth.getSession();
+        if (sessionErr) {
+          console.warn('Session verification issue:', sessionErr.message);
+        }
+
         const currentUser = session?.user ?? null;
         setUser(currentUser);
         await bootstrap(currentUser);
       } catch (e) {
-        console.error('Session fetch failed', e);
+        console.error('Session initialization failed:', e);
         setLoading(false);
       }
     }
@@ -122,7 +146,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const currentUser = session?.user ?? null;
         setUser(currentUser);
 
-        if (event === 'SIGNED_IN') {
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           setLoading(true);
           await bootstrap(currentUser);
         } else if (event === 'SIGNED_OUT') {
@@ -139,11 +163,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      console.warn('SignOut error:', e);
+    }
     const mainSiteUrl =
       import.meta.env.VITE_MAIN_SITE_URL ||
       (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
-    window.location.href = mainSiteUrl;
+    window.location.href = `${mainSiteUrl}?auth=signout`;
   };
 
   return (

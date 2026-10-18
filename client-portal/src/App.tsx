@@ -7,6 +7,7 @@ import ExploreProducts from './pages/ExploreProducts';
 import MyProducts from './pages/MyProducts';
 import Subscriptions from './pages/Subscriptions';
 import Billing from './pages/Billing';
+import NotFound from './pages/NotFound';
 import SidebarLayout from './components/Layout/SidebarLayout';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { ToastProvider } from './components/Layout/ToastProvider';
@@ -29,9 +30,6 @@ function GlobalLoader() {
  * Redirects unauthenticated users to the main Originyx sign-in page.
  * Encodes the intended destination as a `next` query parameter so
  * originyx.in can redirect back after successful authentication.
- *
- * The local /login route is kept only for OAuth callback handling
- * (Supabase needs a page on the same origin to exchange the code).
  */
 function Protected({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -66,12 +64,10 @@ function AuthCallback() {
   useEffect(() => {
     if (loading) return;
     if (user) {
-      // Check if there's a stored post-auth destination
       const stored = sessionStorage.getItem('cp_return_path');
       sessionStorage.removeItem('cp_return_path');
       navigate(stored || '/dashboard', { replace: true });
     }
-    // If no user after loading, session exchange may have failed — stay on login
   }, [user, loading, navigate]);
 
   return <GlobalLoader />;
@@ -155,7 +151,16 @@ export default function App() {
 
             {/* Default: redirect root to dashboard (Protected will handle auth) */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+
+            {/* 404 Not Found Page for unknown application routes */}
+            <Route
+              path="*"
+              element={
+                <SidebarLayout>
+                  <NotFound />
+                </SidebarLayout>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
