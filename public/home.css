@@ -168,287 +168,97 @@ body.home-page {
 }
 
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION (Restored Original Navbar & Orange Client Portal CTA)
    ========================================================================== */
 
-.home-nav-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--ox-nav-height);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-  z-index: 1000;
-  transition: all var(--ox-transition-fast);
+/* Navbar Background & Frosted Glass matching Reference Image 2 */
+.home-page .navbar {
+  background: rgba(251, 251, 250, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  transition: all 0.3s ease;
 }
 
-.home-nav-wrapper.scrolled {
-  background: rgba(255, 255, 255, 0.95);
+.home-page .navbar.scrolled {
+  background: rgba(251, 251, 250, 0.98);
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
-.home-nav-inner {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.home-nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-}
-
-.home-nav-logo {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  transition: transform var(--ox-transition-fast);
-}
-
-.home-nav-brand:hover .home-nav-logo {
-  transform: rotate(15deg);
-}
-
-.home-nav-wordmark {
-  height: 20px;
-  width: auto;
-  object-fit: contain;
-}
-
-.home-nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.home-nav-link {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--ox-navy-700);
-  text-decoration: none;
-  padding: 0.5rem 0.25rem;
-  position: relative;
-  transition: color var(--ox-transition-fast);
-}
-
-.home-nav-link:hover {
-  color: var(--ox-orange);
-}
-
-.home-nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: var(--ox-orange);
-  transition: width var(--ox-transition-fast);
-}
-
-.home-nav-link:hover::after {
-  width: 100%;
-}
-
-.home-nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.home-nav-signin-btn {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ox-navy-800);
-  background: transparent;
-  border: 1px solid var(--ox-border);
-  padding: 0.5rem 1.15rem;
-  border-radius: var(--ox-radius-md);
-  cursor: pointer;
-  transition: all var(--ox-transition-fast);
-  text-decoration: none;
+/* Orange Client Portal CTA Button */
+.nav-client-portal-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.home-nav-signin-btn:hover {
-  background: var(--ox-bg-subtle);
-  border-color: var(--ox-navy-400);
-  color: var(--ox-navy-950);
-}
-
-.home-nav-cta-btn {
-  font-size: 0.9rem;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: #ffffff !important;
-  background: linear-gradient(135deg, var(--ox-orange) 0%, #ff4500 100%);
-  border: none;
-  padding: 0.55rem 1.25rem;
-  border-radius: var(--ox-radius-md);
+  background: var(--ox-orange, #ff5b1a);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full, 9999px);
+  text-decoration: none !important;
+  white-space: nowrap;
   box-shadow: 0 2px 8px rgba(255, 91, 26, 0.25);
-  cursor: pointer;
-  transition: all var(--ox-transition-fast);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  transition: all 0.3s ease !important;
+  line-height: normal;
 }
 
-.home-nav-cta-btn:hover {
-  background: linear-gradient(135deg, var(--ox-orange-hover) 0%, #e03e00 100%);
-  box-shadow: 0 4px 14px rgba(255, 91, 26, 0.35);
+.nav-client-portal-btn:hover {
+  background: var(--ox-orange-hover, #e04a0e) !important;
+  box-shadow: 0 4px 14px rgba(255, 91, 26, 0.38);
   transform: translateY(-1px);
+  color: #ffffff !important;
 }
 
-/* User Profile Dropdown in Nav */
-.home-nav-dropdown {
-  position: relative;
+.nav-client-portal-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(255, 91, 26, 0.25);
 }
 
-.home-nav-profile-trigger {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.95rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--ox-navy-800);
-  background: var(--ox-bg-subtle);
-  border: 1px solid var(--ox-border);
-  border-radius: var(--ox-radius-md);
-  cursor: pointer;
-  transition: all var(--ox-transition-fast);
+.nav-client-portal-btn:focus-visible {
+  outline: 2px solid var(--ox-orange, #ff5b1a);
+  outline-offset: 2px;
 }
 
-.home-nav-profile-trigger:hover {
-  border-color: var(--ox-navy-400);
+/* Suppress underline hover indicator on Client Portal button */
+.nav-links .nav-client-portal-btn::after {
+  display: none !important;
 }
 
-.home-nav-profile-trigger .arrow {
-  font-size: 0.65rem;
-  transition: transform var(--ox-transition-fast);
+/* Tablet & Mobile Nav Link Balance */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .nav-links {
+    gap: 1.15rem;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+  .nav-client-portal-btn,
+  .nav-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
 }
 
-.home-nav-dropdown.open .home-nav-profile-trigger .arrow {
-  transform: rotate(180deg);
-}
-
-.home-nav-dropdown-menu {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  width: 200px;
-  background: #ffffff;
-  border: 1px solid var(--ox-border);
-  border-radius: var(--ox-radius-md);
-  box-shadow: var(--ox-shadow-lg);
-  padding: 0.5rem;
-  display: none;
-  flex-direction: column;
-  z-index: 1050;
-}
-
-.home-nav-dropdown.open .home-nav-dropdown-menu {
-  display: flex;
-}
-
-.home-nav-dropdown-item {
-  width: 100%;
-  text-align: left;
-  padding: 0.6rem 0.85rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--ox-navy-700);
-  background: transparent;
-  border: none;
-  border-radius: var(--ox-radius-sm);
-  cursor: pointer;
-  transition: background var(--ox-transition-fast);
-  text-decoration: none;
-  display: block;
-}
-
-.home-nav-dropdown-item:hover {
-  background: var(--ox-bg-subtle);
-  color: var(--ox-navy-950);
-}
-
-/* Mobile Nav Toggle */
-.home-nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 38px;
-  height: 38px;
-  padding: 8px;
-  background: var(--ox-bg-subtle);
-  border: 1px solid var(--ox-border);
-  border-radius: var(--ox-radius-sm);
-  cursor: pointer;
-}
-
-.home-nav-toggle span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: var(--ox-navy-800);
-  border-radius: 2px;
-  transition: all var(--ox-transition-fast);
-}
-
-.home-nav-toggle.open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.home-nav-toggle.open span:nth-child(2) {
-  opacity: 0;
-}
-.home-nav-toggle.open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* Mobile Drawer */
-.home-nav-drawer {
-  position: fixed;
-  top: var(--ox-nav-height);
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  border-bottom: 1px solid var(--ox-border);
-  box-shadow: var(--ox-shadow-xl);
-  padding: 1.5rem;
-  display: none;
-  flex-direction: column;
-  gap: 1.25rem;
-  z-index: 999;
-}
-
-.home-nav-drawer.open {
-  display: flex;
-}
-
-.home-nav-drawer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.home-nav-drawer-links a {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--ox-navy-800);
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--ox-border-subtle);
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1.5rem;
+    padding: 2.5rem 1.5rem;
+  }
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+  .nav-links .nav-client-portal-btn,
+  .nav-links .nav-cta {
+    width: 85%;
+    max-width: 240px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    font-size: 0.9rem;
+    padding: 0.65rem 1.25rem;
+  }
 }
 
 /* ==========================================================================
@@ -2338,15 +2148,6 @@ body.home-page {
 }
 
 @media (max-width: 768px) {
-  .home-nav-menu,
-  .home-nav-actions .home-nav-signin-btn {
-    display: none;
-  }
-
-  .home-nav-toggle {
-    display: flex;
-  }
-
   .home-hero-title {
     font-size: 2.25rem;
   }

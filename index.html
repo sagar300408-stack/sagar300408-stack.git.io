@@ -104,67 +104,42 @@
   <div class="nav-overlay" id="nav-overlay"></div>
 
   <!-- ==========================================================================
-       HOME NAVIGATION
+       ORIGINYX NAVIGATION (Restored Original with Client Portal CTA)
        ========================================================================== -->
-  <header class="home-nav-wrapper" id="home-navbar">
-    <div class="home-container">
-      <nav class="home-nav-inner" id="navbar" role="navigation" aria-label="Main navigation">
-        <a href="/home" class="home-nav-brand" id="nav-logo-link" aria-label="Originyx Home">
-          <img decoding="async" src="logo.png" alt="Originyx Compass" class="home-nav-logo" width="32" height="32">
-          <img decoding="async" src="brand.png" alt="Originyx" class="home-nav-wordmark" width="105" height="22">
-        </a>
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="/home" class="nav-logo" id="nav-logo-link" aria-label="Originyx Home">
+        <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+        <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+      </a>
 
-        <div class="home-nav-menu" id="nav-links">
-          <a href="#problems" class="home-nav-link">Business Challenges</a>
-          <a href="#calculator" class="home-nav-link">Impact Calculator</a>
-          <a href="#method" class="home-nav-link">Solutions</a>
-          <a href="#products" class="home-nav-link">Products</a>
-          <a href="#engineering" class="home-nav-link">Engineering</a>
-          <a href="/about/" class="home-nav-link">About</a>
-        </div>
-
-        <div class="home-nav-actions">
-          <button class="home-nav-signin-btn" id="nav-sign-in-btn">Sign In</button>
-          
-          <div class="home-nav-dropdown hidden" id="nav-profile-dropdown">
-            <button class="home-nav-profile-trigger" id="nav-profile-trigger" type="button" aria-haspopup="true">
-              <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
-            </button>
-            <div class="home-nav-dropdown-menu">
-              <a href="https://app.originyx.in/dashboard" class="home-nav-dropdown-item" id="dropdown-client-portal">Client Portal</a>
-              <button class="home-nav-dropdown-item" id="dropdown-start-project" data-modal-target="start-project-modal" data-auth-required="true">Start a Project</button>
-              <button class="home-nav-dropdown-item" id="dropdown-sign-out">Sign Out</button>
-            </div>
-          </div>
-
-          <button class="home-nav-cta-btn" data-modal-target="start-project-modal" data-auth-required="true">
-            Discuss Your Business
-          </button>
-
-          <button class="home-nav-toggle" id="home-nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Mobile Drawer -->
-    <div class="home-nav-drawer" id="home-nav-drawer">
-      <div class="home-nav-drawer-links">
-        <a href="#problems">Business Challenges</a>
-        <a href="#calculator">Impact Calculator</a>
-        <a href="#method">Solutions</a>
-        <a href="#products">Products</a>
-        <a href="#engineering">Engineering</a>
+      <div class="nav-links" id="nav-links">
+        <a href="/home" class="active">Home</a>
+        <a href="/services/">Services</a>
+        <a href="/case-studies/">Case Studies</a>
+        <a href="/insights/">Insights</a>
         <a href="/about/">About</a>
-        <a href="https://app.originyx.in/dashboard">Client Portal</a>
+        <a href="/contact/">Contact</a>
+
+        <a href="https://app.originyx.in" class="nav-client-portal-btn" id="nav-client-portal-btn">Client Portal</a>
+        <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
+        <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
+          <button class="nav-profile-trigger" id="nav-profile-trigger" type="button" aria-haspopup="true">
+            <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Client Portal</a>
+            <button class="dropdown-item" id="dropdown-start-project" data-modal-target="start-project-modal" data-auth-required="true">Start a Project</button>
+            <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
+          </div>
+        </div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
-        <button class="home-btn-secondary" style="width: 100%; justify-content: center;" onclick="window.openAuthModal ? window.openAuthModal('login') : document.getElementById('nav-sign-in-btn').click();">Sign In</button>
-        <button class="home-btn-primary" style="width: 100%; justify-content: center;" data-modal-target="start-project-modal" data-auth-required="true">Discuss Your Business</button>
-      </div>
+
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
+  </nav>
 
   <!-- ==========================================================================
        HERO SECTION

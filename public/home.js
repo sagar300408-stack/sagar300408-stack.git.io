@@ -19,84 +19,19 @@
      1. NAVIGATION & ACCESSIBILITY
      ========================================================================== */
   function initHomeNav() {
-    const nav = document.getElementById('home-navbar');
-    const toggle = document.getElementById('home-nav-toggle');
-    const drawer = document.getElementById('home-nav-drawer');
-    const profileTrigger = document.getElementById('nav-profile-trigger');
-    const profileDropdown = document.getElementById('nav-profile-dropdown');
-
-    // Sticky nav shadow
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        nav?.classList.add('scrolled');
-      } else {
-        nav?.classList.remove('scrolled');
-      }
-    });
-
-    // Mobile Hamburger
-    toggle?.addEventListener('click', () => {
-      const isOpen = drawer?.classList.contains('open');
-      if (isOpen) {
-        drawer?.classList.remove('open');
-        toggle?.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      } else {
-        drawer?.classList.add('open');
-        toggle?.classList.add('open');
-        toggle?.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    // Close drawer on link click
-    drawer?.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        drawer?.classList.remove('open');
-        toggle?.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    // Profile Dropdown Toggle
-    profileTrigger?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      profileDropdown?.classList.toggle('open');
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!profileDropdown?.contains(e.target)) {
-        profileDropdown?.classList.remove('open');
-      }
-      if (!drawer?.contains(e.target) && !toggle?.contains(e.target)) {
-        drawer?.classList.remove('open');
-        toggle?.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Escape key closes menus
+    // Accessibility: Escape key closes active menus / dropdowns
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        profileDropdown?.classList.remove('open');
-        drawer?.classList.remove('open');
-        toggle?.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      }
-    });
+        const navLinks = document.getElementById('nav-links');
+        const navToggle = document.getElementById('nav-toggle');
+        const navOverlay = document.getElementById('nav-overlay');
+        const profileDropdown = document.getElementById('nav-profile-dropdown');
 
-    // Sign in trigger click opens auth modal
-    const navSignInBtn = document.getElementById('nav-sign-in-btn');
-    navSignInBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (typeof window.openAuthModal === 'function') {
-        window.openAuthModal('login');
-      } else {
-        const modal = document.getElementById('auth-modal');
-        const wrapper = document.getElementById('modal-wrapper');
-        if (modal && wrapper) {
-          wrapper.classList.remove('hidden');
-          modal.classList.remove('hidden');
-        }
+        navLinks?.classList.remove('open');
+        navToggle?.classList.remove('active');
+        navOverlay?.classList.remove('active');
+        profileDropdown?.classList.remove('active');
+        document.body.style.overflow = '';
       }
     });
   }
