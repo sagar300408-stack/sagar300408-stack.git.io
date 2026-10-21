@@ -160,7 +160,42 @@
     </style>
 </head>
 <body>
-    <ox-navbar></ox-navbar>
+    <ox-navbar>
+    <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+      <div class="container">
+        <a href="/home" class="nav-logo" id="nav-logo-link" aria-label="Originyx Home">
+          <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+          <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+        </a>
+
+        <div class="nav-links" id="nav-links">
+          <a href="/home">Home</a>
+          <a href="/services/">Services</a>
+          <a href="/case-studies/">Case Studies</a>
+          <a href="/insights/" class="active">Insights</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+
+          <a href="https://app.originyx.in" class="nav-dashboard-btn" id="nav-dashboard-btn">Dashboard</a>
+          <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
+          <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
+            <button class="nav-profile-trigger" id="nav-profile-trigger" type="button" aria-haspopup="true">
+              <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Dashboard</a>
+              <button class="dropdown-item" id="dropdown-start-project" data-modal-target="start-project-modal" data-auth-required="true">Start a Project</button>
+              <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </ox-navbar>
 
     <main id="article-container">
         <!-- Skeleton Loading -->

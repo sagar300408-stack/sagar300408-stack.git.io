@@ -9,42 +9,61 @@ class OxNavbar extends HTMLElement {
     const isAbout = path.includes('/about');
     const isContact = path.includes('/contact');
 
-    this.innerHTML = `
-      <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="container">
-          <a href="/home" class="nav-logo" id="nav-logo-link">
-            <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
-            <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
-          </a>
+    // Only inject HTML if not already statically rendered
+    if (!this.querySelector('#navbar')) {
+      this.innerHTML = `
+        <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+          <div class="container">
+            <a href="/home" class="nav-logo" id="nav-logo-link">
+              <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
+              <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
+            </a>
 
-          <div class="nav-links" id="nav-links">
-            <a href="/home" class="${isHome ? 'active' : ''}">Home</a>
-            <a href="/services/" class="${isServices ? 'active' : ''}">Services</a>
-            <a href="/case-studies/" class="${isCaseStudies ? 'active' : ''}">Case Studies</a>
-            <a href="/insights/" class="${isInsights ? 'active' : ''}">Insights</a>
-            <a href="/about/" class="${isAbout ? 'active' : ''}">About</a>
-            <a href="/contact/" class="${isContact ? 'active' : ''}">Contact</a>
-            
-            <a href="https://app.originyx.in" class="nav-dashboard-btn" id="nav-dashboard-btn">Dashboard</a>
-            <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
-            <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
-              <button class="nav-profile-trigger" id="nav-profile-trigger">
-                <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
-              </button>
-              <div class="dropdown-menu">
-                <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Dashboard</a>
-                <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
-                <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
+            <div class="nav-links" id="nav-links">
+              <a href="/home" class="${isHome ? 'active' : ''}">Home</a>
+              <a href="/services/" class="${isServices ? 'active' : ''}">Services</a>
+              <a href="/case-studies/" class="${isCaseStudies ? 'active' : ''}">Case Studies</a>
+              <a href="/insights/" class="${isInsights ? 'active' : ''}">Insights</a>
+              <a href="/about/" class="${isAbout ? 'active' : ''}">About</a>
+              <a href="/contact/" class="${isContact ? 'active' : ''}">Contact</a>
+              
+              <a href="https://app.originyx.in" class="nav-dashboard-btn" id="nav-dashboard-btn">Dashboard</a>
+              <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
+              <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
+                <button class="nav-profile-trigger" id="nav-profile-trigger">
+                  <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                  <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Dashboard</a>
+                  <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
+                  <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-      </nav>
-    `;
+            <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </nav>
+      `;
+    }
+
+    // Ensure Dashboard button exists in all situations
+    const navLinks = this.querySelector('#nav-links');
+    if (navLinks && !navLinks.querySelector('#nav-dashboard-btn')) {
+      const signInBtn = navLinks.querySelector('#nav-sign-in-btn');
+      const dashBtn = document.createElement('a');
+      dashBtn.href = 'https://app.originyx.in';
+      dashBtn.className = 'nav-dashboard-btn';
+      dashBtn.id = 'nav-dashboard-btn';
+      dashBtn.textContent = 'Dashboard';
+      if (signInBtn) {
+        navLinks.insertBefore(dashBtn, signInBtn);
+      } else {
+        navLinks.appendChild(dashBtn);
+      }
+    }
 
     // Re-bind navbar interactions since elements were freshly injected
     this.bindEvents();
