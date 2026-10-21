@@ -185,7 +185,8 @@ body.home-page {
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
 }
 
-/* Orange Client Portal CTA Button */
+/* Orange Dashboard CTA Button */
+.nav-dashboard-btn,
 .nav-client-portal-btn {
   display: inline-flex;
   align-items: center;
@@ -204,6 +205,7 @@ body.home-page {
   line-height: normal;
 }
 
+.nav-dashboard-btn:hover,
 .nav-client-portal-btn:hover {
   background: var(--ox-orange-hover, #e04a0e) !important;
   box-shadow: 0 4px 14px rgba(255, 91, 26, 0.38);
@@ -211,17 +213,20 @@ body.home-page {
   color: #ffffff !important;
 }
 
+.nav-dashboard-btn:active,
 .nav-client-portal-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(255, 91, 26, 0.25);
 }
 
+.nav-dashboard-btn:focus-visible,
 .nav-client-portal-btn:focus-visible {
   outline: 2px solid var(--ox-orange, #ff5b1a);
   outline-offset: 2px;
 }
 
-/* Suppress underline hover indicator on Client Portal button */
+/* Suppress underline hover indicator on Dashboard button */
+.nav-links .nav-dashboard-btn::after,
 .nav-links .nav-client-portal-btn::after {
   display: none !important;
 }
@@ -234,7 +239,7 @@ body.home-page {
   .nav-links a {
     font-size: 0.85rem;
   }
-  .nav-client-portal-btn,
+  .nav-dashboard-btn, .nav-client-portal-btn,
   .nav-cta {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
@@ -249,7 +254,7 @@ body.home-page {
   .nav-links a {
     font-size: 1.1rem;
   }
-  .nav-links .nav-client-portal-btn,
+  .nav-links .nav-dashboard-btn, .nav-client-portal-btn,
   .nav-links .nav-cta {
     width: 85%;
     max-width: 240px;

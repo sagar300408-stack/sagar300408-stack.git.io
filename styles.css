@@ -375,6 +375,62 @@ button {
   width: 100%;
 }
 
+/* Dashboard Button — Prominent Orange Box */
+.nav-dashboard-btn,
+ox-navbar .navbar .nav-links a.nav-dashboard-btn,
+.nav-client-portal-btn,
+ox-navbar .navbar .nav-links a.nav-client-portal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.85rem;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  background: #ff5b1a !important; /* Orange Box */
+  border: 1px solid #ff5b1a;
+  border-radius: var(--radius-full);
+  text-decoration: none !important;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(255, 91, 26, 0.25);
+  transition: all 0.3s ease !important;
+  line-height: normal;
+}
+
+.nav-dashboard-btn:hover,
+ox-navbar .navbar .nav-links a.nav-dashboard-btn:hover,
+.nav-client-portal-btn:hover,
+ox-navbar .navbar .nav-links a.nav-client-portal-btn:hover {
+  background: #e04a0e !important;
+  border-color: #e04a0e !important;
+  box-shadow: 0 4px 14px rgba(255, 91, 26, 0.38);
+  transform: translateY(-1px);
+  color: #ffffff !important;
+}
+
+.nav-dashboard-btn:active,
+ox-navbar .navbar .nav-links a.nav-dashboard-btn:active,
+.nav-client-portal-btn:active,
+ox-navbar .navbar .nav-links a.nav-client-portal-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(255, 91, 26, 0.2);
+}
+
+.nav-dashboard-btn:focus-visible,
+ox-navbar .navbar .nav-links a.nav-dashboard-btn:focus-visible,
+.nav-client-portal-btn:focus-visible,
+ox-navbar .navbar .nav-links a.nav-client-portal-btn:focus-visible {
+  outline: 2px solid #ff5b1a;
+  outline-offset: 2px;
+}
+
+.nav-dashboard-btn::after,
+ox-navbar .navbar .nav-links a.nav-dashboard-btn::after,
+.nav-client-portal-btn::after,
+ox-navbar .navbar .nav-links a.nav-client-portal-btn::after {
+  display: none !important;
+}
+
 .nav-cta {
   padding: 0.55rem 1.3rem;
   font-size: 0.85rem;
@@ -1362,6 +1418,23 @@ button {
 }
 
 /* Mobile */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .nav-links {
+    gap: 1.15rem;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+  .nav-dashboard-btn,
+  ox-navbar .navbar .nav-links a.nav-dashboard-btn,
+  .nav-client-portal-btn,
+  ox-navbar .navbar .nav-links a.nav-client-portal-btn,
+  .nav-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --space-4xl: 4rem;
@@ -1392,6 +1465,18 @@ button {
 
   .nav-links a {
     font-size: 1.1rem;
+  }
+
+  .nav-links .nav-dashboard-btn,
+  ox-navbar .navbar .nav-links a.nav-dashboard-btn,
+  .nav-links .nav-client-portal-btn,
+  ox-navbar .navbar .nav-links a.nav-client-portal-btn,
+  .nav-links .nav-cta {
+    width: 80%;
+    max-width: 220px;
+    text-align: center;
+    justify-content: center;
+    display: inline-flex;
   }
 
   .nav-toggle {

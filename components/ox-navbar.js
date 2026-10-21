@@ -25,13 +25,14 @@ class OxNavbar extends HTMLElement {
             <a href="/about/" class="${isAbout ? 'active' : ''}">About</a>
             <a href="/contact/" class="${isContact ? 'active' : ''}">Contact</a>
             
+            <a href="https://app.originyx.in" class="nav-dashboard-btn" id="nav-dashboard-btn">Dashboard</a>
             <button class="nav-cta" id="nav-sign-in-btn">Sign In</button>
             <div class="nav-profile-dropdown hidden" id="nav-profile-dropdown">
               <button class="nav-profile-trigger" id="nav-profile-trigger">
                 <span id="nav-profile-name">Account</span> <span class="arrow">▼</span>
               </button>
               <div class="dropdown-menu">
-                <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Client Portal</a>
+                <a href="https://app.originyx.in/dashboard" class="dropdown-item" id="dropdown-client-portal" style="display: block; text-decoration: none; text-align: left; color: inherit;">Dashboard</a>
                 <button class="dropdown-item" id="dropdown-start-project">Start a Project</button>
                 <button class="dropdown-item" id="dropdown-sign-out">Sign Out</button>
               </div>
