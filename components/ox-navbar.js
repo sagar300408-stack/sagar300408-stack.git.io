@@ -14,13 +14,13 @@ class OxNavbar extends HTMLElement {
       this.innerHTML = `
         <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
           <div class="container">
-            <a href="/home" class="nav-logo" id="nav-logo-link">
+            <a href="/" class="nav-logo" id="nav-logo-link">
               <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
               <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
             </a>
 
             <div class="nav-links" id="nav-links">
-              <a href="/home" class="${isHome ? 'active' : ''}">Home</a>
+              <a href="/" class="${isHome ? 'active' : ''}">Home</a>
               <a href="/services/" class="${isServices ? 'active' : ''}">Services</a>
               <a href="/case-studies/" class="${isCaseStudies ? 'active' : ''}">Case Studies</a>
               <a href="/insights/" class="${isInsights ? 'active' : ''}">Insights</a>

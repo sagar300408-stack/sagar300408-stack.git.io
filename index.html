@@ -7,18 +7,18 @@
   <link rel="manifest" href="site.webmanifest">
 
   <!-- SEO Meta Tags -->
-  <title>Originyx | Business-First AI Systems, Workflow Automation & Enterprise Architecture</title>
-  <meta name="description" content="Originyx builds custom AI workflow automation systems, autonomous multi-agent networks, and enterprise software for businesses. We eliminate repetitive operational friction so teams can focus on growth.">
+  <title>Originyx | AI Workflow Automation & Business Systems Architecture</title>
+  <meta name="description" content="Originyx engineers AI workflow automation systems, revenue operations software, and event-driven architectures to eliminate operational friction and accelerate growth.">
   <meta name="keywords" content="Originyx, AI Workflow Automation, Enterprise AI Systems, Business Automation, Autonomous Agents, Customer Engagement, SaaS, FastAPI, Next.js, Supabase">
   <meta name="author" content="Originyx">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://originyx.in/home">
+  <link rel="canonical" href="https://originyx.in/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Originyx | Built Around Your Business. Powered by Technology.">
   <meta property="og:description" content="Rethink operational processes with intelligent systems that give your team time to focus on customers, decisions, and growth.">
-  <meta property="og:url" content="https://originyx.in/home">
+  <meta property="og:url" content="https://originyx.in/">
   <meta property="og:image" content="https://originyx.in/brand.png">
   <meta property="og:site_name" content="Originyx">
 
@@ -28,19 +28,33 @@
   <meta name="twitter:description" content="Eliminate repetitive tasks, connect disconnected tools, and accelerate business momentum with custom AI systems.">
   <meta name="twitter:image" content="https://originyx.in/brand.png">
 
-  <!-- Structured Data: Organization Schema -->
+  <!-- Structured Data: Organization & WebSite Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Originyx",
-    "url": "https://originyx.in/",
-    "logo": "https://originyx.in/logo.png",
-    "description": "Originyx develops bespoke AI workflow automation systems, autonomous customer engagement pipelines, and enterprise software architectures for businesses.",
-    "foundingDate": "2024",
-    "sameAs": [
-      "https://www.linkedin.com/company/originyx",
-      "https://github.com/sagar300408-stack"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://originyx.in/#organization",
+        "name": "Originyx",
+        "url": "https://originyx.in/",
+        "logo": "https://originyx.in/logo.png",
+        "description": "Originyx is an AI-first technology company researching, engineering, and developing real SaaS products and workflow automation systems that solve business friction.",
+        "sameAs": [
+          "https://www.linkedin.com/company/originyx",
+          "https://github.com/sagar300408-stack"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://originyx.in/#website",
+        "url": "https://originyx.in/",
+        "name": "Originyx",
+        "description": "AI-first technology company engineering practical SaaS systems and workflow automation for measurable business outcomes.",
+        "publisher": {
+          "@id": "https://originyx.in/#organization"
+        }
+      }
     ]
   }
   </script>
@@ -108,13 +122,13 @@
        ========================================================================== -->
   <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <a href="/home" class="nav-logo" id="nav-logo-link" aria-label="Originyx Home">
+      <a href="/" class="nav-logo" id="nav-logo-link" aria-label="Originyx Home">
         <img decoding="async" src="/logo.png" alt="ORIGINYX Logo" class="logo-img" width="32" height="32">
         <img decoding="async" src="/brand.png" alt="ORIGINYX" class="brand-img" width="100" height="24">
       </a>
 
       <div class="nav-links" id="nav-links">
-        <a href="/home" class="active">Home</a>
+        <a href="/" class="active">Home</a>
         <a href="/services/">Services</a>
         <a href="/case-studies/">Case Studies</a>
         <a href="/insights/">Insights</a>
@@ -1020,7 +1034,7 @@ export function useEntitlements(user: User | null) {
     <div class="home-container">
       <div class="home-footer-grid">
         <div class="home-footer-brand">
-          <a href="/home" style="display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+          <a href="/" style="display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none;">
             <img decoding="async" src="logo.png" alt="Originyx Compass" width="32" height="32">
             <img decoding="async" src="brand.png" alt="Originyx" width="105" height="22">
           </a>

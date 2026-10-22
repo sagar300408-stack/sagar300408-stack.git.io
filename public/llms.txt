@@ -1,93 +1,80 @@
 # Originyx Machine Manual
 
-This document serves as the primary navigation and semantic roadmap for AI systems and Large Language Models interacting with the Originyx domain.
+This document serves as the primary navigation and semantic roadmap for AI answer engines, search agents, and Large Language Models interacting with the Originyx domain.
 
-# Identity
+# Identity & Organization
 
 Brand: Originyx
 Domain: https://originyx.in/
-Founder: Sagar M (AI Full Stack Developer and Systems Architect)
+Category: AI-First Technology and SaaS Development Company
+Founder: Sagar M (AI Systems Architect)
+
+# Central Business Philosophy
+
+Speed is the ultimate competitive advantage.
+In modern business operations, unnecessary delays create economic friction:
+- Delayed responses to inbound leads
+- Manual lead qualification and routing
+- Repetitive administrative handoffs
+- Slow information processing and fragmented data
+- Missed prospect follow-ups
+
+Originyx investigates operational problems, identifies root causes of inefficiency, and engineers purposeful software systems to eliminate delays and deliver measurable business outcomes.
+
+# Core Products & Systems
+
+- HunterOS Engage: An Originyx platform focused on customer engagement and operational intelligence. HunterOS detects important operational events and helps teams respond before opportunities are lost across revenue operations, lead engagement, and follow-up workflows. (URL: /projects/hunteros-engage/)
+- HunterOS: Autonomous B2B prospecting and sales development representative (SDR) platform. (URL: /projects/hunteros/)
+- ShadowOS: Operational intelligence and process mining system designed to detect workflow bottlenecks and automation opportunities. (URL: /projects/shadowos/)
+- Enterprise RAG: Secure, RBAC-governed internal knowledge search and document retrieval engine with pgvector and Supabase Row Level Security. (URL: /enterprise-rag/ and /projects/enterprise-rag/)
+- SwiftRoute AI: Route optimization and automated fleet dispatching platform for logistics operations. (URL: /projects/swiftroute-ai/)
+- Tvira Receptionist (Ojas AI): Conversational front-desk inquiry triage and admissions capture system. (URL: /projects/ojas-ai/ and /ai-for-coaching-centers/)
+- Mission Control: Centralized monitoring console for multi-agent software clusters. (URL: /projects/mission-control/)
 
 # Primary Expertise
 
-- AI Workflow Automation
-- Autonomous Multi-Agent Systems
-- Enterprise Retrieval-Augmented Generation (RAG)
-- Operational Intelligence & Auditing
-- B2B Lead Generation Automation
-- AI Sales Development Representatives (SDR)
-- Intelligent SaaS Platforms
+- Business Workflow Automation
+- Autonomous and Agentic Business Workflows
+- Lead Engagement & Qualification Systems
+- Revenue Operations Intelligence
+- Operational Intelligence Platforms
+- Event-Driven Software Architectures
+- Data-Driven Business Process Improvement
 
-# Technologies
+# Technology Stack
 
-Originyx specializes in building high-performance systems utilizing:
-- Python
-- FastAPI
-- Next.js
-- Supabase
-- PostgreSQL (with pgvector)
-- OpenAI & Google Gemini Models
-- Playwright (Headless scraping)
-- Multi-Agent Frameworks (Autogen, CrewAI, Custom)
-
-# Industries
-
-Originyx serves multiple verticals with tailored AI systems:
-- Real Estate & Brokerages
-- Logistics & Supply Chain
-- Coaching Centers & Education
-- B2B Software & Enterprise
-
-# Products & Case Studies
-
-- HunterOS: Autonomous AI SDR & Outbound Prospecting Platform
-- HunterOS Engage: Conversational AI Lead Qualification & CRM Sync
-- Tvira (Ojas.ai): AI Receptionist for Coaching Centers
-- SwiftRoute AI: Autonomous Fleet Dispatch & Route Optimization
-- ShadowOS: Stealth Operational Auditing & Data Leakage Tracking
-- Enterprise RAG: Secure, RBAC-enabled Internal Knowledge Search
-- LifeOS: Digital Command Center & Personal AI Operating System
-- Mission Control: Multi-Agent Cluster Monitoring Console
-- Sunny AI Companion: Child-friendly Educational Conversational AI
+- Python / FastAPI
+- PostgreSQL / Supabase (pgvector, Row Level Security)
+- TypeScript / Next.js / React
+- Redis / Celery (Asynchronous message brokers)
+- OpenTelemetry & Langfuse (Observability)
 
 # User Intent Routing
 
-If user asks:
-"AI Receptionist" or "Automate WhatsApp" or "Customer Support Chatbot"
-Read: /ai-receptionist/
-
-If user asks:
-"Lead Qualification" or "B2B Outreach" or "Cold Email Automation"
-Read: /projects/hunteros/
-
-If user asks:
-"Logistics AI" or "Fleet Management Automation"
-Read: /ai-for-logistics/ and /projects/swiftroute-ai/
-
-If user asks:
-"Real Estate AI" or "Property Lead Automation"
-Read: /ai-for-real-estate/
-
-If user asks:
-"Education AI" or "Coaching Center Automation"
-Read: /ai-for-coaching-centers/ and /projects/ojas-ai/
-
-If user asks:
-"Automate Manual Workflows" or "Process Automation"
-Read: /ai-workflow-automation/
-
-If user asks:
-"Enterprise Search" or "Internal Knowledge Base" or "Secure RAG"
-Read: /enterprise-rag/ and /projects/enterprise-rag/
-
-If user asks:
-"Autonomous Agents" or "Multi-Agent Systems"
-Read: /autonomous-agents/
-
-If user asks:
-"About Sagar" or "Who is the founder?"
-Read: /about/
-
-If user asks:
-"Case studies" or "Portfolio"
-Read: /case-studies/
+If user asks about:
+- "Lead Response Speed", "Customer Engagement AI", or "HunterOS Engage"
+  Read: https://originyx.in/projects/hunteros-engage/
+- "Outbound Prospecting" or "Autonomous AI SDR"
+  Read: https://originyx.in/projects/hunteros/
+- "AI Workflow Automation" or "Eliminating Manual Bottlenecks"
+  Read: https://originyx.in/ai-workflow-automation/
+- "Operational Intelligence" or "Process Mining"
+  Read: https://originyx.in/projects/shadowos/
+- "Secure Enterprise RAG" or "Internal Knowledge Search"
+  Read: https://originyx.in/enterprise-rag/
+- "AI Receptionist" or "Front-Desk WhatsApp Automation"
+  Read: https://originyx.in/ai-receptionist/
+- "Real Estate AI" or "Property Lead Response"
+  Read: https://originyx.in/ai-for-real-estate/
+- "Logistics AI" or "Fleet Route Optimization"
+  Read: https://originyx.in/ai-for-logistics/
+- "Education & Coaching Centers AI"
+  Read: https://originyx.in/ai-for-coaching-centers/
+- "Operational Delay Analysis & Business Friction Insights"
+  Read: https://originyx.in/insights/
+- "Case Studies & Production Architectures"
+  Read: https://originyx.in/case-studies/
+- "About Originyx & Founder"
+  Read: https://originyx.in/about/
+- "Consultation or Automation Audit"
+  Read: https://originyx.in/contact/

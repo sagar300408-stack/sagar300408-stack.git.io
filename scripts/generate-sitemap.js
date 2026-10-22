@@ -4,12 +4,14 @@ const path = require('path');
 const domain = 'https://originyx.in';
 const rootDir = path.resolve(__dirname, '..');
 
-// Hardcoded core pages and their configurations
+// Core public routes
 const coreUrls = [
   { loc: '/', priority: '1.0', changefreq: 'weekly' },
   { loc: '/about/', priority: '0.8', changefreq: 'monthly' },
   { loc: '/services/', priority: '0.8', changefreq: 'monthly' },
   { loc: '/case-studies/', priority: '0.8', changefreq: 'weekly' },
+  { loc: '/insights/', priority: '0.9', changefreq: 'weekly' },
+  { loc: '/blog/', priority: '0.8', changefreq: 'monthly' },
   { loc: '/contact/', priority: '0.8', changefreq: 'monthly' },
   { loc: '/ai-workflow-automation/', priority: '0.9', changefreq: 'monthly' },
   { loc: '/autonomous-agents/', priority: '0.9', changefreq: 'monthly' },
@@ -19,7 +21,10 @@ const coreUrls = [
   { loc: '/ai-for-real-estate/', priority: '0.9', changefreq: 'monthly' },
   { loc: '/ai-for-logistics/', priority: '0.9', changefreq: 'monthly' },
   { loc: '/ai-for-coaching-centers/', priority: '0.9', changefreq: 'monthly' },
-  { loc: '/ai-automation-india/', priority: '0.9', changefreq: 'monthly' }
+  { loc: '/ai-automation-india/', priority: '0.9', changefreq: 'monthly' },
+  { loc: '/privacy-policy/', priority: '0.3', changefreq: 'yearly' },
+  { loc: '/terms-and-conditions/', priority: '0.3', changefreq: 'yearly' },
+  { loc: '/cookie-policy/', priority: '0.3', changefreq: 'yearly' }
 ];
 
 function generateSitemap() {
@@ -49,6 +54,24 @@ function generateSitemap() {
     <loc>${domain}/projects/${proj}/</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`);
+    });
+  }
+
+  // Scan insights directory for standalone articles
+  const insightsDir = path.join(rootDir, 'insights');
+  if (fs.existsSync(insightsDir)) {
+    const articles = fs.readdirSync(insightsDir).filter(file => {
+      const fullPath = path.join(insightsDir, file);
+      return fs.statSync(fullPath).isDirectory() && fs.existsSync(path.join(fullPath, 'index.html'));
+    });
+
+    articles.forEach(article => {
+      sitemapItems.push(`  <url>
+    <loc>${domain}/insights/${article}/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`);
     });
@@ -57,11 +80,12 @@ function generateSitemap() {
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapItems.join('\n')}
-</urlset>`;
+</urlset>
+`;
 
   const sitemapPath = path.join(rootDir, 'sitemap.xml');
   fs.writeFileSync(sitemapPath, sitemapXml, 'utf8');
-  console.log(`Successfully generated sitemap at ${sitemapPath}`);
+  console.log(`Successfully generated sitemap at ${sitemapPath} with ${sitemapItems.length} entries.`);
 }
 
 generateSitemap();
