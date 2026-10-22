@@ -22,6 +22,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/home/",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin(.*)",
       "destination": "/admin/index.html"
     },
@@ -39,7 +43,7 @@
           "value": "app.originyx.in"
         }
       ],
-      "destination": "/insights",
+      "destination": "/home",
       "permanent": false
     }
   ],
