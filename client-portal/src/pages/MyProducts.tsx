@@ -19,6 +19,18 @@ interface ActiveProduct {
 }
 
 export default function MyProducts() {
+  useEffect(() => {
+    document.title = 'My Products | Originyx Client Portal';
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'robots';
+      document.head.appendChild(meta);
+    }
+    meta.content = 'noindex, nofollow';
+  }, []);
+
+
   const { user } = useAuth();
   const [products, setProducts] = useState<ActiveProduct[]>([]);
   const [loading, setLoading] = useState(true);

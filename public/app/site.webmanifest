@@ -1,0 +1,21 @@
+{
+  "name": "Originyx Client Portal",
+  "short_name": "Originyx Portal",
+  "description": "Access the Originyx Client Portal to explore available products and manage your Originyx services through one central platform.",
+  "start_url": "/explore",
+  "display": "standalone",
+  "background_color": "#fbfbfa",
+  "theme_color": "#244235",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

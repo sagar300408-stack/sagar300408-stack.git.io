@@ -4,17 +4,32 @@
   "rewrites": [
     {
       "source": "/assets/:path*",
-      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "app.originyx.in"
+        }
+      ],
       "destination": "/app/assets/:path*"
     },
     {
-      "source": "/:file(.*\\.(?:png|svg|ico|jpg|jpeg|webp|woff|woff2|ttf|json|css|js|map))",
-      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "source": "/:file(.*\\.(?:png|svg|ico|jpg|jpeg|webp|woff|woff2|ttf|json|css|js|map|txt|xml|webmanifest))",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.originyx.in"
+        }
+      ],
       "destination": "/app/:file"
     },
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "app.originyx.in" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "app.originyx.in"
+        }
+      ],
       "destination": "/app/index.html"
     },
     {

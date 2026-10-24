@@ -1,6 +1,19 @@
+import { useEffect } from 'react';
 import { Receipt, ShieldCheck } from 'lucide-react';
 
 export default function Billing() {
+  useEffect(() => {
+    document.title = 'Billing & Invoices | Originyx Client Portal';
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'robots';
+      document.head.appendChild(meta);
+    }
+    meta.content = 'noindex, nofollow';
+  }, []);
+
+
 
   return (
     <div style={{ padding: '32px 40px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>

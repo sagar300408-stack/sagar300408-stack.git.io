@@ -1,0 +1,13 @@
+# Originyx Client Portal robots.txt (https://app.originyx.in)
+User-agent: *
+Allow: /explore
+Allow: /assets/
+Disallow: /dashboard
+Disallow: /my-products
+Disallow: /subscriptions
+Disallow: /billing
+Disallow: /account
+Disallow: /auth/
+Disallow: /login
+
+Sitemap: https://app.originyx.in/sitemap.xml

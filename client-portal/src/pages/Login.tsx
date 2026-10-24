@@ -9,6 +9,18 @@ const MAIN_SITE_SIGNIN =
   (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
 
 export default function Login() {
+  useEffect(() => {
+    document.title = 'Sign In | Originyx Client Portal';
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'robots';
+      document.head.appendChild(meta);
+    }
+    meta.content = 'noindex, nofollow';
+  }, []);
+
+
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [showPass, setShowPass] = useState(false);

@@ -19,6 +19,18 @@ interface SubscriptionItem {
 }
 
 export default function Subscriptions() {
+  useEffect(() => {
+    document.title = 'Subscriptions | Originyx Client Portal';
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'robots';
+      document.head.appendChild(meta);
+    }
+    meta.content = 'noindex, nofollow';
+  }, []);
+
+
   const { user } = useAuth();
   const [subscriptions, setSubscriptions] = useState<SubscriptionItem[]>([]);
   const [loading, setLoading] = useState(true);
