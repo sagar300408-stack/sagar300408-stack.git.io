@@ -1,3 +1,4 @@
+import SEOHead from '../components/SEO/SEOHead';
 import { useState, useEffect } from 'react';
 import { getOCEClient } from '../lib/sdk';
 import { useAuth } from '../lib/AuthContext';
@@ -29,6 +30,7 @@ export default function Dashboard() {
 
   return (
     <>
+      <SEOHead title="Overview | Originyx Client Portal" description="Private client workspace overview and system monitoring." robots="noindex, nofollow" />
       <style>{`
         .overview-container {
           padding: 32px 40px;

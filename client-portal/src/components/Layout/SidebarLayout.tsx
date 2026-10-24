@@ -13,7 +13,9 @@ import {
   Receipt, 
   Menu, 
   X,
-  ChevronRight
+  ChevronRight,
+  Tag,
+  BookOpen
 } from 'lucide-react';
 
 const MAIN_SITE_SIGNIN =
@@ -115,13 +117,19 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
   }, [isMobileOpen]);
 
   const navItems = [
-    { label: 'Overview', to: '/dashboard', icon: Home },
+    ...(user ? [{ label: 'Overview', to: '/dashboard', icon: Home }] : [{ label: 'Portal Home', to: '/', icon: Home }]),
     { label: 'Explore Products', to: '/explore', icon: Box },
-    { label: 'My Products', to: '/my-products', icon: Grid },
+    ...(user ? [
+      { label: 'My Products', to: '/my-products', icon: Grid },
+      { divider: true },
+      { label: 'Subscriptions', to: '/subscriptions', icon: CreditCard },
+      { label: 'Billing', to: '/billing', icon: Receipt },
+      { divider: true },
+      { label: 'Account', to: '/account', icon: User }
+    ] : []),
     { divider: true },
-    { label: 'Subscriptions', to: '/subscriptions', icon: CreditCard },
-    { label: 'Billing', to: '/billing', icon: Receipt },
-    ...(user ? [{ divider: true }, { label: 'Account', to: '/account', icon: User }] : [])
+    { label: 'Commercial Models', to: '/pricing', icon: Tag },
+    { label: 'Documentation', to: '/docs', icon: BookOpen }
   ];
 
   return (
@@ -775,10 +783,10 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
         >
           {/* Logo Area */}
           <div className="sidebar-logo">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <NavLink to={user ? "/dashboard" : "/"} style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
               <img src="/logo.png" alt="Logo" className="sidebar-logo-icon" />
               <img src="/brand.png" alt="Originyx" className="sidebar-logo-brand" />
-            </div>
+            </NavLink>
 
             {/* Mobile close button inside drawer */}
             <button
@@ -910,10 +918,10 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
               </button>
 
               {/* Mobile brand presentation */}
-              <a href="/dashboard" className="header-mobile-brand">
+              <NavLink to={user ? "/dashboard" : "/"} className="header-mobile-brand">
                 <img src="/logo.png" alt="Logo" style={{ height: '18px', width: 'auto' }} />
                 <img src="/brand.png" alt="Originyx" style={{ height: '12px', width: 'auto' }} />
-              </a>
+              </NavLink>
 
               {/* Desktop Workspace badge */}
               <span className="header-title-badge">Client Portal</span>

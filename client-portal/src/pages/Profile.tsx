@@ -1,3 +1,4 @@
+import SEOHead from '../components/SEO/SEOHead';
 import { useState, useEffect } from 'react';
 import { getOCEClient } from '../lib/sdk';
 import { useAuth } from '../lib/AuthContext';
@@ -150,6 +151,7 @@ export default function Profile() {
 
   return (
     <>
+      <SEOHead title="Account Settings | Originyx Client Portal" description="Client organization profile and account credentials." robots="noindex, nofollow" />
       <style>{`
         /* Core Layout */
         .profile-container {

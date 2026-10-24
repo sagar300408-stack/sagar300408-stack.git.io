@@ -1,0 +1,23 @@
+# Originyx Client Portal robots.txt
+# Production Domain: https://app.originyx.in
+# Company: Originyx (https://originyx.in)
+
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /products/*
+Allow: /explore
+Allow: /pricing
+Allow: /docs
+
+# Disallow private customer-authenticated workspaces and authentication flows
+Disallow: /dashboard
+Disallow: /my-products
+Disallow: /subscriptions
+Disallow: /billing
+Disallow: /account
+Disallow: /login
+Disallow: /auth/
+
+# Authoritative Client Portal Sitemap
+Sitemap: https://app.originyx.in/sitemap.xml

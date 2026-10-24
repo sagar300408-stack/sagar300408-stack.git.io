@@ -1,0 +1,21 @@
+{
+  "name": "Originyx Client Portal",
+  "short_name": "Originyx Portal",
+  "description": "Discover, purchase, and manage Originyx operational AI products and services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfbfa",
+  "theme_color": "#244235",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
