@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../lib/AuthContext';
 import { getOCEClient } from '../lib/sdk';
-import { AUTHORITATIVE_PRODUCTS } from '../lib/products';
-import SEOHead from '../components/SEO/SEOHead';
+import { classifyDbError } from '../lib/dbErrors';
 import { 
   Check, ArrowRight, ShieldCheck, Lock, Sparkles, X, AlertCircle, Box 
 } from 'lucide-react';
@@ -92,15 +91,9 @@ export default function ExploreProducts() {
         };
       });
 
-      if (mapped && mapped.length > 0) {
-        setProducts(mapped);
-      } else {
-        setProducts(AUTHORITATIVE_PRODUCTS);
-      }
+      setProducts(mapped);
     } catch (err: any) {
-      console.warn('DB catalogue load failed, falling back to authoritative local catalogue:', err);
-      setProducts(AUTHORITATIVE_PRODUCTS);
-      setError(null);
+      setError(classifyDbError(err).message);
     } finally {
       setLoading(false);
     }
@@ -177,26 +170,8 @@ export default function ExploreProducts() {
     }
   };
 
-  const exploreJsonLd = {
-    '@type': 'ItemList',
-    'name': 'Originyx Product Catalogue',
-    'description': 'Verified SaaS products and operational intelligence engines engineered by Originyx.',
-    'itemListElement': products.map((p, idx) => ({
-      '@type': 'ListItem',
-      'position': idx + 1,
-      'name': p.name,
-      'url': 'https://app.originyx.in/products/' + p.slug
-    }))
-  };
-
   return (
     <div style={{ padding: '32px 40px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
-      <SEOHead
-        title="Explore Products & Operational Systems | Originyx Client Portal"
-        description="Explore the authoritative Originyx product catalogue. Discover verified operational AI systems, inspect technical specifications, and submit pilot inquiries."
-        canonicalUrl="https://app.originyx.in/products"
-        jsonLd={exploreJsonLd}
-      />
       {/* ─── Header ─── */}
       <div style={{ marginBottom: '36px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 10px', backgroundColor: '#eef3f0', borderRadius: '100px', marginBottom: '12px' }}>
@@ -352,9 +327,7 @@ export default function ExploreProducts() {
                     </span>
                   </div>
                   <h2 style={{ fontSize: '22px', fontWeight: 700, color: '#1c1c1c', margin: '0 0 6px 0' }}>
-                    <NavLink to={'/products/' + product.slug} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      {product.name}
-                    </NavLink>
+                    {product.name}
                   </h2>
                   <p style={{ fontSize: '14px', fontWeight: 600, color: '#244235', margin: '0 0 10px 0' }}>
                     {product.tagline}
@@ -364,49 +337,28 @@ export default function ExploreProducts() {
                   </p>
                 </div>
 
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <NavLink
-                    to={'/products/' + product.slug}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '9px 14px',
-                      backgroundColor: '#ffffff',
-                      border: '1px solid #d4d4cf',
-                      color: '#1c1c1c',
-                      borderRadius: '8px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                      whiteSpace: 'nowrap'
-                    }}
-                  >
-                    Technical Specs
-                  </NavLink>
-                  <button
-                    onClick={() => handleActionClick(product)}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      padding: '10px 18px',
-                      backgroundColor: '#244235',
-                      color: '#ffffff',
-                      borderRadius: '8px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      border: 'none',
-                      cursor: 'pointer',
-                      transition: 'background-color 0.2s',
-                      whiteSpace: 'nowrap'
-                    }}
-                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a3026'}
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#244235'}
-                  >
-                    Express Interest <ArrowRight size={14} />
-                  </button>
-                </div>
+                <button
+                  onClick={() => handleActionClick(product)}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '10px 18px',
+                    backgroundColor: '#244235',
+                    color: '#ffffff',
+                    borderRadius: '8px',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.2s',
+                    whiteSpace: 'nowrap'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a3026'}
+                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#244235'}
+                >
+                  Express Interest <ArrowRight size={14} />
+                </button>
               </div>
 
               {/* Middle: Key Capabilities (if provided in metadata) */}

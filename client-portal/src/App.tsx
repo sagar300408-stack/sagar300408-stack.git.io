@@ -8,10 +8,6 @@ import MyProducts from './pages/MyProducts';
 import Subscriptions from './pages/Subscriptions';
 import Billing from './pages/Billing';
 import NotFound from './pages/NotFound';
-import PortalHome from './pages/PortalHome';
-import ProductDetail from './pages/ProductDetail';
-import Pricing from './pages/Pricing';
-import Docs from './pages/Docs';
 import SidebarLayout from './components/Layout/SidebarLayout';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { ToastProvider } from './components/Layout/ToastProvider';
@@ -86,17 +82,6 @@ function AuthCallback() {
   return <GlobalLoader message="Authenticating…" />;
 }
 
-function RootRoute() {
-  const { user, loading } = useAuth();
-  if (loading) {
-    return <GlobalLoader message="Loading workspace…" />;
-  }
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
-  }
-  return <PortalHome />;
-}
-
 export default function App() {
   return (
     <ToastProvider>
@@ -108,9 +93,6 @@ export default function App() {
             <Route path="/auth/callback" element={<AuthCallback />} />
 
             {/* Public routes — accessible without authentication */}
-            <Route path="/" element={<RootRoute />} />
-
-            {/* Public discovery routes — accessible without authentication */}
             <Route
               path="/explore"
               element={
@@ -119,17 +101,6 @@ export default function App() {
                 </SidebarLayout>
               }
             />
-            <Route
-              path="/products"
-              element={
-                <SidebarLayout>
-                  <ExploreProducts />
-                </SidebarLayout>
-              }
-            />
-            <Route path="/products/:slug" element={<ProductDetail />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/docs" element={<Docs />} />
 
             {/* Protected routes — require a valid Supabase session */}
             <Route
@@ -188,7 +159,7 @@ export default function App() {
             />
 
             {/* Default: redirect root to dashboard (Protected will handle auth) */}
-            
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
             {/* 404 Not Found Page for unknown application routes */}
             <Route

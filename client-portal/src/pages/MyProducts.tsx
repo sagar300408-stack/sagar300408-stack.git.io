@@ -1,4 +1,3 @@
-import SEOHead from '../components/SEO/SEOHead';
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../lib/AuthContext';
@@ -85,7 +84,6 @@ export default function MyProducts() {
 
   return (
     <div style={{ padding: '32px 40px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
-      <SEOHead title="My Products | Originyx Client Portal" description="Active client software deployments, API keys, and endpoints." robots="noindex, nofollow" />
       {/* ─── Header ─── */}
       <div style={{ marginBottom: '32px' }}>
         <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#1c1c1c', margin: '0 0 8px 0', letterSpacing: '-0.02em' }}>
