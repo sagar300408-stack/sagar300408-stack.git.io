@@ -13,7 +13,7 @@ class OxFooter extends HTMLElement {
               <a href="/privacy-policy/" id="footer-privacy">Privacy Policy</a>
               <a href="/terms-and-conditions/" id="footer-terms">Terms &amp; Conditions</a>
               <a href="/cookie-policy/" id="footer-cookie">Cookie Policy</a>
-              <a href="mailto:sagar@originyx.in" id="footer-email">Email</a>
+              <a href="mailto:info@originyx.in" id="footer-email">Email</a>
               <a href="https://www.linkedin.com/company/originyx" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
               <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
             </div>

@@ -260,7 +260,7 @@
         <div class="footer-tagline">Building Agentic Systems & Autonomous SaaS</div>
 
         <div class="footer-links">
-          <a href="mailto:sagar@originyx.in" id="footer-email">Email</a>
+          <a href="mailto:info@originyx.in" id="footer-email">Email</a>
           <a href="https://www.linkedin.com/company/originyx" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
           <a href="https://github.com/sagar300408-stack" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
         </div>

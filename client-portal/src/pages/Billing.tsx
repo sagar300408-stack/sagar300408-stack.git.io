@@ -69,7 +69,7 @@ export default function Billing() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', fontWeight: 600, color: '#1c1c1c' }}>
             <ShieldCheck size={16} color="#244235" /> Tax & Compliance Invoicing
           </div>
-          All Originyx corporate invoices include GSTIN details, enterprise address, and reverse-charge declaration where applicable. For custom billing schedules or purchase order inquiries, contact <strong>sagar@originyx.in</strong>.
+          All Originyx corporate invoices include GSTIN details, enterprise address, and reverse-charge declaration where applicable. For custom billing schedules or purchase order inquiries, contact <strong>info@originyx.in</strong>.
         </div>
       </div>
     </div>
