@@ -211,6 +211,112 @@ export interface LeadSourceDistribution {
   isOutbound: boolean;
 }
 
+// ─── CONTENT SYSTEM TYPES (Phase 3) ──────────────────────────────
+export type ContentType = 'blog' | 'article' | 'social' | 'newsletter' | 'case_study' | 'whitepaper' | 'other';
+export type ContentStatus = 'draft' | 'in_review' | 'changes_requested' | 'approved' | 'scheduled' | 'published' | 'rejected' | 'archived';
+export type IdeaStatus = 'new' | 'under_review' | 'approved' | 'converted' | 'rejected' | 'archived';
+export type IdeaPriority = 'low' | 'medium' | 'high';
+export type ReviewAction = 'submitted' | 'approved' | 'rejected' | 'changes_requested' | 'commented';
+
+export interface GrowthContentItem {
+  id: string;
+  org_id: string;
+  title: string;
+  slug: string;
+  content_type: ContentType;
+  status: ContentStatus;
+  summary?: string | null;
+  content: any;
+  body_text?: string | null;
+  cover_image?: string | null;
+  media_urls: string[];
+  category?: string | null;
+  tags: string[];
+  channel_id?: string | null;
+  objective_id?: string | null;
+  audience_id?: string | null;
+  idea_id?: string | null;
+  cms_node_id?: string | null;
+  author_id?: string | null;
+  author_name?: string | null;
+  reviewer_id?: string | null;
+  reviewer_name?: string | null;
+  scheduled_for?: string | null;
+  published_at?: string | null;
+  submitted_at?: string | null;
+  approved_at?: string | null;
+  rejected_at?: string | null;
+  rejection_reason?: string | null;
+  version: number;
+  metadata: Record<string, any>;
+  created_by?: string | null;
+  updated_by?: string | null;
+  created_at: string;
+  updated_at: string;
+  // Computed / joined fields
+  channel_name?: string;
+  objective_title?: string;
+  audience_name?: string;
+}
+
+export interface GrowthContentIdea {
+  id: string;
+  org_id: string;
+  title: string;
+  description?: string | null;
+  notes?: string | null;
+  category?: string | null;
+  tags: string[];
+  target_channels: string[];
+  status: IdeaStatus;
+  priority: IdeaPriority;
+  objective_id?: string | null;
+  audience_id?: string | null;
+  converted_content_id?: string | null;
+  author_name?: string | null;
+  created_by?: string | null;
+  created_at: string;
+  updated_at: string;
+  objective_title?: string;
+  audience_name?: string;
+}
+
+export interface GrowthContentReview {
+  id: string;
+  org_id: string;
+  content_id: string;
+  reviewer_id?: string | null;
+  reviewer_name: string;
+  action: ReviewAction;
+  feedback?: string | null;
+  created_at: string;
+}
+
+export interface GrowthContentRevision {
+  id: string;
+  org_id: string;
+  content_id: string;
+  version: number;
+  title: string;
+  summary?: string | null;
+  content: any;
+  change_summary?: string | null;
+  created_by?: string | null;
+  created_at: string;
+}
+
+export interface ContentOverviewMetrics {
+  totalContent: number;
+  publishedCount: number;
+  scheduledCount: number;
+  inReviewCount: number;
+  draftCount: number;
+  totalIdeas: number;
+  approvedIdeas: number;
+  convertedIdeas: number;
+  topCategory: string;
+}
+
 export class OCEClient {
   public supabase: SupabaseClient;
 
@@ -697,8 +803,30 @@ export class OCEClient {
           .in('status', ['To Do', 'In Progress', 'Blocked']),
       ]);
 
-      stats.totalContent = totalContentRes.count ?? 0;
-      stats.publishedContent = publishedContentRes.count ?? 0;
+      // Prefer growth_content_items count if available, falling back to cms_nodes
+      try {
+        const { count: gcTotal } = await this.supabase
+          .from('growth_content_items')
+          .select('id', { count: 'exact', head: true })
+          .eq('org_id', orgId);
+        const { count: gcPublished } = await this.supabase
+          .from('growth_content_items')
+          .select('id', { count: 'exact', head: true })
+          .eq('org_id', orgId)
+          .eq('status', 'published');
+
+        if (gcTotal !== null && gcTotal !== undefined && gcTotal > 0) {
+          stats.totalContent = gcTotal;
+          stats.publishedContent = gcPublished ?? 0;
+        } else {
+          stats.totalContent = totalContentRes.count ?? 0;
+          stats.publishedContent = publishedContentRes.count ?? 0;
+        }
+      } catch {
+        stats.totalContent = totalContentRes.count ?? 0;
+        stats.publishedContent = publishedContentRes.count ?? 0;
+      }
+
       stats.growthLeads = growthLeadsRes.count ?? 0;
       stats.totalGrowthTasks = totalGrowthTasksRes.count ?? 0;
       stats.activeGrowthTasks = activeGrowthTasksRes.count ?? 0;
@@ -1573,6 +1701,694 @@ export class OCEClient {
       return local[idx];
     }
     return null;
+  }
+
+  // ─── CONTENT SYSTEM METHODS (Phase 3) ───────────────────────────
+
+  async getContentOverviewMetrics(orgId: string): Promise<ContentOverviewMetrics> {
+    const metrics: ContentOverviewMetrics = {
+      totalContent: 0,
+      publishedCount: 0,
+      scheduledCount: 0,
+      inReviewCount: 0,
+      draftCount: 0,
+      totalIdeas: 0,
+      approvedIdeas: 0,
+      convertedIdeas: 0,
+      topCategory: 'General',
+    };
+
+    try {
+      const [items, ideas] = await Promise.all([
+        this.getContentItems(orgId),
+        this.getContentIdeas(orgId),
+      ]);
+
+      metrics.totalContent = items.length;
+      metrics.publishedCount = items.filter(i => i.status === 'published').length;
+      metrics.scheduledCount = items.filter(i => i.status === 'scheduled').length;
+      metrics.inReviewCount = items.filter(i => i.status === 'in_review').length;
+      metrics.draftCount = items.filter(i => i.status === 'draft').length;
+
+      metrics.totalIdeas = ideas.length;
+      metrics.approvedIdeas = ideas.filter(i => i.status === 'approved').length;
+      metrics.convertedIdeas = ideas.filter(i => i.status === 'converted').length;
+
+      // Find top category
+      const catCounts: Record<string, number> = {};
+      items.forEach(i => {
+        if (i.category) {
+          catCounts[i.category] = (catCounts[i.category] || 0) + 1;
+        }
+      });
+      const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
+      if (topCat) metrics.topCategory = topCat[0];
+
+      return metrics;
+    } catch (e) {
+      console.warn('[Content] Error calculating overview metrics:', e);
+      return metrics;
+    }
+  }
+
+  async getContentItems(orgId: string, options?: { type?: string; status?: string; search?: string; channelId?: string; limit?: number; offset?: number }): Promise<GrowthContentItem[]> {
+    try {
+      let query = this.supabase
+        .from('growth_content_items')
+        .select(`
+          *,
+          channel:marketing_channels(id, name),
+          objective:marketing_objectives(id, title),
+          audience:marketing_audiences(id, name)
+        `)
+        .eq('org_id', orgId)
+        .order('updated_at', { ascending: false });
+
+      if (options?.type && options.type !== 'all') {
+        query = query.eq('content_type', options.type);
+      }
+      if (options?.status && options.status !== 'all') {
+        query = query.eq('status', options.status);
+      }
+      if (options?.channelId) {
+        query = query.eq('channel_id', options.channelId);
+      }
+      if (options?.search) {
+        query = query.or(`title.ilike.%${options.search}%,summary.ilike.%${options.search}%`);
+      }
+      if (options?.limit) {
+        query = query.limit(options.limit);
+      }
+      if (options?.offset) {
+        query = query.range(options.offset, options.offset + (options.limit || 20) - 1);
+      }
+
+      const { data, error } = await query;
+      if (!error && data) {
+        return data.map((item: any) => ({
+          ...item,
+          channel_name: item.channel?.name,
+          objective_title: item.objective?.title,
+          audience_name: item.audience?.name,
+        }));
+      }
+    } catch (e) {
+      console.warn('[Content] Remote fetch failed, using local storage:', e);
+    }
+
+    // Local fallback
+    let items = this.getLocalMarketingStorage<GrowthContentItem>('content_items', orgId);
+    if (options?.type && options.type !== 'all') {
+      items = items.filter(i => i.content_type === options.type);
+    }
+    if (options?.status && options.status !== 'all') {
+      items = items.filter(i => i.status === options.status);
+    }
+    if (options?.search) {
+      const q = options.search.toLowerCase();
+      items = items.filter(i => i.title.toLowerCase().includes(q) || (i.summary && i.summary.toLowerCase().includes(q)));
+    }
+    return items;
+  }
+
+  async getContentItemById(orgId: string, id: string): Promise<GrowthContentItem | null> {
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_items')
+        .select(`
+          *,
+          channel:marketing_channels(id, name),
+          objective:marketing_objectives(id, title),
+          audience:marketing_audiences(id, name)
+        `)
+        .eq('id', id)
+        .eq('org_id', orgId)
+        .maybeSingle();
+
+      if (!error && data) {
+        return {
+          ...data,
+          channel_name: data.channel?.name,
+          objective_title: data.objective?.title,
+          audience_name: data.audience?.name,
+        };
+      }
+    } catch {}
+
+    const items = this.getLocalMarketingStorage<GrowthContentItem>('content_items', orgId);
+    return items.find(i => i.id === id) || null;
+  }
+
+  async createContentItem(orgId: string, payload: Partial<GrowthContentItem>): Promise<GrowthContentItem> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+
+    const insertPayload = {
+      org_id: orgId,
+      title: payload.title || 'Untitled Draft',
+      slug: payload.slug || `draft-${Date.now()}`,
+      content_type: payload.content_type || 'blog',
+      status: payload.status || 'draft',
+      summary: payload.summary || null,
+      content: payload.content || { type: 'doc', content: [{ type: 'paragraph' }] },
+      body_text: payload.body_text || null,
+      cover_image: payload.cover_image || null,
+      media_urls: payload.media_urls || [],
+      category: payload.category || null,
+      tags: payload.tags || [],
+      channel_id: payload.channel_id || null,
+      objective_id: payload.objective_id || null,
+      audience_id: payload.audience_id || null,
+      idea_id: payload.idea_id || null,
+      author_id: user?.id || null,
+      author_name: payload.author_name || user?.user_metadata?.full_name || 'Admin',
+      reviewer_id: payload.reviewer_id || null,
+      reviewer_name: payload.reviewer_name || null,
+      scheduled_for: payload.scheduled_for || null,
+      version: 1,
+      metadata: payload.metadata || {},
+      created_by: user?.id || null,
+      updated_by: user?.id || null,
+    };
+
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_items')
+        .insert(insertPayload)
+        .select()
+        .single();
+
+      if (!error && data) {
+        await this.logGrowthActivity(orgId, 'CREATE_CONTENT_ITEM', data.id, {
+          title: data.title,
+          type: data.content_type,
+        });
+        return data as GrowthContentItem;
+      }
+    } catch (e) {
+      console.warn('[Content] Error creating content item in Supabase, using local fallback:', e);
+    }
+
+    const fallback: GrowthContentItem = {
+      ...insertPayload,
+      id: crypto.randomUUID(),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    } as GrowthContentItem;
+
+    const local = this.getLocalMarketingStorage<GrowthContentItem>('content_items', orgId);
+    this.setLocalMarketingStorage('content_items', orgId, [fallback, ...local]);
+    await this.logGrowthActivity(orgId, 'CREATE_CONTENT_ITEM', fallback.id, {
+      title: fallback.title,
+      type: fallback.content_type,
+    });
+    return fallback;
+  }
+
+  async updateContentItem(orgId: string, id: string, payload: Partial<GrowthContentItem>): Promise<GrowthContentItem | null> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+
+    const updatePayload = {
+      ...payload,
+      updated_by: user?.id,
+      updated_at: new Date().toISOString(),
+    };
+
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_items')
+        .update(updatePayload)
+        .eq('id', id)
+        .eq('org_id', orgId)
+        .select()
+        .single();
+
+      if (!error && data) {
+        await this.logGrowthActivity(orgId, 'UPDATE_CONTENT_ITEM', id, {
+          title: data.title,
+          status: data.status,
+        });
+        return data as GrowthContentItem;
+      }
+    } catch (e) {
+      console.warn('[Content] Remote update failed, using local storage:', e);
+    }
+
+    const local = this.getLocalMarketingStorage<GrowthContentItem>('content_items', orgId);
+    const idx = local.findIndex(i => i.id === id);
+    if (idx !== -1) {
+      local[idx] = { ...local[idx], ...updatePayload } as GrowthContentItem;
+      this.setLocalMarketingStorage('content_items', orgId, local);
+      await this.logGrowthActivity(orgId, 'UPDATE_CONTENT_ITEM', id, {
+        title: local[idx].title,
+        status: local[idx].status,
+      });
+      return local[idx];
+    }
+    return null;
+  }
+
+  async deleteContentItem(orgId: string, id: string): Promise<void> {
+    try {
+      await this.supabase
+        .from('growth_content_items')
+        .delete()
+        .eq('id', id)
+        .eq('org_id', orgId);
+    } catch {}
+
+    const local = this.getLocalMarketingStorage<GrowthContentItem>('content_items', orgId);
+    this.setLocalMarketingStorage('content_items', orgId, local.filter(i => i.id !== id));
+    await this.logGrowthActivity(orgId, 'DELETE_CONTENT_ITEM', id);
+  }
+
+  async submitContentForReview(orgId: string, id: string, reviewerName?: string, notes?: string): Promise<GrowthContentItem> {
+    const updated = await this.updateContentItem(orgId, id, {
+      status: 'in_review',
+      submitted_at: new Date().toISOString(),
+      reviewer_name: reviewerName || null,
+    });
+
+    // Record in reviews table
+    await this.recordContentReview(orgId, id, 'submitted', notes || 'Submitted for editorial review', reviewerName);
+    return updated!;
+  }
+
+  async approveContent(orgId: string, id: string, notes?: string, reviewerName: string = 'Editorial Staff'): Promise<GrowthContentItem> {
+    const updated = await this.updateContentItem(orgId, id, {
+      status: 'approved',
+      approved_at: new Date().toISOString(),
+    });
+
+    await this.recordContentReview(orgId, id, 'approved', notes || 'Approved for scheduling / release', reviewerName);
+    return updated!;
+  }
+
+  async rejectContent(orgId: string, id: string, reason: string, reviewerName: string = 'Editorial Staff'): Promise<GrowthContentItem> {
+    const updated = await this.updateContentItem(orgId, id, {
+      status: 'rejected',
+      rejected_at: new Date().toISOString(),
+      rejection_reason: reason,
+    });
+
+    await this.recordContentReview(orgId, id, 'rejected', reason, reviewerName);
+    return updated!;
+  }
+
+  async requestContentChanges(orgId: string, id: string, feedback: string, reviewerName: string = 'Editorial Staff'): Promise<GrowthContentItem> {
+    const updated = await this.updateContentItem(orgId, id, {
+      status: 'changes_requested',
+      rejection_reason: feedback,
+    });
+
+    await this.recordContentReview(orgId, id, 'changes_requested', feedback, reviewerName);
+    return updated!;
+  }
+
+  async scheduleContent(orgId: string, id: string, scheduledFor: string): Promise<GrowthContentItem> {
+    const updated = await this.updateContentItem(orgId, id, {
+      status: 'scheduled',
+      scheduled_for: scheduledFor,
+    });
+
+    await this.recordContentReview(orgId, id, 'commented', `Content scheduled for release at ${new Date(scheduledFor).toLocaleString()}`);
+    return updated!;
+  }
+
+  async publishContent(orgId: string, id: string): Promise<GrowthContentItem> {
+    const updated = await this.updateContentItem(orgId, id, {
+      status: 'published',
+      published_at: new Date().toISOString(),
+    });
+
+    await this.recordContentReview(orgId, id, 'commented', 'Content marked published');
+    return updated!;
+  }
+
+  async archiveContent(orgId: string, id: string): Promise<void> {
+    await this.updateContentItem(orgId, id, {
+      status: 'archived',
+    });
+  }
+
+  private async recordContentReview(orgId: string, contentId: string, action: ReviewAction, feedback?: string, reviewerName?: string): Promise<void> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+
+    try {
+      await this.supabase.from('growth_content_reviews').insert({
+        org_id: orgId,
+        content_id: contentId,
+        reviewer_id: user?.id || null,
+        reviewer_name: reviewerName || user?.user_metadata?.full_name || 'Reviewer',
+        action,
+        feedback: feedback || null,
+      });
+    } catch {}
+
+    const reviews = this.getLocalMarketingStorage<GrowthContentReview>('content_reviews', orgId);
+    reviews.unshift({
+      id: crypto.randomUUID(),
+      org_id: orgId,
+      content_id: contentId,
+      reviewer_id: user?.id || null,
+      reviewer_name: reviewerName || user?.user_metadata?.full_name || 'Reviewer',
+      action,
+      feedback: feedback || null,
+      created_at: new Date().toISOString(),
+    });
+    this.setLocalMarketingStorage('content_reviews', orgId, reviews);
+  }
+
+  async getContentReviews(orgId: string, contentId: string): Promise<GrowthContentReview[]> {
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_reviews')
+        .select('*')
+        .eq('content_id', contentId)
+        .eq('org_id', orgId)
+        .order('created_at', { ascending: false });
+
+      if (!error && data) return data as GrowthContentReview[];
+    } catch {}
+
+    const local = this.getLocalMarketingStorage<GrowthContentReview>('content_reviews', orgId);
+    return local.filter(r => r.content_id === contentId);
+  }
+
+  async getContentRevisions(orgId: string, contentId: string): Promise<GrowthContentRevision[]> {
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_revisions')
+        .select('*')
+        .eq('content_id', contentId)
+        .eq('org_id', orgId)
+        .order('version', { ascending: false });
+
+      if (!error && data) return data as GrowthContentRevision[];
+    } catch {}
+
+    const local = this.getLocalMarketingStorage<GrowthContentRevision>('content_revisions', orgId);
+    return local.filter(r => r.content_id === contentId);
+  }
+
+  async createContentRevision(orgId: string, contentId: string, title: string, summary: string | null, content: any, changeSummary?: string): Promise<GrowthContentRevision> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    const existing = await this.getContentRevisions(orgId, contentId);
+    const nextVersion = existing.length > 0 ? Math.max(...existing.map(r => r.version)) + 1 : 1;
+
+    const revision: GrowthContentRevision = {
+      id: crypto.randomUUID(),
+      org_id: orgId,
+      content_id: contentId,
+      version: nextVersion,
+      title,
+      summary,
+      content,
+      change_summary: changeSummary || `Version ${nextVersion} saved`,
+      created_by: user?.id || null,
+      created_at: new Date().toISOString(),
+    };
+
+    try {
+      await this.supabase.from('growth_content_revisions').insert({
+        org_id: orgId,
+        content_id: contentId,
+        version: revision.version,
+        title: revision.title,
+        summary: revision.summary,
+        content: revision.content,
+        change_summary: revision.change_summary,
+        created_by: revision.created_by,
+      });
+    } catch {}
+
+    const local = this.getLocalMarketingStorage<GrowthContentRevision>('content_revisions', orgId);
+    this.setLocalMarketingStorage('content_revisions', orgId, [revision, ...local]);
+    return revision;
+  }
+
+  // ─── CMS INTEGRATION ───────────────────────────────────────────
+
+  async publishContentToCMS(orgId: string, contentId: string): Promise<{ cmsNodeId: string }> {
+    const item = await this.getContentItemById(orgId, contentId);
+    if (!item) throw new Error('Content item not found');
+
+    const { data: { user } } = await this.supabase.auth.getUser();
+
+    // If already linked to a CMS node, update it
+    if (item.cms_node_id) {
+      await this.updateNode(item.cms_node_id, {
+        title: item.title,
+        slug: item.slug,
+        excerpt: item.summary || '',
+        cover_image: item.cover_image || '',
+        content: item.content,
+        status: 'Published',
+        category: item.category,
+        tags: item.tags,
+      });
+
+      await this.updateContentItem(orgId, contentId, {
+        status: 'published',
+        published_at: new Date().toISOString(),
+      });
+
+      await this.logGrowthActivity(orgId, 'PUBLISH_CONTENT_TO_CMS', contentId, {
+        title: item.title,
+        cmsNodeId: item.cms_node_id,
+        action: 'updated'
+      });
+
+      return { cmsNodeId: item.cms_node_id };
+    }
+
+    // Resolve 'insights' content type from CMS
+    let typeId = '';
+    try {
+      const { data: typeData } = await this.supabase
+        .from('cms_content_types')
+        .select('id')
+        .eq('org_id', orgId)
+        .eq('slug', 'insights')
+        .maybeSingle();
+
+      if (typeData?.id) {
+        typeId = typeData.id;
+      } else {
+        const { data: anyType } = await this.supabase
+          .from('cms_content_types')
+          .select('id')
+          .eq('org_id', orgId)
+          .limit(1)
+          .maybeSingle();
+        if (anyType?.id) typeId = anyType.id;
+      }
+    } catch {}
+
+    // Create node via standard CMS method
+    const newNode = await this.createNode({
+      type_id: typeId,
+      title: item.title,
+      slug: item.slug,
+      excerpt: item.summary || '',
+      cover_image: item.cover_image || '',
+      content: item.content,
+      status: 'Published',
+      category: item.category,
+      tags: item.tags,
+      author_id: user?.id || item.author_id,
+    });
+
+    const cmsNodeId = newNode.id;
+
+    // Link back to Growth content item
+    await this.updateContentItem(orgId, contentId, {
+      cms_node_id: cmsNodeId,
+      status: 'published',
+      published_at: new Date().toISOString(),
+    });
+
+    await this.logGrowthActivity(orgId, 'PUBLISH_CONTENT_TO_CMS', contentId, {
+      title: item.title,
+      cmsNodeId,
+      action: 'created'
+    });
+
+    return { cmsNodeId };
+  }
+
+  // ─── IDEAS MANAGEMENT ──────────────────────────────────────────
+
+  async getContentIdeas(orgId: string, options?: { status?: string; priority?: string; search?: string }): Promise<GrowthContentIdea[]> {
+    try {
+      let query = this.supabase
+        .from('growth_content_ideas')
+        .select(`
+          *,
+          objective:marketing_objectives(id, title),
+          audience:marketing_audiences(id, name)
+        `)
+        .eq('org_id', orgId)
+        .order('created_at', { ascending: false });
+
+      if (options?.status && options.status !== 'all') {
+        query = query.eq('status', options.status);
+      }
+      if (options?.priority && options.priority !== 'all') {
+        query = query.eq('priority', options.priority);
+      }
+      if (options?.search) {
+        query = query.or(`title.ilike.%${options.search}%,description.ilike.%${options.search}%`);
+      }
+
+      const { data, error } = await query;
+      if (!error && data) {
+        return data.map((idea: any) => ({
+          ...idea,
+          objective_title: idea.objective?.title,
+          audience_name: idea.audience?.name,
+        }));
+      }
+    } catch {}
+
+    let ideas = this.getLocalMarketingStorage<GrowthContentIdea>('content_ideas', orgId);
+    if (options?.status && options.status !== 'all') {
+      ideas = ideas.filter(i => i.status === options.status);
+    }
+    if (options?.priority && options.priority !== 'all') {
+      ideas = ideas.filter(i => i.priority === options.priority);
+    }
+    if (options?.search) {
+      const q = options.search.toLowerCase();
+      ideas = ideas.filter(i => i.title.toLowerCase().includes(q) || (i.description && i.description.toLowerCase().includes(q)));
+    }
+    return ideas;
+  }
+
+  async createContentIdea(orgId: string, payload: Partial<GrowthContentIdea>): Promise<GrowthContentIdea> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+
+    const insertPayload = {
+      org_id: orgId,
+      title: payload.title || 'Untitled Idea',
+      description: payload.description || null,
+      notes: payload.notes || null,
+      category: payload.category || null,
+      tags: payload.tags || [],
+      target_channels: payload.target_channels || [],
+      status: payload.status || 'new',
+      priority: payload.priority || 'medium',
+      objective_id: payload.objective_id || null,
+      audience_id: payload.audience_id || null,
+      author_name: payload.author_name || user?.user_metadata?.full_name || 'Contributor',
+      created_by: user?.id || null,
+    };
+
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_ideas')
+        .insert(insertPayload)
+        .select()
+        .single();
+
+      if (!error && data) {
+        await this.logGrowthActivity(orgId, 'CREATE_CONTENT_IDEA', data.id, { title: data.title });
+        return data as GrowthContentIdea;
+      }
+    } catch (e) {
+      console.warn('[Content] Error creating idea in Supabase, using local fallback:', e);
+    }
+
+    const fallback: GrowthContentIdea = {
+      ...insertPayload,
+      id: crypto.randomUUID(),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    } as GrowthContentIdea;
+
+    const local = this.getLocalMarketingStorage<GrowthContentIdea>('content_ideas', orgId);
+    this.setLocalMarketingStorage('content_ideas', orgId, [fallback, ...local]);
+    await this.logGrowthActivity(orgId, 'CREATE_CONTENT_IDEA', fallback.id, { title: fallback.title });
+    return fallback;
+  }
+
+  async updateContentIdea(orgId: string, id: string, payload: Partial<GrowthContentIdea>): Promise<GrowthContentIdea | null> {
+    const updatePayload = {
+      ...payload,
+      updated_at: new Date().toISOString(),
+    };
+
+    try {
+      const { data, error } = await this.supabase
+        .from('growth_content_ideas')
+        .update(updatePayload)
+        .eq('id', id)
+        .eq('org_id', orgId)
+        .select()
+        .single();
+
+      if (!error && data) {
+        await this.logGrowthActivity(orgId, 'UPDATE_CONTENT_IDEA', id, { title: data.title, status: data.status });
+        return data as GrowthContentIdea;
+      }
+    } catch {}
+
+    const local = this.getLocalMarketingStorage<GrowthContentIdea>('content_ideas', orgId);
+    const idx = local.findIndex(i => i.id === id);
+    if (idx !== -1) {
+      local[idx] = { ...local[idx], ...updatePayload } as GrowthContentIdea;
+      this.setLocalMarketingStorage('content_ideas', orgId, local);
+      return local[idx];
+    }
+    return null;
+  }
+
+  async deleteContentIdea(orgId: string, id: string): Promise<void> {
+    try {
+      await this.supabase
+        .from('growth_content_ideas')
+        .delete()
+        .eq('id', id)
+        .eq('org_id', orgId);
+    } catch {}
+
+    const local = this.getLocalMarketingStorage<GrowthContentIdea>('content_ideas', orgId);
+    this.setLocalMarketingStorage('content_ideas', orgId, local.filter(i => i.id !== id));
+    await this.logGrowthActivity(orgId, 'DELETE_CONTENT_IDEA', id);
+  }
+
+  async convertIdeaToDraft(orgId: string, ideaId: string, contentType: ContentType = 'blog'): Promise<{ contentItem: GrowthContentItem; idea: GrowthContentIdea }> {
+    const ideas = await this.getContentIdeas(orgId);
+    const idea = ideas.find(i => i.id === ideaId);
+    if (!idea) throw new Error('Idea not found');
+
+    const slug = idea.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now();
+
+    const contentItem = await this.createContentItem(orgId, {
+      title: idea.title,
+      slug,
+      content_type: contentType,
+      status: 'draft',
+      summary: idea.description,
+      category: idea.category,
+      tags: idea.tags,
+      objective_id: idea.objective_id,
+      audience_id: idea.audience_id,
+      idea_id: idea.id,
+      metadata: { original_idea_notes: idea.notes, target_channels: idea.target_channels }
+    });
+
+    const updatedIdea = await this.updateContentIdea(orgId, ideaId, {
+      status: 'converted',
+      converted_content_id: contentItem.id,
+    });
+
+    await this.logGrowthActivity(orgId, 'CONVERT_IDEA_TO_DRAFT', ideaId, {
+      ideaTitle: idea.title,
+      contentId: contentItem.id,
+      contentType
+    });
+
+    return { contentItem, idea: updatedIdea || idea };
   }
 }
 

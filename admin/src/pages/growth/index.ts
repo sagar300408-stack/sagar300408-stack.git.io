@@ -13,3 +13,12 @@ export { default as MarketingLeads } from './marketing/MarketingLeads';
 export { default as MarketingExperiments } from './marketing/MarketingExperiments';
 export { default as MarketingInitiatives } from './marketing/MarketingInitiatives';
 
+// Content Sub-Pages
+export { default as ContentLibrary } from './content/ContentLibrary';
+export { default as ContentIdeas } from './content/ContentIdeas';
+export { default as ContentBlog } from './content/ContentBlog';
+export { default as ContentSocial } from './content/ContentSocial';
+export { default as ContentNewsletters } from './content/ContentNewsletters';
+export { default as ContentCalendar } from './content/ContentCalendar';
+export { default as ContentApprovals } from './content/ContentApprovals';
+

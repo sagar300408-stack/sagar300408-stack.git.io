@@ -17,3 +17,5 @@ export { default as GrowthActivityFeed } from './GrowthActivityFeed';
 export type { GrowthActivityFeedProps } from './GrowthActivityFeed';
 
 export { default as MarketingNav } from './MarketingNav';
+export { default as ContentNav } from './ContentNav';
+export { default as ContentEditorModal } from './ContentEditorModal';

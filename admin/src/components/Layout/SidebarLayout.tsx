@@ -126,7 +126,10 @@ const NAV_GROUPS: NavGroup[] = [
 
 // Pages that are fully built vs. coming soon
 const BUILT_PATHS = new Set([
-  '/dashboard', '/growth', '/growth/marketing', '/insights', '/media', '/settings',
+  '/dashboard', '/growth', '/growth/marketing', '/growth/content',
+  '/growth/content/library', '/growth/content/ideas', '/growth/content/blog',
+  '/growth/content/social', '/growth/content/newsletters', '/growth/content/calendar',
+  '/growth/content/approvals', '/content', '/insights', '/media', '/settings',
   '/leads', '/customers', '/opportunities', '/products', '/subscriptions',
   '/projects', '/tasks', '/my-work',
 ]);

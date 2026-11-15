@@ -36,6 +36,13 @@ import {
   MarketingLeads,
   MarketingExperiments,
   MarketingInitiatives,
+  ContentLibrary,
+  ContentIdeas,
+  ContentBlog,
+  ContentSocial,
+  ContentNewsletters,
+  ContentCalendar,
+  ContentApprovals,
 } from './pages/growth';
 
 /**
@@ -152,6 +159,13 @@ export default function App() {
             <Route path="/growth/marketing/experiments" element={<Protected><MarketingExperiments /></Protected>} />
             <Route path="/growth/marketing/initiatives" element={<Protected><MarketingInitiatives /></Protected>} />
             <Route path="/growth/content" element={<Protected><GrowthContent /></Protected>} />
+            <Route path="/growth/content/library" element={<Protected><ContentLibrary /></Protected>} />
+            <Route path="/growth/content/ideas" element={<Protected><ContentIdeas /></Protected>} />
+            <Route path="/growth/content/blog" element={<Protected><ContentBlog /></Protected>} />
+            <Route path="/growth/content/social" element={<Protected><ContentSocial /></Protected>} />
+            <Route path="/growth/content/newsletters" element={<Protected><ContentNewsletters /></Protected>} />
+            <Route path="/growth/content/calendar" element={<Protected><ContentCalendar /></Protected>} />
+            <Route path="/growth/content/approvals" element={<Protected><ContentApprovals /></Protected>} />
             <Route path="/growth/social" element={<Protected><GrowthSocial /></Protected>} />
             <Route path="/growth/campaigns" element={<Protected><GrowthCampaigns /></Protected>} />
             <Route path="/growth/analytics" element={<Protected><GrowthAnalytics /></Protected>} />
@@ -164,6 +178,13 @@ export default function App() {
             <Route path="/marketing/experiments" element={<Navigate to="/growth/marketing/experiments" replace />} />
             <Route path="/marketing/initiatives" element={<Navigate to="/growth/marketing/initiatives" replace />} />
             <Route path="/content" element={<Protected><GrowthContent /></Protected>} />
+            <Route path="/content/library" element={<Navigate to="/growth/content/library" replace />} />
+            <Route path="/content/ideas" element={<Navigate to="/growth/content/ideas" replace />} />
+            <Route path="/content/blog" element={<Navigate to="/growth/content/blog" replace />} />
+            <Route path="/content/social" element={<Navigate to="/growth/content/social" replace />} />
+            <Route path="/content/newsletters" element={<Navigate to="/growth/content/newsletters" replace />} />
+            <Route path="/content/calendar" element={<Navigate to="/growth/content/calendar" replace />} />
+            <Route path="/content/approvals" element={<Navigate to="/growth/content/approvals" replace />} />
             <Route path="/social" element={<Protected><GrowthSocial /></Protected>} />
             <Route path="/linkedin" element={<Navigate to="/growth/social" replace />} />
             <Route path="/campaigns" element={<Protected><GrowthCampaigns /></Protected>} />
