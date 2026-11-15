@@ -23,6 +23,21 @@ import Projects from './pages/Projects';
 import Tasks from './pages/Tasks';
 import ComingSoonPage from './pages/ComingSoonPage';
 
+// Growth module
+import {
+  GrowthOverview,
+  GrowthMarketing,
+  GrowthContent,
+  GrowthSocial,
+  GrowthCampaigns,
+  GrowthAnalytics,
+  MarketingStrategy,
+  MarketingChannels,
+  MarketingLeads,
+  MarketingExperiments,
+  MarketingInitiatives,
+} from './pages/growth';
+
 /**
  * Full-screen loading spinner shown while the bootstrap check runs.
  */
@@ -128,11 +143,31 @@ export default function App() {
             <Route path="/revenue" element={<Protected><ComingSoonPage title="Revenue" description="Revenue forecasting and financial pipeline coming soon." /></Protected>} />
 
             {/* --- Growth --- */}
-            <Route path="/marketing" element={<Protected><ComingSoonPage title="Marketing" description="Marketing dashboard and campaign oversight coming soon." /></Protected>} />
-            <Route path="/content" element={<Protected><ComingSoonPage title="Content Engine" description="Content distribution and publishing engine coming soon." /></Protected>} />
-            <Route path="/linkedin" element={<Protected><ComingSoonPage title="LinkedIn" description="LinkedIn automation and engagement tracking coming soon." /></Protected>} />
-            <Route path="/campaigns" element={<Protected><ComingSoonPage title="Campaigns" description="Outreach and marketing campaigns coming soon." /></Protected>} />
-            <Route path="/analytics" element={<Protected><ComingSoonPage title="Analytics" description="Web and growth analytics coming soon." /></Protected>} />
+            <Route path="/growth" element={<Protected><GrowthOverview /></Protected>} />
+            <Route path="/growth/overview" element={<Navigate to="/growth" replace />} />
+            <Route path="/growth/marketing" element={<Protected><GrowthMarketing /></Protected>} />
+            <Route path="/growth/marketing/strategy" element={<Protected><MarketingStrategy /></Protected>} />
+            <Route path="/growth/marketing/channels" element={<Protected><MarketingChannels /></Protected>} />
+            <Route path="/growth/marketing/leads" element={<Protected><MarketingLeads /></Protected>} />
+            <Route path="/growth/marketing/experiments" element={<Protected><MarketingExperiments /></Protected>} />
+            <Route path="/growth/marketing/initiatives" element={<Protected><MarketingInitiatives /></Protected>} />
+            <Route path="/growth/content" element={<Protected><GrowthContent /></Protected>} />
+            <Route path="/growth/social" element={<Protected><GrowthSocial /></Protected>} />
+            <Route path="/growth/campaigns" element={<Protected><GrowthCampaigns /></Protected>} />
+            <Route path="/growth/analytics" element={<Protected><GrowthAnalytics /></Protected>} />
+
+            {/* Growth alias routes for backward compatibility */}
+            <Route path="/marketing" element={<Protected><GrowthMarketing /></Protected>} />
+            <Route path="/marketing/strategy" element={<Navigate to="/growth/marketing/strategy" replace />} />
+            <Route path="/marketing/channels" element={<Navigate to="/growth/marketing/channels" replace />} />
+            <Route path="/marketing/leads" element={<Navigate to="/growth/marketing/leads" replace />} />
+            <Route path="/marketing/experiments" element={<Navigate to="/growth/marketing/experiments" replace />} />
+            <Route path="/marketing/initiatives" element={<Navigate to="/growth/marketing/initiatives" replace />} />
+            <Route path="/content" element={<Protected><GrowthContent /></Protected>} />
+            <Route path="/social" element={<Protected><GrowthSocial /></Protected>} />
+            <Route path="/linkedin" element={<Navigate to="/growth/social" replace />} />
+            <Route path="/campaigns" element={<Protected><GrowthCampaigns /></Protected>} />
+            <Route path="/analytics" element={<Protected><GrowthAnalytics /></Protected>} />
 
             {/* --- Products --- */}
             <Route path="/products" element={<Protected><Products /></Protected>} />

@@ -11,7 +11,7 @@ import {
   Building2, UserCheck, Truck, Plug, Settings,
   ShieldCheck, Lock, Eye, Terminal,
   LogOut, ChevronDown, Search, Bell, Menu, X,
-  ImageIcon, ChevronRight,
+  ImageIcon, ChevronRight, Compass,
 } from 'lucide-react';
 import { useAuth } from '../../lib/AuthContext';
 import { getOCEClient } from '../../lib/sdk';
@@ -60,11 +60,12 @@ const NAV_GROUPS: NavGroup[] = [
     label: 'GROWTH',
     icon: Megaphone,
     items: [
-      { name: 'Marketing', path: '/marketing', icon: Megaphone },
-      { name: 'Content', path: '/content', icon: FileText },
-      { name: 'Social', path: '/social', icon: Share2 },
-      { name: 'Campaigns', path: '/campaigns', icon: Radio },
-      { name: 'Analytics', path: '/analytics', icon: BarChart2 },
+      { name: 'Overview', path: '/growth', icon: Compass },
+      { name: 'Marketing', path: '/growth/marketing', icon: Megaphone },
+      { name: 'Content', path: '/growth/content', icon: FileText },
+      { name: 'Social', path: '/growth/social', icon: Share2 },
+      { name: 'Campaigns', path: '/growth/campaigns', icon: Radio },
+      { name: 'Analytics', path: '/growth/analytics', icon: BarChart2 },
     ],
   },
   {
@@ -125,7 +126,7 @@ const NAV_GROUPS: NavGroup[] = [
 
 // Pages that are fully built vs. coming soon
 const BUILT_PATHS = new Set([
-  '/dashboard', '/insights', '/media', '/settings',
+  '/dashboard', '/growth', '/growth/marketing', '/insights', '/media', '/settings',
   '/leads', '/customers', '/opportunities', '/products', '/subscriptions',
   '/projects', '/tasks', '/my-work',
 ]);
@@ -312,6 +313,7 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
                       <NavLink
                         key={item.name}
                         to={item.path}
+                        end={item.path === '/growth' || item.path === '/dashboard'}
                         title={collapsed ? item.name : undefined}
                         className={({ isActive }) =>
                           `flex items-center gap-2.5 transition-colors text-[13px] font-medium mx-1.5 rounded-md
