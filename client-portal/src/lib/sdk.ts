@@ -226,26 +226,35 @@ export class OCEClient {
          throw new Error("Organization update failed (possible RLS violation or record not found).");
       }
     } else if (payload.company?.trim()) {
-      // Create new organization
+      // Create new organization and assign initial owner atomically via trusted RPC
       const slug = payload.company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now();
-      const { data: newOrg, error: orgError } = await this.supabase
-        .from('organizations')
-        .insert({ ...orgPayload, slug })
-        .select()
-        .single();
-      
-      if (orgError) throw orgError;
-      
-      // Link user
-      const { error: roleError } = await this.supabase
-        .from('user_roles')
-        .insert({
-          user_id: user.id,
-          org_id: newOrg.id,
-          role: 'owner'
-        });
-      
-      if (roleError) throw roleError;
+
+      const { error: rpcError } = await this.supabase.rpc('provision_tenant_organization', {
+        _org_name: orgPayload.name,
+        _slug: slug,
+        _industry: orgPayload.industry,
+        _company_size: orgPayload.company_size,
+        _website: orgPayload.website,
+        _phone: orgPayload.phone,
+        _email: orgPayload.email,
+        _description: orgPayload.description,
+        _products_services: orgPayload.products_services,
+        _target_market: orgPayload.target_market,
+        _business_model: orgPayload.business_model,
+        _growth_stage: orgPayload.growth_stage,
+        _business_goals: orgPayload.business_goals,
+        _address_line1: orgPayload.address_line1,
+        _address_line2: orgPayload.address_line2,
+        _city: orgPayload.city,
+        _state: orgPayload.state,
+        _postal_code: orgPayload.postal_code,
+        _country: orgPayload.country
+      });
+
+      if (rpcError) {
+        console.error("Failed to provision organization:", rpcError);
+        throw rpcError;
+      }
     }
   }
 
