@@ -192,6 +192,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     setIsLoggingOut(true);
+
+    // Capture user details BEFORE the session is destroyed
+    const userForEmail = user ? {
+      id:    user.id,
+      name:  user.user_metadata?.full_name || user.email || '',
+      email: user.email || '',
+    } : null;
+
     try {
       await supabase.auth.signOut({ scope: 'local' });
     } catch (e) {
@@ -204,6 +212,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       sessionStorage.removeItem('cp_return_path');
       sessionStorage.removeItem('originyx_auth_return_url');
 
+      // Fire logout notification email (fire-and-forget — NEVER block logout)
+      if (userForEmail && userForEmail.email) {
+        const logoutTime = new Date().toISOString();
+        // Generate a per-event UUID for idempotency
+        const eventId = crypto.randomUUID();
+
+        fetch('/api/auth/logout-notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id:     userForEmail.id,
+            name:        userForEmail.name,
+            email:       userForEmail.email,
+            logout_time: logoutTime,
+            event_id:    eventId,
+          }),
+        }).catch(err => console.warn('[AuthContext] Logout email failed (non-fatal):', err));
+      }
+
       const mainSiteUrl =
         import.meta.env.VITE_MAIN_SITE_URL ||
         (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
@@ -212,6 +239,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       window.location.replace(`${mainSiteUrl}?auth=signout`);
     }
   };
+
 
   return (
     <AuthContext.Provider value={{ user, role, loading, isLoggingOut, isInitialized, systemStatus, signOut, refreshStatus }}>
