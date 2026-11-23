@@ -112,21 +112,7 @@
       transform: translateX(-3px);
     }
 
-    .project-hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 992px) {
-      .project-hero-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
-      }
-    }
+    
 
     .project-meta-box {
       display: flex;
@@ -150,21 +136,7 @@
       color: var(--accent);
     }
 
-    .project-main-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-3xl);
-      margin-top: var(--space-3xl);
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 992px) {
-      .project-main-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
-      }
-    }
+    
 
     .project-body h2 {
       font-family: var(--font-serif);
@@ -422,7 +394,8 @@
     .ambient-glow-lifeos {
       position: absolute;
       top: 10%;
-      right: -10%;
+      right: 0;
+      max-width: 100%;
       width: 500px;
       height: 500px;
       background: radial-gradient(circle, rgba(0, 255, 213, 0.05) 0%, transparent 70%);
@@ -841,7 +814,7 @@
         <div class="tech-stack-panel" style="background: var(--bg-tertiary); border-color: var(--border); position: sticky; top: calc(var(--nav-height) + var(--space-md));">
           
           <!-- Knowledge Panel -->
-          <div class="glass-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg); background: var(--bg-card); border-color: var(--border);">
+          <div class="glass-card knowledge-panel-card" style="padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-lg); background: var(--bg-card); border-color: var(--border);">
             <h3 style="font-family: var(--font-serif); margin-bottom: 0;">Knowledge Panel</h3>
             <div style="display: flex; flex-direction: column; gap: 4px;">
               <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Industry</span>

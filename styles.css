@@ -2542,7 +2542,225 @@ ox-navbar .navbar .nav-links a.nav-client-portal-btn::after {
 
 
 /* ========================================================================= */
-/* PHASE 3: COMPREHENSIVE MOBILE RESPONSIVENESS OVERRIDES & BUGFIXES */
+/* CASE STUDY PAGES: RESPONSIVE ARCHITECTURE & BASE STYLES                   */
+/* ========================================================================= */
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.ambient-glow,
+.ambient-glow-lifeos {
+  pointer-events: none;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.project-header-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.project-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-3xl);
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-image-wrapper {
+  max-width: 400px;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 40px rgba(36, 66, 53, 0.08);
+  box-sizing: border-box;
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-main-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: var(--space-3xl);
+  margin-bottom: var(--space-4xl);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.project-sidebar {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tech-stack-panel {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-md));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Quick Facts / Retrieval Metadata */
+#quick-facts-block {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#quick-facts-block table {
+  display: table !important;
+  width: 100% !important;
+  table-layout: auto !important;
+  border-collapse: collapse;
+}
+
+#quick-facts-block tbody {
+  display: table-row-group !important;
+  width: 100%;
+}
+
+#quick-facts-block tr {
+  display: table-row !important;
+  border-bottom: 1px solid var(--border);
+}
+
+#quick-facts-block tr:last-child {
+  border-bottom: none;
+}
+
+#quick-facts-block td {
+  padding: 10px 12px !important;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+#quick-facts-block td:first-child {
+  width: 36%;
+  min-width: 120px;
+  max-width: 170px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding-left: 0 !important;
+  white-space: normal;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+#quick-facts-block td:last-child {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding-right: 0 !important;
+  white-space: normal;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Knowledge Panel & Sidebar Cards */
+.knowledge-panel-card,
+.tech-stack-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tech Table */
+.tech-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0 var(--space-2xl);
+  font-size: 0.9rem;
+  table-layout: auto;
+}
+
+.tech-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.tech-table td {
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(36, 66, 53, 0.06);
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.tech-table td:first-child {
+  color: var(--accent);
+  font-weight: 500;
+  width: 32%;
+  min-width: 120px;
+}
+
+.tech-table tr:last-child td {
+  border-bottom: none;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--space-lg);
+}
+
+/* --- Tablet Breakpoint (769px–1024px) --- */
+@media (max-width: 1024px) {
+  .project-hero-grid,
+  div[class*="project-hero-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--space-2xl) !important;
+  }
+
+  .project-main-grid,
+  section[class*="project-main-grid"] {
+    grid-template-columns: 1.15fr 0.85fr !important;
+    gap: var(--space-2xl) !important;
+  }
+
+  .hero-image-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* ========================================================================= */
+/* PHASE 3: COMPREHENSIVE MOBILE RESPONSIVENESS OVERRIDES & BUGFIXES         */
 /* ========================================================================= */
 
 @media (max-width: 768px) {
@@ -2574,12 +2792,16 @@ ox-navbar .navbar .nav-links a.nav-client-portal-btn::after {
   }
 
   /* 2. Fix inline grid layouts across all subpages */
-  /* This specifically targets the hardcoded grids in services, about, case-studies */
   div[style*="grid-template-columns: 1.2fr 0.8fr"],
   div[style*="grid-template-columns: 1fr 1fr"],
   div[style*="grid-template-columns: 0.9fr 1.1fr"],
   div[style*="grid-template-columns: 2fr 1fr"],
-  div[style*="grid-template-columns: 1fr 2fr"] {
+  div[style*="grid-template-columns: 1fr 2fr"],
+  div[style*="grid-template-columns: 1.3fr 0.7fr"],
+  div[style*="grid-template-columns: 1.35fr 0.65fr"],
+  section[style*="grid-template-columns"],
+  div[class*="project-hero-grid"],
+  .project-hero-grid {
     grid-template-columns: 1fr !important;
   }
 
@@ -2636,17 +2858,16 @@ ox-navbar .navbar .nav-links a.nav-client-portal-btn::after {
   }
   
   .hero-buttons {
-    flex-direction: column;
-    width: 100%;
+    flex-direction: column !important;
+    width: 100% !important;
     align-items: stretch;
   }
 
   .hero-buttons .btn {
-    width: 100%;
+    width: 100% !important;
   }
 
   /* 5. Pricing Cards / Service Grid */
-  /* Ensure auto-fit grids don't overflow screen width */
   [style*="grid-template-columns: repeat(auto-fit"] {
     grid-template-columns: 1fr !important;
   }
@@ -2665,48 +2886,256 @@ ox-navbar .navbar .nav-links a.nav-client-portal-btn::after {
   .contact-link-card,
   .dropdown-item {
     min-width: 0;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
 
-  /* Tables responsiveness */
+  /* Tables general responsiveness */
   table {
     display: block;
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
-    table-layout: fixed;
+    -webkit-overflow-scrolling: touch;
     white-space: normal;
   }
 
   th,
   td {
     white-space: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
     word-break: normal;
+  }
+
+  /* 6. Case Study Main Grid Overhaul: Single-Column Layout & Semantic Reordering */
+  .project-main-grid,
+  section[class*="project-main-grid"],
+  div[class*="project-main-grid"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-xl) !important;
+    width: 100% !important;
+    margin-bottom: var(--space-2xl) !important;
+  }
+
+  .project-body,
+  .project-sidebar,
+  .tech-stack-panel {
+    display: contents !important;
+  }
+
+  /* 1. Retrieval Metadata FIRST */
+  #quick-facts-block {
+    order: 1 !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 2. Knowledge Panel SECOND (Immediately Below Retrieval Metadata) */
+  .knowledge-panel-card,
+  .tech-stack-panel > .glass-card:first-child,
+  .tech-stack-panel > div:first-child {
+    order: 2 !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 3. All other case study content THIRD */
+  .project-body > *:not(#quick-facts-block) {
+    order: 3 !important;
+    width: 100% !important;
+  }
+
+  /* 4. Project Tech Stack & any remaining sidebar cards FOURTH */
+  .tech-stack-card,
+  .tech-stack-panel > .glass-card:nth-child(2),
+  .tech-stack-panel > div:nth-child(2),
+  .tech-stack-panel > .glass-card:last-child {
+    order: 4 !important;
+    width: 100% !important;
+  }
+
+  /* Hero Section Mobile Layout */
+  .hero-visual {
+    order: 2;
+    margin-top: var(--space-md);
+  }
+
+  .hero-content {
+    order: 1;
+  }
+
+  .hero-image-wrapper {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .project-meta-box {
+    margin-bottom: var(--space-md) !important;
+  }
+
+  /* Information Cards & Subgrids Mobile Adaptations */
+  .features-detail-grid,
+  .diff-row,
+  .rbac-compare,
+  .dashboard-metrics,
+  .pillars-grid,
+  .project-body div[style*="grid-template-columns: 1fr 1fr"],
+  .project-body div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md) !important;
+  }
+
+  /* Semantic Relationships on mobile */
+  .glass-card div[style*="align-items: center"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--space-xs) !important;
+  }
+
+  .glass-card div[style*="align-items: center"] > span[style*="width: 120px"],
+  .glass-card div[style*="align-items: center"] > span[style*="width:120px"] {
+    width: 100% !important;
+    margin-bottom: 2px !important;
+  }
+
+  /* Touch Scrolling for Pre & Code Blocks & Arch Flow */
+  .code-block,
+  .arch-flow {
+    padding: var(--space-md) !important;
+    font-size: 0.8rem !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
 
+/* --- Compact Mobile Screen Breakpoint (<=480px) --- */
 @media (max-width: 480px) {
-  /* Smaller mobile screens (320px - 480px) */
   .glass-card {
     padding: var(--space-md) !important;
   }
 
-  h1.hero-title, h1.gradient-text {
-    font-size: 2.2rem !important;
+  /* Hero Typography scaling */
+  h1.hero-title,
+  h1.gradient-text {
+    font-size: 2rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .hero-description {
+    font-size: 1.05rem !important;
+    line-height: 1.5 !important;
   }
 
   h2 {
-    font-size: 1.6rem !important;
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .project-body h2 {
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+    margin-top: var(--space-lg) !important;
+  }
+
+  /* Tech Table Mobile Stacking */
+  .tech-table,
+  .tech-table thead,
+  .tech-table tbody,
+  .tech-table tr,
+  .tech-table th,
+  .tech-table td {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .tech-table thead {
+    display: none !important;
+  }
+
+  .tech-table tr {
+    padding: var(--space-sm) 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  .tech-table td:first-child {
+    width: 100% !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
+    font-size: 0.8rem !important;
+    padding: 0 0 2px 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tech-table td:last-child {
+    width: 100% !important;
+    padding: 0 !important;
+    font-size: 0.88rem !important;
+    color: var(--text-secondary) !important;
+  }
+
+  /* Quote Box */
+  .quote-box {
+    padding: var(--space-xl) var(--space-md) !important;
+  }
+
+  .quote-box blockquote {
+    font-size: 1.2rem !important;
   }
 
   .modal-container {
     padding: var(--space-md) !important;
   }
 
-  /* Fix compliance checkbox text spacing on small phones */
   #group-compliance label {
     font-size: 0.75rem;
     line-height: 1.3;
+  }
+}
+
+/* --- Ultra-Narrow Mobile Screen Breakpoint (<=375px) --- */
+@media (max-width: 375px) {
+  /* Retrieval Metadata: Stack Label above Value */
+  #quick-facts-block table,
+  #quick-facts-block tbody {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  #quick-facts-block tr {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+    gap: 2px !important;
+  }
+
+  #quick-facts-block td:first-child {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted) !important;
+    line-height: 1.3 !important;
+  }
+
+  #quick-facts-block td:last-child {
+    width: 100% !important;
+    padding: 0 !important;
+    font-size: 0.88rem !important;
+    color: var(--text-primary) !important;
+    line-height: 1.4 !important;
+  }
+
+  .project-meta-box .meta-tag {
+    font-size: 0.75rem !important;
+    padding: 3px 8px !important;
   }
 }

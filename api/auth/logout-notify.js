@@ -6,30 +6,30 @@
  * Sends a branded logout notification + feedback CTA email after a user
  * explicitly signs out.
  *
- * Idempotency:
- *  - Each logical logout event receives a client-generated `event_id` (UUID).
- *  - The endpoint records the event_id and skips re-delivery for the same ID.
- *  - This prevents duplicates if the client-side code fires more than once.
+ * Idempotency & Duplicate Prevention:
+ *  - Client-generated `event_id` (UUID) tracked in `email_sent_log`.
+ *  - 60-second time-window deduplication per `user_id` prevents duplicate
+ *    emails if both client portal and main site initiate logout.
  *
  * Security:
- *  - Validates that the authorization token maps to a real Supabase session
- *    BEFORE the sign-out is confirmed, so we have a trusted recipient address.
- *  - Accepts only POST requests.
- *  - Never exposes credentials to the browser.
- *  - Logout is NOT blocked if email delivery fails (fire-and-forget email).
+ *  - Validates user identity via Supabase auth token (if provided in Authorization header)
+ *    or via Supabase admin user lookup.
+ *  - Recipient email is strictly obtained from the verified account record.
+ *  - Never exposes credentials or sensitive session data to the browser.
+ *  - Logout is NOT blocked if email delivery fails (returns 200 with reason).
  *
  * Request body (JSON):
  *  {
- *    user_id    : string   — Supabase user UUID (from active session)
- *    name       : string   — Display name
- *    email      : string   — Recipient email (from authenticated session)
+ *    user_id    : string   — Supabase user UUID
+ *    name       : string   — Display name (optional)
+ *    email      : string   — Account email for verification
  *    logout_time: string   — ISO 8601 timestamp
  *    event_id   : string   — Client-generated UUID for idempotency
  *  }
  *
  * Response:
  *  200 { sent: true }
- *  200 { sent: false, reason: 'duplicate' }
+ *  200 { sent: false, reason: 'duplicate' | 'duplicate_recent_logout' | 'delivery_failed' }
  *  400 { error: '...' }
  *  500 { error: '...' }
  */
@@ -39,7 +39,7 @@ import { createClient } from '@supabase/supabase-js';
 import { logoutEmail } from '../emails/templates.js';
 
 export default async function handler(req, res) {
-  // CORS headers — allow both main site and client portal origins
+  // CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
@@ -75,18 +75,16 @@ export default async function handler(req, res) {
   if (!user_id || typeof user_id !== 'string') {
     return res.status(400).json({ error: 'user_id is required.' });
   }
-  if (!email || typeof email !== 'string' || !email.includes('@')) {
-    return res.status(400).json({ error: 'Valid email is required.' });
-  }
   if (!event_id || typeof event_id !== 'string') {
     return res.status(400).json({ error: 'event_id is required.' });
   }
 
-  // Basic UUID format checks
-  if (!/^[0-9a-f-]{36}$/i.test(user_id)) {
+  // UUID format checks
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  if (!uuidRegex.test(user_id)) {
     return res.status(400).json({ error: 'Invalid user_id format.' });
   }
-  if (!/^[0-9a-f-]{36}$/i.test(event_id)) {
+  if (!uuidRegex.test(event_id)) {
     return res.status(400).json({ error: 'Invalid event_id format.' });
   }
 
@@ -96,28 +94,73 @@ export default async function handler(req, res) {
       auth: { autoRefreshToken: false, persistSession: false }
     });
 
-    // --- Idempotency check: has this event_id already been processed? ---
-    const { data: existingLog, error: logSelectError } = await supabase
+    // --- Verify User & Identity ---
+    // 1. If an Authorization token was provided, verify with Supabase Auth
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.replace(/^Bearer\s+/i, '');
+      const { data: tokenData, error: tokenErr } = await supabase.auth.getUser(token);
+      if (!tokenErr && tokenData?.user) {
+        if (tokenData.user.id !== user_id) {
+          console.warn(`[logout-notify] Token user mismatch: ${tokenData.user.id} vs ${user_id}`);
+          return res.status(403).json({ error: 'Token user mismatch.' });
+        }
+      }
+    }
+
+    // 2. Fetch trusted user from Supabase
+    const { data: userData, error: userLookupError } = await supabase.auth.admin.getUserById(user_id);
+    if (userLookupError || !userData?.user) {
+      console.warn(`[logout-notify] User not found: ${user_id}`);
+      return res.status(404).json({ error: 'User account not found.' });
+    }
+
+    const trustedUser = userData.user;
+    const trustedEmail = trustedUser.email;
+
+    if (!trustedEmail || !trustedEmail.includes('@')) {
+      return res.status(400).json({ error: 'User account has no associated email.' });
+    }
+
+    // --- Idempotency Check 1: Has this event_id already been processed? ---
+    const { data: existingEventLog, error: eventLogErr } = await supabase
       .from('email_sent_log')
       .select('id')
       .eq('event_id', event_id)
       .eq('email_type', 'logout_notification')
       .maybeSingle();
 
-    if (logSelectError && !logSelectError.message.includes('does not exist')) {
-      console.error('[logout-notify] Log check failed:', logSelectError.message);
+    if (eventLogErr && !eventLogErr.message.includes('does not exist')) {
+      console.error('[logout-notify] Event log check failed:', eventLogErr.message);
       return res.status(500).json({ error: 'Database error during idempotency check.' });
     }
 
-    if (existingLog) {
+    if (existingEventLog) {
       console.info(`[logout-notify] Duplicate skipped for event ${event_id}`);
       return res.status(200).json({ sent: false, reason: 'duplicate' });
     }
 
+    // --- Idempotency Check 2: 60-second window deduplication ---
+    // Prevents double notifications if both client-portal and main site initiate logout within 60 seconds
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString();
+    const { data: recentLog } = await supabase
+      .from('email_sent_log')
+      .select('id')
+      .eq('user_id', user_id)
+      .eq('email_type', 'logout_notification')
+      .gte('sent_at', oneMinuteAgo)
+      .maybeSingle();
+
+    if (recentLog) {
+      console.info(`[logout-notify] Duplicate skipped: recent logout notification already sent within 60s for user ${user_id}`);
+      return res.status(200).json({ sent: false, reason: 'duplicate_recent_logout' });
+    }
+
     // --- Build email content ---
+    const recipientName = name || trustedUser.user_metadata?.full_name || trustedUser.user_metadata?.name || '';
     const { subject, html, text } = logoutEmail({
-      name:       name || '',
-      email:      email,
+      name:       recipientName,
+      email:      trustedEmail,
       logoutTime: logout_time || new Date().toISOString(),
     });
 
@@ -125,7 +168,7 @@ export default async function handler(req, res) {
     const resend = new Resend(resendApiKey);
     const { data: sendData, error: sendError } = await resend.emails.send({
       from:    'Originyx <noreply@originyx.in>',
-      to:      [email],
+      to:      [trustedEmail],
       subject,
       html,
       text,
@@ -134,7 +177,7 @@ export default async function handler(req, res) {
 
     if (sendError) {
       console.error('[logout-notify] Resend error:', sendError);
-      // Non-fatal for logout — do NOT block logout by returning an error
+      // Non-fatal for logout — return 200 so client-side logout flow is never blocked
       return res.status(200).json({ sent: false, reason: 'delivery_failed' });
     }
 
@@ -144,7 +187,7 @@ export default async function handler(req, res) {
       .insert({
         user_id,
         email_type: 'logout_notification',
-        recipient:  email,
+        recipient:  trustedEmail,
         resend_id:  sendData?.id || null,
         event_id,
       });
@@ -153,12 +196,12 @@ export default async function handler(req, res) {
       console.warn('[logout-notify] Failed to write to email_sent_log:', logInsertError.message);
     }
 
-    console.info(`[logout-notify] Logout email sent to ${email} (user: ${user_id}, event: ${event_id})`);
+    console.info(`[logout-notify] Logout email sent to ${trustedEmail} (user: ${user_id}, event: ${event_id})`);
     return res.status(200).json({ sent: true });
 
   } catch (err) {
     console.error('[logout-notify] Unexpected error:', err);
-    // Non-fatal — return success so client-side logout is never blocked
+    // Non-fatal — return 200 so client-side logout is never blocked
     return res.status(200).json({ sent: false, reason: 'server_error' });
   }
 }

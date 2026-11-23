@@ -193,11 +193,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     setIsLoggingOut(true);
 
-    // Capture user details BEFORE the session is destroyed
+    // Capture user details and active session token BEFORE the session is destroyed
+    let userToken: string | null = null;
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      userToken = session?.access_token ?? null;
+    } catch (_) {
+      // Ignore session read error
+    }
+
     const userForEmail = user ? {
       id:    user.id,
       name:  user.user_metadata?.full_name || user.email || '',
       email: user.email || '',
+      token: userToken,
     } : null;
 
     try {
@@ -218,9 +227,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Generate a per-event UUID for idempotency
         const eventId = crypto.randomUUID();
 
+        const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+        if (userForEmail.token) {
+          headers['Authorization'] = `Bearer ${userForEmail.token}`;
+        }
+
         fetch('/api/auth/logout-notify', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers,
           body: JSON.stringify({
             user_id:     userForEmail.id,
             name:        userForEmail.name,
@@ -235,8 +249,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         import.meta.env.VITE_MAIN_SITE_URL ||
         (window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://originyx.in');
       
-      // Navigate with replace so user cannot click Back button into logged-in dashboard
-      window.location.replace(`${mainSiteUrl}?auth=signout`);
+      // Navigate with replace so user cannot click Back button into logged-in dashboard.
+      // Append notified=1 so main site does not trigger duplicate notification.
+      window.location.replace(`${mainSiteUrl}?auth=signout&notified=1`);
     }
   };
 

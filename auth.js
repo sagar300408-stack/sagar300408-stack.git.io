@@ -219,15 +219,16 @@
     },
 
     // Sign Out — sends logout notification email (fire-and-forget) then signs out
-    async signOut() {
+    async signOut({ skipNotification = false } = {}) {
       await this.init();
       if (!this.configured) return;
 
-      // Capture user details before the session is destroyed
-      const userForEmail = this.user ? {
+      // Capture user details and session token before the session is destroyed
+      const userForEmail = (!skipNotification && this.user) ? {
         id:    this.user.id,
         name:  this.user.user_metadata?.full_name || this.user.email || '',
         email: this.user.email || '',
+        token: this.session?.access_token || null,
       } : null;
 
       const { error } = await this.client.auth.signOut();
@@ -271,16 +272,21 @@
     // -------------------------------------------------------------------------
     // Internal: Send logout notification email via server-side API
     // -------------------------------------------------------------------------
-    async _sendLogoutEmail({ id, name, email }) {
+    async _sendLogoutEmail({ id, name, email, token }) {
       // Generate a per-logout event UUID for idempotency
       const eventId = ([1e7]+-1e3+-4e3+-8e3+-1e11)
         .replace(/[018]/g, c =>
           (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
         );
 
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch('/api/auth/logout-notify', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           user_id:     id,
           name:        name,
@@ -299,7 +305,7 @@
     // -------------------------------------------------------------------------
     // Internal: Handle OAuth first-time registration welcome email
     // Called after a SIGNED_IN event when the provider is Google or Microsoft.
-    // Sends welcome email only once using the server-side idempotency guard.
+    // Sends welcome email only once using client and server-side idempotency guards.
     // -------------------------------------------------------------------------
     async _maybeWelcomeOAuthUser(user) {
       if (!user || !user.email) return;
@@ -308,8 +314,19 @@
       const provider = user.app_metadata?.provider;
       if (provider !== 'google' && provider !== 'azure') return;
 
+      // Check whether this account was created recently (within last 10 minutes)
+      // If the account was created earlier, this is a normal recurring login, NOT a new signup.
+      if (user.created_at) {
+        const createdAt = new Date(user.created_at).getTime();
+        const tenMinutesAgo = Date.now() - (10 * 60 * 1000);
+        if (createdAt < tenMinutesAgo) {
+          // Returning user login — do not send welcome email!
+          return;
+        }
+      }
+
       // Use session storage as a lightweight client-side duplicate-prevention check
-      // The server-side email_sent_log is the authoritative guard.
+      // The server-side email_sent_log and account age check are the authoritative guards.
       const clientKey = `originyx_welcomed_${user.id}`;
       if (sessionStorage.getItem(clientKey)) return;
       sessionStorage.setItem(clientKey, '1');

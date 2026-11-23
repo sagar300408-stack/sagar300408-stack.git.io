@@ -1342,6 +1342,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
     const authAction = urlParams.get('auth');
 
     if (authAction === 'signout' || authAction === 'logout') {
+      const alreadyNotified = urlParams.get('notified') === '1' || urlParams.get('notified') === 'true';
       sessionStorage.removeItem('originyx_auth_return_url');
       window.history.replaceState(null, '', window.location.pathname);
 
@@ -1349,7 +1350,7 @@ document.querySelectorAll('.modal-success-close').forEach(btn =>
         try {
           if (window.originyxAuth) {
             await window.originyxAuth.init();
-            await window.originyxAuth.signOut();
+            await window.originyxAuth.signOut({ skipNotification: alreadyNotified });
           }
         } catch (err) {
           console.warn('Signout synchronization error:', err);
