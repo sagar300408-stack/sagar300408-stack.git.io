@@ -212,11 +212,36 @@ export interface LeadSourceDistribution {
 }
 
 // ─── CONTENT SYSTEM TYPES (Phase 3) ──────────────────────────────
-export type ContentType = 'blog' | 'article' | 'social' | 'newsletter' | 'case_study' | 'whitepaper' | 'other';
+export type ContentType = 'blog' | 'article' | 'social' | 'newsletter' | 'case_study' | 'whitepaper' | 'landing_page' | 'other';
 export type ContentStatus = 'draft' | 'in_review' | 'changes_requested' | 'approved' | 'scheduled' | 'published' | 'rejected' | 'archived';
 export type IdeaStatus = 'new' | 'under_review' | 'approved' | 'converted' | 'rejected' | 'archived';
 export type IdeaPriority = 'low' | 'medium' | 'high';
 export type ReviewAction = 'submitted' | 'approved' | 'rejected' | 'changes_requested' | 'commented';
+
+export const VALID_CONTENT_TRANSITIONS: Record<ContentStatus, ContentStatus[]> = {
+  draft: ['in_review', 'archived'],
+  in_review: ['approved', 'changes_requested', 'rejected', 'draft'],
+  changes_requested: ['in_review', 'draft', 'archived'],
+  approved: ['scheduled', 'published', 'changes_requested', 'archived'],
+  scheduled: ['published', 'approved', 'archived'],
+  published: ['archived'],
+  rejected: ['draft', 'archived'],
+  archived: ['draft'],
+};
+
+export function isValidContentTransition(current: ContentStatus, next: ContentStatus): boolean {
+  if (current === next) return true;
+  return VALID_CONTENT_TRANSITIONS[current]?.includes(next) ?? false;
+}
+
+export interface ContentPerformanceMetrics {
+  totalPublished: number;
+  cmsPublishedCount: number;
+  publishedByChannel: Array<{ channelId: string; channelName: string; count: number }>;
+  byContentType: Array<{ type: ContentType; label: string; count: number }>;
+  telemetryConnected: boolean;
+  telemetryNotice: string;
+}
 
 export interface GrowthContentItem {
   id: string;
@@ -235,6 +260,7 @@ export interface GrowthContentItem {
   channel_id?: string | null;
   objective_id?: string | null;
   audience_id?: string | null;
+  campaign_id?: string | null;
   idea_id?: string | null;
   cms_node_id?: string | null;
   author_id?: string | null;
@@ -257,6 +283,7 @@ export interface GrowthContentItem {
   channel_name?: string;
   objective_title?: string;
   audience_name?: string;
+  campaign_name?: string;
 }
 
 export interface GrowthContentIdea {
@@ -1858,6 +1885,7 @@ export class OCEClient {
       channel_id: payload.channel_id || null,
       objective_id: payload.objective_id || null,
       audience_id: payload.audience_id || null,
+      campaign_id: payload.campaign_id || null,
       idea_id: payload.idea_id || null,
       author_id: user?.id || null,
       author_name: payload.author_name || user?.user_metadata?.full_name || 'Admin',
@@ -1904,8 +1932,18 @@ export class OCEClient {
     return fallback;
   }
 
-  async updateContentItem(orgId: string, id: string, payload: Partial<GrowthContentItem>): Promise<GrowthContentItem | null> {
+  async updateContentItem(orgId: string, id: string, payload: Partial<GrowthContentItem>, options?: { skipTransitionCheck?: boolean }): Promise<GrowthContentItem | null> {
     const { data: { user } } = await this.supabase.auth.getUser();
+
+    // Enforce valid editorial lifecycle transitions when status is updated
+    if (payload.status && !options?.skipTransitionCheck) {
+      const current = await this.getContentItemById(orgId, id);
+      if (current && current.status !== payload.status) {
+        if (!isValidContentTransition(current.status, payload.status)) {
+          throw new Error(`Invalid status transition from "${current.status}" to "${payload.status}". Must follow editorial workflow: Draft → In Review → Changes Requested / Approved → Scheduled → Published.`);
+        }
+      }
+    }
 
     const updatePayload = {
       ...payload,
@@ -1973,34 +2011,52 @@ export class OCEClient {
     return updated!;
   }
 
-  async approveContent(orgId: string, id: string, notes?: string, reviewerName: string = 'Editorial Staff'): Promise<GrowthContentItem> {
+  async approveContent(orgId: string, id: string, notes?: string, reviewerName?: string, reviewerId?: string): Promise<GrowthContentItem> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    const effectiveReviewerId = reviewerId || user?.id || null;
+    const effectiveReviewerName = reviewerName || user?.user_metadata?.full_name || 'Editorial Staff';
+
     const updated = await this.updateContentItem(orgId, id, {
       status: 'approved',
       approved_at: new Date().toISOString(),
+      reviewer_id: effectiveReviewerId,
+      reviewer_name: effectiveReviewerName,
     });
 
-    await this.recordContentReview(orgId, id, 'approved', notes || 'Approved for scheduling / release', reviewerName);
+    await this.recordContentReview(orgId, id, 'approved', notes || 'Approved for scheduling / release', effectiveReviewerName);
     return updated!;
   }
 
-  async rejectContent(orgId: string, id: string, reason: string, reviewerName: string = 'Editorial Staff'): Promise<GrowthContentItem> {
+  async rejectContent(orgId: string, id: string, reason: string, reviewerName?: string, reviewerId?: string): Promise<GrowthContentItem> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    const effectiveReviewerId = reviewerId || user?.id || null;
+    const effectiveReviewerName = reviewerName || user?.user_metadata?.full_name || 'Editorial Staff';
+
     const updated = await this.updateContentItem(orgId, id, {
       status: 'rejected',
       rejected_at: new Date().toISOString(),
       rejection_reason: reason,
+      reviewer_id: effectiveReviewerId,
+      reviewer_name: effectiveReviewerName,
     });
 
-    await this.recordContentReview(orgId, id, 'rejected', reason, reviewerName);
+    await this.recordContentReview(orgId, id, 'rejected', reason, effectiveReviewerName);
     return updated!;
   }
 
-  async requestContentChanges(orgId: string, id: string, feedback: string, reviewerName: string = 'Editorial Staff'): Promise<GrowthContentItem> {
+  async requestContentChanges(orgId: string, id: string, feedback: string, reviewerName?: string, reviewerId?: string): Promise<GrowthContentItem> {
+    const { data: { user } } = await this.supabase.auth.getUser();
+    const effectiveReviewerId = reviewerId || user?.id || null;
+    const effectiveReviewerName = reviewerName || user?.user_metadata?.full_name || 'Editorial Staff';
+
     const updated = await this.updateContentItem(orgId, id, {
       status: 'changes_requested',
       rejection_reason: feedback,
+      reviewer_id: effectiveReviewerId,
+      reviewer_name: effectiveReviewerName,
     });
 
-    await this.recordContentReview(orgId, id, 'changes_requested', feedback, reviewerName);
+    await this.recordContentReview(orgId, id, 'changes_requested', feedback, effectiveReviewerName);
     return updated!;
   }
 
@@ -2124,6 +2180,96 @@ export class OCEClient {
     const local = this.getLocalMarketingStorage<GrowthContentRevision>('content_revisions', orgId);
     this.setLocalMarketingStorage('content_revisions', orgId, [revision, ...local]);
     return revision;
+  }
+
+  async restoreContentRevision(orgId: string, contentId: string, version: number): Promise<GrowthContentItem | null> {
+    const revisions = await this.getContentRevisions(orgId, contentId);
+    const targetRev = revisions.find(r => r.version === version);
+    if (!targetRev) throw new Error(`Revision version ${version} not found`);
+
+    const updated = await this.updateContentItem(orgId, contentId, {
+      title: targetRev.title,
+      summary: targetRev.summary,
+      content: targetRev.content,
+    }, { skipTransitionCheck: true });
+
+    await this.createContentRevision(
+      orgId,
+      contentId,
+      targetRev.title,
+      targetRev.summary,
+      targetRev.content,
+      `Restored from Version ${version}`
+    );
+
+    await this.logGrowthActivity(orgId, 'RESTORE_CONTENT_REVISION', contentId, {
+      version,
+      title: targetRev.title,
+    });
+
+    return updated;
+  }
+
+  async getContentPerformanceMetrics(orgId: string): Promise<ContentPerformanceMetrics> {
+    const [items, channels] = await Promise.all([
+      this.getContentItems(orgId),
+      this.getMarketingChannels(orgId)
+    ]);
+
+    const publishedItems = items.filter(i => i.status === 'published');
+    const channelCounts: Record<string, number> = {};
+    const typeCounts: Record<ContentType, number> = {
+      blog: 0,
+      article: 0,
+      social: 0,
+      newsletter: 0,
+      case_study: 0,
+      whitepaper: 0,
+      landing_page: 0,
+      other: 0,
+    };
+
+    items.forEach(i => {
+      if (i.content_type && typeCounts[i.content_type] !== undefined) {
+        typeCounts[i.content_type]++;
+      }
+      if (i.status === 'published' && i.channel_id) {
+        channelCounts[i.channel_id] = (channelCounts[i.channel_id] || 0) + 1;
+      }
+    });
+
+    const channelMap = new Map(channels.map(c => [c.id, c.name]));
+    const publishedByChannel = Object.entries(channelCounts).map(([chId, count]) => ({
+      channelId: chId,
+      channelName: channelMap.get(chId) || 'Unassigned Channel',
+      count,
+    }));
+
+    const typeLabels: Record<ContentType, string> = {
+      blog: 'Blog Posts',
+      article: 'Articles & Guides',
+      social: 'Social Drafts',
+      newsletter: 'Newsletters',
+      case_study: 'Case Studies',
+      whitepaper: 'Whitepapers',
+      landing_page: 'Landing Pages',
+      other: 'Other Documents',
+    };
+
+    const byContentType = (Object.keys(typeCounts) as ContentType[]).map(type => ({
+      type,
+      label: typeLabels[type] || type,
+      count: typeCounts[type],
+    }));
+
+    return {
+      totalPublished: publishedItems.length,
+      cmsPublishedCount: items.filter(i => Boolean(i.cms_node_id)).length,
+      publishedByChannel,
+      byContentType,
+      telemetryConnected: false,
+      telemetryNotice: 'External engagement telemetry (impressions, clicks, CTR, conversions) is currently unavailable because live analytics tracking pixels and webhook streams have not been connected for this tenant.',
+    };
   }
 
   // ─── CMS INTEGRATION ───────────────────────────────────────────

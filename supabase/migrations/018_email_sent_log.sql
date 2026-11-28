@@ -73,12 +73,14 @@ CREATE INDEX IF NOT EXISTS idx_email_sent_log_user_type_sent
 -- ---------------------------------------------------------------------------
 ALTER TABLE public.email_sent_log ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "deny_all_anon" ON public.email_sent_log;
 CREATE POLICY "deny_all_anon" ON public.email_sent_log
   AS RESTRICTIVE
   FOR ALL
   TO anon
   USING (false);
 
+DROP POLICY IF EXISTS "deny_all_authenticated" ON public.email_sent_log;
 CREATE POLICY "deny_all_authenticated" ON public.email_sent_log
   AS RESTRICTIVE
   FOR ALL

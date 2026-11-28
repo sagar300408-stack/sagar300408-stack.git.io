@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Search, Eye,
-  ShieldCheck, FileText, Check, X, RotateCcw
+  ShieldCheck, FileText, Check, X, RotateCcw, AlertCircle
 } from 'lucide-react';
 import { useAuth } from '../../../lib/AuthContext';
 import { useToast } from '../../../components/Layout/ToastProvider';
@@ -18,8 +18,9 @@ import {
 } from '../../../components/growth';
 
 export default function ContentApprovals() {
-  const { systemStatus } = useAuth();
+  const { systemStatus, role, user } = useAuth();
   const orgId = systemStatus?.organization?.id;
+  const isAuthorizedReviewer = role === 'owner' || role === 'admin';
   const { showToast } = useToast();
   const sdk = getOCEClient();
 
@@ -72,10 +73,18 @@ export default function ContentApprovals() {
     e.preventDefault();
     if (!orgId || !reviewingItem) return;
 
+    if (!isAuthorizedReviewer) {
+      showToast('Unauthorized: Editorial approvals require Owner or Admin permissions.', 'error');
+      return;
+    }
+
     setSubmittingReview(true);
+    const reviewerName = user?.user_metadata?.full_name || (role === 'owner' ? 'Organization Owner' : 'Lead Editor');
+    const reviewerId = user?.id;
+
     try {
       if (reviewAction === 'approve') {
-        await sdk.approveContent(orgId, reviewingItem.id, reviewNotes.trim() || undefined);
+        await sdk.approveContent(orgId, reviewingItem.id, reviewNotes.trim() || undefined, reviewerName, reviewerId);
         showToast(`Approved "${reviewingItem.title}"`, 'success');
       } else if (reviewAction === 'request_changes') {
         if (!reviewNotes.trim()) {
@@ -83,7 +92,7 @@ export default function ContentApprovals() {
           setSubmittingReview(false);
           return;
         }
-        await sdk.requestContentChanges(orgId, reviewingItem.id, reviewNotes.trim());
+        await sdk.requestContentChanges(orgId, reviewingItem.id, reviewNotes.trim(), reviewerName, reviewerId);
         showToast(`Requested changes on "${reviewingItem.title}"`, 'success');
       } else if (reviewAction === 'reject') {
         if (!reviewNotes.trim()) {
@@ -91,7 +100,7 @@ export default function ContentApprovals() {
           setSubmittingReview(false);
           return;
         }
-        await sdk.rejectContent(orgId, reviewingItem.id, reviewNotes.trim());
+        await sdk.rejectContent(orgId, reviewingItem.id, reviewNotes.trim(), reviewerName, reviewerId);
         showToast(`Rejected "${reviewingItem.title}"`, 'success');
       }
 
@@ -140,6 +149,15 @@ export default function ContentApprovals() {
       <ContentNav />
 
       <div className="flex-1 max-w-7xl mx-auto px-6 py-8 w-full space-y-6">
+        {!isAuthorizedReviewer && (
+          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-center gap-2.5">
+            <AlertCircle size={16} className="text-amber-600 shrink-0" />
+            <span>
+              <strong>Read-Only Mode:</strong> Your user role ({role || 'member'}) allows inspecting editorial submissions, but submitting review decisions requires Organization Owner or Admin privileges.
+            </span>
+          </div>
+        )}
+
         {/* Metric summary banner */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-xs">
@@ -373,11 +391,17 @@ export default function ContentApprovals() {
 
                   <button
                     onClick={() => {
+                      if (!isAuthorizedReviewer) {
+                        showToast('Only organization owners and administrators can submit review decisions.', 'error');
+                        return;
+                      }
                       setReviewingItem(item);
                       setReviewAction('approve');
                       setReviewNotes('');
                     }}
-                    className="px-3.5 py-1.5 bg-[#244235] text-white hover:bg-[#1a3026] rounded-lg text-xs font-medium transition-colors shadow-xs flex items-center gap-1.5"
+                    disabled={!isAuthorizedReviewer}
+                    title={isAuthorizedReviewer ? 'Submit review decision' : 'Requires Owner or Admin role'}
+                    className="px-3.5 py-1.5 bg-[#244235] text-white hover:bg-[#1a3026] disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-xs font-medium transition-colors shadow-xs flex items-center gap-1.5"
                   >
                     <ShieldCheck size={14} />
                     <span>Review Decision</span>

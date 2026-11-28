@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   X, Save, Send, CheckCircle2, Globe, Calendar, Image as ImageIcon,
-  Tag, Trash2, History, AlertCircle
+  Tag, Trash2, History, AlertCircle, Video, Plus, RotateCcw, Eye, ExternalLink
 } from 'lucide-react';
 import OCEEditor from '../Editor/Editor';
 import MediaDrawer from '../Editor/MediaDrawer';
@@ -14,7 +14,9 @@ import {
   type MarketingChannel,
   type MarketingObjective,
   type MarketingAudience,
-  type GrowthContentRevision
+  type MarketingInitiative,
+  type GrowthContentRevision,
+  VALID_CONTENT_TRANSITIONS
 } from '../../lib/sdk';
 
 interface ContentEditorModalProps {
@@ -33,6 +35,7 @@ const CONTENT_TYPES: { id: ContentType; label: string }[] = [
   { id: 'newsletter', label: 'Newsletter Edition' },
   { id: 'case_study', label: 'Case Study' },
   { id: 'whitepaper', label: 'Whitepaper / Report' },
+  { id: 'landing_page', label: 'Landing Page' },
   { id: 'other', label: 'Other Document' },
 ];
 
@@ -64,6 +67,7 @@ export default function ContentEditorModal({
   const [channels, setChannels] = useState<MarketingChannel[]>([]);
   const [objectives, setObjectives] = useState<MarketingObjective[]>([]);
   const [audiences, setAudiences] = useState<MarketingAudience[]>([]);
+  const [initiatives, setInitiatives] = useState<MarketingInitiative[]>([]);
   const [revisions, setRevisions] = useState<GrowthContentRevision[]>([]);
 
   // Form State
@@ -74,11 +78,16 @@ export default function ContentEditorModal({
   const [summary, setSummary] = useState('');
   const [content, setContent] = useState<any>({ type: 'doc', content: [{ type: 'paragraph' }] });
   const [coverImage, setCoverImage] = useState('');
+  const [mediaUrls, setMediaUrls] = useState<string[]>([]);
+  const [newMediaUrl, setNewMediaUrl] = useState('');
+  const [mediaDrawerMode, setMediaDrawerMode] = useState<'cover' | 'attachment'>('cover');
+  const [previewRevision, setPreviewRevision] = useState<GrowthContentRevision | null>(null);
   const [category, setCategory] = useState('');
   const [tagsInput, setTagsInput] = useState('');
   const [channelId, setChannelId] = useState('');
   const [objectiveId, setObjectiveId] = useState('');
   const [audienceId, setAudienceId] = useState('');
+  const [campaignId, setCampaignId] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [reviewerName, setReviewerName] = useState('');
   const [scheduledFor, setScheduledFor] = useState('');
@@ -95,16 +104,19 @@ export default function ContentEditorModal({
         setSummary(item.summary || '');
         setContent(item.content || { type: 'doc', content: [{ type: 'paragraph' }] });
         setCoverImage(item.cover_image || '');
+        setMediaUrls(item.media_urls || []);
         setCategory(item.category || '');
         setTagsInput((item.tags || []).join(', '));
         setChannelId(item.channel_id || '');
         setObjectiveId(item.objective_id || '');
         setAudienceId(item.audience_id || '');
+        setCampaignId(item.campaign_id || '');
         setAuthorName(item.author_name || '');
         setReviewerName(item.reviewer_name || '');
         setScheduledFor(item.scheduled_for ? new Date(item.scheduled_for).toISOString().slice(0, 16) : '');
         setRejectionReason(item.rejection_reason || '');
         setCmsNodeId(item.cms_node_id || null);
+        setPreviewRevision(null);
 
         // Load revisions
         sdk.getContentRevisions(orgId, item.id).then(setRevisions).catch(() => {});
@@ -117,23 +129,27 @@ export default function ContentEditorModal({
         setSummary('');
         setContent({ type: 'doc', content: [{ type: 'paragraph' }] });
         setCoverImage('');
+        setMediaUrls([]);
         setCategory('');
         setTagsInput('');
         setChannelId('');
         setObjectiveId('');
         setAudienceId('');
+        setCampaignId('');
         setAuthorName('');
         setReviewerName('');
         setScheduledFor('');
         setRejectionReason('');
         setCmsNodeId(null);
         setRevisions([]);
+        setPreviewRevision(null);
       }
 
       // Load marketing relations
       sdk.getMarketingChannels(orgId).then(setChannels).catch(() => {});
       sdk.getMarketingObjectives(orgId).then(setObjectives).catch(() => {});
       sdk.getMarketingAudiences(orgId).then(setAudiences).catch(() => {});
+      sdk.getMarketingInitiatives(orgId).then(setInitiatives).catch(() => {});
     }
   }, [isOpen, item, defaultType, orgId, sdk]);
 
@@ -173,11 +189,13 @@ export default function ContentEditorModal({
         summary: summary.trim() || null,
         content,
         cover_image: coverImage.trim() || null,
+        media_urls: mediaUrls,
         category: category.trim() || null,
         tags,
         channel_id: channelId || null,
         objective_id: objectiveId || null,
         audience_id: audienceId || null,
+        campaign_id: campaignId || null,
         author_name: authorName.trim() || null,
         reviewer_name: reviewerName.trim() || null,
         scheduled_for: scheduledFor ? new Date(scheduledFor).toISOString() : null,
@@ -239,6 +257,28 @@ export default function ContentEditorModal({
       onClose();
     } catch (e: any) {
       showToast(e?.message || 'Delete failed', 'error');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleRestoreRevision = async (rev: GrowthContentRevision) => {
+    if (!item?.id) return;
+    if (!confirm(`Restore content from Version ${rev.version}? Your current editor inputs will be replaced.`)) return;
+
+    try {
+      setSaving(true);
+      await sdk.restoreContentRevision(orgId, item.id, rev.version);
+      setTitle(rev.title);
+      setSummary(rev.summary || '');
+      setContent(rev.content);
+      showToast(`Restored Version ${rev.version} snapshot`, 'success');
+      const updatedRevs = await sdk.getContentRevisions(orgId, item.id);
+      setRevisions(updatedRevs);
+      setPreviewRevision(null);
+      onSaved();
+    } catch (e: any) {
+      showToast(e.message || 'Failed to restore revision', 'error');
     } finally {
       setSaving(false);
     }
@@ -350,7 +390,10 @@ export default function ContentEditorModal({
                     />
                     <button
                       type="button"
-                      onClick={() => setIsMediaDrawerOpen(true)}
+                      onClick={() => {
+                        setMediaDrawerMode('cover');
+                        setIsMediaDrawerOpen(true);
+                      }}
                       className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-lg flex items-center gap-1.5 transition-colors"
                     >
                       <ImageIcon size={14} />
@@ -372,6 +415,97 @@ export default function ContentEditorModal({
                   </button>
                 </div>
               )}
+
+              {/* Image & Video Attachments Section */}
+              <div className="p-4 bg-gray-50/70 border border-gray-200 rounded-xl space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Video size={16} className="text-[#0ea5e9]" />
+                    <label className="text-xs font-semibold uppercase tracking-wider text-gray-800">
+                      Image & Video Attachments ({mediaUrls.length})
+                    </label>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMediaDrawerMode('attachment');
+                      setIsMediaDrawerOpen(true);
+                    }}
+                    className="px-3 py-1.5 bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 text-xs font-medium rounded-lg flex items-center gap-1.5 transition-colors shadow-xs"
+                  >
+                    <Plus size={13} />
+                    <span>Attach from Media Library</span>
+                  </button>
+                </div>
+
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={newMediaUrl}
+                    onChange={(e) => setNewMediaUrl(e.target.value)}
+                    placeholder="Or paste direct video/image URL (MP4, WebM, YouTube, CDN asset)..."
+                    className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0ea5e9]"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (newMediaUrl.trim()) {
+                          setMediaUrls((prev) => [...prev, newMediaUrl.trim()]);
+                          setNewMediaUrl('');
+                          showToast('Attachment added', 'success');
+                        }
+                      }
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (newMediaUrl.trim()) {
+                        setMediaUrls((prev) => [...prev, newMediaUrl.trim()]);
+                        setNewMediaUrl('');
+                        showToast('Attachment added', 'success');
+                      }
+                    }}
+                    className="px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs font-medium rounded-lg transition-colors"
+                  >
+                    Add URL
+                  </button>
+                </div>
+
+                {mediaUrls.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
+                    {mediaUrls.map((url, idx) => {
+                      const isVideo = /\.(mp4|webm|mov|mkv)($|\?)/i.test(url) || url.includes('youtube') || url.includes('vimeo');
+                      return (
+                        <div key={idx} className="flex items-center justify-between p-2 rounded-lg border border-gray-200 bg-white shadow-xs text-xs">
+                          <div className="flex items-center gap-2 min-w-0 flex-1">
+                            {isVideo ? (
+                              <Video size={16} className="text-purple-600 shrink-0" />
+                            ) : (
+                              <ImageIcon size={16} className="text-blue-600 shrink-0" />
+                            )}
+                            <span className="truncate text-gray-700 font-mono text-[11px]" title={url}>
+                              {url.split('/').pop() || url}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1 shrink-0 ml-2">
+                            <a href={url} target="_blank" rel="noopener noreferrer" className="p-1 text-gray-400 hover:text-gray-700">
+                              <ExternalLink size={12} />
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => setMediaUrls((prev) => prev.filter((_, i) => i !== idx))}
+                              className="p-1 text-rose-500 hover:text-rose-700"
+                              title="Remove attachment"
+                            >
+                              <X size={13} />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1">Summary / Excerpt</label>
@@ -483,6 +617,20 @@ export default function ContentEditorModal({
                       ))}
                     </select>
                   </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-gray-600 mb-1">Marketing Campaign (Initiative)</label>
+                    <select
+                      value={campaignId}
+                      onChange={(e) => setCampaignId(e.target.value)}
+                      className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-xs text-gray-700"
+                    >
+                      <option value="">None / Unassigned</option>
+                      {initiatives.map(i => (
+                        <option key={i.id} value={i.id}>{i.name} ({i.priority} Priority)</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -512,23 +660,79 @@ export default function ContentEditorModal({
           )}
 
           {activeTab === 'schedule' && (
-            <div className="space-y-4">
+            <div className="space-y-5">
+              {/* Visual Lifecycle Stepper */}
+              <div className="p-4 bg-gray-50 border border-gray-200 rounded-xl space-y-3">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                  Editorial Lifecycle Progression
+                </span>
+                <div className="flex items-center justify-between text-xs font-semibold gap-1 overflow-x-auto pb-1">
+                  {[
+                    { key: 'draft', label: '1. Draft' },
+                    { key: 'in_review', label: '2. In Review' },
+                    { key: 'approved', label: '3. Approved' },
+                    { key: 'scheduled', label: '4. Scheduled' },
+                    { key: 'published', label: '5. Published' },
+                  ].map((step, idx, arr) => {
+                    const isCurrent = status === step.key;
+                    const isPassed =
+                      (status === 'in_review' && idx < 1) ||
+                      (status === 'approved' && idx < 2) ||
+                      (status === 'scheduled' && idx < 3) ||
+                      (status === 'published' && idx < 4);
+
+                    return (
+                      <div key={step.key} className="flex items-center gap-1.5 shrink-0">
+                        <span
+                          className={`px-2.5 py-1 rounded-lg border text-xs ${
+                            isCurrent
+                              ? 'bg-[#244235] text-white border-[#244235] font-bold shadow-xs'
+                              : isPassed
+                              ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                              : 'bg-white text-gray-400 border-gray-200'
+                          }`}
+                        >
+                          {step.label}
+                        </span>
+                        {idx < arr.length - 1 && <span className="text-gray-300">→</span>}
+                      </div>
+                    );
+                  })}
+                </div>
+                {(status === 'changes_requested' || status === 'rejected' || status === 'archived') && (
+                  <div className="text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg flex items-center gap-2">
+                    <AlertCircle size={13} className="text-amber-600 shrink-0" />
+                    <span>Special Lifecycle State: <strong className="capitalize">{status.replace('_', ' ')}</strong></span>
+                  </div>
+                )}
+              </div>
+
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1">Lifecycle Status</label>
-                <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value as ContentStatus)}
-                  className="w-full px-3 py-2.5 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-800"
-                >
-                  <option value="draft">Draft (Work in progress)</option>
-                  <option value="in_review">In Review (Submitted for editorial check)</option>
-                  <option value="changes_requested">Changes Requested (Revision needed)</option>
-                  <option value="approved">Approved (Editorial approval granted)</option>
-                  <option value="scheduled">Scheduled (Queued for calendar release)</option>
-                  <option value="published">Published (Released to target channels)</option>
-                  <option value="rejected">Rejected</option>
-                  <option value="archived">Archived</option>
-                </select>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-700 mb-1">
+                  Enforce Valid Lifecycle Transition
+                </label>
+                <div className="p-3 bg-white border border-gray-200 rounded-lg space-y-2">
+                  <div className="text-xs text-gray-500 mb-1">
+                    Current Status: <span className={`font-bold px-2 py-0.5 rounded text-xs ${STATUS_LABELS[status]?.color || 'bg-gray-100 text-gray-700'}`}>{STATUS_LABELS[status]?.label || status}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {[status, ...(VALID_CONTENT_TRANSITIONS[status] || [])].filter((val, i, self) => self.indexOf(val) === i).map((allowedSt) => (
+                      <button
+                        key={allowedSt}
+                        type="button"
+                        onClick={() => setStatus(allowedSt)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                          status === allowedSt
+                            ? 'bg-[#0ea5e9] text-white border-[#0ea5e9] shadow-xs'
+                            : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
+                        }`}
+                      >
+                        {STATUS_LABELS[allowedSt]?.label || allowedSt}
+                        {status === allowedSt ? ' (Current)' : ''}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -540,7 +744,9 @@ export default function ContentEditorModal({
                     value={scheduledFor}
                     onChange={(e) => {
                       setScheduledFor(e.target.value);
-                      if (e.target.value && status === 'draft') setStatus('scheduled');
+                      if (e.target.value && (status === 'draft' || status === 'approved')) {
+                        setStatus('scheduled');
+                      }
                     }}
                     className="w-full pl-9 pr-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-700"
                   />
@@ -624,18 +830,98 @@ export default function ContentEditorModal({
 
           {activeTab === 'revisions' && (
             <div className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-700">Snapshot & Revisions History</h4>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-700">Snapshot & Revisions History</h4>
+                  <p className="text-xs text-gray-400">Inspect past versions or restore previous content snapshots.</p>
+                </div>
+                <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
+                  {revisions.length} {revisions.length === 1 ? 'Snapshot' : 'Snapshots'}
+                </span>
+              </div>
+
+              {previewRevision && (
+                <div className="p-4 bg-blue-50/70 border border-blue-200 rounded-xl space-y-2">
+                  <div className="flex items-center justify-between text-xs font-semibold text-blue-900">
+                    <span className="flex items-center gap-1.5">
+                      <Eye size={14} />
+                      Previewing Version {previewRevision.version}: {previewRevision.title}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setPreviewRevision(null)}
+                      className="text-blue-700 hover:text-blue-900"
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+                  {previewRevision.summary && (
+                    <p className="text-xs text-blue-800 italic">{previewRevision.summary}</p>
+                  )}
+                  <div className="flex items-center gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => handleRestoreRevision(previewRevision)}
+                      className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs font-medium flex items-center gap-1 transition-colors"
+                    >
+                      <RotateCcw size={12} />
+                      <span>Restore This Version</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPreviewRevision(null)}
+                      className="px-2.5 py-1 bg-white border border-blue-300 text-blue-700 rounded text-xs font-medium hover:bg-blue-50"
+                    >
+                      Close Preview
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {revisions.length === 0 ? (
-                <p className="text-xs text-gray-500 italic">No previous revisions recorded yet.</p>
+                <p className="text-xs text-gray-500 italic p-4 text-center border border-dashed border-gray-200 rounded-xl">
+                  No previous revisions recorded yet. Revisions are created automatically whenever you save edits.
+                </p>
               ) : (
                 <div className="space-y-2">
-                  {revisions.map(r => (
-                    <div key={r.id} className="p-3 border border-gray-200 rounded-lg flex items-center justify-between text-xs bg-gray-50">
-                      <div>
-                        <span className="font-semibold text-gray-900">Version {r.version}:</span>{' '}
-                        <span className="text-gray-600">{r.change_summary || r.title}</span>
+                  {revisions.map((r) => (
+                    <div
+                      key={r.id}
+                      className="p-3 border border-gray-200 rounded-lg flex items-center justify-between text-xs bg-gray-50 hover:bg-gray-100/70 transition-colors"
+                    >
+                      <div className="space-y-0.5">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-gray-900 bg-white border border-gray-200 px-1.5 py-0.5 rounded text-[10px]">
+                            v{r.version}
+                          </span>
+                          <span className="font-semibold text-gray-800">{r.title}</span>
+                        </div>
+                        <p className="text-[11px] text-gray-500">
+                          {r.change_summary || 'Content revision update'}
+                        </p>
+                        <span className="text-[10px] text-gray-400">
+                          {new Date(r.created_at).toLocaleString()}
+                        </span>
                       </div>
-                      <span className="text-gray-400">{new Date(r.created_at).toLocaleString()}</span>
+
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setPreviewRevision(r)}
+                          className="px-2 py-1 text-xs text-gray-600 hover:text-gray-900 bg-white border border-gray-200 rounded flex items-center gap-1 transition-colors hover:border-gray-300"
+                        >
+                          <Eye size={12} />
+                          <span>Preview</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleRestoreRevision(r)}
+                          className="px-2.5 py-1 text-xs text-blue-700 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded flex items-center gap-1 transition-colors font-medium"
+                        >
+                          <RotateCcw size={12} />
+                          <span>Restore</span>
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -705,8 +991,13 @@ export default function ContentEditorModal({
         isOpen={isMediaDrawerOpen}
         onClose={() => setIsMediaDrawerOpen(false)}
         onSelectImage={(url) => {
-          setCoverImage(url);
-          showToast('Cover image selected from Media Library', 'success');
+          if (mediaDrawerMode === 'cover') {
+            setCoverImage(url);
+            showToast('Cover image selected from Media Library', 'success');
+          } else {
+            setMediaUrls((prev) => [...prev, url]);
+            showToast('Media attachment added from Media Library', 'success');
+          }
         }}
       />
     </div>

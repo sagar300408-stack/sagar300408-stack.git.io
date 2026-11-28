@@ -3,6 +3,10 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
       "source": "/assets/:path*",
       "has": [
         {
@@ -35,10 +39,6 @@
     {
       "source": "/admin(.*)",
       "destination": "/admin/index.html"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
     }
   ],
   "redirects": [

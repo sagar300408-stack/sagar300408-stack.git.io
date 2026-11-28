@@ -25,6 +25,7 @@ const TYPE_COLORS: Record<ContentType, { bg: string; text: string; border: strin
   newsletter: { bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200' },
   case_study: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
   whitepaper: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
+  landing_page: { bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-200' },
   other: { bg: 'bg-gray-50', text: 'text-gray-700', border: 'border-gray-200' },
 };
 
@@ -372,7 +373,6 @@ export default function ContentCalendar() {
                   <div className="flex-1 space-y-1.5 overflow-y-auto max-h-28 scrollbar-none">
                     {dayItems.map((item) => {
                       const colorCfg = TYPE_COLORS[item.content_type] || TYPE_COLORS.other;
-                      const isPublished = item.status === 'published';
 
                       return (
                         <div
@@ -387,15 +387,24 @@ export default function ContentCalendar() {
                             <span className={`font-semibold truncate ${colorCfg.text}`}>
                               {item.title}
                             </span>
-                            {isPublished ? (
-                              <CheckCircle2 size={10} className="text-emerald-600 shrink-0" />
+                            {item.status === 'published' ? (
+                              <span title="Published" className="inline-flex"><CheckCircle2 size={11} className="text-emerald-600 shrink-0" /></span>
+                            ) : item.status === 'approved' ? (
+                              <span title="Approved" className="inline-flex"><CheckCircle2 size={11} className="text-teal-600 shrink-0" /></span>
+                            ) : item.status === 'scheduled' ? (
+                              <span title="Scheduled" className="inline-flex"><Clock size={11} className="text-blue-500 shrink-0" /></span>
+                            ) : item.status === 'in_review' ? (
+                              <span className="w-2 h-2 rounded-full bg-orange-500 shrink-0" title="In Review" />
                             ) : (
-                              <Clock size={10} className="text-blue-500 shrink-0" />
+                              <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" title="Draft" />
                             )}
                           </div>
 
                           <div className="flex items-center justify-between text-[10px] text-gray-500">
                             <span className="capitalize">{item.content_type.replace('_', ' ')}</span>
+                            <span className="text-[9px] uppercase px-1 rounded bg-white/70 border border-gray-200 text-gray-600">
+                              {item.status}
+                            </span>
                             <button
                               onClick={(e) => handleOpenReschedule(item, e)}
                               className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-gray-800 transition-opacity"
@@ -414,6 +423,35 @@ export default function ContentCalendar() {
           </div>
         </div>
       )}
+
+      {/* Status Indicators Legend */}
+      <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-white border border-gray-200 rounded-xl text-xs text-gray-600 shadow-xs">
+        <span className="font-semibold text-gray-700 uppercase tracking-wider text-[10px]">
+          Editorial Status Legend:
+        </span>
+        <div className="flex flex-wrap items-center gap-4">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-amber-400" />
+            <span>Draft</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-orange-500" />
+            <span>In Review</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 size={12} className="text-teal-600" />
+            <span>Approved</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Clock size={12} className="text-blue-500" />
+            <span>Scheduled</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 size={12} className="text-emerald-600" />
+            <span>Published Live</span>
+          </span>
+        </div>
+      </div>
     </div>
 
       {/* Reschedule Modal */}

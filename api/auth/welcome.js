@@ -38,6 +38,19 @@ import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
 import { welcomeEmail } from '../emails/templates.js';
 
+function isTableMissingError(error) {
+  if (!error) return false;
+  const msg = (error.message || '').toLowerCase();
+  const code = (error.code || '').toUpperCase();
+  return (
+    code === 'PGRST205' ||
+    code === '42P01' ||
+    msg.includes('does not exist') ||
+    msg.includes('schema cache') ||
+    msg.includes('could not find the table')
+  );
+}
+
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -75,33 +88,36 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid user_id UUID format.' });
   }
 
+  // Require valid email to prevent user enumeration
+  if (!email || typeof email !== 'string' || !email.includes('@')) {
+    return res.status(400).json({ error: 'Valid email is required.' });
+  }
+
   try {
     // --- Supabase admin client (service role, server-side only) ---
     const supabase = createClient(supabaseUrl, supabaseServiceKey, {
       auth: { autoRefreshToken: false, persistSession: false }
     });
 
-    // --- Security Check 1: Verify user exists in Supabase auth.users ---
+    // --- Security Check: Verify user exists & prevent user enumeration ---
     const { data: userData, error: userLookupError } = await supabase.auth.admin.getUserById(user_id);
-    if (userLookupError || !userData?.user) {
-      console.warn(`[welcome] Lookup failed for user_id ${user_id}:`, userLookupError?.message);
-      return res.status(404).json({ error: 'User account not found.' });
+    const trustedUser = userData?.user;
+    const trustedEmail = trustedUser?.email;
+
+    // Uniform response for non-existent user, missing email, or email mismatch
+    // (Prevents attackers from probing valid user UUIDs via differing HTTP status codes)
+    if (
+      userLookupError ||
+      !trustedUser ||
+      !trustedEmail ||
+      !trustedEmail.includes('@') ||
+      (email.toLowerCase().trim() !== trustedEmail.toLowerCase().trim())
+    ) {
+      console.warn(`[welcome] Unverified welcome request for user_id ${user_id}`);
+      return res.status(200).json({ sent: false, reason: 'unverified_request' });
     }
 
-    const trustedUser = userData.user;
-    const trustedEmail = trustedUser.email;
-
-    if (!trustedEmail || !trustedEmail.includes('@')) {
-      return res.status(400).json({ error: 'User account has no associated email address.' });
-    }
-
-    // --- Security Check 2: If client provided an email, it must match the account record ---
-    if (email && email.toLowerCase().trim() !== trustedEmail.toLowerCase().trim()) {
-      console.warn(`[welcome] Email mismatch attempt for user ${user_id}: requested ${email}, registered ${trustedEmail}`);
-      return res.status(403).json({ error: 'Recipient address does not match registered account.' });
-    }
-
-    // --- Security Check 3: Check account creation age ---
+    // --- Check account creation age ---
     // If the account was created more than 15 minutes ago, this is a normal recurring login, NOT a new signup.
     const createdAtTime = new Date(trustedUser.created_at).getTime();
     const FIFTEEN_MINUTES_MS = 15 * 60 * 1000;
@@ -118,7 +134,7 @@ export default async function handler(req, res) {
       .eq('email_type', 'welcome')
       .maybeSingle();
 
-    if (logSelectError && !logSelectError.message.includes('does not exist')) {
+    if (logSelectError && !isTableMissingError(logSelectError)) {
       console.error('[welcome] Log check failed:', logSelectError.message);
       return res.status(500).json({ error: 'Database error during idempotency check.' });
     }
@@ -167,8 +183,11 @@ export default async function handler(req, res) {
       });
 
     if (logInsertError) {
-      // Non-fatal: email was delivered; just log the failure
-      console.warn('[welcome] Failed to write to email_sent_log:', logInsertError.message);
+      if (isTableMissingError(logInsertError)) {
+        console.warn('[welcome] email_sent_log table not found in schema cache. Idempotency log skipped.');
+      } else {
+        console.warn('[welcome] Failed to write to email_sent_log:', logInsertError.message);
+      }
     }
 
     console.info(`[welcome] Welcome email sent to ${trustedEmail} (user: ${user_id})`);

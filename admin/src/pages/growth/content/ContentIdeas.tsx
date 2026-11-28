@@ -303,9 +303,10 @@ export default function ContentIdeas() {
               <option value="all">All Statuses</option>
               <option value="new">New</option>
               <option value="under_review">Under Review</option>
-              <option value="accepted">Accepted</option>
+              <option value="approved">Approved</option>
               <option value="converted">Converted</option>
               <option value="rejected">Rejected</option>
+              <option value="archived">Archived</option>
             </select>
 
             <select
@@ -314,7 +315,6 @@ export default function ContentIdeas() {
               className="px-2.5 py-1.5 text-xs bg-white border border-gray-200 rounded-lg text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#0ea5e9]"
             >
               <option value="all">All Priorities</option>
-              <option value="urgent">Urgent</option>
               <option value="high">High</option>
               <option value="medium">Medium</option>
               <option value="low">Low</option>

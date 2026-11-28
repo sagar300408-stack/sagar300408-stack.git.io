@@ -81,6 +81,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await bootstrap(currentUser ?? null);
   }
 
+  /**
+   * For OAuth registrations: send a welcome email on first-time SIGNED_IN.
+   * Protected by client-side sessionStorage, creation age check, and server-side idempotency.
+   */
+  function maybeWelcomeOAuthUser(currentUser: User | null) {
+    if (!currentUser || !currentUser.email) return;
+
+    const provider = currentUser.app_metadata?.provider;
+    if (provider !== 'google' && provider !== 'azure') return;
+
+    // Check whether this account was created recently (within last 10 minutes)
+    // If the account was created earlier, this is a normal recurring login, NOT a new signup.
+    if (currentUser.created_at) {
+      const createdAt = new Date(currentUser.created_at).getTime();
+      const tenMinutesAgo = Date.now() - (10 * 60 * 1000);
+      if (createdAt < tenMinutesAgo) {
+        return;
+      }
+    }
+
+    // Use session storage as a lightweight client-side duplicate-prevention check
+    const clientKey = `originyx_welcomed_${currentUser.id}`;
+    if (sessionStorage.getItem(clientKey)) return;
+    sessionStorage.setItem(clientKey, '1');
+
+    fetch('/api/auth/welcome', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        name: currentUser.user_metadata?.full_name || currentUser.user_metadata?.name || '',
+        email: currentUser.email,
+        provider: provider === 'azure' ? 'microsoft' : 'google',
+        needs_verification: false,
+      }),
+    }).catch(err => {
+      console.warn('[AuthContext] OAuth welcome email failed (non-fatal):', err);
+    });
+  }
+
   // Handle bfcache (Back/Forward Cache restoration) to prevent viewing cached dashboard after logout
   useEffect(() => {
     const handlePageShow = async (event: PageTransitionEvent) => {
@@ -161,6 +201,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const currentUser = session?.user ?? null;
         setUser(currentUser);
         await bootstrap(currentUser);
+        if (currentUser) {
+          maybeWelcomeOAuthUser(currentUser);
+        }
       } catch (e) {
         console.error('Session initialization failed:', e);
         setLoading(false);
@@ -177,6 +220,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           setLoading(true);
           await bootstrap(currentUser);
+
+          if (event === 'SIGNED_IN' && currentUser) {
+            maybeWelcomeOAuthUser(currentUser);
+          }
         } else if (event === 'SIGNED_OUT') {
           setRole(null);
           setLoading(false);

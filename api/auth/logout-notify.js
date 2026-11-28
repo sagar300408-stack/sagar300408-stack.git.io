@@ -38,6 +38,19 @@ import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
 import { logoutEmail } from '../emails/templates.js';
 
+function isTableMissingError(error) {
+  if (!error) return false;
+  const msg = (error.message || '').toLowerCase();
+  const code = (error.code || '').toUpperCase();
+  return (
+    code === 'PGRST205' ||
+    code === '42P01' ||
+    msg.includes('does not exist') ||
+    msg.includes('schema cache') ||
+    msg.includes('could not find the table')
+  );
+}
+
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -94,28 +107,29 @@ export default async function handler(req, res) {
       auth: { autoRefreshToken: false, persistSession: false }
     });
 
-    // --- Verify User & Identity ---
-    // 1. If an Authorization token was provided, verify with Supabase Auth
+    // --- Verify User & Identity: Require Valid Authenticated Session ---
     const authHeader = req.headers.authorization;
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      const token = authHeader.replace(/^Bearer\s+/i, '');
-      const { data: tokenData, error: tokenErr } = await supabase.auth.getUser(token);
-      if (!tokenErr && tokenData?.user) {
-        if (tokenData.user.id !== user_id) {
-          console.warn(`[logout-notify] Token user mismatch: ${tokenData.user.id} vs ${user_id}`);
-          return res.status(403).json({ error: 'Token user mismatch.' });
-        }
-      }
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Authorization header with Bearer token is required.' });
     }
 
-    // 2. Fetch trusted user from Supabase
-    const { data: userData, error: userLookupError } = await supabase.auth.admin.getUserById(user_id);
-    if (userLookupError || !userData?.user) {
-      console.warn(`[logout-notify] User not found: ${user_id}`);
-      return res.status(404).json({ error: 'User account not found.' });
+    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+    if (!token) {
+      return res.status(401).json({ error: 'Authentication token is empty.' });
     }
 
-    const trustedUser = userData.user;
+    const { data: tokenData, error: tokenErr } = await supabase.auth.getUser(token);
+    if (tokenErr || !tokenData?.user) {
+      console.warn('[logout-notify] Token verification failed:', tokenErr?.message);
+      return res.status(401).json({ error: 'Invalid or expired authentication session.' });
+    }
+
+    if (tokenData.user.id !== user_id) {
+      console.warn(`[logout-notify] Token user mismatch: ${tokenData.user.id} vs ${user_id}`);
+      return res.status(403).json({ error: 'Token user mismatch.' });
+    }
+
+    const trustedUser = tokenData.user;
     const trustedEmail = trustedUser.email;
 
     if (!trustedEmail || !trustedEmail.includes('@')) {
@@ -130,7 +144,7 @@ export default async function handler(req, res) {
       .eq('email_type', 'logout_notification')
       .maybeSingle();
 
-    if (eventLogErr && !eventLogErr.message.includes('does not exist')) {
+    if (eventLogErr && !isTableMissingError(eventLogErr)) {
       console.error('[logout-notify] Event log check failed:', eventLogErr.message);
       return res.status(500).json({ error: 'Database error during idempotency check.' });
     }
@@ -143,13 +157,18 @@ export default async function handler(req, res) {
     // --- Idempotency Check 2: 60-second window deduplication ---
     // Prevents double notifications if both client-portal and main site initiate logout within 60 seconds
     const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString();
-    const { data: recentLog } = await supabase
+    const { data: recentLog, error: recentLogErr } = await supabase
       .from('email_sent_log')
       .select('id')
       .eq('user_id', user_id)
       .eq('email_type', 'logout_notification')
       .gte('sent_at', oneMinuteAgo)
       .maybeSingle();
+
+    if (recentLogErr && !isTableMissingError(recentLogErr)) {
+      console.error('[logout-notify] Recent log check failed:', recentLogErr.message);
+      return res.status(500).json({ error: 'Database error during idempotency check.' });
+    }
 
     if (recentLog) {
       console.info(`[logout-notify] Duplicate skipped: recent logout notification already sent within 60s for user ${user_id}`);
@@ -193,7 +212,11 @@ export default async function handler(req, res) {
       });
 
     if (logInsertError) {
-      console.warn('[logout-notify] Failed to write to email_sent_log:', logInsertError.message);
+      if (isTableMissingError(logInsertError)) {
+        console.warn('[logout-notify] email_sent_log table not found in schema cache. Idempotency log skipped.');
+      } else {
+        console.warn('[logout-notify] Failed to write to email_sent_log:', logInsertError.message);
+      }
     }
 
     console.info(`[logout-notify] Logout email sent to ${trustedEmail} (user: ${user_id}, event: ${event_id})`);

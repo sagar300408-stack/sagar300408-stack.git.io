@@ -10,6 +10,7 @@ import { useToast } from '../../components/Layout/ToastProvider';
 import {
   getOCEClient,
   type ContentOverviewMetrics,
+  type ContentPerformanceMetrics,
   type GrowthContentItem,
   type GrowthContentIdea,
   type GrowthActivityItem,
@@ -99,6 +100,7 @@ export default function GrowthContent() {
   const sdk = getOCEClient();
 
   const [metrics, setMetrics] = useState<ContentOverviewMetrics | null>(null);
+  const [perfMetrics, setPerfMetrics] = useState<ContentPerformanceMetrics | null>(null);
   const [recentItems, setRecentItems] = useState<GrowthContentItem[]>([]);
   const [recentIdeas, setRecentIdeas] = useState<GrowthContentIdea[]>([]);
   const [activities, setActivities] = useState<GrowthActivityItem[]>([]);
@@ -115,17 +117,19 @@ export default function GrowthContent() {
     else setLoading(true);
 
     try {
-      const [overviewMetrics, allItems, allIdeas, recentActivities] = await Promise.all([
+      const [overviewMetrics, allItems, allIdeas, recentActivities, performanceData] = await Promise.all([
         sdk.getContentOverviewMetrics(orgId),
         sdk.getContentItems(orgId),
         sdk.getContentIdeas(orgId),
         sdk.getGrowthActivity(orgId, 6),
+        sdk.getContentPerformanceMetrics(orgId),
       ]);
 
       setMetrics(overviewMetrics);
       setRecentItems(allItems.slice(0, 6));
       setRecentIdeas(allIdeas.filter((i) => i.status !== 'converted').slice(0, 5));
       setActivities(recentActivities);
+      setPerfMetrics(performanceData);
     } catch (e: any) {
       console.warn('[GrowthContent] Error loading content overview data:', e);
       showToast(e.message || 'Failed to load content engine data', 'error');
@@ -450,6 +454,81 @@ export default function GrowthContent() {
                   ))}
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* Content Performance & Telemetry Section (Phase 3 Requirement 9) */}
+        <div className="space-y-4 pt-2">
+          <div>
+            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              Content Performance & Distribution Telemetry
+            </h2>
+            <p className="text-xs text-gray-400">
+              Audited metrics across publishing channels and media formats based on actual database records.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Format Distribution Card */}
+            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
+              <span className="text-xs font-bold text-gray-800 uppercase tracking-wider block">
+                Production by Format
+              </span>
+              <div className="space-y-2">
+                {perfMetrics?.byContentType.map((item) => (
+                  <div key={item.type} className="flex items-center justify-between text-xs">
+                    <span className="text-gray-600">{item.label}</span>
+                    <span className="font-semibold text-gray-900 bg-gray-50 border border-gray-200 px-2 py-0.5 rounded">
+                      {item.count}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Published Channels Card */}
+            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs space-y-3">
+              <span className="text-xs font-bold text-gray-800 uppercase tracking-wider block">
+                Published by Channel
+              </span>
+              {perfMetrics?.publishedByChannel.length === 0 ? (
+                <p className="text-xs text-gray-400 italic">No published assets assigned to channels yet.</p>
+              ) : (
+                <div className="space-y-2">
+                  {perfMetrics?.publishedByChannel.map((ch) => (
+                    <div key={ch.channelId} className="flex items-center justify-between text-xs">
+                      <span className="text-gray-600 truncate max-w-[180px]">{ch.channelName}</span>
+                      <span className="font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                        {ch.count} published
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+                <span>Website Insights CMS Live:</span>
+                <span className="font-bold text-gray-900">{perfMetrics?.cmsPublishedCount ?? 0}</span>
+              </div>
+            </div>
+
+            {/* Engagement Telemetry Card (Requirement 9: clear unavailable state, no fabricated data) */}
+            <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-xs flex flex-col justify-between">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-400" />
+                  <span className="text-xs font-bold text-gray-800 uppercase tracking-wider">
+                    Audience Telemetry & Impressions
+                  </span>
+                </div>
+                <div className="p-3 bg-amber-50/60 border border-amber-200 rounded-lg text-xs text-amber-900 leading-relaxed">
+                  {perfMetrics?.telemetryNotice ||
+                    'Real-time third-party telemetry (impressions, clicks, CTR, conversions) is currently unavailable. No external tracking pixels or channel webhooks are connected.'}
+                </div>
+              </div>
+              <p className="text-[11px] text-gray-400 pt-3">
+                Live audience engagement metrics will activate once external channel webhooks or tracking pixels are configured for this organization.
+              </p>
             </div>
           </div>
         </div>
