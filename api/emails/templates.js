@@ -215,7 +215,7 @@ function escapeHtml(str) {
 }
 
 // ===========================================================================
-// 1. WELCOME EMAIL
+// 1. WELCOME EMAIL (Originyx Redesigned Visual Layout)
 // ===========================================================================
 
 /**
@@ -228,118 +228,412 @@ function escapeHtml(str) {
  */
 function welcomeEmail({ name, email, provider = 'email', needsVerification = false }) {
   const displayName = escapeHtml(name || 'there');
+  const year = new Date().getFullYear();
 
-  const headerContent = `
-    ${logoBlock()}
-    <h1 style="font-family:Georgia,serif; font-size:28px; font-weight:700;
-               color:${T.white}; margin:20px 0 6px 0; line-height:1.2;">
-      Welcome to Originyx
-    </h1>
-    <p style="font-family:Arial,sans-serif; font-size:14px; color:rgba(255,255,255,0.85);
-               margin:0; line-height:1.5;">
-      Your account is ready. Let's build something extraordinary.
-    </p>`;
+  // CTA button configuration based on verification state & provider
+  let ctaText = 'Verify Email Address \u2192';
+  let ctaUrl = 'https://originyx.in/client-portal/';
+  if (!needsVerification) {
+    ctaText = 'Explore Originyx \u2192';
+    ctaUrl = 'https://originyx.in';
+  }
 
-  const verificationNote = needsVerification ? `
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
-           style="margin:20px 0; background-color:#fef3c7; border-radius:8px;
-                  border-left:3px solid #d97706;">
-      <tr>
-        <td style="padding:14px 16px;">
-          <p style="font-family:Arial,sans-serif; font-size:13px; color:#92400e;
-                     margin:0; line-height:1.6;">
-            <strong>One more step:</strong> Please verify your email address by clicking
-            the verification link we sent alongside this email. Your account is created —
-            you just need to confirm your email before you can sign in.
-          </p>
-        </td>
-      </tr>
-    </table>` : '';
+  // Verification callout box content
+  let calloutIconSvg = `
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+      <rect width="20" height="16" x="2" y="4" rx="2"/>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </svg>`;
+  let calloutTitle = 'Verify your email address';
+  let calloutSubtext = 'Before accessing your account, please verify your email address to activate your Originyx account.';
 
-  const providerNote = provider !== 'email' ? `
-    <p style="font-family:Arial,sans-serif; font-size:14px; color:${T.textMid};
-               margin:0 0 20px 0; line-height:1.6;">
-      You signed up using your <strong>${escapeHtml(provider === 'google' ? 'Google' : 'Microsoft')}</strong> account.
-      Your email is already verified — you can sign in immediately.
-    </p>` : '';
+  if (!needsVerification) {
+    const providerName = provider === 'google' ? 'Google' : (provider === 'microsoft' ? 'Microsoft' : 'Originyx');
+    calloutIconSvg = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>`;
+    calloutTitle = `Account ready with ${escapeHtml(providerName)}`;
+    calloutSubtext = `You signed up using your ${escapeHtml(providerName)} account. Your email is already verified and you can explore Originyx directly.`;
+  }
 
-  const bodyContent = `
-    <p style="font-family:Arial,sans-serif; font-size:16px; color:${T.textDark};
-               font-weight:600; margin:0 0 16px 0;">
-      Hi ${displayName},
-    </p>
-    <p style="font-family:Arial,sans-serif; font-size:14px; color:${T.textMid};
-               margin:0 0 16px 0; line-height:1.7;">
-      Your Originyx account has been created successfully. We're glad you're here.
-    </p>
-    ${verificationNote}
-    ${providerNote}
-    <p style="font-family:Arial,sans-serif; font-size:14px; color:${T.textMid};
-               margin:0 0 20px 0; line-height:1.7;">
-      Originyx helps businesses eliminate operational friction by building intelligent
-      AI workflow automation systems, autonomous agents, and enterprise-grade SaaS solutions
-      tailored to your operations.
-    </p>
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>Welcome to Originyx</title>
+  <!--[if mso]>
+  <noscript>
+    <xml><o:OfficeDocumentSettings>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings></xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @media only screen and (max-width:600px) {
+      .email-wrapper { width:100% !important; border-radius:0 !important; }
+      .email-body-inner { padding:24px 20px !important; }
+      .grid-card-cell { display:block !important; width:100% !important; padding:0 0 12px 0 !important; }
+      .banner-stack { display:block !important; width:100% !important; text-align:left !important; }
+      .banner-btn-cell { display:block !important; width:100% !important; padding-top:14px !important; text-align:left !important; }
+      .h1-headline { font-size:26px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f7f5; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f4f7f5; min-height:100vh;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
 
-    <!-- What's available -->
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
-           style="margin:0 0 24px 0; background-color:${T.bg}; border-radius:8px;">
-      <tr>
-        <td style="padding:20px 24px;">
-          <p style="font-family:Arial,sans-serif; font-size:12px; font-weight:700;
-                     letter-spacing:0.08em; text-transform:uppercase; color:${T.primaryMid};
-                     margin:0 0 12px 0;">
-            What you can do with Originyx
-          </p>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-              <td style="padding:6px 0; font-family:Arial,sans-serif; font-size:13px; color:${T.textMid}; line-height:1.6;">
-                &#x2713;&nbsp; <strong>Explore Products</strong> — Discover HunterOS, AI Receptionist, ShadowOS and more
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:6px 0; font-family:Arial,sans-serif; font-size:13px; color:${T.textMid}; line-height:1.6;">
-                &#x2713;&nbsp; <strong>Start a Project</strong> — Consult directly on custom AI automation
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:6px 0; font-family:Arial,sans-serif; font-size:13px; color:${T.textMid}; line-height:1.6;">
-                &#x2713;&nbsp; <strong>Client Portal</strong> — Track your project, view deliverables, manage your account
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+        <!-- EMAIL CONTAINER -->
+        <table role="presentation" cellpadding="0" cellspacing="0" width="600" class="email-wrapper"
+               style="max-width:600px; width:100%; background-color:#ffffff; border-radius:18px; border:1px solid #e5e7eb; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.04);">
 
-    ${ctaButton('Explore Originyx', 'https://originyx.in')}
+          <!-- TOP DECORATIVE ACCENT & LOGO -->
+          <tr>
+            <td style="padding:36px 36px 12px 36px; background:linear-gradient(180deg, #f0f7f3 0%, #ffffff 160px); text-align:center;">
+              <!-- LOGO -->
+              <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;">
+                <tr>
+                  <td align="center" valign="middle">
+                    <img src="https://originyx.in/logo.png" alt="Originyx Icon" width="28" height="28" style="display:inline-block; border:0; vertical-align:middle;" />
+                    <span style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:16px; font-weight:800; letter-spacing:0.18em; color:#0f172a; vertical-align:middle; margin-left:8px; display:inline-block;">ORIGINYX</span>
+                  </td>
+                </tr>
+              </table>
 
-    <p style="font-family:Arial,sans-serif; font-size:12px; color:${T.textMuted};
-               text-align:center; margin:12px 0 0 0; line-height:1.6;">
-      If the button above doesn't work, copy and paste this link into your browser:<br>
-      <a href="https://originyx.in" style="color:${T.primaryMid}; word-break:break-all;">https://originyx.in</a>
-    </p>
+              <!-- HEADLINE -->
+              <h1 class="h1-headline" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:32px; font-weight:800; color:#111827; letter-spacing:-0.02em; line-height:1.2; margin:28px 0 8px 0; text-align:center;">
+                Welcome to <span style="color:#1b4332;">Originyx.</span>
+              </h1>
+              <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:17px; font-weight:500; color:#374151; margin:0 0 20px 0; text-align:center;">
+                ${name ? `Hi ${displayName}, your account has been created successfully.` : 'Your account has been created successfully.'}
+              </p>
 
-    ${securityNotice(`If you did not create an Originyx account, you can safely ignore this email. No action is required.`)}`;
+              <!-- INTRO PARAGRAPH -->
+              <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:14px; line-height:1.65; color:#4b5563; margin:0 auto 28px auto; max-width:510px; text-align:center;">
+                Originyx works with businesses to identify operational bottlenecks, design intelligent workflows, and build automation systems that improve how their operations function.
+              </p>
+            </td>
+          </tr>
 
-  const headerGradient = `linear-gradient(135deg, ${T.primaryDark} 0%, ${T.primaryMid} 100%)`;
+          <!-- BODY INNER -->
+          <tr>
+            <td class="email-body-inner" style="padding:0 36px 36px 36px;">
 
-  const html = emailWrapper(headerGradient, headerContent, bodyContent);
+              <!-- VERIFY EMAIL ADDRESS CALLOUT BOX -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                     style="margin:0 0 24px 0; background-color:#fff7ed; border:1px solid #ffedd5; border-radius:14px;">
+                <tr>
+                  <td style="padding:16px 20px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <!-- Icon box -->
+                        <td width="48" valign="middle" style="padding-right:16px;">
+                          <div style="width:44px; height:44px; background-color:#ffedd5; border-radius:10px; text-align:center; line-height:44px;">
+                            ${calloutIconSvg}
+                          </div>
+                        </td>
+                        <!-- Vertical divider line -->
+                        <td width="1" style="background-color:#fed7aa; font-size:1px; line-height:1px;">&nbsp;</td>
+                        <!-- Text description -->
+                        <td style="padding-left:16px;" valign="middle">
+                          <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:15px; font-weight:700; color:#111827; margin:0 0 3px 0;">
+                            ${calloutTitle}
+                          </p>
+                          <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:13px; color:#6b7280; line-height:1.45; margin:0;">
+                            ${calloutSubtext}
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
 
-  const text = `Welcome to Originyx, ${name || 'there'}!
+              <!-- PRIMARY ORANGE PILL BUTTON -->
+              <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:20px auto 36px auto;">
+                <tr>
+                  <td align="center" style="border-radius:9999px; background-color:#eb5e1e;">
+                    <a href="${ctaUrl}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style="display:inline-block; padding:14px 38px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:15px; font-weight:700; color:#ffffff; text-decoration:none; border-radius:9999px; background-color:#eb5e1e; letter-spacing:0.01em;">
+                      ${ctaText}
+                    </a>
+                  </td>
+                </tr>
+              </table>
 
+              <!-- SECTION DIVIDER & TITLE: WHAT YOU CAN EXPLORE WITH ORIGINYX -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:8px 0 24px 0;">
+                <tr>
+                  <td width="15%" style="border-bottom:1px solid #e5e7eb; font-size:1px; line-height:1px;">&nbsp;</td>
+                  <td align="center" style="padding:0 12px; white-space:nowrap;">
+                    <h2 style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:18px; font-weight:800; color:#1b4332; margin:0; letter-spacing:-0.01em;">
+                      What you can explore with Originyx
+                    </h2>
+                  </td>
+                  <td width="15%" style="border-bottom:1px solid #e5e7eb; font-size:1px; line-height:1px;">&nbsp;</td>
+                </tr>
+              </table>
+
+              <!-- 2x2 CARDS GRID -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 24px 0;">
+                <!-- ROW 1 -->
+                <tr>
+                  <!-- CARD 1: INTELLIGENT AUTOMATION -->
+                  <td class="grid-card-cell" width="50%" valign="top" style="padding:0 6px 12px 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                           style="background-color:#ffffff; border:1px solid #e5e7eb; border-radius:12px; height:100%;">
+                      <tr>
+                        <td style="padding:16px 18px;" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td width="42" valign="top">
+                                <div style="width:38px; height:38px; background-color:#ecfdf5; border-radius:8px; text-align:center; line-height:38px;">
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+                                    <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+                                    <path d="m22 12.5-8.58 3.91a2 2 0 0 1-1.66 0L2 12.5"/>
+                                    <path d="m22 17.5-8.58 3.91a2 2 0 0 1-1.66 0L2 17.5"/>
+                                  </svg>
+                                </div>
+                              </td>
+                              <td valign="top" style="padding-left:12px;">
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:15px; font-weight:700; color:#111827; margin:0 0 4px 0;">
+                                  Intelligent Automation
+                                </p>
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:12.5px; color:#4b5563; line-height:1.45; margin:0;">
+                                  Explore workflow automation systems designed to reduce repetitive operational work and improve execution.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+
+                  <!-- CARD 2: BUSINESS SYSTEMS -->
+                  <td class="grid-card-cell" width="50%" valign="top" style="padding:0 0 12px 6px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                           style="background-color:#ffffff; border:1px solid #e5e7eb; border-radius:12px; height:100%;">
+                      <tr>
+                        <td style="padding:16px 18px;" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td width="42" valign="top">
+                                <div style="width:38px; height:38px; background-color:#ecfdf5; border-radius:8px; text-align:center; line-height:38px;">
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+                                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                  </svg>
+                                </div>
+                              </td>
+                              <td valign="top" style="padding-left:12px;">
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:15px; font-weight:700; color:#111827; margin:0 0 4px 0;">
+                                  Business Systems
+                                </p>
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:12.5px; color:#4b5563; line-height:1.45; margin:0;">
+                                  Discover solutions built around operational requirements, process efficiency, and business workflows.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- ROW 2 -->
+                <tr>
+                  <!-- CARD 3: PROJECT CONSULTATION -->
+                  <td class="grid-card-cell" width="50%" valign="top" style="padding:0 6px 0 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                           style="background-color:#ffffff; border:1px solid #e5e7eb; border-radius:12px; height:100%;">
+                      <tr>
+                        <td style="padding:16px 18px;" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td width="42" valign="top">
+                                <div style="width:38px; height:38px; background-color:#ecfdf5; border-radius:8px; text-align:center; line-height:38px;">
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+                                    <path d="M18 20V10"/>
+                                    <path d="M12 20V4"/>
+                                    <path d="M6 20v-6"/>
+                                  </svg>
+                                </div>
+                              </td>
+                              <td valign="top" style="padding-left:12px;">
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:15px; font-weight:700; color:#111827; margin:0 0 4px 0;">
+                                  Project Consultation
+                                </p>
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:12.5px; color:#4b5563; line-height:1.45; margin:0;">
+                                  Share your operational challenges, workflow requirements, and expected outcomes for architectural review.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+
+                  <!-- CARD 4: CLIENT PORTAL -->
+                  <td class="grid-card-cell" width="50%" valign="top" style="padding:0 0 0 6px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                           style="background-color:#ffffff; border:1px solid #e5e7eb; border-radius:12px; height:100%;">
+                      <tr>
+                        <td style="padding:16px 18px;" valign="top">
+                          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td width="42" valign="top">
+                                <div style="width:38px; height:38px; background-color:#ecfdf5; border-radius:8px; text-align:center; line-height:38px;">
+                                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle;">
+                                    <rect width="20" height="14" x="2" y="3" rx="2"/>
+                                    <line x1="8" x2="16" y1="21" y2="21"/>
+                                    <line x1="12" x2="12" y1="17" y2="21"/>
+                                  </svg>
+                                </div>
+                              </td>
+                              <td valign="top" style="padding-left:12px;">
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:15px; font-weight:700; color:#111827; margin:0 0 4px 0;">
+                                  Client Portal
+                                </p>
+                                <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:12.5px; color:#4b5563; line-height:1.45; margin:0;">
+                                  Access your projects, track deliverables, and manage your engagement with Originyx.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- BOTTOM BANNER: BUILD SYSTEMS AROUND YOUR OPERATIONS -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
+                     style="background-color:#163627; background-image:linear-gradient(135deg, #163627 0%, #1b4332 100%); border-radius:14px; overflow:hidden;">
+                <tr>
+                  <td style="padding:22px 24px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <!-- Left: Title & Subtitle with orange accent -->
+                        <td class="banner-stack" valign="middle">
+                          <table role="presentation" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td width="4" style="background-color:#ea580c; border-radius:2px; font-size:1px; line-height:1px;">&nbsp;</td>
+                              <td style="padding-left:10px;">
+                                <span style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:17px; font-weight:700; color:#ffffff; line-height:1.2;">
+                                  Build systems around your operations.
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
+                          <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.45; margin:8px 0 0 0;">
+                            From identifying workflow inefficiencies to implementing intelligent automation, Originyx focuses on building systems that address real operational requirements.
+                          </p>
+                        </td>
+
+                        <!-- Right: White Pill Button -->
+                        <td class="banner-btn-cell" width="160" align="right" valign="middle" style="padding-left:16px;">
+                          <table role="presentation" cellpadding="0" cellspacing="0" align="right">
+                            <tr>
+                              <td align="center" style="border-radius:9999px; background-color:#ffffff;">
+                                <a href="https://originyx.in"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   style="display:inline-block; padding:10px 22px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:13px; font-weight:700; color:#111827; text-decoration:none; border-radius:9999px; background-color:#ffffff; white-space:nowrap;">
+                                  Explore Originyx &rarr;
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- FOOTER SECTION -->
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #e5e7eb; margin-top:32px;">
+                <tr>
+                  <td align="center" style="padding-top:24px; text-align:center;">
+                    <!-- Footer Logo -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto 8px auto;">
+                      <tr>
+                        <td align="center" valign="middle">
+                          <img src="https://originyx.in/logo.png" alt="Originyx" width="20" height="20" style="display:inline-block; border:0; vertical-align:middle;" />
+                          <span style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:13px; font-weight:800; letter-spacing:0.15em; color:#0f172a; vertical-align:middle; margin-left:6px; display:inline-block;">ORIGINYX</span>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:12px; color:#6b7280; margin:0 0 10px 0; line-height:1.5;">
+                      AI Workflow Automation &amp; Business Systems Architecture
+                    </p>
+
+                    <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:11px; color:#6b7280; margin:0 0 14px 0; line-height:1.5;">
+                      <a href="https://originyx.in" style="color:#059669; text-decoration:none;">originyx.in</a>
+                      &nbsp;&middot;&nbsp;
+                      <a href="https://originyx.in/privacy-policy/" style="color:#059669; text-decoration:none;">Privacy Policy</a>
+                      &nbsp;&middot;&nbsp;
+                      <a href="https://originyx.in/terms-and-conditions/" style="color:#059669; text-decoration:none;">Terms</a>
+                    </p>
+
+                    <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:11px; color:#9ca3af; margin:0 0 4px 0; line-height:1.5;">
+                      If you did not create this account, you can safely ignore this email.
+                    </p>
+                    <p style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; font-size:11px; color:#9ca3af; margin:0; line-height:1.5;">
+                      This is an automated account notification. Please do not reply directly to this email.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const text = `Hi ${name || 'there'},
+
+Welcome to Originyx.
 Your account has been created successfully.
 
-${needsVerification ? 'IMPORTANT: Please verify your email address using the separate verification email we sent you. Your account exists but requires verification before you can sign in.\n\n' : ''}${provider !== 'email' ? `You signed up with ${provider === 'google' ? 'Google' : 'Microsoft'} — your email is already verified.\n\n` : ''}What you can do with Originyx:
-✓ Explore Products — HunterOS, AI Receptionist, ShadowOS and more
-✓ Start a Project — Consult on custom AI automation
-✓ Client Portal — Track your project, manage your account
+Originyx works with businesses to identify operational bottlenecks, design intelligent workflows, and build automation systems that improve how their operations function.
 
-Visit Originyx: https://originyx.in
+${needsVerification ? '[Verify your email address]\nBefore accessing your account, please verify your email address to activate your Originyx account.\nVerify Email Address: https://originyx.in/client-portal/\n\n' : ''}${provider !== 'email' ? `You signed up using your ${provider === 'google' ? 'Google' : 'Microsoft'} account. Your email is already verified.\n\n` : ''}What you can explore with Originyx:
+• Intelligent Automation — Explore workflow automation systems designed to reduce repetitive operational work and improve execution.
+• Business Systems — Discover solutions built around operational requirements, process efficiency, and business workflows.
+• Project Consultation — Share your operational challenges, workflow requirements, and expected outcomes for architectural review.
+• Client Portal — Access your projects, track deliverables, and manage your engagement with Originyx.
+
+Build systems around your operations.
+From identifying workflow inefficiencies to implementing intelligent automation, Originyx focuses on building systems that address real operational requirements.
+Explore Originyx: https://originyx.in
 
 —
-© ${new Date().getFullYear()} Originyx | originyx.in
-If you did not create this account, please ignore this email.`;
+ORIGINYX
+AI Workflow Automation & Business Systems Architecture
+https://originyx.in • Privacy: https://originyx.in/privacy-policy/ • Terms: https://originyx.in/terms-and-conditions/
+If you did not create this account, you can safely ignore this email.
+This is an automated account notification. Please do not reply directly to this email.`;
 
   return {
     subject: 'Welcome to Originyx | Your Account Is Ready',

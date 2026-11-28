@@ -28,7 +28,7 @@ assert('correct subject', w1.subject === 'Welcome to Originyx | Your Account Is 
 assert('html is string', typeof w1.html === 'string');
 assert('text is string', typeof w1.text === 'string');
 assert('html > 1000 chars', w1.html.length > 1000);
-assert('verification note present', w1.html.includes('One more step'));
+assert('verification note present', w1.html.includes('Verify your email address'));
 assert('no raw name injection in html', !w1.html.includes('<script>'));
 assert('explore CTA present', w1.html.includes('Explore Originyx'));
 assert('CTA points to originyx.in', w1.html.includes('https://originyx.in'));
@@ -38,8 +38,8 @@ assert('plain text has explore link', w1.text.includes('https://originyx.in'));
 
 const w2 = welcomeEmail({ name: '', email: 'anon@example.com', provider: 'google', needsVerification: false });
 assert('google provider note present', w2.html.includes('Google'));
-assert('no verification note when not needed', !w2.html.includes('One more step'));
-assert('fallback name there for empty name', w2.html.includes('there'));
+assert('no verification note when not needed', !w2.html.includes('Verify your email address'));
+assert('fallback greeting when name empty', w2.text.includes('there'));
 
 // XSS in name
 const wXss = welcomeEmail({ name: '<img src=x onerror=alert(1)>', email: 'x@x.com', provider: 'email' });
